@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加管理员</title>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/main/add.css">
+</head>
+<body>
+<div id="app">
+    <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">添加管理员</div>
+
+    <el-container>
+        <el-main>
+            <el-row>
+                <el-col :span="24" style="overflow: hidden">
+                    <div class="top" style="margin-top:30px">
+                        <el-form label-width="80px">
+                            <el-form-item label="工号:">
+                                <el-input prefix-icon="el-icon-timer" v-model="stuName" placeholder="请输入管理员工号"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="姓名:">
+                                <el-input prefix-icon="el-icon-user" v-model="stuName" placeholder="请输入管理员姓名"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="密码:">
+                                <el-input prefix-icon="el-icon-unlock" v-model="stuName" placeholder="请输入管理员密码"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="电话:">
+                                <el-input prefix-icon="el-icon-phone-outline" v-model="stuName" placeholder="请输入管理员电话"></el-input>
+                            </el-form-item>
+                            <el-form-item label="权限:">
+                                <el-checkbox v-model="checked">用户管理</el-checkbox>
+                                <el-checkbox v-model="checked">车位管理</el-checkbox>
+                                <el-checkbox v-model="checked">合同管理</el-checkbox>
+                                <el-checkbox v-model="checked">投诉管理</el-checkbox>
+                            </el-form-item>
+
+                            <el-form-item style="margin-top:50px;">
+                                <el-button @click="add" type="primary" style="margin-right: 50px;">添加</el-button>
+                                <el-button @click="cancle" type="danger">取消</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-main>
+    </el-container>
+
+</div>
+
+</body>
+</html>
+<!--vue.js 必须在elementUI.js之前导入-->
+<script src="../js/vue/Vue.js"></script>
+<!--使用ajax 需要导入-->
+<script src="../js/vue/vue-resource.js"></script>
+<script src="../js/elementUI/elementUI.js"></script>
+<script src="../js/page_Js/main/add.js"></script>
