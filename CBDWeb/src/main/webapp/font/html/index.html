@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+        <el-row>
+                <el-col :span="24">
+                    <h2 class="grid-content bg-purple-dark" style="size:20px ; margin-bottom:30px" >CBD前台服务主页面</h2>
+                </el-col>
+            </el-row>
+  <div id="app"style="width:800px; margin: 0 auto; display: flex;
+  justify-content: space-between">
+  <div><el-table
+    :data="tableData"
+    style="width: 100%">
+    <el-table-column
+      prop="stallAddress"
+      label="地址"
+      width="260">
+    </el-table-column>
+    <el-table-column
+      prop="stallState"
+      label="状态"
+      width="100">
+    </el-table-column>
+  
+      <el-table-column
+ 
+      label="操作"
+      width="100">
+      <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row.stallId)" type="text" size="medium">查看详情</el-button>
+      </template>
+    
+  </el-table>
+  <div class="block">
+       <el-pagination
+         @size-change="handleSizeChange"
+         @current-change="handleCurrentChange"
+         :current-page="page.currentPage"
+         :page-sizes="[3, 10, 15]"
+         :page-size="3"
+         layout="total, sizes, prev, pager, next, jumper"
+         :total="page.total">
+       </el-pagination>
+     </div>
+    </el-table-column>
+  </el-table></div>
+
+      <el-badge value="0" class="item">
+          <el-button size="small" @click="news">您有新消息</el-button>
+      </el-badge>
+      
+  </div>
+</body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      methods: {
+      handleClick(row) {
+        console.log(row);
+      },
+    
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      },
+    news(){
+        window.location.href="../../yzh/page/updateCompanyUser.html"
+    }
+
+    },
+      data: function() {
+        return { 
+          tableData: [{
+            stallId: '2',
+            stallState: '王小虎',
+            stallAddress: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            stallId: '2',
+            stallState: '王小虎',
+            stallAddress: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            stallId: '2',
+            stallState: '王小虎',
+            stallAddress: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            stallId: '2',
+            stallState: '王小虎',
+            stallAddress: '上海市普陀区金沙江路 1518 弄'
+          }],
+          page:{
+            currentPage1: 5,
+            total:10,
+          },
+         infoData: [{
+            stallId: '2',
+            stallState: '王小虎',
+            stallAddress: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            stallId: '2',
+            stallState: '王小虎',
+            stallAddress: '上海市普陀区金沙江路 1518 弄'
+          }],
+        }
+      
+      }
+    })
+  </script>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--vue.js 必须在elementUI.js之前导入-->
+    <script src="../js/vue/Vue.js"></script>
+    <!--使用ajax 需要导入-->
+    <script  src="../js/vue/vue-resource.js"></script>
+    <script src="../js/elementUI/elementUI.js"></script>
+    <script  src="../js/page_Js/main/add.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/main/add.css">
+</head>
+<body>
+<div style="margin-left: 650px"><h2 style="color: #66b1ff">车位管理</h2></div>
+<div id="app" style="margin-top: -20px">
+
+
+    <el-container>
+
+        <!--内容显示区-->
+        <el-main>
+
+            <el-table :data="tableData"
+                      highlight-current-row
+                      style="width:100%"
+            >
+                <el-table-column prop="stallNo" label="车位编号">
+                </el-table-column>
+                <el-table-column prop="stallAddress" label="车位地址">
+                </el-table-column>
+
+            </el-table>
+            <!-- 分页区 -->
+            <el-pagination style="margin: 20px auto;" background
+                           layout="prev,pager,next,sizes,total,jumper "
+                           :current-page="currentPage"
+                           :page-size="pageSize"
+                           :pager-count=5
+                           :page-sizes=[3,5,10]
+                           :total="total"
+                           @current-change="currentChange"
+                           @size-change="sizeChange"
+            >
+            </el-pagination>
+
+
+
+
+
+                        <div class="main_button" style="margin-bottom:30px">
+
+
+
+
+                            <el-form :inline="true" label-width="80px">
+                                <el-form-item label="车位地址:">
+                                    <el-input prefix-icon="el-icon-search" v-model="stallAddress"></el-input>
+                                </el-form-item>
+                                <el-form-item label="车位编号:">
+                                    <el-input prefix-icon="el-icon-search" v-model="stallNo" ></el-input>
+                                </el-form-item><br>
+                                <el-button type="primary" size="mini" @click="seach" icon="el-icon-search" style="margin-left: 40px">查找</el-button>
+                                <el-button type="primary" size="mini" @click="add" icon="el-icon-search" style="margin-left: 110px">添加车位</el-button>
+                            </el-form>
+                        </div>
+        </el-main>
+    </el-container>
+</div>
+
+
+<script type="text/javascript">
+
+
+    var tableData=[{stallAddress :'天府一街cbd',stallNo:'TF548'},
+        {stallAddress :'天府一街cbd',stallNo:'TF528'}];
+
+    new Vue({
+        el:"#app",
+        data:{
+            tableData:tableData},
+        methods:{
+            serch(){},
+            add(){
+
+                window.location.href="addStall.html";
+
+            }
+
+        }
+
+
+    })
+</script>
+
+</body>
+</html>

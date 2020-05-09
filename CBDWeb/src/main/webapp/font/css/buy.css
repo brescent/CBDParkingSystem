@@ -1,0 +1,67 @@
+.el-header {
+    background-color: rgb(255, 255, 255);
+    color: #409EFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  }
+  
+  .el-aside {
+    background-color: #D3DCE6;
+    color:
+      #606266;
+    text-align: center;
+    line-height: 200px;
+  }
+  
+  .el-main {
+    color:
+      #606266;
+    text-align: center;
+  }
+  
+  body>.el-container {
+    margin-bottom: 40px;
+  }
+  
+  .el-container:nth-child(5) .el-aside,
+  .el-container:nth-child(6) .el-aside {
+    line-height: 260px;
+  }
+  
+  .el-container:nth-child(7) .el-aside {
+    line-height: 320px;
+  }
+  
+  body,
+  p {
+    margin: 0px;
+  }
+  
+  .information {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: 30px;
+  }
+  
+  .information>div {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  span {
+    font-size: 14px;
+  }
+  
+  .information>div>p {
+    color:
+      #606266;
+    font-size: 14px;
+  }
+
+  .content{
+    display: flex;
+    justify-content: end;
+    flex-wrap: wrap;
+  }

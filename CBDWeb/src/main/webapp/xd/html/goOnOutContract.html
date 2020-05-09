@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <!--vue.js 必须在elementUI.js之前导入-->
+    <script src="../js/vue/Vue.js"></script>
+    <!--使用ajax 需要导入-->
+    <script  src="../js/vue/vue-resource.js"></script>
+    <script src="../js/elementUI/elementUI.js"></script>
+    <script  src="../js/page_Js/main/add.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/main/add.css">
+
+</head>
+<body>
+
+<div style="margin-left: 650px"><h2 style="color: #66b1ff">续约外部合约</h2></div>
+
+<div id="app" style="margin-top: -20px">
+    <el-container>
+        <el-main>
+            <el-row>
+                <el-col :span="24" style="overflow: hidden">
+                    <div class="top" style="float: left" >
+                        <el-form  label-width="120px">
+                            <el-form-item label="原合同编号:">
+                                <el-input  prefix-icon="el-icon-user"  placeholder="请输入原合同编号"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="新合同编号:">
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入新合同编号 "></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="对方联系人:">
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入对方联系人 "></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="对方联系人电话:">
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入对方联系人电话 "></el-input>
+                            </el-form-item>
+                            <el-form-item label="合同生效日期:" >
+                                <el-date-picker
+                                        v-model="value1"
+                                        type="date"
+                                        placeholder="选择日期"  >
+                                </el-date-picker>
+                            </el-form-item>
+                            <el-form-item label="合同失效日期:" >
+                                <el-date-picker
+                                        v-model="value2"
+                                        type="date"
+                                        placeholder="选择日期">
+                                </el-date-picker>
+                            </el-form-item>
+                            <el-form-item label="成交价格:">
+                                <el-input  prefix-icon="el-icon-user"   placeholder="请输入成交价格"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="合同图片:">
+                                <el-upload
+                                        class="upload-demo"
+                                        action="https://jsonplaceholder.typicode.com/posts/"
+                                        :on-preview="handlePreview"
+                                        :on-remove="handleRemove"
+                                        :before-remove="beforeRemove"
+                                        multiple
+                                        :limit="3"
+                                        :on-exceed="handleExceed"
+                                >
+                                    <el-button size="small" type="primary">点击上传</el-button>
+                                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                                </el-upload>
+                            </el-form-item>
+
+                            <el-form-item >
+                                <el-button   @click="ok" type="primary" style="margin-right: 50px;">续约</el-button>
+                                <el-button  @click="no" type="danger">取消</el-button>
+                            </el-form-item>
+
+
+                        </el-form>
+                    </div>
+
+
+
+                </el-col>
+
+            </el-row>
+        </el-main>
+    </el-container>
+
+</div>
+<script>
+    new Vue( {
+        el:"#app",
+        data:{
+
+            disabledDate(time) {
+                return time.getTime() > Date.now();
+            }, value1: '',
+            disabledDate(time) {
+                return time.getTime() > Date.now();
+            }, value2: ''
+        },
+        methods: {
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePreview(file) {
+                console.log(file);
+            },
+            handleExceed(files, fileList) {
+                this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            beforeRemove(file, fileList) {
+                return this.$confirm(`确定移除 ${ file.name }？`);
+
+            },
+
+            ok(){},
+            no(){
+                window.history.go(-1);
+            },
+        }
+    })
+
+
+</script>
+
+
+</body>
+</html>
