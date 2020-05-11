@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+  <link rel="stylesheet" href="../css/page_css/main/add.css">
+</head>
+<body>
+
+     <h1 align="center" style="color: #409EFF">注册页面</h1>
+  <div id="app">
+      <el-container>
+        <el-main>
+         <el-row>
+              <el-col :span="24" style="overflow: hidden">
+              <div class="top" style="margin-top:50px">
+              <el-form  label-width="100px">
+
+                <el-form-item label="用户登录名:">
+                     <el-input  prefix-icon="el-icon-user"  v-model="userName" placeholder="请输入您的用户名"  clearable></el-input>
+                      </el-form-item>
+
+
+
+
+                  <el-form-item label="用户密码:">
+                      <el-input prefix-icon="el-icon-key"  type="password" v-model="pwd" placeholder="请输入您的密码" showpassword></el-input>
+                  </el-form-item>
+
+
+                      <el-form-item label="确认密码:">
+                          <el-input prefix-icon="el-icon-key"  type="password" v-model="pwd2" placeholder="请输入您的密码" showpassword></el-input>
+                      </el-form-item>
+
+
+                  <el-form-item label="用户真实姓名:">
+                      <el-input  prefix-icon="el-icon-user"  v-model="userRealName" placeholder="请输入您的真实姓名"  clearable></el-input>
+                  </el-form-item>
+
+
+
+                  <el-form-item label="用户职业描述:">
+                      <el-input  prefix-icon="el-icon-suitcase"  v-model="jobInfo" placeholder="请输入您的职业描述"  clearable></el-input>
+                  </el-form-item>
+
+
+                  <el-form-item label="身份证号码:">
+                      <el-input  prefix-icon="el-icon-user-solid"  v-model="IDCardNum" placeholder="请输入您的身份证号码"  clearable></el-input>
+                  </el-form-item>
+
+                  <el-form-item label="家庭住址:">
+                      <el-input  prefix-icon="el-icon-house"  v-model="homeAddress" placeholder="请输入您的家庭住址"  clearable></el-input>
+                  </el-form-item>
+
+                  <el-form-item label="邮箱:">
+                      <el-input  prefix-icon="el-icon-message"  v-model="email" placeholder="请输入您的邮箱地址"  clearable></el-input>
+                  </el-form-item>
+
+                  <el-form-item label="电话号码:">
+                      <el-input  prefix-icon="el-icon-mobile"  v-model="phone" placeholder="请输入您的邮箱地址"  clearable></el-input>
+                  </el-form-item>
+
+                  <el-form-item label="验证码:">
+                      <el-input  prefix-icon="el-icon-mobile"  v-model="checkCode" placeholder="请输入您的验证码"  clearable></el-input>
+                  </el-form-item>
+
+                  <el-form-item style="margin-top:50px;">
+                       <el-button   @click="add" type="primary" style="margin-right: 50px;">注册</el-button>
+                        <el-button  @click="cancle" type="danger">取消</el-button>
+                        </el-form-item>
+                </el-form>
+               </div>
+              </el-col>
+          </el-row>
+         </el-main>
+      </el-container>
+
+
+
+
+   </div>
+
+
+
+
+     <!--vue.js 必须在elementUI.js之前导入-->
+     <script src="../js/vue/Vue.js"></script>
+     <!--使用ajax 需要导入-->
+     <script  src="../js/vue/vue-resource.js"></script>
+     <script src="../js/elementUI/elementUI.js"></script>
+     <script  src="../js/page_Js/main/add.js"></script>
+
+
+</body>
+</html>
+
+
+

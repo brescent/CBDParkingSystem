@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--vue.js 必须在elementUI.js之前导入-->
+    <script src="../js/vue/Vue.js"></script>
+    <!--使用ajax 需要导入-->
+    <script  src="../js/vue/vue-resource.js"></script>
+    <script src="../js/elementUI/elementUI.js"></script>
+    <script  src="../js/page_Js/main/add.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/main/add.css">
+</head>
+<body>
+<div style="margin-left: 650px"><h2 style="color: #66b1ff">外部合约</h2></div>
+<div id="app">
+
+
+    <el-container >
+
+        <!--内容显示区-->
+        <el-main>
+
+            <!-- 按钮区-->
+            <!--            <div class="main_button" style="margin-bottom:30px">-->
+            <!--                <el-button style="margin-bottom: 40px;"   type="primary" size="mini" icon="el-icon-plus">-->
+            <!--                    <a href="addStudent.html">添加</a>-->
+            <!--                </el-button>-->
+
+            <!--                <el-button type="primary" size="mini" @click="seach" icon="el-icon-search">查找</el-button>-->
+
+            <!--                <el-form :inline="true" label-width="80px">-->
+            <!--                    <el-form-item label="学生姓名:">-->
+            <!--                        <el-input prefix-icon="el-icon-search" v-model="stuName"></el-input>-->
+            <!--                    </el-form-item>-->
+            <!--                    <el-form-item label="性别:">-->
+            <!--                        <el-input prefix-icon="el-icon-search" v-model="stuGender" ></el-input>-->
+            <!--                     </el-form-item>-->
+            <!--                    <el-form-item label="所在班级:">-->
+            <!--                        <el-input prefix-icon="el-icon-search" v-model="className"></el-input>-->
+            <!--                    </el-form-item>-->
+            <!--                </el-form>-->
+            <!--            </div>-->
+            <el-table :data="tableData"
+                      highlight-current-row
+                      style="width: 100%"
+            >
+                <el-table-column prop="companyContractNo" label="合同编号"  >
+                </el-table-column>
+                <el-table-column prop="companyName" label="公司名称">
+                </el-table-column>
+                <el-table-column label="操作"  >
+                    <template slot-scope="scope">
+                        <el-button size="mini"
+                                   @click="handleEdit(scope.$index, scope.row)"
+                                   type="success"
+                                   icon="el-icon-edit">查看和解约
+                        </el-button>
+
+                    </template>
+
+                </el-table-column>
+            </el-table>
+            <!-- 分页区 -->
+            <el-pagination style="margin: 20px auto;" background
+                           layout="prev,pager,next,sizes,total,jumper "
+                           :current-page="currentPage"
+                           :page-size="pageSize"
+                           :pager-count=5
+                           :page-sizes=[3,5,10]
+                           :total="total"
+                           @current-change="currentChange"
+                           @size-change="sizeChange"
+            >
+            </el-pagination>
+
+        </el-main>
+    </el-container>
+</div>
+
+
+
+<script>
+
+    var tableData=[{companyContractNo:'hadkj5487',companyName:'保湿杰科技有限公司'}]
+    new Vue({
+        el:"#app",
+        data:{
+            tableData:tableData
+        },
+        methods:{
+            /*处理编辑按钮*/
+            handleEdit:function(index,row){
+                window.location.href="outContractInfo.html";
+            },
+        }
+
+
+    })
+</script>
+
+
+
+</body>
+</html>

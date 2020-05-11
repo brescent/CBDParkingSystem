@@ -1,0 +1,15 @@
+
+#app{
+
+    width: 500px;
+    height: auto;
+    margin: 40px auto;
+}
+
+a{
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
