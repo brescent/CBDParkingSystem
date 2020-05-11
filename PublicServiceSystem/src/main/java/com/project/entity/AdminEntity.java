@@ -24,7 +24,7 @@ public class AdminEntity {
 
     @OneToOne
     @Column(name = "a_publicUserId")
-    private PublicUserEntity publicUserId;
+    private PublicUserEntity publicUser;
 
     @OneToMany(mappedBy = "pk_adminId")
     private List<PowerEntity> powerList;
@@ -62,11 +62,11 @@ public class AdminEntity {
     }
 
     public PublicUserEntity getPublicUserId() {
-        return publicUserId;
+        return publicUser;
     }
 
     public void setPublicUserId(PublicUserEntity publicUserId) {
-        this.publicUserId = publicUserId;
+        this.publicUser = publicUserId;
     }
 
     public List<PowerEntity> getPowerList() {
