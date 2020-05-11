@@ -30,7 +30,7 @@ public class CompanyUser {
 
     @OneToOne
     @Column(name = "c_publicUserId")
-    private PublicUserEntity publicUserId;
+    private PublicUserEntity publicUser;
 
     public CompanyUser() {
     }
@@ -83,10 +83,10 @@ public class CompanyUser {
     }
 
     public PublicUserEntity getPublicUserId() {
-        return publicUserId;
+        return publicUser;
     }
 
     public void setPublicUserId(PublicUserEntity publicUserId) {
-        this.publicUserId = publicUserId;
+        this.publicUser = publicUserId;
     }
 }

@@ -40,7 +40,7 @@ public class PersonalUserEntity {
 
     @OneToOne
     @Column(name = "p_publicUserId")
-    private PublicUserEntity publicUserId;
+    private PublicUserEntity publicUser;
 
     public PersonalUserEntity() {
     }
@@ -110,10 +110,10 @@ public class PersonalUserEntity {
     }
 
     public PublicUserEntity getPublicUserId() {
-        return publicUserId;
+        return publicUser;
     }
 
     public void setPublicUserId(PublicUserEntity publicUserId) {
-        this.publicUserId = publicUserId;
+        this.publicUser = publicUserId;
     }
 }
