@@ -4,8 +4,8 @@ import javax.persistence.*;
 
 /**企业用户实体类*/
 @Entity
-@Table
-public class CompanyUser {
+@Table(name = "t_company")
+public class CompanyUserEntity {
     /**企业用户id*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,13 +29,13 @@ public class CompanyUser {
     private String contactPhone;
 
     @OneToOne
-    @Column(name = "c_publicUserId")
+    @JoinColumn(name = "fk_publicUserId")
     private PublicUserEntity publicUser;
 
-    public CompanyUser() {
+    public CompanyUserEntity() {
     }
 
-    public CompanyUser(String companyName,String companyAddress,String contact,String contactPhone) {
+    public CompanyUserEntity(String companyName, String companyAddress, String contact, String contactPhone) {
         this.companyName=companyName;
         this.companyAddress=companyAddress;
         this.contact=contact;
