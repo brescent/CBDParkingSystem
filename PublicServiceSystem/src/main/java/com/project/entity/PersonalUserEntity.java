@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 /**个人用户实体类*/
 @Entity
-@Table
+@Table(name = "t_personalUser")
 public class PersonalUserEntity {
 
     /**个人用户id*/
@@ -39,7 +39,7 @@ public class PersonalUserEntity {
     private String phone;
 
     @OneToOne
-    @Column(name = "p_publicUserId")
+    @JoinColumn(name = "fk_publicUserId")
     private PublicUserEntity publicUser;
 
     public PersonalUserEntity() {
