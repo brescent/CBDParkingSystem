@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**用户持久层*/
-public interface IUserDao extends CrudRepository<PublicUserEntity,String> {
+public interface IUserDao extends CrudRepository<PublicUserEntity,Integer> {
 
     /**
      * 用户登录，再根据用户类型到属于他角色的表查询角色详情
