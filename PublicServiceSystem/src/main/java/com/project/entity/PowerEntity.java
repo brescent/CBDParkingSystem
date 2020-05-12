@@ -6,13 +6,14 @@ import javax.persistence.*;
 @Table(name = "t_power")
 public class PowerEntity {
     @Id
+    @Column(name = "pk_powerId")
     private int id;
 
     @Column(name = "p_powerInfo")
     private int powerInfo;
 
     @ManyToOne
-    @JoinColumn(name = "pk_adminId")
+    @JoinColumn(name = "fk_adminId")
     private AdminEntity admin;
 
     public PowerEntity() {

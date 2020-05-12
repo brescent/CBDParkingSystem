@@ -23,10 +23,10 @@ public class AdminEntity {
     private String realName;
 
     @OneToOne
-    @Column(name = "a_publicUserId")
+    @JoinColumn(name = "fk_publicUserId")
     private PublicUserEntity publicUser;
 
-    @OneToMany(mappedBy = "pk_adminId")
+    @OneToMany(mappedBy = "admin")
     private List<PowerEntity> powerList;
 
     public AdminEntity() {

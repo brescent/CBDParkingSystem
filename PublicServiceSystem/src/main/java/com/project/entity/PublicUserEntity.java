@@ -1,5 +1,7 @@
 package com.project.entity;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+
 import javax.persistence.*;
 
 /**公共用户类*/
@@ -18,6 +20,7 @@ public class PublicUserEntity {
     @Column(name = "f_pwd")
     private String pwd;
     /**用户类型*/
+    @Column(name = "f_userType")
     private int userType;
 
     public PublicUserEntity() {
