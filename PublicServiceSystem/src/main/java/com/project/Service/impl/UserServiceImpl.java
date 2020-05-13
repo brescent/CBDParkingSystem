@@ -30,8 +30,9 @@ public class UserServiceImpl implements IUserService {
     IAdminDao adminDao;
 
     @Override
-    public  void login(String userName, String pwd) {
+    public  PublicUserEntity login(String userName, String pwd) {
          PublicUserEntity mainUser= userDao.login(userName, pwd);
+         return mainUser;
     }
 
     @Override
@@ -47,15 +48,9 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Object getUserInfo(int userType, int userId) {
-        if(userType==0){
-            PersonalUserEntity personalUser=personalUserDao.getPersonalUser(userId);
-        }else if (userType==1){
-            CompanyUserEntity companyUser=companyDao.getCompanyUserById(userId);
-        }else if(userType==2){
-            AdminEntity admin=adminDao.getAdminEntityById(userId);
-            List<PowerEntity> powerList=adminDao.getPowerByAdmidId(userId);
-        }
-        return null;
+    public PublicUserEntity findUserByName(String userName) {
+        return userDao.findUserByName(userName);
     }
+
+
 }
