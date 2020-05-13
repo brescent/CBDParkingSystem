@@ -6,10 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="FrontServiceSystem" />
         <module name="BackgorundServiceSystem" />
         <module name="PublicServiceSystem" />
         <module name="CBDWeb" />
+        <module name="FrontServiceSystem" />
       </profile>
     </annotationProcessing>
   </component>

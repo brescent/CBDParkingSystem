@@ -17,34 +17,36 @@
                         <el-form label-width="80px">
 
                             <el-form-item label="出租人:">
-                                <span>小白</span>
+                                <span>{{renter}}</span>
                             </el-form-item>
 
                             <el-form-item label="个人职业:">
-                                <span>魔法少男</span>
+                                <span>{{job}}</span>
                             </el-form-item>
 
                             <el-form-item label="车位地址:">
-                                <span>火星</span>
+                                <span>{{carAddress}}</span>
                             </el-form-item>
 
-
                             <el-form-item label="车位编号:">
-                                <span>124</span>
+                                <span>{{carNumber}}</span>
                             </el-form-item>
 
                             <el-form-item label="出租价格:">
-                                <span>50</span>
+                                <span>{{price}}</span>
                             </el-form-item>
 
                             <el-form-item label="信誉度:">
-                                <span>50</span>
+                                <span>{{sound}}</span>
                             </el-form-item>
 
                             <el-form-item label="产权图片:">
-                                <i prefix-icon="el-icon-unlock"/>
+                                <el-image
+                                        style="width: 250px; height: 200px"
+                                        :src="url"
+                                        :preview-src-list="srcList">
+                                </el-image>
                             </el-form-item>
-
 
                             <el-form-item style="margin-top:50px;">
                                 <el-button @click="update" type="primary" style="margin-right: 50px;">通过审核</el-button>
@@ -70,5 +72,5 @@
 <!--使用ajax 需要导入-->
 <script src="../js/vue/vue-resource.js"></script>
 <script src="../js/elementUI/elementUI.js"></script>
-<script src="../js/page_Js/main/update.js"></script>
+<script src="../js/page_Js/main/checkMsgInfo.js"></script>
 

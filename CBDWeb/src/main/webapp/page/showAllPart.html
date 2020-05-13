@@ -23,19 +23,19 @@
                       highlight-current-row
                       style="width:100%"
             >
-                <el-table-column prop="userName" label="出售人">
+                <el-table-column prop="seller" label="卖家">
                 </el-table-column>
-                <el-table-column prop="carAddress" label="购买人">
+                <el-table-column prop="buyer" label="买家">
                 </el-table-column>
-                <el-table-column prop="carNumber" label="车位地址">
+                <el-table-column prop="carAddress" label="车位地址">
                 </el-table-column>
-                <el-table-column prop="price" label="车位编号">
+                <el-table-column prop="carNumber" label="车位编号">
                 </el-table-column>
-                <el-table-column prop="checkType" label="出售价格">
+                <el-table-column prop="price" label="出售价格">
                 </el-table-column>
                 <el-table-column prop="checkType" label="审核状态">
                 </el-table-column>
-                <el-table-column prop="checkType" label="签约状态">
+                <el-table-column prop="signType" label="签约状态">
                 </el-table-column>
                 <el-table-column label="操作" width="300px">
                     <template slot-scope="scope">
@@ -44,9 +44,7 @@
                                    type="success"
                                    icon="el-icon-edit">查看
                         </el-button>
-
                     </template>
-
                 </el-table-column>
             </el-table>
             <!-- 分页区 -->
@@ -72,4 +70,4 @@
 <!--使用ajax 需要导入-->
 <script src="../js/vue/vue-resource.js"></script>
 <script src="../js/elementUI/elementUI.js"></script>
-<script src="../js/page_Js/main/studentList.js"></script>
+<script src="../js/page_Js/main/showAllPart.js"></script>
