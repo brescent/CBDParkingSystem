@@ -29,6 +29,20 @@ public class LogEntity {
         this.logInfo = logInfo;
     }
 
+    public LogEntity(int logId, Date logDate, String logInfo) {
+        this.logId = logId;
+        this.logDate = logDate;
+        this.logInfo = logInfo;
+    }
+
+    public int getLogId() {
+        return logId;
+    }
+
+    public void setLogId(int logId) {
+        this.logId = logId;
+    }
+
     public Date getLogDate() {
         return logDate;
     }

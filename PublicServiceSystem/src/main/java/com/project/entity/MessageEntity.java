@@ -1,24 +1,38 @@
 package com.project.entity;
 
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
  * 消息实体类
  */
+@Entity
+@Table(name = "t_message")
 public class MessageEntity {
     /**消息id*/
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "pk_messageId")
     private int messageId;
     /**消息内容*/
+    @Column(name = "m_info")
     private String messageInfo;
     /**消息类型*/
+    @Column(name = "m_type")
     private String messageType;
     /**消息发送日期*/
+    @Column(name = "m_date")
     private Date messageDate;
     /**消息状态*/
+    @Column(name = "m_status")
     private int messageStatus;
     /**接收用户*/
+    @OneToOne
+    @JoinColumn(name = "fk_receiverId")
     private PublicUserEntity receiver;
     /**发送用户*/
+    @OneToOne
+    @JoinColumn(name = "fk_senderId")
     private PublicUserEntity sender;
 
     public MessageEntity() {
