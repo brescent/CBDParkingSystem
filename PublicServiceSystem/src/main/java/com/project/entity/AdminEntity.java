@@ -12,7 +12,7 @@ public class AdminEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "pk_adminId")
-    private int id;
+    private Integer id;
 
     /**管理员工号*/
     @Column(name = "a_jobNum")

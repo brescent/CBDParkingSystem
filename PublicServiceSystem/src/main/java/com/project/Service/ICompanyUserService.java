@@ -1,8 +1,10 @@
 package com.project.Service;
 
 import com.project.entity.CompanyUserEntity;
+import org.omg.CORBA.INTERNAL;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 企业用户业务接口
@@ -11,8 +13,10 @@ public interface ICompanyUserService {
     /**
      * 添加新企业
      * @param company 企业实体
+     * @param companyLoginName 企业登录名
+     * @param companyLoginPwd 企业登录密码
      */
-    public void addCompany(CompanyUserEntity company);
+    public void addCompany(CompanyUserEntity company,String companyLoginName,String companyLoginPwd);
 
     /**
      * 根据用户id查询对应的企业详细信息
@@ -42,4 +46,10 @@ public interface ICompanyUserService {
     public void updCompany(String contact,String contactPhone,int companyId);
 
 
+    /**
+     * 根据id查询企业
+     * @param companyId
+     * @return
+     */
+    public CompanyUserEntity getCompanyById(int companyId);
 }
