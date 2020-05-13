@@ -24,7 +24,7 @@ public class CompanyUserEntity {
     @Column(name = "c_contact")
     private String contact;
 
-    /**企业名*/
+    /**企业联系人电话*/
     @Column(name = "c_contactPhone")
     private String contactPhone;
 

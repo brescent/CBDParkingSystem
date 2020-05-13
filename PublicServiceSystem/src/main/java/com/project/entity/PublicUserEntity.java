@@ -1,8 +1,8 @@
 package com.project.entity;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**公共用户类*/
 @Entity
@@ -23,6 +23,8 @@ public class PublicUserEntity {
     @Column(name = "f_userType")
     private int userType;
 
+
+
     public PublicUserEntity() {
     }
 
@@ -30,6 +32,7 @@ public class PublicUserEntity {
         this.loginName=loginName;
         this.pwd=pwd;
         this.userType=userType;
+
     }
 
 
