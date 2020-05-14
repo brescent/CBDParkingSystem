@@ -13,7 +13,6 @@ public interface IAdminDao extends CrudRepository<AdminEntity,Integer> {
     @Query("from AdminEntity where publicUser.id=:userId")
     public AdminEntity getAdminEntityById(@Param("userId") int userId);
 
-    @Query("from PowerEntity where admin.id=:adminId")
-    public List<PowerEntity> getPowerByAdmidId(@Param("adminId") int adminId);
+
 
 }

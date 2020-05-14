@@ -8,6 +8,7 @@ public class UserDto {
     private String loginName;
     private String pwd;
     private List<PowerDto> powerList;
+    private String userType;
 
 
     public UserDto() {
@@ -50,5 +51,13 @@ public class UserDto {
 
     public void setPowerList(List<PowerDto> powerList) {
         this.powerList = powerList;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 }

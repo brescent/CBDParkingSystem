@@ -79,6 +79,8 @@ public class MD5Util {
         byte[] digestIndb = new byte[pwIndb.length - SALT_LENGTH];
         //获得数据库中口令的摘要
         System.arraycopy(pwIndb, SALT_LENGTH, digestIndb, 0,digestIndb.length);
+        System.out.println("输入的密码："+Arrays.toString(digest));
+        System.out.println("解密的数据库密码："+Arrays.toString(digestIndb));
         //比较根据输入口令生成的消息摘要和数据库中的口令摘要是否相同
         if(Arrays.equals(digest, digestIndb)){
             //口令匹配相同
