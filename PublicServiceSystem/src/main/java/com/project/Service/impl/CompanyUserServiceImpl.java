@@ -5,11 +5,13 @@ import com.project.dao.ICompanyDao;
 import com.project.dao.IUserDao;
 import com.project.entity.CompanyUserEntity;
 import com.project.entity.PublicUserEntity;
-import org.omg.CORBA.INTERNAL;
+import com.project.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +20,7 @@ import java.util.Optional;
  */
 @Service
 @Transactional
-public class CompanyUserServiceImpl implements ICompanyUserService    {
+public class CompanyUserServiceImpl implements ICompanyUserService {
 
     @Autowired
     private ICompanyDao companyDao;
@@ -29,12 +31,26 @@ public class CompanyUserServiceImpl implements ICompanyUserService    {
 
     @Override
     public void addCompany(CompanyUserEntity company,String companyLoginName,String companyLoginPwd) {
-        PublicUserEntity userEntity = new PublicUserEntity(companyLoginName,companyLoginPwd,1);
 
-        userDao.save(userEntity);
-        company.setPublicUserId(userEntity);
 
-        companyDao.save(company);
+        try {
+            //将密码进行加密
+            String md5pwd = MD5Util.getEncryptedPwd(companyLoginPwd);
+            //创建一个企业用户对象
+            PublicUserEntity userEntity = new PublicUserEntity(
+                    companyLoginName,md5pwd,1);
+            //保存用户
+            userDao.save(userEntity);
+            //设置企业的用户外键
+            company.setPublicUserId(userEntity);
+            //保存企业用户
+            companyDao.save(company);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

@@ -12,6 +12,7 @@ public class UserDto {
 
 
     public UserDto() {
+
     }
 
     public UserDto(int id, String loginName, String pwd, List<PowerDto> powerList) {

@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import com.project.Service.ILogService;
 import com.project.Service.IPowerService;
 import com.project.Service.IUserService;
 import com.project.dto.PowerDto;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +28,10 @@ public class UserController {
     IUserService service;
 
     @Autowired
-    IPowerService powerServcie;
+    IPowerService powerService;
+
+    @Autowired
+    ILogService logService;
 
     @RequestMapping("login/{userName}/{pwd}")
     public UserDto login(@PathVariable("userName") String userName,@PathVariable("pwd") String pwd){
@@ -40,13 +45,12 @@ public class UserController {
                 //System.out.println("欢迎用户"+user.getLoginName()+"登陆系统");
                 //如果用户是管理员，查询权限
                 if(userType==2){
-                    List<PowerEntity> powerlist=powerServcie.getPowerByAdminId(mainUser.getId());
+                    List<PowerEntity> powerlist=powerService.getPowerByAdminId(mainUser.getId());
                     List<PowerDto> powerDtoList=new ArrayList<>();
                     for(PowerEntity power:powerlist){
                         List<Integer> powerinfo= Collections.singletonList(power.getPowerInfo());
                         //遍历拿到的数组，进行比较
                         for (int i:powerinfo){
-
                             if (i==1){
                                 String powerA="用户管理";
                                 powerDtoList.add(new PowerDto(powerA));
@@ -60,7 +64,6 @@ public class UserController {
                                 String powerD="投诉管理";
                                 powerDtoList.add(new PowerDto(powerD));
                             }
-
                         }
                         //设置UserDto的属性
                         userDto.setPowerList(powerDtoList);
@@ -78,6 +81,9 @@ public class UserController {
                             userDto.setUserType(CBDStringUtil.SUPERADMIN_USER);
                         }
                     }
+
+                   LogEntity logEntity= new LogEntity();
+                    logService.addLog(logEntity);
                 }
             }else {
                     return null;
@@ -87,7 +93,6 @@ public class UserController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
         return userDto;
     }
 
@@ -115,7 +120,7 @@ public class UserController {
 
 
 
-    @RequestMapping("updateUser")
+    @RequestMapping("updateUser/{email}/{jobInfo}/{phone}/{homeAddress}/{pwd}/{userId}")
     public void updatePersonalUser(@PathVariable("email") String email,@PathVariable("jobInfo") String jobInfo,@PathVariable("phone") String phone,@PathVariable("homeAddress") String homeAddress,@PathVariable("userName") String userName,@PathVariable("pwd") String pwd,@PathVariable("userId") int userId){
 
     }

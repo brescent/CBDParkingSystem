@@ -2,7 +2,6 @@ package com.project.controller;
 
 import com.project.Service.IAdminService;
 import com.project.entity.AdminEntity;
-import com.project.entity.PublicUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

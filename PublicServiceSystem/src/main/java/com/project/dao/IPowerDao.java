@@ -25,5 +25,5 @@ public interface IPowerDao extends CrudRepository<PowerEntity,Integer> {
      * @param adminId
      */
     @Query("delete  from PowerEntity where admin.id=?1")
-    public void delPowerByAdminId(@Param("adminId") int adminId );
+    public void delPowerByAdminId(@Param("adminId") int adminId);
 }

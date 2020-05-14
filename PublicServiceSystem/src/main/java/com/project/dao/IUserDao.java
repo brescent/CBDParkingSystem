@@ -20,16 +20,6 @@ public interface IUserDao extends CrudRepository<PublicUserEntity,Integer> {
 
 
 
-    /**
-     * 根据id修改公共用户的密码
-     * @param newPwd
-     * @param userId
-     */
-    @Query("update PublicUserEntity set pwd=:newPwd,loginName=:userName where id=:userId")
-    public void updatepublicUser(@Param("newPwd") String newPwd,@Param("userId") int userId,@Param("userName") String userName);
-
-
-
     @Query("from PublicUserEntity  where loginName=:userName")
     public PublicUserEntity findUserByName(@Param("userName") String userName);
 

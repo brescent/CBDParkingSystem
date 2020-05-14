@@ -22,6 +22,9 @@ public class AdminEntity {
     @Column(name = "a_realName")
     private String realName;
 
+    @Column(name = "a_phone")
+    private String phone;
+
     @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_publicUserId",referencedColumnName = "pk_publicUserId",nullable = false)
     private PublicUserEntity publicUser;
@@ -32,16 +35,17 @@ public class AdminEntity {
     public AdminEntity() {
     }
 
-    public AdminEntity(int jobNum,String realName) {
+    public AdminEntity(int jobNum,String realName,String phone) {
         this.realName=realName;
         this.jobNum=jobNum;
+        this.phone=phone;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -61,12 +65,20 @@ public class AdminEntity {
         this.realName = realName;
     }
 
-    public PublicUserEntity getPublicUserId() {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public PublicUserEntity getPublicUser() {
         return publicUser;
     }
 
-    public void setPublicUserId(PublicUserEntity publicUserId) {
-        this.publicUser = publicUserId;
+    public void setPublicUser(PublicUserEntity publicUser) {
+        this.publicUser = publicUser;
     }
 
     public List<PowerEntity> getPowerList() {

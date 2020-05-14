@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService  {
 
     @Autowired
     IUserDao userDao;
@@ -30,15 +30,18 @@ public class UserServiceImpl implements IUserService {
     IPowerDao powerDao;
 
     @Override
-    public  void login(String userName, String pwd) {
+    public  PublicUserEntity login(String userName, String pwd) {
          PublicUserEntity mainUser= userDao.login(userName, pwd);
+         return  mainUser;
     }
 
     @Override
-    public void updatePersonalUser(String email, String jobInfo, String phone, String homeAddress, String userName, String pwd, int userId) {
-        userDao.updatepublicUser(pwd,userId,userName);
-        personalUserDao.updatePersonalUser(email, jobInfo, homeAddress, phone, userId);
+    public void updatePersonalUser(PersonalUserEntity personalUserEntity, int userId, PublicUserEntity publicUserEntity) {
+        userDao.save(publicUserEntity);
+        personalUserEntity.setPublicUser(publicUserEntity);
+        personalUserDao.save(personalUserEntity);
     }
+
 
     @Override
     public void addUser(PublicUserEntity publicUser, PersonalUserEntity personalUser) {
@@ -47,15 +50,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Object getUserInfo(int userType, int userId) {
-        if(userType==0){
-            PersonalUserEntity personalUser=personalUserDao.getPersonalUser(userId);
-        }else if (userType==1){
-            CompanyUserEntity companyUser=companyDao.getCompanyUserById(userId);
-        }else if(userType==2){
-            AdminEntity admin=adminDao.getAdminEntityById(userId);
-            List<PowerEntity> powerList=powerDao.getPowerByAdmidId(userId);
-        }
-        return null;
+    public PublicUserEntity findUserByName(String userName) {
+        return userDao.findUserByName(userName);
     }
+
+    @Override
+    public PersonalUserEntity findByPublicUserId(int publicUserId) {
+        return personalUserDao.getPersonalUser(publicUserId);
+    }
+
+
 }

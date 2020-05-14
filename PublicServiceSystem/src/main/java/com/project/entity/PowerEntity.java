@@ -10,6 +10,7 @@ public class PowerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /**权利名*/
     @Column(name = "p_powerInfo")
     private int powerInfo;
 

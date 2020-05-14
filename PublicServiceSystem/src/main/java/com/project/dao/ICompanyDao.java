@@ -9,13 +9,13 @@ import org.springframework.data.repository.query.Param;
  * 企业用户持久接口
  */
 public interface ICompanyDao extends CrudRepository<CompanyUserEntity,Integer> {
-    /**
+     /**
      * 根据id修改企业用户详情
      * @param contact
      * @param contactPhone
      */
     @Query("update CompanyUserEntity set contact=:contact,contactPhone=:contactPhone where id=:userId")
-    public void updateCompanyUser(@Param("contact") String contact, @Param("contactPhone") String contactPhone,@Param("userId") int userID);
+    public void updateCompanyUser(@Param("contact") String contact, @Param("contactPhone") String contactPhone, @Param("userId") int userID);
 
 
     /**
