@@ -3,8 +3,11 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BackgorundServiceSystem" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BackgorundServiceSystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CBDWeb" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/FrontServiceSystem" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/PublicServiceSystem" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PublicServiceSystem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PublicServiceSystem/src/main/resources" charset="UTF-8" />
   </component>
 </project>

@@ -1,10 +1,7 @@
 package com.project.Service.impl;
 
 import com.project.Service.IUserService;
-import com.project.dao.IAdminDao;
-import com.project.dao.ICompanyDao;
-import com.project.dao.IPersonalUserDao;
-import com.project.dao.IUserDao;
+import com.project.dao.*;
 import com.project.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,10 +26,12 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     IAdminDao adminDao;
 
+    @Autowired
+    IPowerDao powerDao;
+
     @Override
-    public  PublicUserEntity login(String userName, String pwd) {
+    public  void login(String userName, String pwd) {
          PublicUserEntity mainUser= userDao.login(userName, pwd);
-         return mainUser;
     }
 
     @Override
@@ -48,9 +47,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public PublicUserEntity findUserByName(String userName) {
-        return userDao.findUserByName(userName);
+    public Object getUserInfo(int userType, int userId) {
+        if(userType==0){
+            PersonalUserEntity personalUser=personalUserDao.getPersonalUser(userId);
+        }else if (userType==1){
+            CompanyUserEntity companyUser=companyDao.getCompanyUserById(userId);
+        }else if(userType==2){
+            AdminEntity admin=adminDao.getAdminEntityById(userId);
+            List<PowerEntity> powerList=powerDao.getPowerByAdmidId(userId);
+        }
+        return null;
     }
-
-
 }
