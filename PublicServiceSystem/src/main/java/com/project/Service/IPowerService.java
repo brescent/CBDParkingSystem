@@ -11,14 +11,14 @@ import java.util.List;
 public interface IPowerService {
     /**
      * 根据管理员id获取对应权限集合
-     * @param adminId
+     * @param adminId 管理员工号
      * @return 权限实体集合
      */
     public List<PowerEntity> getPowerByAdminId(int adminId);
 
     /**
      * 根据管理员id删除对应权限
-     * @param adminId
+     * @param adminId 管理员工号
      */
     public void delPowerByAdminId(int adminId);
 

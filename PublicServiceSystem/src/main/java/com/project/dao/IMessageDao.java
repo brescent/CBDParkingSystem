@@ -15,11 +15,11 @@ import java.util.List;
 public interface IMessageDao extends CrudRepository<MessageEntity,Integer> {
     /**
      * 通过用户id查询消息集合
-     * @param userId 用户id
+     * @param userName 用户名
      * @return 消息集合
      */
-    @Query("from MessageEntity where receiver.id = :userId")
-    public List<MessageEntity> findMessageListByUserId(@Param("userId") int userId);
+    @Query("from MessageEntity where receiver.name = :userName")
+    public List<MessageEntity> findMessageListByUserId(@Param("userName") String userName);
 
     /**
      * 通过消息id修改消息类型（0为未读，1为已读，2为已删除）

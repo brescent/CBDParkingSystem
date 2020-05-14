@@ -26,6 +26,10 @@ public class MessageController {
     @Autowired
     private IUserService userService;
 
+    /**
+     * 添加消息
+     * @param messageDto 消息Dto
+     */
     @RequestMapping("add")
     public void addMessage(MessageDto messageDto){
         PublicUserEntity receiver = userService.findUserByName(messageDto.getReceiverName());
@@ -34,10 +38,15 @@ public class MessageController {
         messageService.addMessage(messageEntity);
     }
 
+    /**
+     * 通过用户id查询某用户的消息集合
+     * @param userName 用户名
+     * @return 消息集合
+     */
     @RequestMapping("find")
-    public List<MessageEntity> findMessageListByUserId(int userId){
+    public List<MessageEntity> findMessageListByUserId(String userName){
         List<MessageEntity> messageList = new ArrayList<MessageEntity>();
-        messageList = messageService.findMessageListByUserId(userId);
+        messageList = messageService.findMessageListByUserName(userName);
         return messageList;
     }
 

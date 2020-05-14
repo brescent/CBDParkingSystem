@@ -10,10 +10,10 @@ import java.util.List;
 public interface IMessageService {
     /**
      * 通过用户id查询消息集合
-     * @param userId 用户id
+     * @param userName 用户名
      * @return 消息集合
      */
-    public List<MessageEntity> findMessageListByUserId(int userId);
+    public List<MessageEntity> findMessageListByUserName(String userName);
 
     /**
      * 删除消息，通过id查询消息并修改消息的类型为不可见

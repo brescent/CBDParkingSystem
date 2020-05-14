@@ -17,8 +17,8 @@ public class MessageServiceImpl implements IMessageService {
     private IMessageDao dao;
 
     @Override
-    public List<MessageEntity> findMessageListByUserId(int userId) {
-        return dao.findMessageListByUserId(userId);
+    public List<MessageEntity> findMessageListByUserName(String userName) {
+        return dao.findMessageListByUserId(userName);
     }
 
     @Override
