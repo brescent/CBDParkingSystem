@@ -10,7 +10,7 @@ import java.util.List;
 public class PublicUserEntity {
     /**用户id*/
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_publicUserId")
     private int id;
     /**用户登录名*/

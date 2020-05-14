@@ -30,6 +30,9 @@ public interface IUserDao extends CrudRepository<PublicUserEntity,Integer> {
 
 
 
+    @Query("from PublicUserEntity  where loginName=:userName")
+    public PublicUserEntity findUserByName(@Param("userName") String userName);
+
 
 
 }

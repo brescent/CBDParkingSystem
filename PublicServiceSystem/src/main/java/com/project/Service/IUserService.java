@@ -12,7 +12,7 @@ public interface IUserService {
      * @param pwd
      *
      */
-    public void login(String userName,String pwd);
+    public PublicUserEntity login(String userName,String pwd);
 
     /**
      * 用户修改
@@ -34,5 +34,11 @@ public interface IUserService {
     public void addUser(PublicUserEntity publicUser, PersonalUserEntity personalUser);
 
 
-    public Object getUserInfo(int userType,int userId);
+    /**
+     * 通过姓名查找用户，做到重名验证
+     * @param userName
+     * @return
+     */
+    public PublicUserEntity findUserByName(String userName);
+
 }

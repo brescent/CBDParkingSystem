@@ -10,7 +10,7 @@ import java.util.List;
 public class AdminEntity {
     /**管理员ID*/
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_adminId")
     private Integer id;
 
@@ -22,8 +22,8 @@ public class AdminEntity {
     @Column(name = "a_realName")
     private String realName;
 
-    @OneToOne
-    @JoinColumn(name = "fk_publicUserId")
+    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_publicUserId",referencedColumnName = "pk_publicUserId",nullable = false)
     private PublicUserEntity publicUser;
 
     @OneToMany(mappedBy = "admin")
