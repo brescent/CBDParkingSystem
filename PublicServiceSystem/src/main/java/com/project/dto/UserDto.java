@@ -1,25 +1,23 @@
 package com.project.dto;
 
-import javax.persistence.Column;
+
 import java.util.List;
 
-public class AdminUserDto {
+public class UserDto {
     private int id;
     private String loginName;
     private String pwd;
-    private int jobNum;
-    private String realName;
     private List<PowerDto> powerList;
+    private String userType;
 
-    public AdminUserDto() {
+
+    public UserDto() {
     }
 
-    public AdminUserDto(int id, String loginName, String pwd, int jobNum, String realName, List<PowerDto> powerList) {
+    public UserDto(int id, String loginName, String pwd, List<PowerDto> powerList) {
         this.id = id;
         this.loginName = loginName;
         this.pwd = pwd;
-        this.jobNum = jobNum;
-        this.realName = realName;
         this.powerList = powerList;
     }
 
@@ -47,27 +45,19 @@ public class AdminUserDto {
         this.pwd = pwd;
     }
 
-    public int getJobNum() {
-        return jobNum;
-    }
-
-    public void setJobNum(int jobNum) {
-        this.jobNum = jobNum;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
     public List<PowerDto> getPowerList() {
         return powerList;
     }
 
     public void setPowerList(List<PowerDto> powerList) {
         this.powerList = powerList;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 }
