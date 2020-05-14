@@ -32,8 +32,9 @@ public class AdminServiceImpl implements IAdminService  {
 
     @Override
     public void addAdmin(AdminEntity admin,String pwd) {
-
+        //创建一个公共用户对象,并设置添加的登录名以及密码
         PublicUserEntity userEntity = new PublicUserEntity( admin.getJobNum()+"",pwd,2);
+
         userDao.save(userEntity);
         admin.setPublicUserId(userEntity);
         adminDao.save(admin);
