@@ -35,7 +35,7 @@
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row.stallId)" type="text" size="medium">查看详情</el-button>
       </template>
-    
+      </el-table-column>
   </el-table>
   <div class="block">
        <el-pagination
@@ -76,7 +76,7 @@
         console.log(`当前页: ${val}`);
       },
     news(){
-        window.location.href="../../yzh/page/updateCompanyUser.html"
+        window.location.href="../../bwk/page/ShowMessageList.html"
     }
 
     },

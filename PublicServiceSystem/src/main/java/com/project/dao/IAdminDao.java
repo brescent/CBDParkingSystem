@@ -8,7 +8,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+/**
+ * 管理员持久接口
+ */
 public interface IAdminDao extends CrudRepository<AdminEntity,Integer> {
+
     /**
      * 根据用户di查询对应管理员的详细信息
      * @param userId

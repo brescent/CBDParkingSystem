@@ -7,7 +7,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+/**
+ * 权限持久接口
+ */
 public interface IPowerDao extends CrudRepository<PowerEntity,Integer> {
+
     /**
      * 根据管理员id获取对应的权限集合
      * @param adminId

@@ -13,7 +13,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/cdb?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: 666002
+    password: a
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     database: mysql
