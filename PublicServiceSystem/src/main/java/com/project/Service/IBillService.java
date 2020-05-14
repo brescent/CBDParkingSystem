@@ -30,4 +30,5 @@ public interface IBillService {
      * @param billEntity 账单实体
      */
     public void addBill(BillEntity billEntity);
+
 }
