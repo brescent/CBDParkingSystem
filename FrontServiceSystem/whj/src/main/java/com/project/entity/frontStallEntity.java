@@ -29,36 +29,36 @@ public class frontStallEntity {
     /**
      * 车位编号
      */
-    @Column(name = "stallNum",length = 32)
+    @Column(name = "f_stallNum",length = 32)
     private  String stallNum;
     /**
      * 车位地址
      */
-    @Column(name = "stallAddress",length = 50)
+    @Column(name = "f_stallAddress",length = 50)
     private String stallAddress;
     /**
      * 车位状态
      */
-    @Column(name = "stallState",length = 32)
+    @Column(name = "f_stallState",length = 32)
     private String stallState;
     /**
      * 车位产权
      */
-    @Column(name = "stallPhoto",length = 100)
+    @Column(name = "f_stallPhoto",length = 100)
     private String stallPhoto;
     /**
      * 车位小区编号
      */
-    @Column(name = "stallAreaNum",length = 32)
+    @Column(name = "f_stallAreaNum",length = 32)
     private String stallAreaNum;
     /**
      * 车位所属
      */
-    @Column(name = "stallOwner",length = 32)
+    @Column(name = "f_stallOwner",length = 32)
     private int stallOwner;
     /**
      * 身份证号码
      */
-    @Column(name = "IDNum",length = 20)
+    @Column(name = "f_IDNum",length = 20)
     private String IDNum;
 }

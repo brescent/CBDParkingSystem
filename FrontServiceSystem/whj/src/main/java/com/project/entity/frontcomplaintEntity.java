@@ -1,5 +1,7 @@
 package com.project.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -8,7 +10,8 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "t_frontcomplaint")
-public class frontcomplaint {
+@Data
+public class frontcomplaintEntity {
     /**
      * id
      */
@@ -19,12 +22,18 @@ public class frontcomplaint {
     /**
      * 投诉内容
      */
-    @Column(name = "complaintContant",length = 100)
+    @Column(name = "f_complaintContant",length = 100)
     private  String complaintContant;
     /**
      * 投诉时间
      */
-    @Column(name = "complaintTime")
+    @Column(name = "f_complaintTime")
     private Date complaintTime;
+    /**
+     * 订单外键
+     */
+    @OneToOne
+    @JoinColumn(name = "fk_frontOrderId")
+    private frontOrderEntity frontOrderId;
 
 }

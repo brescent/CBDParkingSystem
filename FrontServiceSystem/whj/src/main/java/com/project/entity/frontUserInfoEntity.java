@@ -1,5 +1,7 @@
 package com.project.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +9,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "t_frontUserInfo")
-public class frontUserInfo {
+@Data
+public class frontUserInfoEntity {
     /**
      * id
      */
@@ -18,21 +21,21 @@ public class frontUserInfo {
     /**
      * 职业
      */
-    @Column(name = "userProfession",length = 32)
+    @Column(name = "f_userProfession",length = 32)
     private String userProfession;
     /**
      * 真实姓名
      */
-    @Column(name = "realName",length = 32)
+    @Column(name = "f_realName",length = 32)
     private String realName;
     /**
      * 用户名
      */
-    @Column(name = "userName",length = 32)
+    @Column(name = "f_userName",length = 32)
     private String userName;
     /**
      * 身份证号
      */
-    @Column(name = "IDNum",length = 20)
+    @Column(name = "f_IDNum",length = 20)
     private String IDNum;
 }

@@ -1,5 +1,7 @@
 package com.project.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +9,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "t_frontPact")
-public class frontPact {
+@Data
+public class frontPactEntity {
     /**
      * id
      */
@@ -18,7 +21,13 @@ public class frontPact {
     /**
      * 合同状态
      */
-    @Column(name = "pactState",length = 10)
+    @Column(name = "f_pactState",length = 10)
     private int pactState;
+    /**
+     * 订单外键
+     */
+    @OneToOne
+    @JoinColumn(name = "fk_frontOrderId")
+    private frontOrderEntity frontOrderId;
 }
 
