@@ -30,5 +30,6 @@ public class BillServiceImpl implements IBillService {
     @Override
     public void addBill(BillEntity billEntity) {
         dao.addBill(billEntity);
+        dao.save(billEntity);
     }
 }

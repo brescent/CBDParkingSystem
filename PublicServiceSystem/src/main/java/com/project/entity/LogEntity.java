@@ -11,7 +11,7 @@ import java.sql.Date;
 public class LogEntity {
     /**日志id*/
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_logId")
     private int logId;
     /**操作时间*/

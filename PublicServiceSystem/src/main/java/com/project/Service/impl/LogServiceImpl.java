@@ -22,11 +22,6 @@ public class LogServiceImpl implements ILogService {
     }
 
     @Override
-    public List<LogEntity> findByUserId(int userId) {
-        return dao.findByUserId(userId);
-    }
-
-    @Override
     public void addLog(LogEntity logEntity) {
         dao.addLog(logEntity);
     }

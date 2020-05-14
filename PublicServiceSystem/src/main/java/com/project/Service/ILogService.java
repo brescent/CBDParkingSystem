@@ -15,13 +15,6 @@ public interface ILogService {
     public List<LogEntity> findAll();
 
     /**
-     * 通过用户id查找该用户日志
-     * @param userId 用户id
-     * @return 日志集合
-     */
-    public List<LogEntity> findByUserId(int userId);
-
-    /**
      * 添加日志
      * @param logEntity 日志实体
      */

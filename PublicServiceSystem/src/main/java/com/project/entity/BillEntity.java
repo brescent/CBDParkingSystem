@@ -11,7 +11,7 @@ import java.sql.Date;
 public class BillEntity {
     /**账单id*/
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_billId")
     private int billId;
     /**交易日期*/

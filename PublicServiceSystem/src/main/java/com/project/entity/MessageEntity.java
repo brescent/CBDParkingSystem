@@ -11,7 +11,7 @@ import java.sql.Date;
 public class MessageEntity {
     /**消息id*/
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_messageId")
     private int messageId;
     /**消息内容*/

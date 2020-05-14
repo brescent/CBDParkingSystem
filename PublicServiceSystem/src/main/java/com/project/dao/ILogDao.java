@@ -1,24 +1,23 @@
 package com.project.dao;
 
 import com.project.entity.LogEntity;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface ILogDao {
+/**
+ * 日志持久层接口
+ */
+public interface ILogDao extends CrudRepository<LogEntity,Integer> {
     /**
      * 查找全部日志
      * @return 日志集合
      */
+    @Query("from LogEntity")
     public List<LogEntity> findAll();
-
-    /**
-     * 通过用户id查找该用户日志
-     * @param userId 用户id
-     * @return 日志集合
-     */
-    public List<LogEntity> findByUserId(int userId);
 
     /**
      * 添加日志
