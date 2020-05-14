@@ -32,4 +32,12 @@ public interface IMessageService {
      * @param messageEntity 消息实体
      */
     public void addMessage(MessageEntity messageEntity);
+
+    /**
+     * 通过id查询消息
+     * @param  messageId 消息id
+     * @return 消息实体
+     */
+    public MessageEntity findById(int messageId);
+
 }

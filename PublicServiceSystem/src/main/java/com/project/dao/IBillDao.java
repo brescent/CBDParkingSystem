@@ -31,9 +31,9 @@ public interface IBillDao extends CrudRepository<BillEntity,Integer> {
     @Query("from BillEntity where billId = :billId")
     public BillEntity findById(@Param("billId") int billId);
 
-    /**
-     * 添加账单
-     * @param billEntity 账单实体
-     */
-    public void addBill(BillEntity billEntity);
+//    /**
+//     * 添加账单
+//     * @param billEntity 账单实体
+//     */
+//    public void addBill(BillEntity billEntity);
 }

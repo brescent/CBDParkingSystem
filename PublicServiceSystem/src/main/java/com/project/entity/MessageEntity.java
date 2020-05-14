@@ -2,6 +2,7 @@ package com.project.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * 消息实体类
@@ -17,15 +18,15 @@ public class MessageEntity {
     /**消息内容*/
     @Column(name = "m_info")
     private String messageInfo;
-    /**消息类型*/
+    /**消息类型 0是个人消息，1是系统消息*/
     @Column(name = "m_type")
-    private String messageType;
+    private int messageType;
     /**消息发送日期*/
     @Column(name = "m_date")
-    private Date messageDate;
-    /**消息状态*/
+    private Date messageDate = new Date(System.currentTimeMillis());
+    /**消息状态 0表示未读，1表示已读，2表示已删除*/
     @Column(name = "m_status")
-    private int messageStatus;
+    private int messageStatus = 0;
     /**接收用户*/
     @OneToOne
     @JoinColumn(name = "fk_receiverId")
@@ -35,14 +36,23 @@ public class MessageEntity {
     @JoinColumn(name = "fk_senderId")
     private PublicUserEntity sender;
 
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
     public MessageEntity() {
     }
 
-    public MessageEntity(String messageInfo, String messageType, Date messageDate, int messageStatus, PublicUserEntity receiver, PublicUserEntity sender) {
+    public MessageEntity(String messageInfo, int messageType, Date messageDate, int messageStatus, PublicUserEntity receiver, PublicUserEntity sender) {
         this.messageInfo = messageInfo;
         this.messageType = messageType;
         this.messageDate = messageDate;
         this.messageStatus = messageStatus;
+        this.receiver = receiver;
+        this.sender = sender;
+    }
+
+    public MessageEntity(String messageInfo, int messageType, PublicUserEntity receiver, PublicUserEntity sender) {
+        this.messageInfo = messageInfo;
+        this.messageType = messageType;
         this.receiver = receiver;
         this.sender = sender;
     }
@@ -63,20 +73,16 @@ public class MessageEntity {
         this.messageInfo = messageInfo;
     }
 
-    public String getMessageType() {
+    public int getMessageType() {
         return messageType;
     }
 
-    public void setMessageType(String messageType) {
+    public void setMessageType(int messageType) {
         this.messageType = messageType;
     }
 
-    public Date getMessageDate() {
-        return messageDate;
-    }
-
-    public void setMessageDate(Date messageDate) {
-        this.messageDate = messageDate;
+    public String getMessageDate() {
+        return sdf.format(messageDate);
     }
 
     public int getMessageStatus() {

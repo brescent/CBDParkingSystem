@@ -23,6 +23,6 @@ public class LogServiceImpl implements ILogService {
 
     @Override
     public void addLog(LogEntity logEntity) {
-        dao.addLog(logEntity);
+        dao.save(logEntity);
     }
 }

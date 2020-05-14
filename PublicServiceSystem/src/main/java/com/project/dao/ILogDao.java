@@ -19,9 +19,9 @@ public interface ILogDao extends CrudRepository<LogEntity,Integer> {
     @Query("from LogEntity")
     public List<LogEntity> findAll();
 
-    /**
-     * 添加日志
-     * @param logEntity 日志实体
-     */
-    public void addLog(LogEntity logEntity);
+//    /**
+//     * 添加日志
+//     * @param logEntity 日志实体
+//     */
+//    public void addLog(LogEntity logEntity);
 }

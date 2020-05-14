@@ -37,10 +37,10 @@ public interface IMessageDao extends CrudRepository<MessageEntity,Integer> {
     @Query("from MessageEntity where messageId = :messageId")
     public MessageEntity findById(@Param("messageId") int messageId);
 
-    /**
-     * 添加消息
-     * @param messageEntity 消息实体
-     */
-    public void addMessage(MessageEntity messageEntity);
+//    /**
+//     * 添加消息
+//     * @param messageEntity 消息实体
+//     */
+//    public void addMessage(MessageEntity messageEntity);
 
 }
