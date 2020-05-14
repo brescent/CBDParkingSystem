@@ -14,7 +14,7 @@ const  app = new Vue({
 
         /*取消按钮事件*/
         news:function(){
-            window.location.href="updateCompanyUser.html"
+            window.location.href="../../bwk/page/ShowMessageList.html";
         },
 
     }

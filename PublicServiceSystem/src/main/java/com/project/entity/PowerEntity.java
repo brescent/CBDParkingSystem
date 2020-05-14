@@ -7,8 +7,10 @@ import javax.persistence.*;
 public class PowerEntity {
     @Id
     @Column(name = "pk_powerId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /**权利名*/
     @Column(name = "p_powerInfo")
     private int powerInfo;
 

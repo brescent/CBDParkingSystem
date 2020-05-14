@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <style>
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <el-container>
+        <!-- 内容显示区-->
+        <el-main>
+            <div style="text-align: center">
+                <h1 style="color: #3a8ee6">日志记录</h1>
+            </div>
+            <el-table :data="tableData"
+                      highlight-current-row
+                      style="width:100%">
+                <el-table-column prop="logDate" label="日志时间" align="center" width="500px">
+                </el-table-column>
+                <el-table-column prop="logInfo" label="操作记录" align="center">
+                </el-table-column>
+            </el-table>
+            <!-- 分页区 -->
+            <el-pagination style="margin: 20px auto;" background
+                           layout="prev,pager,next,sizes,total,jumper "
+                           :current-page="currentPage"
+                           :page-size="pageSize"
+                           :pager-count=5
+                           :page-sizes=[5,10]
+                           :total="total"
+                           @current-change="currentChange"
+                           @size-change="sizeChange">
+            </el-pagination>
+        </el-main>
+    </el-container>
+</div>
+</body>
+</html>
+
+<!--vue.js 必须在elementUI.js之前导入-->
+<script src="../js/vue/Vue.js"></script>
+<!--使用ajax 需要导入-->
+<script  src="../js/vue/vue-resource.js"></script>
+<script src="../js/elementUI/elementUI.js"></script>
+<script src="../js/page_Js/publicService/logList.js"></script>

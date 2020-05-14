@@ -17,17 +17,5 @@ public interface IPersonalUserDao extends CrudRepository<PersonalUserEntity,Inte
     public PersonalUserEntity getPersonalUser(@Param("userId") int userId);
 
 
-    /**
-     * 根据id修改个人用户信息
-     * @param email
-     * @param jobInfo
-     * @param homeAddress
-     * @param phone
-     * @param userId
-     */
-    @Query("update PersonalUserEntity set email=:email,jobInfo=:jobInfo ,homeAddress=:homeAddress,phone=:phone where id=:userId")
-    public void updatePersonalUser(@Param("email") String email, @Param("jobInfo")
-            String jobInfo, @Param("homeAddress")
-                                           String homeAddress, @Param("phone")
-                                           String phone, @Param("userId") int userId);
+
 }

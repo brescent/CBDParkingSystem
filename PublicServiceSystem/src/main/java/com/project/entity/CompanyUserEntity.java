@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class CompanyUserEntity {
     /**企业用户id*/
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_companyUserID")
     private int id;
 
@@ -28,8 +28,8 @@ public class CompanyUserEntity {
     @Column(name = "c_contactPhone")
     private String contactPhone;
 
-    @OneToOne
-    @JoinColumn(name = "fk_publicUserId")
+    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_publicUserId",referencedColumnName = "pk_publicUserId",nullable = false)
     private PublicUserEntity publicUser;
 
     public CompanyUserEntity() {

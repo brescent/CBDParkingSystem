@@ -12,19 +12,14 @@ public interface IUserService {
      * @param pwd
      *
      */
-    public void login(String userName,String pwd);
+    public PublicUserEntity login(String userName,String pwd);
 
     /**
-     * 用户修改
-     * @param email
-     * @param jobInfo
-     * @param phone
-     * @param homeAddress
-     * @param userName
-     * @param pwd
-     * @param userId
+     * 用户修改，可以修改用户邮箱，职业描述，电话号码，家庭住址，面膜
+     * @param personalUserEntity
+     * @param userId 用户id
      */
-    public void updatePersonalUser(String email,String jobInfo,String phone,String homeAddress,String userName,String pwd,int userId);
+    public void updatePersonalUser( PersonalUserEntity personalUserEntity,int userId,PublicUserEntity publicUserEntity);
 
     /**
      *添加用户
@@ -34,5 +29,14 @@ public interface IUserService {
     public void addUser(PublicUserEntity publicUser, PersonalUserEntity personalUser);
 
 
-    public Object getUserInfo(int userType,int userId);
+    /**
+     * 通过姓名查找用户，做到重名验证
+     * @param userName
+     * @return
+     */
+    public PublicUserEntity findUserByName(String userName);
+
+
+    public PersonalUserEntity findByPublicUserId(int publicUserId);
+
 }
