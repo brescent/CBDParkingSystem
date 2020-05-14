@@ -10,7 +10,7 @@ public class PersonalUserEntity {
 
     /**个人用户id*/
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_personalUserID")
     private int id;
 
@@ -38,8 +38,8 @@ public class PersonalUserEntity {
     @Column(name = "p_phone")
     private String phone;
 
-    @OneToOne
-    @JoinColumn(name = "fk_publicUserId")
+    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_publicUserId",referencedColumnName = "pk_publicUserId",nullable = false)
     private PublicUserEntity publicUser;
 
     public PersonalUserEntity() {
