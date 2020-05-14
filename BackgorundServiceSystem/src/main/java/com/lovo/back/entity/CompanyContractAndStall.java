@@ -1,7 +1,7 @@
 package com.lovo.back.entity;
 
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,7 +9,10 @@ import java.io.Serializable;
 /**
  * 企业合约与车位关系实体
  */
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter(value= AccessLevel.PUBLIC)
+@Setter(value= AccessLevel.PUBLIC)
 @Data
 @Entity
 @Table(name="companyContract_stall")
@@ -25,11 +28,26 @@ public class CompanyContractAndStall implements Serializable {
 @ManyToOne
 @JoinColumn(name="fk_companyContractId")
 private CompanyContractEntity  companyContract;
+
+
 /*车位信息外键*/
 @ManyToOne
 @JoinColumn(name="fk_stallId")
 private StallEntity  stall;
 
+    public CompanyContractEntity getCompanyContract() {
+        return companyContract;
+    }
 
+    public void setCompanyContract(CompanyContractEntity companyContract) {
+        this.companyContract = companyContract;
+    }
 
+    public StallEntity getStall() {
+        return stall;
+    }
+
+    public void setStall(StallEntity stall) {
+        this.stall = stall;
+    }
 }

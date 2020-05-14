@@ -1,6 +1,6 @@
 package com.lovo.back.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +9,11 @@ import java.io.Serializable;
 /**
  * 外部合约与车位关系中间表
  */
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter(value= AccessLevel.PUBLIC)
+@Setter(value= AccessLevel.PUBLIC)
 @Data
 @Entity
 @Table(name = "outContract_stall")

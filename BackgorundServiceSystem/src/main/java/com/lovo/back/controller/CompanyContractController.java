@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class CompanyContractContraller {
+public class CompanyContractController {
 
 
     @Autowired
@@ -50,8 +50,8 @@ public class CompanyContractContraller {
      * @param companyCtractEntity  租户合约实体对象
      */
     @GetMapping("companyContract/add")
-    public void  addCompanyContract(@RequestBody CompanyContractEntity companyCtractEntity){
-           companyCtractService.add(companyCtractEntity);
+    public void  addCompanyContract(@RequestBody CompanyContractEntity companyCtractEntity ,int [] stallIdList){
+           companyCtractService.add(companyCtractEntity,stallIdList);
     }
 
     /**

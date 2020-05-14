@@ -52,8 +52,9 @@ public class StallController {
      */
 
 
-    @GetMapping("stall/addStall/{stallAddress}/{addressNo}/{total}/{startNum}")
-    public  void  add(@PathVariable("stallAddress")String stallAddress,@PathVariable("addressNo")String addressNo,@PathVariable("total")String total,@PathVariable("startNum")String startNum){
+    @GetMapping("stall/addStall/{stallAddress}/{addressNo}/{total}/{startNum}/{peopleNo}")
+    public  void  add(@PathVariable("stallAddress")String stallAddress,@PathVariable("addressNo")String addressNo,@PathVariable("total")String total,@PathVariable("startNum")String startNum
+    ){
 
 
 

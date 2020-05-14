@@ -5,6 +5,7 @@ import com.lovo.back.dao.IOutContractDao;
 import com.lovo.back.entity.CompanyContractAndStall;
 import com.lovo.back.entity.OutContractAndStall;
 import com.lovo.back.entity.OutContractEntity;
+import com.lovo.back.entity.StallEntity;
 import com.lovo.back.service.IOutContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Service
+@Service(value="outContract")
 public class OutContractServiceImpl implements IOutContractService {
 
 
@@ -30,8 +31,21 @@ public class OutContractServiceImpl implements IOutContractService {
     }
 
     @Override
-    public void add(OutContractEntity outContractEntity) {
+    public void add(OutContractEntity outContractEntity ,int [] stallIdList) {
         outContractDao.save(outContractEntity);
+
+        for(int stallId:stallIdList){
+            OutContractAndStall  obj=new OutContractAndStall();
+            StallEntity stall=new StallEntity();
+
+            stall.setId(stallId);
+            obj.setOutContract(outContractEntity);
+            obj.setStall(stall);
+
+            outContractAndStallDao.save(obj);
+
+        }
+
     }
 
     @Override
@@ -46,7 +60,5 @@ public class OutContractServiceImpl implements IOutContractService {
     }
 
 
-    public void addOutContractAndStall(OutContractAndStall outContractAndStall){
-        outContractAndStallDao.save(outContractAndStall);
-    }
+
 }

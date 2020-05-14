@@ -11,6 +11,7 @@ import java.util.Set;
 /**
  * 外部合约实体类  cbd系统与其他平台签订的合约
  */
+
 @Data
 @Entity
 @Table(name="t_outContract")
@@ -47,11 +48,24 @@ public class OutContractEntity implements Serializable {
     @Column(length = 88)
     private String oldOutContractNo;
 
-/*车位信息*/
+    /*车位信息*/
     @OneToMany(mappedBy = "outContract")
     private Set<OutContractAndStall> outContractAndStallSet;
+
+
 
     /*合同生效状态*/
     private int state=1;
 
+    public OutContractEntity(String outContractNo, String unit, String bothParties, String linkMan, Date startDate, Date endDate, double dealPrice, String contractImg, String oldOutContractNo) {
+        this.outContractNo = outContractNo;
+        this.unit = unit;
+        this.bothParties = bothParties;
+        this.linkMan = linkMan;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dealPrice = dealPrice;
+        this.contractImg = contractImg;
+        this.oldOutContractNo = oldOutContractNo;
+    }
 }

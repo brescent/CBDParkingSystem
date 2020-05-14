@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class OutContractContraller {
+public class OutContractController {
 
     @Autowired
     IOutContractService contractService;
@@ -47,8 +47,8 @@ public class OutContractContraller {
      * @param outContractEntity  租户合约实体对象
      */
     @GetMapping("outContract/add")
-    public void  addCompanyContract(@RequestBody OutContractEntity outContractEntity){
-        contractService.add(outContractEntity);
+    public void  addCompanyContract(@RequestBody OutContractEntity outContractEntity,int [] stallIdList){
+        contractService.add(outContractEntity,stallIdList);
     }
 
     /**

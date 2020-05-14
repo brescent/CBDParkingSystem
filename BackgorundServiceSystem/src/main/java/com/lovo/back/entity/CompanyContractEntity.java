@@ -1,18 +1,24 @@
 package com.lovo.back.entity;
 
 
-import lombok.Data;
+import lombok.*;
 
 
 import javax.persistence.*;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Optional;
 import java.util.Set;
 
 /**
  * 企业合同实体
  */
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter(value= AccessLevel.PUBLIC)
+@Setter(value= AccessLevel.PUBLIC)
 @Data
 @Entity
 @Table(name = "t_companyContract")
@@ -46,8 +52,10 @@ public class CompanyContractEntity implements Serializable {
 
     /*企业 对象*/
     @OneToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "companyId", insertable = false, updatable = false)
+    @JoinColumn(name = "companyId")
     private CompanyEntity company;
+
+
     /*车位*/
     @OneToMany(mappedBy = "companyContract")
     private Set<CompanyContractAndStall> set;
@@ -55,4 +63,20 @@ public class CompanyContractEntity implements Serializable {
     /*合同生效状态*/
     private int state=1;
 
+    public CompanyContractEntity(String contractNo, Date startDate, Date endDate, double dealPrice, String contractImg, String oldContractNo) {
+        this.contractNo = contractNo;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dealPrice = dealPrice;
+        this.contractImg = contractImg;
+        this.oldContractNo = oldContractNo;
+    }
+
+    public CompanyEntity getCompany() {
+        return company;
+    }
+
+    public void setCompany(Optional<CompanyEntity> company) {
+        this.company = company.get();
+    }
 }

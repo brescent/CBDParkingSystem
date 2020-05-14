@@ -1,20 +1,21 @@
 package com.lovo.back.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
+
 @Entity
 @Table(name="t_company")
+@Data
 public class CompanyEntity implements Serializable {
 
 
 
     /**企业用户id*/
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_companyUserID")
     private int id;
 
@@ -33,7 +34,6 @@ public class CompanyEntity implements Serializable {
     /**企业联系人电话*/
     @Column(name = "c_contactPhone")
     private String contactPhone;
-
 
 
 }
