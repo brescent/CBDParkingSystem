@@ -19,4 +19,10 @@ public interface ILogDao {
      * @return 日志集合
      */
     public List<LogEntity> findByUserId(int userId);
+
+    /**
+     * 添加日志
+     * @param logEntity 日志实体
+     */
+    public void addLog(LogEntity logEntity);
 }

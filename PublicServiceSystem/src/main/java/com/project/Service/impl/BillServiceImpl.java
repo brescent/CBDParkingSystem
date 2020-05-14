@@ -26,4 +26,9 @@ public class BillServiceImpl implements IBillService {
     public BillEntity findById(int billId) {
         return dao.findById(billId);
     }
+
+    @Override
+    public void addBill(BillEntity billEntity) {
+        dao.addBill(billEntity);
+    }
 }

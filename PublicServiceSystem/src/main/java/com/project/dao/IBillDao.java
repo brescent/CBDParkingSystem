@@ -26,4 +26,10 @@ public interface IBillDao {
      * @return 账单实体
      */
     public BillEntity findById(int billId);
+
+    /**
+     * 添加账单
+     * @param billEntity 账单实体
+     */
+    public void addBill(BillEntity billEntity);
 }

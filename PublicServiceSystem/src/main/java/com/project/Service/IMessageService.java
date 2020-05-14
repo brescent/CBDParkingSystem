@@ -26,4 +26,10 @@ public interface IMessageService {
      * @param messageId 消息id
      */
     public void readMessageById(int messageId);
+
+    /**
+     * 添加消息
+     * @param messageEntity 消息实体
+     */
+    public void addMessage(MessageEntity messageEntity);
 }

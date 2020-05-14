@@ -31,4 +31,8 @@ public class MessageServiceImpl implements IMessageService {
         dao.updateMessageTypeById(messageId,1);
     }
 
+    @Override
+    public void addMessage(MessageEntity messageEntity) {
+        dao.addMessage(messageEntity);
+    }
 }

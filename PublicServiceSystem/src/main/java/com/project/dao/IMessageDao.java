@@ -31,4 +31,10 @@ public interface IMessageDao {
      */
     public MessageEntity findById(int messageId);
 
+    /**
+     * 添加消息
+     * @param messageEntity 消息实体
+     */
+    public void addMessage(MessageEntity messageEntity);
+
 }
