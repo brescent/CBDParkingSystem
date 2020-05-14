@@ -16,7 +16,7 @@ public interface ICompanyUserService {
      * @param companyLoginName 企业登录名
      * @param companyLoginPwd 企业登录密码
      */
-    public void addCompany(CompanyUserEntity company,String companyLoginName,String companyLoginPwd);
+    public void addCompany(CompanyUserEntity company, String companyLoginName, String companyLoginPwd);
 
     /**
      * 根据用户id查询对应的企业详细信息
@@ -43,7 +43,7 @@ public interface ICompanyUserService {
      * @param contactPhone 联系电话
      * @param companyId 企业id
      */
-    public void updCompany(String contact,String contactPhone,int companyId);
+    public void updCompany(String contact, String contactPhone, int companyId);
 
 
     /**

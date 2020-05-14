@@ -1,0 +1,26 @@
+#服务器的端口号
+server:
+  port: 8003
+eureka:
+  instance:
+    hostname: 127.0.0.1  #服务器的IP地址
+  client:
+    serviceUrl:    #注册服务器的地址
+      defaultZone: http://127.0.0.1:8000/eureka/
+spring:
+  application:
+    name: frontServiceSystem
+  datasource:
+    url: jdbc:mysql://localhost:3306/cbdp?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      database-platform: org.hibernate.dialect.MySQL5Dialect
+
+

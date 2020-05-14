@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
  * 企业用户持久接口
  */
 public interface ICompanyDao extends CrudRepository<CompanyUserEntity,Integer> {
-     /**
+    /**
      * 根据id修改企业用户详情
      * @param contact
      * @param contactPhone
