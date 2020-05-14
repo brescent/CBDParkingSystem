@@ -1,6 +1,6 @@
 package com.project.controller;
 
-import com.project.Service.IPowerServcie;
+import com.project.Service.IPowerService;
 import com.project.Service.IUserService;
 import com.project.dto.PowerDto;
 import com.project.dto.UserDto;
@@ -26,7 +26,7 @@ public class UserController {
     IUserService service;
 
     @Autowired
-    IPowerServcie powerServcie;
+    IPowerService powerServcie;
 
     @RequestMapping("login/{userName}/{pwd}")
     public UserDto login(@PathVariable("userName") String userName,@PathVariable("pwd") String pwd){
@@ -40,7 +40,7 @@ public class UserController {
                 //System.out.println("欢迎用户"+user.getLoginName()+"登陆系统");
                 //如果用户是管理员，查询权限
                 if(userType==2){
-                    List<PowerEntity> powerlist=powerServcie.getPowerByAdmidId(1);
+                    List<PowerEntity> powerlist=powerServcie.getPowerByAdminId(mainUser.getId());
                     List<PowerDto> powerDtoList=new ArrayList<>();
                     for(PowerEntity power:powerlist){
                         List<Integer> powerinfo= Collections.singletonList(power.getPowerInfo());
@@ -112,6 +112,7 @@ public class UserController {
             }
             return CBDStringUtil.ADD_FAIL;
     }
+
 
 
     @RequestMapping("updateUser")
