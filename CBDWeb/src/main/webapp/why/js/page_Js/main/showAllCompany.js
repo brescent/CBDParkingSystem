@@ -7,17 +7,17 @@ const app = new Vue({
      data:{
          companyName:"",
          companyAddress:"",
-         companyLinkMan:"",
-         companyPhone:"",
+         contact:"",
+         contactPhone:"",
          tableData:[{
              companyName:"中国石油",
              companyAddress:"火星",
-             companyLinkMan:"小白",
-             companyPhone:"158451"
+             contact:"小白",
+             contactPhone:"158451"
          },{companyName:"中国航天",
              companyAddress:"太阳",
-             companyLinkMan:"小黑",
-             companyPhone:"1254871"}],
+             contact:"小黑",
+             contactPhone:"1254871"}],
          pageSize:3,
          total:0,
          currentPage:1

@@ -73,9 +73,24 @@ public class AdminCompTest {
     }
 
     /**
-     * 测试分页
+     * 测试企业动态分页
      */
     @Test
+    public void testCompanyPage(){
+
+        PageEntity p = companyUserService.getAllCompany(
+                null,
+                null,
+                null,
+                null,
+                1,
+                3
+        );
+        System.out.println();
+    }
+    /**
+     *测试分页
+     */
     public void testPage(){
 
         PageEntity p = adminService.getAllAdmin(1,2);

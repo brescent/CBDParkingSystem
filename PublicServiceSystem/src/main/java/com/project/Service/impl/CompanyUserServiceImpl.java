@@ -83,7 +83,7 @@ public class CompanyUserServiceImpl implements ICompanyUserService {
                                     String contact, String contactPhone ,
                                     int pageNum, int pageSize) {
         //设置页码与显示条数
-        PageRequest pageable=PageRequest.of(pageNum,pageSize);
+        PageRequest pageable=PageRequest.of(pageNum-1,pageSize);
 
         //动态查询结果数据集合
         List<CompanyUserEntity> compList = companyDao.findAllCompany( companyName,  companyAddress,
