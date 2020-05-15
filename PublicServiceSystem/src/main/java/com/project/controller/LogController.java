@@ -23,4 +23,9 @@ public class LogController {
     public void addLog(String logInfo,String userName){
         logService.addLog(new LogEntity(logInfo,userName));
     }
+
+    @RequestMapping("find")
+    public void findLogList(){
+        logService.findAll();
+    }
 }

@@ -21,8 +21,8 @@ public interface IBillDao extends CrudRepository<BillEntity,Integer> {
      * @param endDate   终止日期
      * @return  账单集合
      */
-    @Query(value = "select * from  t_message where (tradeDate > :startDate or :startDate is null)where (tradeDate < :endDate  or :endDate is null)",nativeQuery = true)
-    public List<BillEntity> findByItem(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    @Query(value = "select * from  t_message where 1=1 and (tradeDate > :startDate or :startDate is null) and (tradeDate < :endDate  or :endDate is null) where fk_userId = :userId",nativeQuery = true)
+    public List<BillEntity> findByItem(@Param("userId")int userId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     /**
      * 通过id查询账单
