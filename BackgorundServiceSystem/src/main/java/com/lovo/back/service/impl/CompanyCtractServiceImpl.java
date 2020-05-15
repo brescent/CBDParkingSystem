@@ -60,8 +60,8 @@ public class CompanyCtractServiceImpl implements ICompanyContractService {
     }
 
     @Override
-    public Optional<CompanyContractEntity> findById(int id) {
-        return companyContractDao.findById(id);
+    public CompanyContractEntity findById(int id) {
+        return companyContractDao.findById(id).get();
     }
 
 

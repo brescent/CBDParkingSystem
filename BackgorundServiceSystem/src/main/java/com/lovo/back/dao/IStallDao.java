@@ -12,6 +12,7 @@ import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.List;
 @Repository(value = "stallDao")
 public interface IStallDao  extends JpaRepository<StallEntity,Integer> {
@@ -21,7 +22,9 @@ public interface IStallDao  extends JpaRepository<StallEntity,Integer> {
     @Query(value = "select * from  t_stall where peopleNo is null and state =0",nativeQuery = true)
     public List<StallEntity>  findByState();
 
-    /*更改车位空闲状态*/
+    /*更改车位空闲状态    0表示空闲  1表示出租中*/
+    @Transactional
+
     @Modifying
     @Query(value="update t_stall set state=?2 where pk_id=?1" ,nativeQuery = true)
     public void updateState(int  id,int state);
@@ -39,6 +42,24 @@ public interface IStallDao  extends JpaRepository<StallEntity,Integer> {
                   "order by ?#{#pageable}",nativeQuery = true)
     public List<StallEntity>  findByItems(String stallAddress, String stallNo, Pageable pageable);
 
+
+    /**
+     *条件查询的总记录数
+     * @param stallAddress 车位地址
+     * @param stallNo 车位编号
+     * @return
+     */
+
+    @Query(value="select count(*) from t_stall where 1=1 " +
+            " and (stall_Address LIKE CONCAT('%',?1,'%') or ?1 is null)" +
+            " and (stall_No LIKE CONCAT('%',?2,'%') or ?2 is null)" ,
+            countQuery = " select count(*) from t_stall where 1=1" +
+                    "and (stall_Address LIKE CONCAT('%',?1,'%') or ?1 is null)" +
+                    "and (stall_No LIKE CONCAT('%',?2,'%') or ?2 is null)",
+            nativeQuery = true)
+    public List<BigInteger> findByItemsCount(String stallAddress, String stallNo);
+
+
     /*单个添加*/
 
 
@@ -47,12 +68,14 @@ public interface IStallDao  extends JpaRepository<StallEntity,Integer> {
 
 
     /*修改车位的所属者身份证号*/
+    @Transactional
     @Modifying
-    @Query(value=" update t_stall set peopleNo=?1 where pk_id=?2",nativeQuery=true)
-    public void updatePeopleNo(int id,String peopleNum);
+    @Query(value=" update t_stall set people_no=:peopleNo where pk_id=:id",nativeQuery=true)
+    public void updatePeopleNo(@Param("id")int id,@Param("peopleNo")String peopleNo);
 
 
     /*审核车位信息*/
+    @Transactional
 
     @Modifying
     @Query(value=" update t_stall set valid=1 where pk_id=?1",nativeQuery=true)
@@ -71,7 +94,7 @@ public interface IStallDao  extends JpaRepository<StallEntity,Integer> {
      * @param peopleNo
      * @return
      */
-    @Query(value="select * from t_stall where peopleNo=?1",nativeQuery = true)
+    @Query(value="select * from t_stall where people_no=?1",nativeQuery = true)
     public StallEntity  findByPeopleNo(String peopleNo);
 
 
