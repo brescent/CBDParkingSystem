@@ -82,11 +82,11 @@ public class CompanyUserEntity {
         this.contactPhone = contactPhone;
     }
 
-    public PublicUserEntity getPublicUserId() {
+    public PublicUserEntity getPublicUser() {
         return publicUser;
     }
 
-    public void setPublicUserId(PublicUserEntity publicUserId) {
-        this.publicUser = publicUserId;
+    public void setPublicUser(PublicUserEntity publicUser) {
+        this.publicUser = publicUser;
     }
 }

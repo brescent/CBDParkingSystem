@@ -2,6 +2,7 @@ package com.project.controller;
 
 import com.project.Service.IAdminService;
 import com.project.entity.AdminEntity;
+import com.project.entity.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,8 +37,8 @@ public class AdminfController {
      * @return
      */
     @RequestMapping("getAllAdmin")
-    public List<AdminEntity> getAllAdmin(){
-        return adminService.getAllAdmin();
+    public PageEntity<AdminEntity> getAllAdmin(int pageNum, int pageSize){
+        return adminService.getAllAdmin(pageNum,  pageSize);
     }
 
     /**
