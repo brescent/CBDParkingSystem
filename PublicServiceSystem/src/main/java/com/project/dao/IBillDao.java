@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Pageable;
 import java.sql.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface IBillDao extends CrudRepository<BillEntity,Integer> {
      * @param endDate   终止日期
      * @return  账单集合
      */
-    @Query("from BillEntity where tradeDate >= :startDate and tradeDate <= :endDate")
+    @Query(value = "select * from  t_message where (tradeDate > :startDate or :startDate is null)where (tradeDate < :endDate  or :endDate is null)",nativeQuery = true)
     public List<BillEntity> findByItem(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     /**
