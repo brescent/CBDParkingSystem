@@ -1,6 +1,7 @@
 package com.project.Service;
 
 import com.project.entity.CompanyUserEntity;
+import com.project.entity.PageEntity;
 import org.omg.CORBA.INTERNAL;
 
 import java.util.List;
@@ -26,10 +27,19 @@ public interface ICompanyUserService {
     public CompanyUserEntity getCompanyUserById(int userId);
 
     /**
-     * 查询所有企业
-     * @return 企业实体集合
+     * 动态分页查询所有企业
+     * @param companyName 企业名称
+     * @param companyAddress 企业地址
+     * @param contact 联系人
+     * @param contactPhone 联系人电话
+     * @param pageNum 当前页码
+     * @param pageSize 每页显示条数
+     * @return 分页对象
      */
-    public List<CompanyUserEntity> getAllCompany();
+    public PageEntity<CompanyUserEntity> getAllCompany(
+            String companyName,String companyAddress,
+            String contact,String contactPhone ,
+            int pageNum,int pageSize);
 
     /**
      * 根据id删除公司

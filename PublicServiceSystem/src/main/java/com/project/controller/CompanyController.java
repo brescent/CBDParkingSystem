@@ -2,6 +2,7 @@ package com.project.controller;
 
 import com.project.Service.ICompanyUserService;
 import com.project.entity.CompanyUserEntity;
+import com.project.entity.PageEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +35,12 @@ public class CompanyController {
      * @return
      */
     @RequestMapping("getAllCompany")
-    public List<CompanyUserEntity> getAllCompany(){
+    public PageEntity<CompanyUserEntity> getAllCompany(String companyName, String companyAddress,
+                                                       String contact, String contactPhone ,
+                                                       int pageNum, int pageSize){
 
-        return companyUserService.getAllCompany();
+        return companyUserService.getAllCompany(
+                companyName,companyAddress,contact,contactPhone,pageNum,pageSize);
     }
 
     /**
