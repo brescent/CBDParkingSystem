@@ -1,6 +1,7 @@
 package com.project.Service;
 
 import com.project.entity.AdminEntity;
+import com.project.entity.PageEntity;
 import org.omg.CORBA.StringHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -34,12 +35,14 @@ public interface IAdminService {
      * @return 管理员实体
      */
     public AdminEntity getAdminById(int adminId);
+
     /**
-     * 查询所有管理员
-     *
-     * @return 管理员实体集合
+     * 动态查询所有管理员
+     * @param pageNum 当前页码
+     * @param pageSize 每页显示条数
+     * @return 数据集合
      */
-    public List<AdminEntity> getAllAdmin();
+    public PageEntity<AdminEntity> getAllAdmin(int pageNum, int pageSize);
 
     /**
      * 根据id删除管理员

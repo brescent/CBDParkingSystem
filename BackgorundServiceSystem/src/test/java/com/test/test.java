@@ -4,13 +4,12 @@ package com.test;
 
 import com.lovo.back.BackMain;
 import com.lovo.back.dao.ICompanyDao;
-import com.lovo.back.entity.CompanyContractEntity;
-import com.lovo.back.entity.CompanyEntity;
-import com.lovo.back.entity.OutContractEntity;
-import com.lovo.back.entity.StallEntity;
+import com.lovo.back.dao.IStallDao;
+import com.lovo.back.entity.*;
 import com.lovo.back.service.ICompanyContractService;
 import com.lovo.back.service.IOutContractService;
 import com.lovo.back.service.IStallService;
+import org.hamcrest.core.Is;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,8 @@ public class test {
 
     @Autowired
     IStallService stallService;
-
+@Autowired
+IStallDao   stallDao;
 
     @Autowired
     IOutContractService outContractService;
@@ -40,8 +40,15 @@ public class test {
     public void test1(){
 
 
+//        stallService.addSingle("天府二街永商cdb","TFcbd154","51246587531596","img1");
 
-        stallService.add("台南府二届","cw",5,3);
+//        stallService.add("台南府二届","cw",5,3);
+
+
+//        System.out.println(stallService.findByPeopleNo("51246587531596"));
+
+//        stallService.updateValid(26);
+        stallService.updatePeopleNo(24,"88888888888");
 
 
     }
@@ -67,17 +74,19 @@ public class test {
     @Test
     public  void test2(){
 
-     List<StallEntity> list=  stallService.findByItems("台",null,0,5);
+     PaginationBean<StallEntity> list=  stallService.findByItems("台",null,2,5);
 
-        System.out.println(list.size());
-     for (StallEntity s:list){
+        System.out.println(list.getTotal());
 
-         System.out.println(s.getId());
-         System.out.println(s.getStallAddress());
-         System.out.println(s.getStallNo());
-     }
+        for(StallEntity s:list.getDataList()){
+
+            System.out.println(s.getStallNo()   +s.getId());
+
+        }
 
 
+//        int  total=stallDao.findByItemsCount("台",null).get(0).intValue();
+//        System.out.println(total);
     }
 
     @Test
@@ -88,5 +97,10 @@ public class test {
         outContractService.add(out,new int[]{17,19,21});
 
 
+    }
+
+    @Test
+    public  void  testContract(){
+        System.out.println(outContractService.findById(1));
     }
 }

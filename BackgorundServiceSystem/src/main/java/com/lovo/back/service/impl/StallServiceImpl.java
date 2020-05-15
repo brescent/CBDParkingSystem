@@ -1,6 +1,7 @@
 package com.lovo.back.service.impl;
 
 import com.lovo.back.dao.IStallDao;
+import com.lovo.back.entity.PaginationBean;
 import com.lovo.back.entity.StallEntity;
 import com.lovo.back.service.IStallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,29 @@ public class StallServiceImpl  implements IStallService {
     }
 
     @Override
-    public List<StallEntity> findByItems(String stallAddress, String stallNo, int page,int size) {
+    public PaginationBean<StallEntity> findByItems(String stallAddress, String stallNo, int page, int size) {
+        PaginationBean paginationBean=new PaginationBean();
+
+        Pageable pageable=new PageRequest((page-1),size);
+
+        paginationBean.setCurrentPage(page);
+        paginationBean.setPageSize(size);
+        paginationBean.setDataList(stallDao.findByItems(stallAddress,stallNo,pageable));
+        int totalPage=0;
+
+        if((stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue())%size!=0){
+            totalPage=(stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue())/size+1;
+
+        }else{
+            totalPage=(stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue())/size;
+        }
+
+        paginationBean.setTotal(totalPage);
 
 
-        Pageable pageable=new PageRequest(page,size);
 
-        return stallDao.findByItems(stallAddress,stallNo,pageable);
+        paginationBean.setTotal(totalPage);
+        return paginationBean;
     }
 
     @Override
@@ -61,8 +79,9 @@ public class StallServiceImpl  implements IStallService {
         return stallDao.findAll();
     }
 
+
     @Override
-    public void add(String stallAddress, String stallNo, String peopleNo, String stallImg) {
+    public void addSingle(String stallAddress, String stallNo, String peopleNo, String stallImg) {
 
         StallEntity stall= new StallEntity();
         stall.setStallAddress(stallAddress);

@@ -1,6 +1,7 @@
 package com.lovo.back.service;
 
 import com.lovo.back.dao.IStallDao;
+import com.lovo.back.entity.PaginationBean;
 import com.lovo.back.entity.StallEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +18,7 @@ public interface IStallService {
     public List<StallEntity> findByState();
 
     /*跟据 车位地址和编号进行动态查询*/
-    public List<StallEntity>  findByItems(String stallAddress, String stallNo, int page,int size);
+    public PaginationBean<StallEntity> findByItems(String stallAddress, String stallNo, int page, int size);
 
     /*修改车位的所属者身份证号*/
     public void updatePeopleNo(int id,String peopleNum);
@@ -25,6 +26,10 @@ public interface IStallService {
     /*批量添加车位*/
     public  void add(String  stallAddress,String addressNo,int total,int startNum);
 
+    /**
+     *查询所有车位
+     * @return
+     */
     public List<StallEntity>  findAll
             ();
 
@@ -32,7 +37,7 @@ public interface IStallService {
 
 
     /*批单个添加车位*/
-    public  void add(String  stallAddress,String stallNo,String peopleNo,String stallImg);
+    public  void addSingle(String  stallAddress,String stallNo,String peopleNo,String stallImg);
 
 
 

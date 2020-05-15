@@ -54,9 +54,9 @@ public class OutContractServiceImpl implements IOutContractService {
     }
 
     @Override
-    public Optional<OutContractEntity> findById(int id) {
+    public OutContractEntity findById(int id) {
 
-        return outContractDao.findById(id);
+        return outContractDao.findById(id).get();
     }
 
 

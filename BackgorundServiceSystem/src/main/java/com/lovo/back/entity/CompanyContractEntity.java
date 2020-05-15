@@ -51,13 +51,13 @@ public class CompanyContractEntity implements Serializable {
     private String oldContractNo;
 
     /*企业 对象*/
-    @OneToOne(cascade = CascadeType.DETACH)
+    @OneToOne(cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
     @JoinColumn(name = "companyId")
     private CompanyEntity company;
 
 
     /*车位*/
-    @OneToMany(mappedBy = "companyContract")
+    @OneToMany(mappedBy = "companyContract",fetch=FetchType.EAGER)
     private Set<CompanyContractAndStall> set;
 
     /*合同生效状态*/

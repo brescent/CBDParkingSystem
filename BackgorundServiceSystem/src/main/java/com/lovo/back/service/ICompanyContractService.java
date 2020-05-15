@@ -18,6 +18,6 @@ public interface ICompanyContractService {
 
     /*根据id查询合约详情*/
 
-    public Optional<CompanyContractEntity> findById(int id);
+    public CompanyContractEntity findById(int id);
 
 }

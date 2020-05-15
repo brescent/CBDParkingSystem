@@ -49,13 +49,16 @@ public class OutContractEntity implements Serializable {
     private String oldOutContractNo;
 
     /*车位信息*/
-    @OneToMany(mappedBy = "outContract")
+    @OneToMany(mappedBy = "outContract",fetch=FetchType.EAGER)
     private Set<OutContractAndStall> outContractAndStallSet;
 
 
 
     /*合同生效状态*/
     private int state=1;
+
+    public OutContractEntity() {
+    }
 
     public OutContractEntity(String outContractNo, String unit, String bothParties, String linkMan, Date startDate, Date endDate, double dealPrice, String contractImg, String oldOutContractNo) {
         this.outContractNo = outContractNo;

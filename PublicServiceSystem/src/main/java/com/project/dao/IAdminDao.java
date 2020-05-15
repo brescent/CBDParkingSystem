@@ -1,11 +1,14 @@
 package com.project.dao;
 
 import com.project.entity.AdminEntity;
+import com.project.entity.PageEntity;
 import com.project.entity.PowerEntity;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 /**
@@ -21,6 +24,19 @@ public interface IAdminDao extends CrudRepository<AdminEntity,Integer> {
     @Query("from AdminEntity where publicUser.id=:userId")
     public AdminEntity getAdminEntityById(@Param("userId") int userId);
 
+    /**
+     * 分页查询所有管理员
+     * @param pageable 分页查询对象
+     * @return 分页数据集合
+     */
+    @Query(value = "from AdminEntity ")
+    public List<AdminEntity> getAllAdmin(PageRequest pageable);
 
+    /**
+     * 查询管理员数据条数
+     * @return
+     */
+    @Query( "select count (id) from  AdminEntity " )
+    public int getAdminCount();
 
 }

@@ -1,15 +1,12 @@
 package com.project.util;
 
 import com.project.Service.IUserService;
-import com.project.Service.impl.UserServiceImpl;
 import com.project.entity.PersonalUserEntity;
 import com.project.entity.PublicUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MD5Test {
 

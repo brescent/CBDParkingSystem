@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Getter(value= AccessLevel.PUBLIC)
 @Setter(value= AccessLevel.PUBLIC)
 @Data
@@ -32,4 +32,35 @@ public class OutContractAndStall implements Serializable {
     @JoinColumn(name = "fk_stallId")
     private StallEntity stall;
 
+    public OutContractAndStall() {
+    }
+
+    public OutContractAndStall(OutContractEntity outContract, StallEntity stall) {
+        this.outContract = outContract;
+        this.stall = stall;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public OutContractEntity getOutContract() {
+        return outContract;
+    }
+
+    public void setOutContract(OutContractEntity outContract) {
+        this.outContract = outContract;
+    }
+
+    public StallEntity getStall() {
+        return stall;
+    }
+
+    public void setStall(StallEntity stall) {
+        this.stall = stall;
+    }
 }
