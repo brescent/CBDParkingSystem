@@ -4,6 +4,7 @@ import com.lovo.back.dao.IStallDao;
 import com.lovo.back.entity.PaginationBean;
 import com.lovo.back.entity.StallEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -62,5 +63,11 @@ public interface IStallService {
 
     public StallEntity  findByPeopleNo(String peopleNo);
 
+    /**
+     * 添加车位并返回车位对象
+     * @param stall
+     * @return
+     */
+    public StallEntity  addAndReturn(StallEntity stall);
 
 }

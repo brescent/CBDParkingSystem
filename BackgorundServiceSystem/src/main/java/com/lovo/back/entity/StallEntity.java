@@ -45,12 +45,19 @@ public class StallEntity implements Serializable {
     private int valid=0;
 
     /*外部合约*/
-    @OneToMany(mappedBy = "stall",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "stall")
     private Set<OutContractAndStall> outSet;
    /*企业合约*/
 
-    @OneToMany(mappedBy = "stall",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "stall")
     private Set<CompanyContractAndStall> companySet;
+
+    public StallEntity(String stallAddress, String stallNo, String stallImg, String peopleNo) {
+        this.stallAddress = stallAddress;
+        this.stallNo = stallNo;
+        this.stallImg = stallImg;
+        this.peopleNo = peopleNo;
+    }
 
     public int getId() {
         return id;

@@ -16,7 +16,7 @@ import java.util.Set;
  */
 
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Getter(value= AccessLevel.PUBLIC)
 @Setter(value= AccessLevel.PUBLIC)
 @Data
@@ -63,6 +63,9 @@ public class CompanyContractEntity implements Serializable {
     /*合同生效状态*/
     private int state=1;
 
+    public CompanyContractEntity() {
+    }
+
     public CompanyContractEntity(String contractNo, Date startDate, Date endDate, double dealPrice, String contractImg, String oldContractNo) {
         this.contractNo = contractNo;
         this.startDate = startDate;
@@ -78,5 +81,81 @@ public class CompanyContractEntity implements Serializable {
 
     public void setCompany(Optional<CompanyEntity> company) {
         this.company = company.get();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public double getDealPrice() {
+        return dealPrice;
+    }
+
+    public void setDealPrice(double dealPrice) {
+        this.dealPrice = dealPrice;
+    }
+
+    public String getContractImg() {
+        return contractImg;
+    }
+
+    public void setContractImg(String contractImg) {
+        this.contractImg = contractImg;
+    }
+
+    public String getOldContractNo() {
+        return oldContractNo;
+    }
+
+    public void setOldContractNo(String oldContractNo) {
+        this.oldContractNo = oldContractNo;
+    }
+
+    public void setCompany(CompanyEntity company) {
+        this.company = company;
+    }
+
+    public Set<CompanyContractAndStall> getSet() {
+        return set;
+    }
+
+    public void setSet(Set<CompanyContractAndStall> set) {
+        this.set = set;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

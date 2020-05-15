@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-
+@EnableFeignClients//用feign做远程调用
 @EnableEurekaClient //客户端
 ////@EnableFeignClients   //feign进行远程调用
 ////@EnableCircuitBreaker  //熔断

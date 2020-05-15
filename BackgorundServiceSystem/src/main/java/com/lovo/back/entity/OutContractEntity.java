@@ -52,7 +52,13 @@ public class OutContractEntity implements Serializable {
     @OneToMany(mappedBy = "outContract",fetch=FetchType.EAGER)
     private Set<OutContractAndStall> outContractAndStallSet;
 
+    public Set<OutContractAndStall> getOutContractAndStallSet() {
+        return outContractAndStallSet;
+    }
 
+    public void setOutContractAndStallSet(Set<OutContractAndStall> outContractAndStallSet) {
+        this.outContractAndStallSet = outContractAndStallSet;
+    }
 
     /*合同生效状态*/
     private int state=1;
@@ -71,4 +77,5 @@ public class OutContractEntity implements Serializable {
         this.contractImg = contractImg;
         this.oldOutContractNo = oldOutContractNo;
     }
+
 }

@@ -22,9 +22,11 @@ public interface IStallDao  extends JpaRepository<StallEntity,Integer> {
     @Query(value = "select * from  t_stall where peopleNo is null and state =0",nativeQuery = true)
     public List<StallEntity>  findByState();
 
+
+
+
     /*更改车位空闲状态    0表示空闲  1表示出租中*/
     @Transactional
-
     @Modifying
     @Query(value="update t_stall set state=?2 where pk_id=?1" ,nativeQuery = true)
     public void updateState(int  id,int state);
@@ -52,10 +54,7 @@ public interface IStallDao  extends JpaRepository<StallEntity,Integer> {
 
     @Query(value="select count(*) from t_stall where 1=1 " +
             " and (stall_Address LIKE CONCAT('%',?1,'%') or ?1 is null)" +
-            " and (stall_No LIKE CONCAT('%',?2,'%') or ?2 is null)" ,
-            countQuery = " select count(*) from t_stall where 1=1" +
-                    "and (stall_Address LIKE CONCAT('%',?1,'%') or ?1 is null)" +
-                    "and (stall_No LIKE CONCAT('%',?2,'%') or ?2 is null)",
+            " and (stall_No LIKE CONCAT('%',?2,'%') or ?2 is null)",
             nativeQuery = true)
     public List<BigInteger> findByItemsCount(String stallAddress, String stallNo);
 
