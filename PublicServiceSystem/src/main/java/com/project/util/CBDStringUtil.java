@@ -9,4 +9,10 @@ public class CBDStringUtil {
     public static final String LOGIN_LOG = "登陆系统";
     public static final String ADDUSER_LOG = "添加用户";
     public static final String UPDATEUSER_LOG = "修改了个人信息";
+
+    public static final String ADD_SUCCESS="添加成功";
+    public static final String POWER_0="用户管理";
+    public static final String POWER_1="车位管理";
+    public static final String POWER_2="合同管理";
+    public static final String POWER_3="投诉管理";
 }

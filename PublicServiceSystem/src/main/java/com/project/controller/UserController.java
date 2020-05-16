@@ -5,16 +5,14 @@
 
 package com.project.controller;
 
+import com.project.Service.IAdminService;
 import com.project.Service.ILogService;
 import com.project.Service.IPowerService;
 import com.project.Service.IUserService;
 import com.project.dto.PersonalUserDto;
 import com.project.dto.PowerDto;
 import com.project.dto.UserDto;
-import com.project.entity.LogEntity;
-import com.project.entity.PersonalUserEntity;
-import com.project.entity.PowerEntity;
-import com.project.entity.PublicUserEntity;
+import com.project.entity.*;
 import com.project.util.CBDStringUtil;
 import com.project.util.MD5Util;
 import java.io.UnsupportedEncodingException;
@@ -40,67 +38,70 @@ public class UserController {
     @Autowired
     ILogService logService;
 
+    @Autowired
+    IAdminService adminService;
+
     public UserController() {
     }
 
-    @PostMapping({"login/{userName}/{pwd}"})
+    @GetMapping(value = "login/{userName}/{pwd}",produces ="application/json;charset=utf-8" )
     public UserDto login(@PathVariable("userName") String userName, @PathVariable("pwd") String pwd) {
-        PublicUserEntity user = this.service.login(userName, pwd);
-        int userType = user.getUserType();
+        //通过用户名查找用户
         PublicUserEntity mainUser = this.service.findUserByName(userName);
+        //获得用户类型
+        int userType = mainUser.getUserType();
         UserDto userDto = new UserDto();
-
+        List<PowerDto> powerDtoList = new ArrayList();
+        //通过盐加密的解密算法，验证密码
         try {
-            if (!MD5Util.validPasswd(pwd, user.getPwd())) {
+            if (!MD5Util.validPasswd(pwd, mainUser.getPwd())) {
                 return null;
             }
+            //如果用户类型是2或者3，也就是管理员或则超级管理员
+            if (userType == 2||userType==3) {
+                //通过用户id查找管理员信息
+                AdminEntity admin=adminService.getAdminById(mainUser.getId());
+                //通过管理员id查找权限集合
+                List<PowerEntity> powerlist = this.powerService.getPowerByAdminId(admin.getId());
 
-            if (userType == 2) {
-                List<PowerEntity> powerlist = this.powerService.getPowerByAdminId(mainUser.getId());
-                List<PowerDto> powerDtoList = new ArrayList();
-                Iterator var9 = powerlist.iterator();
+                //循环遍历权限集合，对权限集合dto设置权限名
+                for (PowerEntity power:powerlist) {
 
-                while(var9.hasNext()) {
-                    PowerEntity power = (PowerEntity)var9.next();
-                    List<Integer> powerinfo = Collections.singletonList(power.getPowerInfo());
-                    Iterator var12 = powerinfo.iterator();
-
-                    while(var12.hasNext()) {
-                        int i = (Integer)var12.next();
-                        String powerD;
-                        if (i == 1) {
-                            powerD = "用户管理";
-                            powerDtoList.add(new PowerDto(powerD));
-                        } else if (i == 2) {
-                            powerD = "车位管理";
-                            powerDtoList.add(new PowerDto(powerD));
-                        } else if (i == 3) {
-                            powerD = "合同管理";
-                            powerDtoList.add(new PowerDto(powerD));
-                        } else if (i == 4) {
-                            powerD = "投诉管理";
-                            powerDtoList.add(new PowerDto(powerD));
+                        if (power.getPowerInfo() == 0) {
+                            PowerDto powerA = new PowerDto(CBDStringUtil.POWER_0);
+                            powerDtoList.add(powerA);
+                        } else if (power.getPowerInfo() == 1) {
+                            PowerDto powerB = new PowerDto(CBDStringUtil.POWER_1);
+                            powerDtoList.add(powerB);
+                        } else if (power.getPowerInfo() == 2) {
+                            PowerDto powerC = new PowerDto(CBDStringUtil.POWER_2);
+                            powerDtoList.add(powerC);
+                        } else if (power.getPowerInfo() == 3) {
+                            PowerDto powerD = new PowerDto(CBDStringUtil.POWER_3);
+                            powerDtoList.add(powerD);
                         }
-                    }
-
-                    userDto.setPowerList(powerDtoList);
-                    userDto.setLoginName(mainUser.getLoginName());
-                    userDto.setId(mainUser.getId());
-                    userDto.setPwd(pwd);
-                    if (mainUser.getUserType() == 0) {
-                        userDto.setUserType(CBDStringUtil.PERSONAL_USER);
-                    } else if (mainUser.getUserType() == 1) {
-                        userDto.setUserType(CBDStringUtil.COMPANY_USER);
-                    } else if (mainUser.getUserType() == 2) {
-                        userDto.setUserType(CBDStringUtil.ADMIN_USER);
-                    } else if (mainUser.getUserType() == 3) {
-                        userDto.setUserType(CBDStringUtil.SUPERADMIN_USER);
                     }
                 }
 
-                LogEntity log = new LogEntity(userName,CBDStringUtil.LOGIN_LOG);
-                this.logService.addLog(log);
+            //设置用户属性
+            userDto.setPowerList(powerDtoList);
+            userDto.setLoginName(mainUser.getLoginName());
+            userDto.setId(mainUser.getId());
+            userDto.setPwd(pwd);
+            //判断用户的用户类型
+            if (mainUser.getUserType() == 0) {
+                userDto.setUserType(CBDStringUtil.PERSONAL_USER);
+            } else if (mainUser.getUserType() == 1) {
+                userDto.setUserType(CBDStringUtil.COMPANY_USER);
+            } else if (mainUser.getUserType() == 2) {
+                userDto.setUserType(CBDStringUtil.ADMIN_USER);
+            } else if (mainUser.getUserType() == 3) {
+                userDto.setUserType(CBDStringUtil.SUPERADMIN_USER);
             }
+            //书写日志
+            LogEntity log = new LogEntity(userName,CBDStringUtil.LOGIN_LOG);
+            this.logService.addLog(log);
+
         } catch (NoSuchAlgorithmException var15) {
             var15.printStackTrace();
         } catch (UnsupportedEncodingException var16) {
@@ -110,7 +111,7 @@ public class UserController {
         return userDto;
     }
 
-    @RequestMapping({"addUser"})
+    @RequestMapping("addUser")
     public String addUser(PublicUserEntity publicUserEntity, PersonalUserEntity personalUserEntity) {
         PublicUserEntity mainUser = this.service.findUserByName(publicUserEntity.getLoginName());
         if (mainUser != null) {
@@ -130,7 +131,7 @@ public class UserController {
         return CBDStringUtil.ADD_FAIL;
     }
 
-    @GetMapping({"getPersonalUserInfo/{userId}"})
+    @GetMapping("getPersonalUserInfo/{userId}")
     public PersonalUserDto getPersonalUserInfo(@PathVariable("userId") int userId) {
         PersonalUserEntity user = this.service.findByPublicUserId(userId);
         PersonalUserDto userDto = new PersonalUserDto();
@@ -141,7 +142,7 @@ public class UserController {
         return userDto;
     }
 
-    @RequestMapping({"updateUser"})
+    @RequestMapping("updateUser")
     public void updatePersonalUser(String userName, PersonalUserDto personalUserDto) {
         PublicUserEntity maiuUser = this.service.findUserByName(userName);
         PersonalUserEntity user = this.service.findByPublicUserId(maiuUser.getId());
