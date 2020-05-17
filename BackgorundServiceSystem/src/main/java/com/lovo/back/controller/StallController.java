@@ -1,17 +1,19 @@
 package com.lovo.back.controller;
 
 
+import com.lovo.back.entity.PaginationBean;
 import com.lovo.back.entity.StallEntity;
 import com.lovo.back.service.IStallService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
+@FeignClient(name="stallService")
 public class StallController {
     @Autowired
     IStallService stallService;
@@ -37,7 +39,7 @@ public class StallController {
      * @return 合条件的车位集合
      */
     @GetMapping("stall/findByItems/{stallAddress}/{stallNo}/{page}/{size}")
-    public List<StallEntity>  findByIyems(@PathVariable("stallAddress")String stallAddress,@PathVariable("stallNo")String stallNo,@PathVariable("page")String page,@PathVariable("size")String size){
+    public PaginationBean<StallEntity> findByIyems(@PathVariable("stallAddress")String stallAddress, @PathVariable("stallNo")String stallNo, @PathVariable("page")String page, @PathVariable("size")String size){
 
         return  stallService.findByItems(stallAddress,stallNo,Integer.parseInt(page),Integer.parseInt(size));
 

@@ -52,6 +52,13 @@ public class StallEntity implements Serializable {
     @OneToMany(mappedBy = "stall")
     private Set<CompanyContractAndStall> companySet;
 
+    public StallEntity(String stallAddress, String stallNo, String stallImg, String peopleNo) {
+        this.stallAddress = stallAddress;
+        this.stallNo = stallNo;
+        this.stallImg = stallImg;
+        this.peopleNo = peopleNo;
+    }
+
     public int getId() {
         return id;
     }

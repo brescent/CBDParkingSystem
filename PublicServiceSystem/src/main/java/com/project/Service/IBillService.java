@@ -16,7 +16,7 @@ public interface IBillService {
      * @param endDate   终止日期
      * @return  账单集合
      */
-    public List<BillEntity> findByItem(Date startDate,Date endDate);
+    public List<BillEntity> findByItem(int userId, Date startDate, Date endDate);
 
     /**
      * 通过id查询账单

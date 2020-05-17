@@ -3,6 +3,7 @@ package com.project.Service.impl;
 import com.project.Service.IPowerService;
 import com.project.dao.IPowerDao;
 import com.project.entity.PowerEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Transactional
 public class PowerServiceImpl implements IPowerService {
 
+    @Autowired
     private IPowerDao powerDao;
 
     @Override

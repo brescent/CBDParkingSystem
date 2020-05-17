@@ -35,6 +35,15 @@ private CompanyContractEntity  companyContract;
 @JoinColumn(name="fk_stallId")
 private StallEntity  stall;
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public CompanyContractEntity getCompanyContract() {
         return companyContract;
     }

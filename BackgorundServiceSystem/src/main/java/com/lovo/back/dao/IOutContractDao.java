@@ -5,12 +5,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface IOutContractDao extends CrudRepository<OutContractEntity,Integer> {
 
-
-    @Query(value = "update OutContractEntity set state=0 where pk_id=?1")
+    @Transactional
+    @Modifying
+    @Query(value = "update t_out_contract set state=0 where pk_id=?1",nativeQuery = true)
       public void updateState(int id);
 
 
@@ -20,8 +22,9 @@ public interface IOutContractDao extends CrudRepository<OutContractEntity,Intege
      * @param oldContractNo
      * @param newContractNo
      */
+    @Transactional
     @Modifying
-    @Query(value = "update CompanyContractEntity set contractNo=?3,oldContractNo=?2 where pk_id=?1")
+    @Query(value = "update t_out_contract set out_contract_no=?3,old_contract_no=?2 where pk_id=?1",nativeQuery = true)
     public void updateContractNo(int  id,String oldContractNo,String newContractNo);
 
 

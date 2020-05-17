@@ -18,8 +18,8 @@ public class BillServiceImpl implements IBillService {
     private IBillDao dao;
 
     @Override
-    public List<BillEntity> findByItem(Date startDate, Date endDate) {
-        return dao.findByItem(startDate,endDate);
+    public List<BillEntity> findByItem(int userId, Date startDate, Date endDate) {
+        return dao.findByItem(userId,startDate,endDate);
     }
 
     @Override

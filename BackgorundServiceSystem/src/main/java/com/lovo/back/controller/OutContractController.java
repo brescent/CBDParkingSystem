@@ -38,7 +38,7 @@ public class OutContractController {
     @GetMapping("outContract/findById/{id}")
     public  OutContractEntity findById(@PathVariable("id")String  id){
 
-        return contractService.findById(Integer.parseInt(id)).get();
+        return contractService.findById(Integer.parseInt(id));
 
     }
 
