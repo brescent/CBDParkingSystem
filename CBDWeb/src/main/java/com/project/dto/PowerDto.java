@@ -5,9 +5,6 @@ public class PowerDto {
 
     public PowerDto() {
     }
-
-
-
     public PowerDto(String powerName) {
         this.powerName = powerName;
     }

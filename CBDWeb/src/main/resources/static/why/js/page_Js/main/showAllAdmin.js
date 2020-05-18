@@ -8,15 +8,16 @@ const app = new Vue({
          jobNumber:"",
          name:"",
          phone:"",
-         tableData: [{
-             jobNumber: '1',
-             name: '小白',
-             phone: '1582541512'
-         }, {
-             jobNumber: '2',
-             name: '小黑',
-             phone:'2541715415'
-         }],
+         // tableData: [{
+         //     jobNumber: '1',
+         //     name: '小白',
+         //     phone: '1582541512'
+         // }, {
+         //     jobNumber: '2',
+         //     name: '小黑',
+         //     phone:'2541715415'
+         // }],
+         tableData:[],
          pageSize:3,
          total:0,
          currentPage:1
@@ -81,24 +82,24 @@ const app = new Vue({
             this.getDatas(this.currentPage,pSize);
         },
         /*查询数据*/
-        // getDatas:function(currentPage,pageSize){
-        //      //发送ajax
-        //   this.$http.post("../showStudentInfo",{
-        //          jobNumber:this.jobNumber,
-        //          name:this.name,
-        //          phone:this.phone,
-        //          currentPage:currentPage,
-        //          pageSize:pageSize
-        //     }).then(function(result){
-        //        console.log(result.body);
-        //        //设置分页控件的值
-        //          this.tableData=result.body.list;
-        //          this.pageSize=result.body.pageSize;
-        //          this.currentPage=result.body.pageNum;
-        //          this.total =result.body.total;
-        //          console.log(this.total+"----total")
-        //
-        //     });
+        getDatas:function(currentPage,pageSize){
+             //发送ajax
+          this.$http.get("../getAllAdmin",{
+                 jobNumber:this.jobNumber,
+                 name:this.name,
+                 phone:this.phone,
+                 currentPage:currentPage,
+                 pageSize:pageSize
+            }).then(function(result){
+               console.log(result.body);
+               //设置分页控件的值
+                 this.tableData=result.body.list;
+                 this.pageSize=result.body.pageSize;
+                 this.currentPage=result.body.pageNum;
+                 this.total =result.body.total;
+                 console.log(this.total+"----total")
+
+            });
         //
         //       /* axios.post("../showStudentInfo",{
         //            currentPage:this.currentPage,
@@ -115,6 +116,6 @@ const app = new Vue({
         //        {id:1,age:18,name:"张三",gender:"男",classBean:{id:4,name:"4班",teacherBean:{id:1,name:"张老师"}}}
         //        ];
         //
-        // }
+        }
     }
 });

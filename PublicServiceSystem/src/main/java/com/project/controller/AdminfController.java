@@ -77,6 +77,7 @@ public class AdminfController {
      * @param adminId 管理员id
      * @param newPower 新权限数组
      */
+    @RequestMapping("updAdmin")
     public void updAdminPower(@PathVariable("adminId")int adminId,@PathVariable("newPower")int[] newPower){
 
     }

@@ -81,7 +81,7 @@ public class AdminCompTest {
         PageEntity p = companyUserService.getAllCompany(
                 null,
                 null,
-                null,
+                "小",
                 null,
                 1,
                 3

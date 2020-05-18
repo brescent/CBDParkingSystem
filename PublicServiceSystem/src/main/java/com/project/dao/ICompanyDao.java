@@ -42,13 +42,19 @@ public interface ICompanyDao extends CrudRepository<CompanyUserEntity, Integer> 
      * @param pageable       分页对象
      * @return 分页对象
      */
-    @Query(value=" select * from t_company where 1=1 " +
+    @Query(value="select * from  t_company where 1=1 " +
+            " and (c_company_name LIKE CONCAT('%',?1,'%') or ?1 is null)" +
+            " and (c_company_address LIKE CONCAT('%',?2,'%') or ?2 is null)"+
+            " and (c_contact LIKE CONCAT('%',?3,'%') or ?3 is null)" +
+            " and (c_contact_phone LIKE CONCAT('%',?4,'%') or ?4 is null)"+
+            "ORDER BY ?#{#pageable}"
+            ,
+            countQuery = " select *from t_company where 1=1 " +
                     " and (c_company_name LIKE CONCAT('%',?1,'%') or ?1 is null)" +
                     " and (c_company_address LIKE CONCAT('%',?2,'%') or ?2 is null)"+
                     " and (c_contact LIKE CONCAT('%',?3,'%') or ?3 is null)" +
                     " and (c_contact_phone LIKE CONCAT('%',?4,'%') or ?4 is null)" +
-                    " order by ?#{#pageable}"
-            ,
+                    " ORDER BY ?#{#pageable}",
             nativeQuery = true)
     public List<CompanyUserEntity> findAllCompany(String companyName, String companyAddress,
                                                   String contact, String contactPhone, PageRequest pageable);
