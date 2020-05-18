@@ -1,15 +1,19 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 分页实体
- * @param <A> 展示数据
+ * @param <T> 展示数据
  */
-public class PageEntity <A>{
+
+public class PageEntity <T> implements Serializable {
 
     /**展示数据集合*/
-    private List<A> list;
+    private List<T> list;
     /**每页显示条数*/
     private Integer pageSize;
     /**当前页码*/
@@ -22,18 +26,18 @@ public class PageEntity <A>{
     public PageEntity() {
     }
 
-    public PageEntity(List<A> list, Integer pageSize, Integer pageNum, Integer count) {
+    public PageEntity(List<T> list, Integer pageSize, Integer pageNum, Integer count) {
         this.list = list;
         this.pageSize = pageSize;
         this.pageNum = pageNum;
         this.count = count;
     }
 
-    public List<A> getList() {
+    public List<T> getList() {
         return list;
     }
 
-    public void setList(List<A> list) {
+    public void setList(List<T> list) {
         this.list = list;
     }
 

@@ -23,10 +23,10 @@
             <el-table :data="tableData"
                       highlight-current-row
                       style="width:100%">
-                <el-table-column prop="jobNumber" label="工号">
+                <el-table-column prop="jobNum" label="工号">
 
                 </el-table-column>
-                <el-table-column prop="name" label="姓名">
+                <el-table-column prop="realName" label="姓名">
 
                 </el-table-column>
 
@@ -55,7 +55,7 @@
             <!-- 分页区 -->
             <el-pagination style="margin: 20px auto;" background
                            layout="prev,pager,next,sizes,total,jumper "
-                           :current-page="currentPage"
+                           :current-page="pageNum"
                            :page-size="pageSize"
                            :pager-count=5
                            :page-sizes=[3,5,10]
@@ -76,10 +76,12 @@
 </div>
 </body>
 </html>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 <!--vue.js 必须在elementUI.js之前导入-->
 <script src="../js/vue/Vue.js"></script>
 <!--使用ajax 需要导入-->
 <script src="../js/vue/vue-resource.js"></script>
 <script src="../js/elementUI/elementUI.js"></script>
 <script src="../js/page_Js/main/showAllAdmin.js"></script>
+
 

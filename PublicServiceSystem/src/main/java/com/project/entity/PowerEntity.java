@@ -1,9 +1,12 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "t_power")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
 public class PowerEntity {
     @Id
     @Column(name = "pk_powerId")
@@ -16,6 +19,7 @@ public class PowerEntity {
 
     @ManyToOne
     @JoinColumn(name = "fk_adminId")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AdminEntity admin;
 
     public PowerEntity() {

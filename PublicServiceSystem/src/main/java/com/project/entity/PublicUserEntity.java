@@ -1,13 +1,15 @@
 package com.project.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 /**公共用户类*/
 @Entity
 @Table(name = "t_publicUser")
-
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
 public class PublicUserEntity {
     /**用户id*/
     @Id

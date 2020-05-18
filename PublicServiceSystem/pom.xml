@@ -9,6 +9,13 @@
     </parent>
     <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>8.5.34</version>
+        </dependency>
+    </dependencies>
 
     <artifactId>PublicServiceSystem</artifactId>
 

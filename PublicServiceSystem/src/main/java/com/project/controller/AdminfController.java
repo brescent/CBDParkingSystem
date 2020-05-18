@@ -5,10 +5,7 @@ import com.project.entity.AdminEntity;
 import com.project.entity.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,12 +13,24 @@ import java.util.List;
  * 管理员控制器
  */
 @RestController
-@RequestMapping("admin")
-
 public class AdminfController {
 
     @Autowired
     private IAdminService adminService;
+
+    /**
+     * 获取所有管理员
+     * @return
+     */
+    @GetMapping("getAllAdmin/{pageNum}/{pageSize}")
+    @ResponseBody
+    public PageEntity<AdminEntity> getAllAdmin(
+            @PathVariable("pageNum")int pageNum,@PathVariable("pageSize")int pageSize){
+
+        PageEntity<AdminEntity> pageEntity = adminService.getAllAdmin(pageNum,  pageSize);
+
+        return pageEntity;
+    }
 
 
     /**
@@ -34,14 +43,6 @@ public class AdminfController {
         adminService.addAdmin(admin,pwd);
     }
 
-    /**
-     * 获取所有管理员
-     * @return
-     */
-    @RequestMapping("getAllAdmin")
-    public PageEntity<AdminEntity> getAllAdmin(int pageNum, int pageSize){
-        return adminService.getAllAdmin(pageNum,  pageSize);
-    }
 
     /**
      * 根据用户id查询对应管理员信息

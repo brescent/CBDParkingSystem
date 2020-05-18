@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.bouncycastle.crypto.macs.SipHash;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.text.SimpleDateFormat;
  */
 @Entity
 @Table(name = "t_log")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
 public class LogEntity {
     /**日志id*/
     @Id

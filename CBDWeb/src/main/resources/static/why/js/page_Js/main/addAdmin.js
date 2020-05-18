@@ -41,7 +41,7 @@ const  app = new Vue({
                          type:'success',
                          center: true
                      });
-                     window.location.href="studentList.html";
+                     window.location.href="showAllAdmin.html";
                  }else{
                      this.$alert('添加失败', {
                          title:"消息提示",
