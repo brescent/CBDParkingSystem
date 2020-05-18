@@ -28,9 +28,9 @@
                 </el-table-column>
                 <el-table-column prop="companyLoginName" label="登录名">
                 </el-table-column>
-                <el-table-column prop="companyLinkMan" label="联系人">
+                <el-table-column prop="contact" label="联系人">
                 </el-table-column>
-                <el-table-column prop="companyPhone" label="联系电话">
+                <el-table-column prop="contactPhone" label="联系电话">
                 </el-table-column>
 
                 <el-table-column label="操作" width="300px">
@@ -73,10 +73,10 @@
                         <el-input prefix-icon="el-icon-search" v-model="companyAddress"></el-input>
                     </el-form-item><br>
                     <el-form-item label="联系人:">
-                        <el-input prefix-icon="el-icon-search" v-model="companyLinkMan"></el-input>
+                        <el-input prefix-icon="el-icon-search" v-model="contact"></el-input>
                     </el-form-item>
                     <el-form-item label="联系电话:">
-                        <el-input prefix-icon="el-icon-search" v-model="companyPhone"></el-input>
+                        <el-input prefix-icon="el-icon-search" v-model="contactPhone"></el-input>
                     </el-form-item>
                 </el-form>
                 <el-button type="primary" size="mini" @click="seach" icon="el-icon-search">查找</el-button>
