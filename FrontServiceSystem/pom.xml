@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>whj</module>
+        <module>JWK</module>
+        <module>register</module>
     </modules>
 
 

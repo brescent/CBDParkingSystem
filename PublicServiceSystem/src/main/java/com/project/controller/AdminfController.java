@@ -4,6 +4,7 @@ import com.project.Service.IAdminService;
 import com.project.entity.AdminEntity;
 import com.project.entity.PageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("admin")
+
 public class AdminfController {
 
     @Autowired

@@ -92,8 +92,8 @@ public class AdminServiceImpl implements IAdminService {
     @Override
     public AdminEntity getAdminById(int adminId) {
         //根据id获取管理员
-        Optional<AdminEntity> adminEntity =adminDao.findById(adminId);
-        return adminEntity.get();
+        AdminEntity adminEntity =adminDao.getAdminEntityById(adminId);
+        return adminEntity;
     }
 
     @Override

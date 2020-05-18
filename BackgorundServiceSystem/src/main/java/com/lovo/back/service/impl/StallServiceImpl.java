@@ -108,4 +108,9 @@ public class StallServiceImpl  implements IStallService {
     public StallEntity findByPeopleNo(String peopleNo) {
         return stallDao.findByPeopleNo(peopleNo);
     }
+
+    @Override
+    public StallEntity addAndReturn(StallEntity stall) {
+        return stallDao.save(stall);
+    }
 }

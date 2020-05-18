@@ -1,6 +1,7 @@
 package com.lovo.back.controller;
 
 
+import com.lovo.back.dto.CompanyContractDTO;
 import com.lovo.back.entity.CompanyContractEntity;
 import com.lovo.back.service.ICompanyContractService;
 
@@ -39,9 +40,17 @@ public class CompanyContractController {
 
 
     @GetMapping("companyContract/findById/{id}")
-    public  CompanyContractEntity findById(@PathVariable("id")String  id){
+    public CompanyContractDTO findById(@PathVariable("id")String  id){
 
-        return companyCtractService.findById(Integer.parseInt(id)).get();
+        CompanyContractDTO contractDTO=new CompanyContractDTO();
+        contractDTO.setCompanyContract(companyCtractService.findById(Integer.parseInt(id)));
+
+
+
+       // contractDTO.setCompany();
+
+
+        return contractDTO;
 
     }
 

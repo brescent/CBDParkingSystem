@@ -7,6 +7,7 @@ import java.util.List;
 /**公共用户类*/
 @Entity
 @Table(name = "t_publicUser")
+
 public class PublicUserEntity {
     /**用户id*/
     @Id

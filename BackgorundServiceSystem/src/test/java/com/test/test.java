@@ -67,15 +67,13 @@ IStallDao   stallDao;
 
 
         com.setCompany(companyDao.findById(2));
-
-        companyContractService.add(com,new int[] {1,2,5,6});
+        companyContractService.add(com,new int[] {17,21,18,22});
     }
 
     @Test
     public  void test2(){
 
-     PaginationBean<StallEntity> list=  stallService.findByItems("台",null,2,5);
-
+     PaginationBean<StallEntity> list=  stallService.findByItems("天府二街",null,1,5);
         System.out.println(list.getTotal());
 
         for(StallEntity s:list.getDataList()){
@@ -100,7 +98,16 @@ IStallDao   stallDao;
     }
 
     @Test
-    public  void  testContract(){
-        System.out.println(outContractService.findById(1));
-    }
+        public  void  testContract(){
+
+        //System.out.println(outContractService.findById(2));
+       // System.out.println(companyContractService.findById(4).getSet().iterator());
+
+        //outContractService.updateState(1);
+       // stallDao.updateState(17,0);
+
+        //companyContractService.updateState(3);
+
+        System.out.println(stallDao.save(new StallEntity("天府二街永商cdb","TFcbd154","51246587531596","img1")));
+}
 }
