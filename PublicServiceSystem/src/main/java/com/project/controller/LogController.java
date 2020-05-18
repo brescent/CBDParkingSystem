@@ -4,17 +4,14 @@ import com.project.Service.ILogService;
 import com.project.entity.LogEntity;
 import com.project.util.CBDStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * 日志控制层
  */
-@RequestMapping("log")
+@RestController
 public class LogController {
 
     @Autowired

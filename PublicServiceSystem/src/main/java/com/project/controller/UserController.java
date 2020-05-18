@@ -17,10 +17,8 @@ import com.project.util.CBDStringUtil;
 import com.project.util.MD5Util;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("user")
+
 public class UserController {
     @Autowired
     IUserService service;
@@ -44,10 +42,13 @@ public class UserController {
     public UserController() {
     }
 
-    @GetMapping(value = "login/{userName}/{pwd}",produces ="application/json;charset=utf-8" )
-    public UserDto login(@PathVariable("userName") String userName, @PathVariable("pwd") String pwd) {
+    @GetMapping(value = "login")
+    public UserDto login(String userName,String pwd) {
         //通过用户名查找用户
         PublicUserEntity mainUser = this.service.findUserByName(userName);
+        if(mainUser==null){
+            return null;
+        }
         //获得用户类型
         int userType = mainUser.getUserType();
         UserDto userDto = new UserDto();
@@ -112,7 +113,9 @@ public class UserController {
     }
 
     @RequestMapping("addUser")
-    public String addUser(PublicUserEntity publicUserEntity, PersonalUserEntity personalUserEntity) {
+    public String addUser(Map userMap) {
+        PublicUserEntity publicUserEntity= (PublicUserEntity) userMap.get("publicUserEntity");
+        PersonalUserEntity personalUserEntity= (PersonalUserEntity) userMap.get("personalUserEntity");
         PublicUserEntity mainUser = this.service.findUserByName(publicUserEntity.getLoginName());
         if (mainUser != null) {
             try {
@@ -131,6 +134,11 @@ public class UserController {
         return CBDStringUtil.ADD_FAIL;
     }
 
+    /**
+     * 前端修改方法，先通过id查找用户详情回显
+     * @param userId
+     * @return
+     */
     @GetMapping("getPersonalUserInfo/{userId}")
     public PersonalUserDto getPersonalUserInfo(@PathVariable("userId") int userId) {
         PersonalUserEntity user = this.service.findByPublicUserId(userId);
@@ -142,6 +150,11 @@ public class UserController {
         return userDto;
     }
 
+    /**
+     * 修改格瑞特
+     * @param userName
+     * @param personalUserDto
+     */
     @RequestMapping("updateUser")
     public void updatePersonalUser(String userName, PersonalUserDto personalUserDto) {
         PublicUserEntity maiuUser = this.service.findUserByName(userName);

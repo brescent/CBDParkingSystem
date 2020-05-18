@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 账单业务层就接口
  */
-@FeignClient("billService")
+
 public interface IBillService {
 
     /**

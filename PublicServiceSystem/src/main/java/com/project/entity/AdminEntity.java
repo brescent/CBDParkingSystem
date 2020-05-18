@@ -29,7 +29,7 @@ public class AdminEntity implements Serializable {
     @Column(name = "a_phone")
     private String phone;
 
-    @OneToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_publicUserId",referencedColumnName = "pk_publicUserId",nullable = false)
     private PublicUserEntity publicUser;
 

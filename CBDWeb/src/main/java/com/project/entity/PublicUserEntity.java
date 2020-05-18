@@ -1,14 +1,15 @@
 package com.project.entity;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 /**公共用户类*/
 
-
+@Data
 public class PublicUserEntity {
     /**用户id*/
-
     private int id;
     /**用户登录名*/
 
@@ -20,50 +21,35 @@ public class PublicUserEntity {
 
     private int userType;
 
+    /**个人用户真实姓名*/
+    private String realName;
 
+    /**个人用户职业描述*/
+    private String jobInfo;
 
-    public PublicUserEntity() {
-    }
+    /**个人用户邮箱*/
+    private String email;
 
-    public PublicUserEntity(String loginName, String  pwd, int userType) {
-        this.loginName=loginName;
-        this.pwd=pwd;
-        this.userType=userType;
+    /**个人用户家庭住址*/
 
-    }
+    private String homeAddress;
 
+    /**个人用户身份证号*/
+    private String IDCardNum;
 
+    /**个人用户身份证号*/
 
+    private String phone;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
+    public PublicUserEntity(String loginName, String pwd, int userType, String realName, String jobInfo, String email, String homeAddress, String IDCardNum, String phone) {
         this.loginName = loginName;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
         this.pwd = pwd;
-    }
-
-    public int getUserType() {
-        return userType;
-    }
-
-    public void setUserType(int userType) {
         this.userType = userType;
+        this.realName = realName;
+        this.jobInfo = jobInfo;
+        this.email = email;
+        this.homeAddress = homeAddress;
+        this.IDCardNum = IDCardNum;
+        this.phone = phone;
     }
 }

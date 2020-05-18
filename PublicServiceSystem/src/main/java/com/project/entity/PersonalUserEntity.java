@@ -41,7 +41,7 @@ public class PersonalUserEntity {
     @Column(name = "p_phone")
     private String phone;
 
-    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_publicUserId",referencedColumnName = "pk_publicUserId",nullable = false)
     private PublicUserEntity publicUser;
 

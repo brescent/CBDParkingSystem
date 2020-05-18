@@ -31,7 +31,8 @@ public class PerformanceStatistics {
         String className = point.getTarget().getClass().getName();
         String methodName = point.getSignature().getName();
         String logInfo = "执行" + className + "的" + methodName + "方法时，使用了" + useTime + "秒时间";
-        new LogEntity("性能统计",logInfo);
+        //new LogEntity("性能统计",logInfo);
+        publicService.addLog("性能统计",logInfo);
         return obj;
     }
 }

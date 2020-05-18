@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 日志业务层接口
  */
-@FeignClient("logService")
+
 public interface ILogService {
     /**
      * 查找全部日志

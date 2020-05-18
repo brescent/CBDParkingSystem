@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 消息业务层接口
  */
-@FeignClient("messageService")
+
 public interface IMessageService {
     /**
      * 通过用户id查询消息集合

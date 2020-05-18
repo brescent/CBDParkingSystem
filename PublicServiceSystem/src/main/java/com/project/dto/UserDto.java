@@ -3,6 +3,9 @@ package com.project.dto;
 
 import java.util.List;
 
+/**
+ * 登录dto
+ */
 public class UserDto {
     private int id;
     private String loginName;
