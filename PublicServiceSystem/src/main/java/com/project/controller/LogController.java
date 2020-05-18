@@ -5,6 +5,7 @@ import com.project.entity.LogEntity;
 import com.project.util.CBDStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,8 +25,8 @@ public class LogController {
      * @param logInfo 日志内容
      * @param userName 操作用户名
      */
-    @PostMapping("add")
-    public String addLog(String logInfo,String userName){
+    @PostMapping("addLog/{userName}/{logInfo}")
+    public String addLog(@PathVariable("logInfo") String logInfo,@PathVariable("userName") String userName){
         logService.addLog(new LogEntity(logInfo,userName));
         return CBDStringUtil.ADD_SUCCESS;
     }
