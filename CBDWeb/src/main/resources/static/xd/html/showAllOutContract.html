@@ -75,7 +75,7 @@
                            :pager-count=5
                            :page-sizes=[3,5,10]
                            :total="total"
-                           @current-change="currentChange"
+                           @current-change="currentChange"0
                            @size-change="sizeChange"
             >
             </el-pagination>
@@ -92,6 +92,7 @@
     new Vue({
         el:"#app",
         data:{
+            companyContractNo:""
             tableData:tableData
         },
         methods:{
