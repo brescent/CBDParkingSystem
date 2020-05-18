@@ -53,7 +53,7 @@ public class MessageController {
      * @param messageId 消息id
      * @return 消息实体
      */
-    @PostMapping("read/{messageId}")
+    @PutMapping("read/{messageId}")
     public MessageEntity readMessage(@PathVariable("messageId")int messageId){
         MessageEntity messageEntity = messageService.findById(messageId);
         messageService.readMessageById(messageId);

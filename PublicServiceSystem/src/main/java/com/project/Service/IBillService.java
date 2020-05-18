@@ -1,6 +1,7 @@
 package com.project.Service;
 
 import com.project.entity.BillEntity;
+import org.springframework.cloud.openfeign.FeignClient;
 
 import java.sql.Date;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * 账单业务层就接口
  */
+@FeignClient("billService")
 public interface IBillService {
 
     /**
