@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../css/page_css/main/add.css">
 </head>
 <body>
-<div style="margin-left: 650px"><h2 style="color: #66b1ff">车位管理</h2></div>
+<div style="margin-left: 680px"><h2 style="color: #66b1ff">车位管理</h2></div>
 <div id="app" style="margin-top: -20px">
 
 
@@ -85,11 +85,12 @@
 
 <script type="text/javascript">
 
-
+    // //使用post发送ajax时需要设置
+    // Vue.http.options.emulateJSON = true;
 
     //测试对象包含对象的数据
-     var tableData=[{stallAddress :'天府一街cbd',stallNo:'TF548',stallState:0},
-        {stallAddress :'天府一街cbd',stallNo:'TF528',stallState:1}];
+    //  var tableData=[{stallAddress :'天府一街cbd',stallNo:'TF548',stallState:0},
+    //     {stallAddress :'天府一街cbd',stallNo:'TF528',stallState:1}];
     new Vue({
         el:"#app",
         data:{
@@ -100,7 +101,10 @@
             pageSize:3,
             total:0,
             currentPage:1,
-            tableData:tableData},
+            }
+        ,created(){
+        this.getDatas();
+          },
         methods:{
             /*查找按钮事件*/
             seach:function(){
@@ -116,13 +120,13 @@
             },   /*查询数据*/
             getDatas:function(stallAddress,stallNo,currentPage,pageSize){
                 //发送ajax
-                this.$http.post("../stall/findByItems/",{
+                this.$http.get("back/stall/findByItems/",{
                     stallAddress:this.stallAddress,
                     stallNo:this.stallNo,
                     stallState:this.stallState,
                     currentPage:currentPage,
                     pageSize:pageSize,
-                    total:total
+
                 }).then(function(result){
                     console.log(result.body);
                     //设置分页控件的值
