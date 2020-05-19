@@ -19,12 +19,9 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
+import com.project.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
@@ -112,12 +109,24 @@ public class UserController {
         return userDto;
     }
 
-    @RequestMapping("addUser")
-    public String addUser(Map userMap) {
-        PublicUserEntity publicUserEntity= (PublicUserEntity) userMap.get("publicUserEntity");
-        PersonalUserEntity personalUserEntity= (PersonalUserEntity) userMap.get("personalUserEntity");
-        PublicUserEntity mainUser = this.service.findUserByName(publicUserEntity.getLoginName());
-        if (mainUser != null) {
+    @PostMapping("addUser")
+    public String addUser(@RequestBody UserVo userVo) {
+        PublicUserEntity publicUserEntity= new PublicUserEntity();
+        publicUserEntity.setUserType(0);
+        PersonalUserEntity personalUserEntity= new PersonalUserEntity();
+        PublicUserEntity mainUser = this.service.findUserByName(userVo.getLoginName());
+        if (mainUser == null) {
+            //设置用户属性
+            publicUserEntity.setUserType(0);
+            publicUserEntity.setLoginName(userVo.getLoginName());
+            publicUserEntity.setPwd(userVo.getPwd());
+            personalUserEntity.setPhone(userVo.getPhone());
+            personalUserEntity.setHomeAddress(userVo.getHomeAddress());
+            personalUserEntity.setJobInfo(userVo.getJobInfo());
+            personalUserEntity.setIDCardNum(userVo.getIDCard());
+            personalUserEntity.setRealName(userVo.getRealName());
+            personalUserEntity.setPublicUser(publicUserEntity);
+            personalUserEntity.setEmail(userVo.getEmail());
             try {
                 String encryptedPwd = MD5Util.getEncryptedPwd(publicUserEntity.getPwd());
                 publicUserEntity.setPwd(encryptedPwd);
@@ -129,9 +138,11 @@ public class UserController {
             } catch (UnsupportedEncodingException var7) {
                 var7.printStackTrace();
             }
+        }else {
+            return null;
         }
 
-        return CBDStringUtil.ADD_FAIL;
+        return  null;
     }
 
     /**

@@ -12,6 +12,7 @@ public class GotoPageController {
 
     @RequestMapping("gotoLogin")
     public String gotoLogin(){
+
         return "yzh/page/login";
     }
 

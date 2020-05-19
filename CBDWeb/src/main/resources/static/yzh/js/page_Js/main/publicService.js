@@ -1,6 +1,5 @@
 
-//使用post发送ajax时需要设置
-Vue.http.options.emulateJSON = true;
+
 
 const  app = new Vue({
     el:"#app",
@@ -9,9 +8,26 @@ const  app = new Vue({
     //     /*当vue实例化后加载下拉菜单的值*/
     //     this.getClasses();
     // },
+    data:{
+         username:""
+    },
+
+
+    created: function () {
+        this.getDatas();
+    },
+
 
     methods:{
+        getDatas:function(){
+            axios.get("../../../../getLoginUserName", {
 
+            }).then(function (result) {
+                alert(result.data);
+                this.username= result.data;
+
+            }.bind(this));
+        },
         /*取消按钮事件*/
         news:function(){
             window.location.href="../../bwk/page/ShowMessageList.html";

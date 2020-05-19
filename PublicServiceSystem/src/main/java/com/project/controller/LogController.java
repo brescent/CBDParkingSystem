@@ -23,7 +23,7 @@ public class LogController {
      * @param userName 操作用户名
      */
     @PostMapping("addLog/{userName}/{logInfo}")
-    public String addLog(@PathVariable("logInfo") String logInfo,@PathVariable("userName") String userName){
+    public String addLog(@PathVariable("userName") String userName,@PathVariable("logInfo") String logInfo){
         logService.addLog(new LogEntity(logInfo,userName));
         return CBDStringUtil.ADD_SUCCESS;
     }

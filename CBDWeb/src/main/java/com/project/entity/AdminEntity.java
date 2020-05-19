@@ -26,6 +26,7 @@ public class AdminEntity {
     private PublicUserEntity publicUser;
 
 
+
     private List<PowerEntity> powerList;
 
     public AdminEntity() {

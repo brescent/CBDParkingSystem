@@ -4,6 +4,7 @@ import com.project.dto.PersonalUserDto;
 import com.project.dto.UserDto;
 import com.project.entity.PersonalUserEntity;
 import com.project.entity.PublicUserEntity;
+import com.project.vo.UserVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public interface IUserService {
     public UserDto login(@RequestParam String userName,@RequestParam String pwd);
 
     @PostMapping("/addUser")
-    public String addUser(Map userMap);
+    public String addUser(UserVo userVo);
 
     @GetMapping("/getPersonalUserInfo/{userId}")
     public PersonalUserDto getPersonalUserInfo(@PathVariable("userId") int userId);

@@ -11,9 +11,9 @@ spring:
   application:
     name: publicUserService
   datasource:
-    url: jdbc:mysql://localhost:3306/cdb?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://cdb-k8anlqni.cd.tencentcdb.com:10151/publicService?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: a
+    password: root1234
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     database: mysql

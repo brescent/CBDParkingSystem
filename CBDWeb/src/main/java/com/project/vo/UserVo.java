@@ -1,16 +1,8 @@
-package com.project.entity;
+package com.project.vo;
 
 
-import javax.persistence.*;
 
-/**个人用户实体类*/
-
-public class PersonalUserEntity {
-
-    /**个人用户id*/
-
-    private int id;
-
+public class UserVo {
     /**个人用户id*/
     private String realName;
 
@@ -26,32 +18,30 @@ public class PersonalUserEntity {
 
     /**个人用户身份证号*/
 
-    private String IDCardNum;
+    private String  IDCard;
 
     /**个人用户电话号码*/
 
     private String phone;
 
 
-    private PublicUserEntity publicUser;
+    private String loginName;
+    /**用户密码*/
 
-    public PersonalUserEntity() {
-    }
-    public PersonalUserEntity(String realName,String email,String homeAddress,String phone,String jobInfo,String IDCardNum) {
-        this.realName=realName;
-        this.email=email;
-        this.homeAddress=homeAddress;
-        this.IDCardNum=IDCardNum;
-        this.phone=phone;
-        this.jobInfo=jobInfo;
+    private String pwd;
+
+    public UserVo() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public UserVo(String realName, String jobInfo, String email, String homeAddress, String IDCard, String phone, String loginName, String pwd) {
+        this.realName = realName;
+        this.jobInfo = jobInfo;
+        this.email = email;
+        this.homeAddress = homeAddress;
+        this.IDCard = IDCard;
+        this.phone = phone;
+        this.loginName = loginName;
+        this.pwd = pwd;
     }
 
     public String getRealName() {
@@ -86,13 +76,7 @@ public class PersonalUserEntity {
         this.homeAddress = homeAddress;
     }
 
-    public String getIDCardNum() {
-        return IDCardNum;
-    }
 
-    public void setIDCardNum(String IDCardNum) {
-        this.IDCardNum = IDCardNum;
-    }
 
     public String getPhone() {
         return phone;
@@ -102,11 +86,27 @@ public class PersonalUserEntity {
         this.phone = phone;
     }
 
-    public PublicUserEntity getPublicUser() {
-        return publicUser;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setPublicUser(PublicUserEntity publicUser) {
-        this.publicUser = publicUser;
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public String getIDCard() {
+        return IDCard;
+    }
+
+    public void setIDCard(String IDCard) {
+        this.IDCard = IDCard;
     }
 }

@@ -17,24 +17,24 @@
               <el-form  label-width="100px">
 
                 <el-form-item label="用户登录名:">
-                     <el-input  prefix-icon="el-icon-user"  v-model="userName" placeholder="请输入您的用户名"  clearable></el-input>
+                     <el-input  prefix-icon="el-icon-user"  v-model="loginName" placeholder="请输入您的用户名"  clearable></el-input>
                       </el-form-item>
 
 
 
 
                   <el-form-item label="用户密码:">
-                      <el-input prefix-icon="el-icon-key"  type="password" v-model="pwd" placeholder="请输入您的密码" showpassword></el-input>
+                      <el-input prefix-icon="el-icon-key"  type="password" v-model="pwd" placeholder="请输入您的密码" ></el-input>
                   </el-form-item>
 
 
                       <el-form-item label="确认密码:">
-                          <el-input prefix-icon="el-icon-key"  type="password" v-model="pwd2" placeholder="请输入您的密码" showpassword></el-input>
+                          <el-input prefix-icon="el-icon-key"  type="password" v-model="pwd2" placeholder="请输入您的密码" ></el-input>
                       </el-form-item>
 
 
                   <el-form-item label="用户真实姓名:">
-                      <el-input  prefix-icon="el-icon-user"  v-model="userRealName" placeholder="请输入您的真实姓名"  clearable></el-input>
+                      <el-input  prefix-icon="el-icon-user"  v-model="realName" placeholder="请输入您的真实姓名"  clearable></el-input>
                   </el-form-item>
 
 
@@ -45,7 +45,7 @@
 
 
                   <el-form-item label="身份证号码:">
-                      <el-input  prefix-icon="el-icon-user-solid"  v-model="IDCardNum" placeholder="请输入您的身份证号码"  clearable></el-input>
+                      <el-input  prefix-icon="el-icon-user-solid"  v-model="IDCard" placeholder="请输入您的身份证号码"  clearable></el-input>
                   </el-form-item>
 
                   <el-form-item label="家庭住址:">
@@ -82,11 +82,13 @@
 
 
 
-
+     <!--Axios-->
+     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
      <!--vue.js 必须在elementUI.js之前导入-->
      <script src="../js/vue/Vue.js"></script>
      <!--使用ajax 需要导入-->
      <script  src="../js/vue/vue-resource.js"></script>
+     <script src="../js/vue/axios.min.js" type="javascript"></script>
      <script src="../js/elementUI/elementUI.js"></script>
      <script  src="../js/page_Js/main/add.js"></script>
 
