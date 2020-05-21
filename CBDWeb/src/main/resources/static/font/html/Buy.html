@@ -84,7 +84,7 @@
             this.stallAll();
         },methods:{
             stallAll: function(){
-                axios.get("http://127.0.0.1:8888/getAllDeal").then(function (respone) {
+                axios.get("http://127.0.0.1:8089/getAllDeal").then(function (respone) {
                         this.list=respone.data;
                 }.bind(this)).catch(function (error) {
                     console.log(error)
@@ -97,7 +97,7 @@
             },
             gotores:function (event) {
                 let id = event.target.className;
-                location.href="http://127.0.0.1:8888/font/html/Purchase_res.html?id="+id
+                location.href="http://127.0.0.1:8089/font/html/Purchase_res.html?id="+id
             }
         }
     })
