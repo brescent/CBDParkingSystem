@@ -123,7 +123,7 @@ public class UserController {
             personalUserEntity.setPhone(userVo.getPhone());
             personalUserEntity.setHomeAddress(userVo.getHomeAddress());
             personalUserEntity.setJobInfo(userVo.getJobInfo());
-            personalUserEntity.setIDCardNum(userVo.getIDCard());
+            personalUserEntity.setIDCardNum(userVo.getCardNum());
             personalUserEntity.setRealName(userVo.getRealName());
             personalUserEntity.setPublicUser(publicUserEntity);
             personalUserEntity.setEmail(userVo.getEmail());
@@ -158,20 +158,21 @@ public class UserController {
         userDto.setHomeAddress(user.getHomeAddress());
         userDto.setPhone(user.getPhone());
         userDto.setPhone(user.getPhone());
+        userDto.setJobInfo(user.getJobInfo());
         return userDto;
     }
 
     /**
      * 修改格瑞特
-     * @param userName
+     *
      * @param personalUserDto
      */
-    @RequestMapping("updateUser")
-    public void updatePersonalUser(String userName, PersonalUserDto personalUserDto) {
-        PublicUserEntity maiuUser = this.service.findUserByName(userName);
+    @PostMapping("updateUser")
+    public void updatePersonalUser(@RequestBody PersonalUserDto personalUserDto) {
+        PublicUserEntity maiuUser = this.service.findUserByName(personalUserDto.getUserName());
         PersonalUserEntity user = this.service.findByPublicUserId(maiuUser.getId());
         user.setPhone(personalUserDto.getPhone());
-        user.setJobInfo(personalUserDto.getJonInfo());
+        user.setJobInfo(personalUserDto.getJobInfo());
         user.setEmail(personalUserDto.getEmail());
         user.setHomeAddress(personalUserDto.getHomeAddress());
         String encryptedPwd = null;
@@ -185,7 +186,7 @@ public class UserController {
             var8.printStackTrace();
         }
 
-        LogEntity log = new LogEntity(userName,CBDStringUtil.UPDATEUSER_LOG);
+        LogEntity log = new LogEntity(personalUserDto.getUserName(),CBDStringUtil.UPDATEUSER_LOG);
         this.logService.addLog(log);
         this.service.updatePersonalUser(user, maiuUser.getId(), maiuUser);
     }
