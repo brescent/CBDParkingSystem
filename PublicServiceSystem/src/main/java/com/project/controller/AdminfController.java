@@ -92,22 +92,43 @@ public class AdminfController {
      */
     @PostMapping("updAdmin")
     public String updAdminPower(@RequestParam("adminId") Integer adminId, @RequestParam("powerList") int[] powerList) {
-
-
         return adminService.updAdminPower(adminId, powerList);
-
-
     }
 
+    /**
+     * 修改管理员个人信息
+     * @param admin
+     * @param userId
+     * @return
+     */
+    @PostMapping("updAdminMsg")
+    public  String updAdminMsg(@RequestBody AdminVo admin,@RequestParam("userId") Integer userId){
+        return adminService.updAdminMsg(admin,userId);
+    };
     /**
      * 根据用户id查询对应管理员信息
      *
      * @param userId
      * @return
      */
-    @RequestMapping("getAdminByUserId")
-    public AdminEntity getAdminByUserId(@PathVariable("userId") int userId) {
-        return adminService.getAdminEntityByUserId(userId);
+    @GetMapping("getAdminByUserId/{userId}")
+    public String getAdminByUserId(@PathVariable("userId") int userId) {
+
+        AdminEntity adminEntity = adminService.getAdminEntityByUserId(userId);
+
+        AdminVo adminVo = new AdminVo();
+
+        adminVo.setId(adminEntity.getId());
+
+        adminVo.setJobNum(adminEntity.getJobNum());
+
+        adminVo.setPhone(adminEntity.getPhone());
+
+        adminVo.setRealName(adminEntity.getRealName());
+
+        String adminJosn = JSON.toJSONString(adminVo);
+
+        return adminJosn;
     }
 
     /**

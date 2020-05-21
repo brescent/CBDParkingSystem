@@ -28,6 +28,13 @@ public interface IAdminService {
      */
     public AdminEntity getAdminEntityByUserId(int UserId);
 
+    /**
+     * 修改管理员个人信息
+     * @param admin
+     * @param userId
+     * @return
+     */
+    public String updAdminMsg(AdminVo admin,Integer userId);
 
     /**
      * 根据管理员id查询管理员

@@ -1,13 +1,16 @@
 package com.project.controller;
 
 
+import com.project.dto.UserDto;
 import com.project.entity.CompanyUserEntity;
 import com.project.entity.PageEntity;
 import com.project.service.IWebCompanyService;
 import com.project.vo.CompanyVo;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +30,9 @@ public class WebCompanyController {
      *
      * @param company
      */
-    @RequestMapping("addCompany")
-    public void addCompany(@RequestBody CompanyVo company) {
-        companyUserService.addCompany(company);
+    @PostMapping("addCompany")
+    public String addCompany(@RequestBody CompanyVo company) {
+      return   companyUserService.addCompany(company);
     }
 
     /**
@@ -58,7 +61,7 @@ public class WebCompanyController {
     }
 
     /**
-     * 恩据id删除企业
+     * 跟据id删除企业
      *
      * @param companyId
      */
@@ -78,5 +81,33 @@ public class WebCompanyController {
     @RequestMapping("getCompanyById")
     public String getCompanyById(int companyId) {
         return companyUserService.getCompanyById(companyId);
+    }
+
+    /**
+     * 根据用户id查询对应企业详情
+     * @param request
+     * @return
+     */
+    @GetMapping("getCompanyByUserId")
+    public String getCompanyByUserId(HttpServletRequest request){
+
+        UserDto user =(UserDto) request.getSession().getAttribute("user");
+
+        String s = companyUserService.getCompanyByUserId(user.getId());
+        return companyUserService.getCompanyByUserId(user.getId());
+    }
+
+    /**
+     * 修改企业用户信息
+     * @param map 新数据
+     * @param request
+     * @return
+     */
+    @PostMapping("updCompany")
+    public  String updCompany(@RequestBody Map<String,Object> map,HttpServletRequest request){
+        UserDto user =(UserDto) request.getSession().getAttribute("user");
+        map.put("userId",user.getId());
+        String s = companyUserService.updCompany(map);
+        return s;
     }
 }

@@ -4,6 +4,7 @@ import com.project.vo.CompanyVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -17,8 +18,8 @@ public interface IWebCompanyService {
      * 添加新企业
      * @param company
      */
-    @RequestMapping("/addCompany")
-    public void addCompany(@RequestBody CompanyVo company);
+    @PostMapping("/addCompany")
+    public String addCompany(@RequestBody CompanyVo company);
 
 
     /**
@@ -34,14 +35,6 @@ public interface IWebCompanyService {
     @DeleteMapping("/delCompany/{companyId}")
     public  String delCompany(@PathVariable("companyId") int companyId);
 
-    /**
-     * 根据用户id获取对应的企业用户详情
-     * @param userId
-     * @return
-     */
-    @RequestMapping("/getCompanyByUserId")
-    public String getCompanyByUserId(@PathVariable("userId") int userId);
-
 
     /**
      * 根据id查询企业
@@ -50,4 +43,19 @@ public interface IWebCompanyService {
      */
     @RequestMapping("/getCompanyById/{companyId}")
     public String getCompanyById(@PathVariable("companyId") int companyId);
+
+    /**
+     * 根据用户id查询对应企业详情
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/getCompanyByUserId/{userId}")
+    public String getCompanyByUserId(@PathVariable("userId")Integer userId);
+    /**
+     * 修改企业用户信息
+     * @param map 新数据
+     * @return
+     */
+    @RequestMapping("/updCompany")
+    public  String updCompany(@RequestBody Map<String,Object> map);
 }

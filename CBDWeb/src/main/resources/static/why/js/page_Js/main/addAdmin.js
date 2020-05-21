@@ -27,7 +27,6 @@ const  app = new Vue({
                  phone: this.phone,
                  powerList:this.powerList
              }).then(function(result){
-            // console.log(result.body+"***");
                  if(result.data=="1"){
                      this.$alert('添加数据成功',{
                          title:"消息提示",

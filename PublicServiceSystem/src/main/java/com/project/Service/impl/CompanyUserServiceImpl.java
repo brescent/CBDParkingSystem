@@ -5,13 +5,13 @@ import com.project.Service.ICompanyUserService;
 import com.project.dao.ICompanyDao;
 import com.project.dao.ILogDao;
 import com.project.dao.IUserDao;
-import com.project.dto.CompanyDto;
 import com.project.entity.CompanyUserEntity;
 import com.project.entity.LogEntity;
 import com.project.entity.PageEntity;
 import com.project.entity.PublicUserEntity;
 import com.project.util.CBDStringUtil;
 import com.project.util.MD5Util;
+import com.project.vo.CompanyVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.project.dao.BasicDao;
@@ -45,7 +46,7 @@ public class CompanyUserServiceImpl implements ICompanyUserService {
 
 
     @Override
-    public String addCompany(CompanyDto company) {
+    public String addCompany(CompanyVo company) {
 
         try {
             //将密码进行加密
@@ -141,17 +142,6 @@ public class CompanyUserServiceImpl implements ICompanyUserService {
         }
     }
 
-    @Override
-    public String updCompany(String contact, String contactPhone, int companyId) {
-
-       try {
-           companyDao.updateCompanyUser(contact, contactPhone, companyId);
-           return "1";
-       }catch (Exception e){
-           e.printStackTrace();
-           return "0";
-       }
-    }
 
     @Override
     public String getCompanyById(int companyId) {
@@ -161,6 +151,44 @@ public class CompanyUserServiceImpl implements ICompanyUserService {
 
 
         return JSON.toJSONString(company);
+    }
+
+    @Override
+    public String updCompany(Map<String,Object> map) {
+        try {
+            Integer userId = (Integer) map.get("userId");
+
+            //加密
+            String md5pwd = MD5Util.getEncryptedPwd((String) map.get("pwd"));
+
+            PublicUserEntity publicUserEntity = userDao.findById(userId).get();
+            publicUserEntity.setLoginName((String) map.get("companyLoginName"));
+            publicUserEntity.setPwd(md5pwd);
+            userDao.save(publicUserEntity);
+            //写日志
+            LogEntity log = new LogEntity("企业用户" +
+                    map.get("userId"),
+                    "修改了登录名" + (String) map.get("companyLoginName") + "和密码" + (String) map.get("pwd"));
+            logDao.save(log);
+
+            CompanyUserEntity companyUserEntity  = companyDao.getCompanyUserById(userId);
+            companyUserEntity.setContact((String) map.get("contact"));
+            companyUserEntity.setContactPhone((String) map.get("contactPhone"));
+            companyDao.save(companyUserEntity);
+
+            //写日志
+            LogEntity log2 = new LogEntity("企业用户" +
+                    map.get("userId"),
+                    "修改了联系人-->" + (String) map.get("contact") + "和联系人电话-->" + (String) map.get("contactPhone"));
+            logDao.save(log2);
+
+            return "1";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "0";
+
+        }
+
     }
 
 

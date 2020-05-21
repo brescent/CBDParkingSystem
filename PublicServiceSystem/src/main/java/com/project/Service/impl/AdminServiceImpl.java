@@ -46,10 +46,7 @@ public class AdminServiceImpl implements IAdminService {
      */
     @Override
     public String addAdmin(AdminVo admin) {
-
-
         try {
-
             //将密码进行加密
             String md5pwd = MD5Util.getEncryptedPwd(admin.getPwd());
             //创建一个公共用户对象,并设置添加的登录名以及密码
@@ -57,34 +54,24 @@ public class AdminServiceImpl implements IAdminService {
                     admin.getJobNum()+"",md5pwd,2);
             //保存用户
             userDao.save(userEntity);
-
             LogEntity log = new LogEntity(CBDStringUtil.SUPERADMIN_USER,"添加管理员用户");
             logDao.save(log);
-
             //将vo数据放进实体
             AdminEntity adminEntity = new AdminEntity();
             adminEntity.setJobNum(admin.getJobNum());
             adminEntity.setPhone(admin.getPhone());
             adminEntity.setRealName(admin.getRealName());
-
             //设置管理员用户id
             adminEntity.setPublicUser(userEntity);
-
             //保存管理员进数据库
             adminDao.save(adminEntity);
-
             LogEntity log2 = new LogEntity(CBDStringUtil.SUPERADMIN_USER,"添加管理员");
             logDao.save(log2);
-
             //循环添加管理员权限
             for (int p:admin.getPowerList()) {
-
                 PowerEntity powerEntity = new PowerEntity();
-
                 powerEntity.setPowerInfo(p);
-
                 powerEntity.setAdmin(adminEntity);
-
                 //保存
                 powerDao.save(powerEntity);
                 LogEntity logg = new LogEntity(
@@ -92,16 +79,39 @@ public class AdminServiceImpl implements IAdminService {
                         "为管理员"+admin.getRealName()+"添加了权限"+powerEntity.getPowerInfo());
                 logDao.save(logg);
             }
-
             return "1";
         } catch (Exception e) {
-
             e.printStackTrace();
             return "0";
         }
     }
 
 
+    public String updAdminMsg(AdminVo admin,Integer userId){
+
+        try{
+            //修改登录密码,以及记录日志
+            PublicUserEntity publicUserEntity = userDao.findById(userId).get();
+            String md5pwd = MD5Util.getEncryptedPwd(admin.getPwd());
+            publicUserEntity.setPwd(md5pwd);
+            userDao.save(publicUserEntity);
+            LogEntity logEntity = new LogEntity(admin.getRealName(),"管理员修改了密码");
+            logDao.save(logEntity);
+
+
+            //修改电话以及记录日志
+            AdminEntity adminEntity = adminDao.findById(admin.getId()).get();
+            adminEntity.setPhone(admin.getPhone());
+            adminDao.save(adminEntity);
+            LogEntity logEntity2 = new LogEntity(admin.getRealName(),"管理员修改电话-->"+admin.getPhone());
+            logDao.save(logEntity2);
+
+
+            return  "1";
+        }catch (Exception e){
+            return "0";
+        }
+    }
 
     @Override
     public AdminEntity getAdminById(int adminId) {

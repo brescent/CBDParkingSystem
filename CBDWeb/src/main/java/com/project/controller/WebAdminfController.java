@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import com.project.dto.UserDto;
 import com.project.entity.AdminEntity;
 import com.project.entity.PowerEntity;
 import com.project.vo.AdminVo;
@@ -7,8 +8,10 @@ import com.project.service.IWebAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 管理员控制器
@@ -34,6 +37,18 @@ public class WebAdminfController {
     public String addAdmin(@RequestBody AdminVo admin) {
       return   webAdminService.addAdmin(admin);
     }
+
+    /**
+     * 修改管理员的个人信息
+     * @param admin
+     * @return
+     */
+    @PostMapping("updAdminMsg")
+    public String updAdminMsg(@RequestBody AdminVo admin,HttpServletRequest request){
+        UserDto user =(UserDto) request.getSession().getAttribute("user");
+        String str = webAdminService.updAdminMsg(admin,user.getId());
+        return   webAdminService.updAdminMsg(admin,user.getId());
+    }
     /**
      * 根据管理员id查询管理员
      * @param adminId
@@ -42,6 +57,18 @@ public class WebAdminfController {
     @GetMapping("getAdminById")
     public String getAdminById(int adminId) {
         return webAdminService.getAdminById(adminId);
+    }
+
+    /**
+     * 根据用户id查询管理员信息
+     * @param request
+     * @return
+     */
+    @GetMapping("getAdminByUserId")
+    public String getAdminByUserId(HttpServletRequest request){
+        UserDto user =(UserDto) request.getSession().getAttribute("user");
+        String string = webAdminService.getAdminByUserId(user.getId());
+        return string;
     }
     /**
      * 根据id修改管理员权限
@@ -53,18 +80,7 @@ public class WebAdminfController {
         return webAdminService.updAdminPower(adminId,powerList);
     }
 
-    /**
-     * 根据用户id查询对应管理员信息
-     *
-     * @param userId
-     * @return
-     */
-    @GetMapping("getAdminByUserId")
-    public String getAdminByUserId(int userId) {
 
-        String ret=webAdminService.getAdminByUserId(userId);
-        return ret;
-    }
 
 
     /**
@@ -79,6 +95,7 @@ public class WebAdminfController {
        return  ret;
 
     }
+
 
 
 }

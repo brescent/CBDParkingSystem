@@ -1,4 +1,4 @@
-package com.project.dto;
+package com.project.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.entity.PublicUserEntity;
@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 企业用户实体类
  */
 
-public class CompanyDto {
+public class CompanyVo {
     /**
      * 企业用户id
      */
