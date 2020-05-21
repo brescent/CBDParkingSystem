@@ -1,15 +1,12 @@
-package com.project.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package com.project.vo;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 /**管理员实体类*/
 
 
-public class AdminEntity implements Serializable {
+public class AdminVo {
     /**管理员ID*/
 
     private Integer id;
@@ -17,6 +14,9 @@ public class AdminEntity implements Serializable {
     /**管理员工号*/
 
     private int jobNum;
+
+    /**管理员密码*/
+    private String pwd;
 
     /**管理员真实姓名*/
 
@@ -26,20 +26,11 @@ public class AdminEntity implements Serializable {
     private String phone;
 
 
-    private PublicUserEntity publicUser;
+   private int[] powerList;
 
-
-
-    private List<PowerEntity> powerList;
-
-    public AdminEntity() {
+    public AdminVo() {
     }
 
-    public AdminEntity(int jobNum, String realName, String phone) {
-        this.realName=realName;
-        this.jobNum=jobNum;
-        this.phone=phone;
-    }
 
     public Integer getId() {
         return id;
@@ -55,6 +46,14 @@ public class AdminEntity implements Serializable {
 
     public void setJobNum(int jobNum) {
         this.jobNum = jobNum;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     public String getRealName() {
@@ -73,19 +72,11 @@ public class AdminEntity implements Serializable {
         this.phone = phone;
     }
 
-    public PublicUserEntity getPublicUser() {
-        return publicUser;
-    }
-
-    public void setPublicUser(PublicUserEntity publicUser) {
-        this.publicUser = publicUser;
-    }
-
-    public List<PowerEntity> getPowerList() {
+    public int[] getPowerList() {
         return powerList;
     }
 
-    public void setPowerList(List<PowerEntity> powerList) {
+    public void setPowerList(int[] powerList) {
         this.powerList = powerList;
     }
 }

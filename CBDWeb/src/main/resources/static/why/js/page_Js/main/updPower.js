@@ -1,79 +1,89 @@
-
-
 //使用post发送ajax时需要设置
 Vue.http.options.emulateJSON = true;
 
-const  app = new Vue({
-     el:"#app",
-    data:{
-         /*用户*/
-         user:'aaa',
-        /*工号*/
-        jobNumber:"001",
-        /*姓名*/
-        name:"小樱",
-        /*电话*/
-        phone:"15784658474",
-        /**权限集合*/
-        powerList:["1","4"]
+Vue.use({
+    install(Vue) {
+        Object.defineProperty(Vue.prototype, "$qs", {
+            writable: false,
+            value: window.Qs
+        });
+    }
+});
 
+const app = new Vue(
+
+    {
+    el: "#app",
+
+    data: {
+
+        adminId: "",
+        /*工号*/
+        jobNum: "",
+        /*姓名*/
+        realName: "",
+        /*电话*/
+        phone: "",
+        //拥有权限
+        oldPower: [1, 2, 3, 4],
+        /**权限集合*/
+        powerList: [],
     },
-    // created:function(options){
-    //      /*获取参数stuId*/
-    //     let requestObj = GetRequest();
-    //      this.stuId=requestObj['stuId'];
-    //    //查询学生详细信息
-    //      this. getStudentInfo(this.stuId);
-    //     /*当vue实例化后加载下拉菜单的值*/
-    //     this.getClasses();
-    // },
-    methods:{
-         /*查询学生详细信息*/
-         // getStudentInfo:function(stuId) {
-         //     this.$http.post("../ShowStudentInfoDetailServlet",{
-         //         stuId:stuId
-         //     }).then(function(result){
-         //
-         //     });
-         // },
+
+    created: function () {
+        /*获取参数adminId*/
+        let requestObj = GetRequest();
+        this.adminId = requestObj['adminId'];
+        //查询管理员详细信息,展示详细信息并加载复选框的值
+        this.getAdminByid(this.adminId);
+    },
+    methods: {
+
+        /*查询管理员详细信息*/
+        getAdminByid: function (adminId) {
+            axios.get("../../getAdminById", {
+                params: {
+                    adminId: adminId
+                }
+            }).then(function (result) {
+                this.adminId = result.data.id;
+                this.jobNum = result.data.jobNum;
+                this.realName = result.data.realName;
+                this.phone = result.data.phone;
+                this.powerList = result.data.powerList;
+
+            }.bind(this));
+        },
         /*修改按钮事件*/
-        update:function(){
-            this.$http.post("../UpdateStudentInfoServlet",{
-                stuId :this.stuId,
-                stuName:this.stuName,
-                stuAge:this.stuAge,
-                stuGender: this.stuGender,
-                classId:this.classId
-            }).then(function(result){
-                if(result.body==1){
-                    this.$alert('修改数据成功',{
-                        title:"消息提示",
+        update: function () {
+
+            axios.post("../../updAdmin",
+                this.$qs.stringify(
+                    {powerList: this.powerList,
+                    adminId:this.adminId},
+                    { indices: false })).
+            then(function (result) {
+                if (result.data == "1") {
+                    this.$alert('修改数据成功', {
+                        title: "消息提示",
                         confirmButtonText: '确定',
-                        type:'success',
+                        type: 'success',
                         center: true
                     });
-                    window.location.href="studentList.html";
-                }else{
+                    window.location.href = "showAllAdmin.html";
+                } else {
                     this.$alert('修改数据失败', {
-                        title:"消息提示",
+                        title: "消息提示",
                         confirmButtonText: '确定',
-                        type:'error',
+                        type: 'error',
                         center: true
                     });
                 }
-            });
+            }.bind(this));
         },
         /*取消按钮事件*/
-        cancle:function(){
+        cancle: function () {
             window.history.go(-1);
         },
-        /*获取所有班级数据*/
-        // getClasses:function(){
-        //     this.$http.post("../GetAllClassesServlet")
-        //         .then(function(result){
-        //             this.classesData=result.body;
-        //         });
-        // }
     }
-
 });

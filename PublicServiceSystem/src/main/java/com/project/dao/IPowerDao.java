@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import com.project.entity.PowerEntity;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -24,6 +25,7 @@ public interface IPowerDao extends CrudRepository<PowerEntity,Integer> {
      * 根据管理员id删除对应管理员权限
      * @param adminId
      */
-    @Query("delete  from PowerEntity where admin.id=?1")
+    @Query(value = "delete from t_power where fk_admin_id =:adminId",nativeQuery = true)
+    @Modifying
     public void delPowerByAdminId(@Param("adminId") int adminId);
 }

@@ -8,38 +8,33 @@ import java.util.List;
 
 /**管理员实体类*/
 
-@Entity
-@Table(name = "t_admin")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
+
 public class AdminEntity implements Serializable {
     /**管理员ID*/
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pk_adminId")
+
     private Integer id;
 
     /**管理员工号*/
-    @Column(name = "a_jobNum")
+
     private int jobNum;
 
     /**管理员真实姓名*/
-    @Column(name = "a_realName")
+
     private String realName;
 
-    @Column(name = "a_phone")
+
     private String phone;
 
-    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_publicUserId",referencedColumnName = "pk_publicUserId",nullable = false)
+
     private PublicUserEntity publicUser;
 
-    @OneToMany(mappedBy = "admin",fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+
     private List<PowerEntity> powerList;
 
     public AdminEntity() {
     }
 
-    public AdminEntity(int jobNum,String realName,String phone) {
+    public AdminEntity(int jobNum, String realName, String phone) {
         this.realName=realName;
         this.jobNum=jobNum;
         this.phone=phone;

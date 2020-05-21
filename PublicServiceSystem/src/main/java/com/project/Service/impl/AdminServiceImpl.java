@@ -5,16 +5,19 @@ import com.project.dao.IAdminDao;
 import com.project.dao.ILogDao;
 import com.project.dao.IPowerDao;
 import com.project.dao.IUserDao;
+import com.project.dto.AdminVo;
 import com.project.entity.*;
 import com.project.util.CBDStringUtil;
 import com.project.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,51 +43,62 @@ public class AdminServiceImpl implements IAdminService {
     /**
      * 添加管理员
      * @param admin 管理员实体
-     * @param pwd   管理员密码
      */
     @Override
-    public void addAdmin(AdminEntity admin,String pwd) {
+    public String addAdmin(AdminVo admin) {
 
 
         try {
 
             //将密码进行加密
-            String md5pwd = MD5Util.getEncryptedPwd(pwd);
+            String md5pwd = MD5Util.getEncryptedPwd(admin.getPwd());
             //创建一个公共用户对象,并设置添加的登录名以及密码
             PublicUserEntity userEntity = new PublicUserEntity(
                     admin.getJobNum()+"",md5pwd,2);
             //保存用户
             userDao.save(userEntity);
-            //设置管理员用户id
-            admin.setPublicUser(userEntity);
 
             LogEntity log = new LogEntity(CBDStringUtil.SUPERADMIN_USER,"添加管理员用户");
             logDao.save(log);
 
+            //将vo数据放进实体
+            AdminEntity adminEntity = new AdminEntity();
+            adminEntity.setJobNum(admin.getJobNum());
+            adminEntity.setPhone(admin.getPhone());
+            adminEntity.setRealName(admin.getRealName());
+
+            //设置管理员用户id
+            adminEntity.setPublicUser(userEntity);
 
             //保存管理员进数据库
-            adminDao.save(admin);
+            adminDao.save(adminEntity);
+
             LogEntity log2 = new LogEntity(CBDStringUtil.SUPERADMIN_USER,"添加管理员");
             logDao.save(log2);
 
             //循环添加管理员权限
-            for(PowerEntity p : admin.getPowerList()){
-                //设置权限的管理员id
-                p.setAdmin(admin);
+            for (int p:admin.getPowerList()) {
+
+                PowerEntity powerEntity = new PowerEntity();
+
+                powerEntity.setPowerInfo(p);
+
+                powerEntity.setAdmin(adminEntity);
+
                 //保存
-                powerDao.save(p);
+                powerDao.save(powerEntity);
                 LogEntity logg = new LogEntity(
                         CBDStringUtil.SUPERADMIN_USER,
-                        "为管理员"+admin.getRealName()+"添加了权限"+p.getPowerInfo());
+                        "为管理员"+admin.getRealName()+"添加了权限"+powerEntity.getPowerInfo());
                 logDao.save(logg);
             }
 
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+            return "1";
+        } catch (Exception e) {
 
+            e.printStackTrace();
+            return "0";
+        }
     }
 
 
@@ -119,9 +133,12 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public void delAdmin(int adminId) {
+    @Modifying
+    public String delAdmin(int adminId) {
         //根据管理员id删除对应权限
-        powerDao.delPowerByAdminId(adminId);
+       try {
+           powerDao.delPowerByAdminId(adminId);
+
         //根据id删除管理员
         adminDao.deleteById(adminId);
 
@@ -130,16 +147,22 @@ public class AdminServiceImpl implements IAdminService {
                 "删除了id是" +adminId+"的管理员以及他的权限");
         logDao.save(logg);
 
+        return "1";
+       }catch (Exception e){
+           return "0";
+       }
+
     }
 
     @Override
-    public void updAdminPower(int adminId, int[] newPower) {
+    public String updAdminPower(int adminId, int[] newPower) {
 
-        //根据管理员id删除对应权限
+     try {
+         //根据管理员id删除对应权限
+
         powerDao.delPowerByAdminId(adminId);
         //创建一个管理员对象,保存id
-        AdminEntity adminEntity  =new AdminEntity();
-        adminEntity.setId(adminId);
+        AdminEntity adminEntity  = adminDao.getAdminEntityById(adminId);
         //循环保存新权限
         for (int p : newPower){
             //创建一个权限对象,保存管理员外键,以及权限说明
@@ -155,5 +178,10 @@ public class AdminServiceImpl implements IAdminService {
             logDao.save(logg);
 
         }
+        return "1";
+     }catch (Exception e){
+         e.printStackTrace();
+         return "0";
+     }
     }
 }

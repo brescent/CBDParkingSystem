@@ -34,7 +34,7 @@ const app = new Vue({
         },
         /*处理编辑按钮*/
         handleEdit: function (index, row) {
-            window.location.href = "updAdminMsg.html?adminId=" + row.id;
+            window.location.href = "updPower.html?adminId=" + row.id;
         },
         /*处理删除按钮*/
         handleDelete: function (index, row) {
@@ -45,19 +45,20 @@ const app = new Vue({
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                this.$http.post("../deleteStudentinfoServlet", {
-                    stuId: row.id
+                this.$http.get("../../delAdmin", {
+                    params: {
+                        adminId:row.id
+                    }
                 }).then(function (result) {
                     //console.log(result+" === "+result.body);
-                    if (result.body == 1) {
+                    if (result.body == "1") {
                         this.$message({
                             type: 'success',
                             message: '删除成功!'
                         });
-
-                        // this.getDatas(this.currentPage,this.pageSize);
                         //直接操作表格的数据，删除表格中的数据，不需要在发ajax查询
-                        this.tableData.splice(index, 1);
+                        this.getDatas(this.pageNum, this.pageSize);
+                        //this.tableData.splice(index, 1);
                     } else {
                         this.$message({
                             type: 'error',
@@ -65,7 +66,6 @@ const app = new Vue({
                         });
                     }
                 });
-
             }).catch(() => {
                 this.$message({
                     type: 'info',

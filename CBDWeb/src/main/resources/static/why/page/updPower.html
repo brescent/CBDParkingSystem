@@ -16,16 +16,13 @@
                     <div class="top" style="margin-top:30px">
                         <el-form label-width="80px">
 
-                            <el-form-item label="用户:">
-                                <span style="font-size: 20px;color: #cf9236">{{user}}</span>
-                            </el-form-item>
 
                             <el-form-item label="工号:">
-                                <span style="font-size: 20px;color: #13ce66">{{jobNumber}}</span>
+                                <span style="font-size: 20px;color: #13ce66">{{jobNum}}</span>
                             </el-form-item>
 
                             <el-form-item label="姓名:">
-                                <span style="font-size: 20px;color: #ff4d51">{{name}}</span>
+                                <span style="font-size: 20px;color: #ff4d51">{{realName}}</span>
                             </el-form-item>
 
                             <el-form-item label="电话:">
@@ -34,12 +31,15 @@
 
 
                             <el-form-item label="权限:">
-                                <el-checkbox-group v-model="powerList">
-                                <el-checkbox v-model="checked" label="1">用户管理</el-checkbox>
-                                <el-checkbox v-model="checked" label="2">车位管理</el-checkbox>
-                                <el-checkbox v-model="checked" label="3">合同管理</el-checkbox>
-                                <el-checkbox v-model="checked" label="4">投诉管理</el-checkbox>
-                                </el-checkbox-group>
+                                    <el-checkbox-group v-model="powerList">
+                                        <el-checkbox v-for="p in oldPower" :label="p" :key="p">
+                                            <span v-if="p == '1'">用户管理</span>
+                                            <span v-if="p == '2'">车位管理</span>
+                                            <span v-if="p == '3'">合同管理</span>
+                                            <span v-if="p == '4'">投诉管理</span>
+                                        </el-checkbox>
+                                    </el-checkbox-group>
+
                             </el-form-item>
 
                             <el-form-item style="margin-top:50px;">
@@ -58,6 +58,13 @@
 
 </body>
 </html>
+<!--axios ajax异步请求-->
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<!--引用qs-->
+<script src="https://cdn.bootcss.com/qs/6.5.2/qs.min.js"></script>
+<script></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
 <!-- 获取参数使用-->
 <script src="../js/vue/paragram.js"></script>
 <!--vue.js 必须在elementUI.js之前导入-->
