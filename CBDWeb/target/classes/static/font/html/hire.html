@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>车位招租
+    </title>
+</head>
+
+<body>
+    <el-row>
+        <el-col :span="24">
+            <h2 class="grid-content bg-purple-dark" style="size:20px">车位招租</h2>
+        </el-col>
+    </el-row>
+    <div id="app" style="width:800px; margin: 0 auto">
+        <el-form ref="form" :model="form" label-width="80px">
+            <el-form-item label="活动名称">
+                <el-input v-model="form.name"></el-input>
+            </el-form-item>
+
+            <el-form-item label="活动名称">
+                <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="产权编号">
+                <el-input v-model="form.stallNum"></el-input>
+            </el-form-item>
+            <el-form-item label="小区地址">
+                <el-input v-model="form.stallAddress"></el-input>
+            </el-form-item>
+            <div style=" display: flex;
+            justify-content: space-between">
+                <el-form-item label="开始日期">
+                    <div class="block">
+                        <el-date-picker v-model="form.startTime" type="date" placeholder="选择日期">
+                        </el-date-picker>
+                    </div>
+                </el-form-item>
+
+                <el-form-item label="结束日期">
+                    <div class="block">
+                        <el-date-picker v-model="form.endTime" type="date" placeholder="选择日期">
+                        </el-date-picker>
+                    </div>
+                </el-form-item>
+            </div>
+            <el-form-item label="产权复印件">
+                    <el-upload
+                    :before-upload="unloadfile"
+                    class="upload-demo"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    multiple
+                    :limit="1"
+                    :on-exceed="handleExceed"
+                    :file-list="form.fileList">
+                    <el-button size="small" type="primary" >点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过2M</span>
+                  </el-upload>
+            </el-form-item>
+
+
+            <el-form-item style="display: flex;
+            justify-content: center">
+                <el-button type="primary" @click="onSubmit">发布</el-button>
+                <el-button>取消</el-button>
+            </el-form-item>
+
+        </el-form>
+    </div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {form: {
+                    name: '',
+                    stallNum: '',
+                    stallAddress: '',
+                    startTime: '',
+                    endTime: "",
+                    fileList: [],
+                }
+            }
+        },
+        methods: {
+            unloadfile(file){
+                if(file.name.substring(file.name.lastIndexOf("."))=="png"||file.name.substring(file.name.lastIndexOf("."))==".jpg"){
+                   
+                }else{
+                    this.$message.warning(`只能上传jpg/png文件，且不超过2M`);
+                    return false
+                }
+                 
+                
+                
+            },
+            onSubmit() {
+                console.log('submit!');
+            },
+            handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
+      }
+        }
+    })
+</script>
+
+</html>

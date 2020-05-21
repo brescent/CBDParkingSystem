@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--vue.js 必须在elementUI.js之前导入-->
+    <script src="../js/vue/Vue.js"></script>
+    <!--使用ajax 需要导入-->
+    <script  src="../js/vue/vue-resource.js"></script>
+    <script src="../js/elementUI/elementUI.js"></script>
+    <script  src="../js/page_Js/main/add.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/main/add.css">
+</head>
+<body>
+
+
+<div style="margin-left: 700px"><h2 style="color: #66b1ff">投诉管理</h2></div>
+<div id="app">
+
+
+    <el-container>
+
+        <!--内容显示区-->
+        <el-main>
+
+            <el-table :data="tableData"
+                      highlight-current-row
+                      style="width:100%;margin-left: 20px"
+            >
+                <el-table-column prop="complainter"    label="投诉人" width="110px" >
+                </el-table-column>
+                <el-table-column prop="beComplainter"  label="被投诉人" width="110px">
+                </el-table-column>
+                <el-table-column prop="complaintDate"  label="投诉时间" width="110px">
+                </el-table-column>
+                <el-table-column label="操作" width="110px">
+                    <template slot-scope="scope">
+                        <el-button size="mini"
+                                   @click="handleEdit(scope.$index, scope.row)"
+                                   type="success"
+                                   icon="el-icon-edit">查看和授理
+                        </el-button>
+
+                    </template>
+
+                </el-table-column>
+
+            </el-table>
+            <!-- 分页区 -->
+            <el-pagination style="margin: 20px auto;" background
+                           layout="prev,pager,next,sizes,total,jumper "
+                           :current-page="currentPage"
+                           :page-size="pageSize"
+                           :pager-count=5
+                           :page-sizes=[3,5,10]
+                           :total="total"
+                           @current-change="currentChange"
+                           @size-change="sizeChange"
+            >
+            </el-pagination>
+
+
+
+
+<!--            按钮区-->
+            <div class="main_button" style="margin-bottom:30px">
+
+
+
+
+                <el-form :inline="true" label-width="150px">
+                    <el-form-item label="授理状态:" style="margin-left: -10px">
+                        <el-select v-model="value" placeholder="请选择">
+                            <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+
+                    <el-form-item label="投诉时间：" >
+                        <el-date-picker
+                                v-model="value1"
+                                type="date"
+                                placeholder="选择日期"  >
+                        </el-date-picker>
+                        <el-date-picker
+                                v-model="value2"
+                                type="date"
+                                placeholder="选择日期"  >
+                        </el-date-picker>
+
+                    </el-form-item><br>
+                    <el-button type="primary" size="mini" @click="seach" icon="el-icon-search" style="margin-left: 180px">查找</el-button>
+                </el-form>
+            </div>
+        </el-main>
+    </el-container>
+</div>
+
+
+<script>
+
+
+    var tableData = [{ complainter:'古巨基',
+        beComplainter:'谢霆锋',complaintDate:'2020-05-06'},{ complainter:'农夫',
+        beComplainter:'菊花',complaintDate:'2020-05-06'}];
+
+     new Vue({
+        el:"#app",
+        data:{
+            disabledDate(time) {
+                return time.getTime() > Date.now();
+            }, value1: '',
+            disabledDate(time) {
+                return time.getTime() > Date.now();
+            }, value2: '',
+                tableData:tableData,
+                 pageSize:3,
+                 total:0,
+                 currentPage:1,
+
+
+            options: [{
+                value: '选项1',
+                label: '投诉成功'
+            }, {
+                value: '选项2',
+                label: '投诉失败'
+            }, {
+                value: '选项3',
+                label: '暂缓处理'
+            }],
+            value: ''
+
+        },
+        //在vue被实例化之后
+        created:function(){
+            //调用getdatas()方法
+            this.getDatas(this.currentPage,this.pageSize);
+        },
+        methods:{
+            /*查找按钮事件*/
+            seach:function(){
+                this.getDatas(this.currentPage,this.pageSize);
+            },
+            /*处理编辑按钮*/
+            handleEdit:function(index,row){
+                window.location.href="complaintInfo.html?contractId="+row.id;
+            },
+            /*改变当前页数*/
+            currentChange:function(curNum){
+                this.getDatas(curNum,this.pageSize);
+            },
+            /*改变每页显示条数*/
+            sizeChange:function(pSize){
+                this.getDatas(this.currentPage,pSize);
+            },
+            /*查询数据*/
+            getDatas:function(currentPage,pageSize){
+                //发送ajax
+                this.$http.get("../showStudentInfo",{
+                    stuName:this.stuName,
+                    stuGender:this.stuGender,
+                    className:this.className,
+                    currentPage:currentPage,
+                    pageSize:pageSize
+                }).then(function(result){
+                    console.log(result.body);
+                    //设置分页控件的值
+                    this.tableData=result.body.list;
+                    this.pageSize=result.body.pageSize;
+                    this.currentPage=result.body.pageNum;
+                    this.total =result.body.total;
+                    console.log(this.total+"----total")
+
+                });
+
+                /* axios.post("../showStudentInfo",{
+                     currentPage:this.currentPage,
+                     pageSize:this.pageSize
+                 }).then(function(result){
+                     console.log(result+"-->>>")
+                 });*/
+
+
+
+                this.tableData=[{
+                    complainter:"张三",
+                    beComplainter:"李四"
+
+                },{complainter:"老舍",
+                    beComplainter:"珠子"}];
+                //测试对象包含对象的数据
+                /*this.tableData=[
+                    {id:1,age:18,name:"张三",gender:"男",classBean:{id:1,name:"1班",teacherBean:{id:1,name:"张老师"}}},
+                    {id:1,age:18,name:"张三",gender:"男",classBean:{id:2,name:"2班",teacherBean:{id:1,name:"张老师"}}},
+                    {id:1,age:18,name:"张三",gender:"男",classBean:{id:3,name:"3班",teacherBean:{id:1,name:"张老师"}}},
+                    {id:1,age:18,name:"张三",gender:"男",classBean:{id:4,name:"4班",teacherBean:{id:1,name:"张老师"}}}
+                ];*/
+
+            }
+        }
+
+
+    })
+</script>
+
+
+
+
+</body>
+</html>

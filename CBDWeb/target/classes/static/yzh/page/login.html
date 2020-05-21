@@ -1,0 +1,67 @@
+<!--<!DOCTYPE html>-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/index.css"/>
+
+</head>
+　 <body>
+<h1 align="center" style="color: #409EFF">登陆页面</h1>
+　　　　　<div id="app1" >
+    <el-container>
+        <el-main>
+            <el-row>
+                <el-col :span="24" style="overflow: hidden">
+                    <div class="top" style="margin-top:30px">
+                        <el-form  label-width="80px">
+                            <el-form-item label="用户名:">
+                                <el-input  prefix-icon="el-icon-user"  v-model="userName" placeholder="请输入用户名"></el-input>
+                            </el-form-item>
+                            <el-form-item label="密码：">
+                                <el-input prefix-icon="el-icon-key"  type="password"  v-model="pwd" placeholder="请输入密码"></el-input>
+                            </el-form-item>
+
+
+
+                            <el-form-item style="margin-top:50px;">
+                                <el-button  @click="login" type="primary" style="margin-right:100px;">登录</el-button>
+
+                            </el-form-item>
+
+                            <a href="addUser.html" >
+                                <el-button   type="info" style="margin-right: 50px;">没有账号?点击注册</el-button>
+                            </a>
+
+
+                        </el-form>
+
+
+                    </div>
+                </el-col>
+            </el-row>
+        </el-main>
+    </el-container>
+
+
+</div>　　　　　
+
+
+</body>
+</html>
+<!--Axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<!--vue.js 必须在elementUI.js之前导入-->
+<script src="../js/vue/Vue.js"></script>
+<script src="../js/vue/vue-resource.js"></script>
+<script src="../js/vue/axios.min.js" type="javascript"></script>
+<script src="../js/elementUI/elementUI.js"></script>
+<script  src="../js/page_Js/index.js" ></script>
+
+
+
+
+
+
