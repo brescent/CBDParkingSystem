@@ -19,17 +19,23 @@
        <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
          <el-menu >
            <el-submenu index="1">
+
              <template slot="title">
                  <a href="publicServiceMain.html" target="show"><i class="el-icon-message"></i>公共服务系统</a>
              </template>
              <el-menu-item-group>
 
+                 <div v-show="showPersonalUpdate">
                <el-menu-item index="1-1" >
                 <a href="updatePersonalUser.html" target="show">修改个人信息</a>
                </el-menu-item>
+                 </div>
+
+                 <div v-show="showCompanyUpdate">
                <el-menu-item index="1-2">
                    <a href="updateCompanyUser.html" target="show">修改企业信息</a>
                  </el-menu-item>
+                 </div>
 
                  <el-menu-item index="1-3">
                      <a href="../../bwk/page/showMessageList.html" target="show">消息提醒</a>
@@ -41,22 +47,27 @@
                  </el-menu-item>
 
                  <el-menu-item index="1-5">
-                     <a href="../../bwk/page/logList.html" target="show">计费</a>
+                     <a href="../../bwk/page/logList.html" target="show">日志</a>
                  </el-menu-item>
 
              </el-menu-item-group>
 
            </el-submenu>
+             <div v-show="showBack">
            <el-submenu index="2">
+
              <template slot="title">
                  <a href="publicServiceMain.html" target="show"><i class="el-icon-menu"></i>后台服务系统</a>
              </template>
+
              <el-menu-item-group>
 
                <el-menu-item index="2-1">
                    <a href="../../why/page/updAdminMsg.html" target="show">个人信息管理模块</a>
                </el-menu-item>
 
+
+                 <div v-show="showSuperAdmin">
                  <el-submenu index="2-2">
                      <template slot="title">操作权限管理</template>
                      <el-menu-item index="2-3-1">
@@ -66,7 +77,8 @@
                          <a href="../../why/page/showAllAdmin.html" target="show">查看所有管理员</a>
                      </el-menu-item>
                  </el-submenu>
-
+                 </div>
+           <div v-show="showUserPower">
              <el-submenu index="2-3">
                <template slot="title">企业用户管理模块</template>
                <el-menu-item index="2-3-1">
@@ -75,8 +87,11 @@
                  <el-menu-item index="2-3-2">
                      <a href="../../why/page/addCompany.html" target="show">添加企业</a>
                  </el-menu-item>
+
+
              </el-submenu>
-                 <el-submenu index="2-4">
+               <div v-show="showContract">
+               <el-submenu index="2-4">
                      <template slot="title">外部合约管理</template>
                      <el-menu-item index="2-4-1">
                          <a href="../../xd/html/addOutContract.html" target="show">新增外部合约</a>
@@ -85,6 +100,7 @@
                          <a href="../../xd/html/showAllOutContract.html" target="show">查看所有外部合约</a>
                      </el-menu-item>
                  </el-submenu>
+
 
                  <el-submenu index="2-5">
                      <template slot="title">租户合约管理</template>
@@ -96,8 +112,9 @@
                      </el-menu-item>
 
                  </el-submenu>
-
-
+               </div>
+             </div>
+            <div v-show="showComplaints">
                  <el-submenu index="2-6">
                    <template slot="title">投诉受理管理</template>
                    <el-menu-item index="2-6-1">
@@ -105,9 +122,11 @@
                    </el-menu-item>
 
                </el-submenu>
-
+            </div>
 
                </el-menu-item-group>
+
+               <div v-show="showCar">
                <el-submenu index="2-7">
                    <template slot="title">车位管理模块</template>
                    <el-menu-item index="2-7-1">
@@ -119,9 +138,12 @@
 
                </el-submenu>
 
+               </div>
                </el-menu-item-group>
 
                </el-menu-item-group>
+
+               <div v-show="showUserPower">
                <el-submenu index="2-8">
                    <template slot="title">个人用户管理模块</template>
                    <el-menu-item index="2-8-1">
@@ -132,9 +154,12 @@
                    </el-menu-item>
 
                </el-submenu>
-
+               </div>
                </el-menu-item-group>
            </el-submenu>
+    </div>
+
+    <div v-show="showFront">
            <el-submenu index="3">
              <template slot="title">
                  <a href="../../font/html/index.html" target="show"><i class="el-icon-setting"></i>前台服务系统</a>
@@ -145,7 +170,7 @@
                    <a href="../../font/html/record.html" target="show">交易记录</a>
 
                </el-menu-item>
-
+    <div v-show="showFrontCompany">
                <el-submenu index="3-2">
                    <template slot="title">企业用户</template>
                    <el-menu-item index="3-2-1">
@@ -156,6 +181,9 @@
                    </el-menu-item>
 
                </el-submenu>
+    </div>
+
+      <div v-show="showFrontUser">
 
                <el-submenu index="3-3">
                    <template slot="title">个人用户</template>
@@ -178,6 +206,7 @@
                        </el-menu-item>
                    </el-submenu>
                    <el-submenu index="3-3-3">
+                       <template slot="title">出租</template>
                        <el-menu-item index="3-3-3-1">
                            <a href="../../font/html/hireinfo.html" target="show">查看车位</a>
                        </el-menu-item>
@@ -192,12 +221,16 @@
                        </el-menu-item>
                    </el-submenu>
                </el-submenu>
+      </div>
            </el-submenu>
+
+    </div>
          </el-menu>
 
-           <a href="login.html">
-               <el-button   type="primary" style="margin-right: 50px;">注销</el-button>
-           </a>
+
+
+               <el-button   type="primary" style="margin-right: 50px;" @click="userExit">注销</el-button>
+
        </el-aside>
 
 

@@ -1,6 +1,8 @@
 package com.project.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.project.dto.PersonalUserDto;
 import com.project.dto.UserDto;
 
 import com.project.entity.PersonalUserEntity;
@@ -29,6 +31,7 @@ public class UserController {
        if (userDto !=null){
 
            request.getSession().setAttribute("user",userDto);
+          request.getSession().setMaxInactiveInterval(1800);
            return "1";
        }else {
 
@@ -47,6 +50,7 @@ public class UserController {
             return "2";
         }
         request.getSession().setAttribute("user",userDto);
+        request.getSession().setMaxInactiveInterval(1800);
         return "1";
     }
 
@@ -58,4 +62,38 @@ public class UserController {
         String userName=userDto.getLoginName();
         return "欢迎"+userName+"用户使用CBD停车场系统";
     }
+
+    @GetMapping("getUserInfo")
+    @ResponseBody
+    public String  getUserInfo(HttpServletRequest request){
+        UserDto userDto= (UserDto) request.getSession().getAttribute("user");
+        PersonalUserDto user = userService.getPersonalUserInfo(userDto.getId());
+        String userInfo=JSON.toJSONString(user);
+            return userInfo;
+    }
+
+    @PostMapping("updateUser")
+    @ResponseBody
+    public String updateUser(@RequestBody PersonalUserDto personalUserDto,HttpServletRequest request){
+        UserDto userDto= (UserDto) request.getSession().getAttribute("user");
+        personalUserDto.setUserName(userDto.getLoginName());
+        userService.updatePersonalUser(personalUserDto);
+        return "1";
+    }
+
+    @GetMapping("getLoginUserPower")
+    @ResponseBody
+    public String getLoginUserPower(HttpServletRequest request){
+        UserDto userDto= (UserDto) request.getSession().getAttribute("user");
+       String userInfo= JSON.toJSONString(userDto);
+       return  userInfo;
+    }
+
+    @GetMapping("userExit")
+    @ResponseBody
+    public String userExit(HttpServletRequest request){
+       request.getSession().invalidate();
+        return "1";
+    }
+
 }

@@ -1,6 +1,5 @@
 
 
-
 const  app = new Vue({
     el:"#app",
 
@@ -23,7 +22,7 @@ const  app = new Vue({
             axios.get("../../../../getLoginUserName", {
 
             }).then(function (result) {
-                alert(result.data);
+
                 this.username= result.data;
 
             }.bind(this));

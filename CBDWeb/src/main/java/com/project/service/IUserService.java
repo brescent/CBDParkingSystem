@@ -22,6 +22,6 @@ public interface IUserService {
     @GetMapping("/getPersonalUserInfo/{userId}")
     public PersonalUserDto getPersonalUserInfo(@PathVariable("userId") int userId);
 
-    @PutMapping("/user/updateUser")
-    public void updatePersonalUser(String userName,@RequestParam PersonalUserDto personalUserDto);
+    @PostMapping("/updateUser")
+    public void updatePersonalUser(PersonalUserDto personalUserDto);
 }

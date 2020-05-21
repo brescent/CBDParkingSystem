@@ -5,6 +5,7 @@ Vue.http.options.emulateJSON = true;
 
 const  app = new Vue({
      el:"#app",
+
     data:{
          /*学生编号*/
         jobInfo:"",
@@ -18,46 +19,50 @@ const  app = new Vue({
         pwd:""
 
     },
-    created:function(options){
-         /*获取参数stuId*/
-        let requestObj = GetRequest();
-         this.stuId=requestObj['stuId'];
-       //查询学生详细信息
-         this. getStudentInfo(this.stuId);
-        /*当vue实例化后加载下拉菜单的值*/
-        this.getClasses();
+    created:function(){
+         this.getDatas()
     },
     methods:{
-         // /*查询学生详细信息*/
-         // getStudentInfo:function(stuId) {
-         //     this.$http.post("../ShowStudentInfoDetailServlet",{
-         //         stuId:stuId
-         //     }).then(function(result){
-         //         /*设置输入框的值*/
-         //
-         //     });
-         // },
+        getDatas:function(){
+            let pw=this.$set;
+            axios.get("../../../../getUserInfo", {
+
+            }).then(function (result) {
+                this.jobInfo= result.data.jobInfo;
+                this.homeAddress=result.data.homeAddress;
+                this.email=result.data.email;
+                this.phone=result.data.phone;
+                //bind表示绑定，绑定到当前的vue对象
+            }.bind(this))
+        },
         /*修改按钮事件*/
         update:function(){
-           this.$http.post({
+            let vm=this;
+            axios.post("../../../../updateUser",{
+               jobInfo:this.jobInfo,
+               homeAddress:this.homeAddress,
+               email:this.email,
+               phone:this.phone,
+               pwd:this.pwd,
 
-            }).then(function(){
-                if(1){
-                    this.$alert('修改数据成功',{
+           }).then(function(result){
+                if(result.data=="1"){
+                    vm.$alert('修改数据成功',{
                         title:"消息提示",
                         confirmButtonText: '确定',
                         type:'success',
-                        center: true
-                    });
-                    window.location.href="main.html";
+                        center: true,
+                    })
+                    window.location.href="publicServiceMain.html";
                 }else{
-                    this.$alert('修改数据失败', {
+                    vm.$alert('修改数据失败', {
                         title:"消息提示",
                         confirmButtonText: '确定',
                         type:'error',
                         center: true
                     });
                 }
+
             });
         },
         /*取消按钮事件*/

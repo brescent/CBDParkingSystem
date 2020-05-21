@@ -18,7 +18,7 @@ public class UserVo {
 
     /**个人用户身份证号*/
 
-    private String  IDCard;
+    private String   cardNum;
 
     /**个人用户电话号码*/
 
@@ -33,12 +33,12 @@ public class UserVo {
     public UserVo() {
     }
 
-    public UserVo(String realName, String jobInfo, String email, String homeAddress, String IDCard, String phone, String loginName, String pwd) {
+    public UserVo(String realName, String jobInfo, String email, String homeAddress, String cardNum, String phone, String loginName, String pwd) {
         this.realName = realName;
         this.jobInfo = jobInfo;
         this.email = email;
         this.homeAddress = homeAddress;
-        this.IDCard = IDCard;
+        this.cardNum = cardNum;
         this.phone = phone;
         this.loginName = loginName;
         this.pwd = pwd;
@@ -76,7 +76,13 @@ public class UserVo {
         this.homeAddress = homeAddress;
     }
 
+    public String getCardNum() {
+        return cardNum;
+    }
 
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
 
     public String getPhone() {
         return phone;
@@ -100,13 +106,5 @@ public class UserVo {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
-    }
-
-    public String getIDCard() {
-        return IDCard;
-    }
-
-    public void setIDCard(String IDCard) {
-        this.IDCard = IDCard;
     }
 }

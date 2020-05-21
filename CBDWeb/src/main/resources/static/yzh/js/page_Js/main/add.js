@@ -16,7 +16,7 @@ const  app = new Vue({
         /*职业描述输入框*/
         jobInfo:"",
         /*身份证号码输入框*/
-        IDCard:"",
+        cardNum:"",
         /*邮件输入框*/
         email:"",
         /*家庭住址输入框*/
@@ -62,7 +62,7 @@ const  app = new Vue({
                      homeAddress: this.homeAddress,
                      phone:this.phone,
                      realName: this.realName,
-                     IDCard: this.IDCard
+                     cardNum: this.cardNum
 
                  }).then(function(result){
                      console.log(result.body+"***");

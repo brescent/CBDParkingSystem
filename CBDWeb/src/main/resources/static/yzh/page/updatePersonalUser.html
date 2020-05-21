@@ -18,29 +18,35 @@
 
                   <div id="pwdDiv">
                       <el-form-item label="新密码:">
-                          <el-input prefix-icon="el-icon-key"  type="password" v-model="pwd" placeholder="请输入您的密码" showpassword></el-input>
+                          <el-input prefix-icon="el-icon-key"  type="password" v-model="pwd" placeholder="请输入您的密码" showpassword>
+
+                          </el-input>
                       </el-form-item>
                   </div>
 
-
-
-
-
                   <el-form-item label="新职业描述:">
-                      <el-input  prefix-icon="el-icon-suitcase"  v-model="jobInfo" placeholder="请输入您的职业描述"  clearable></el-input>
+                      <el-input  prefix-icon="el-icon-suitcase"  v-model="jobInfo" placeholder="请输入您的职业描述"  clearable>
+
+                      </el-input>
                   </el-form-item>
 
 
                   <el-form-item label="新家庭住址:">
-                      <el-input  prefix-icon="el-icon-house"  v-model="homeAddress" placeholder="请输入您的家庭住址"  clearable></el-input>
+                      <el-input  prefix-icon="el-icon-house"  v-model="homeAddress" placeholder="请输入您的家庭住址"  clearable>
+
+                      </el-input>
                   </el-form-item>
 
                   <el-form-item label="新邮箱:">
-                      <el-input  prefix-icon="el-icon-message"  v-model="email" placeholder="请输入您的邮箱地址"  clearable></el-input>
+                      <el-input  prefix-icon="el-icon-message"  v-model="email" placeholder="请输入您的邮箱地址"  clearable>
+
+                      </el-input>
                   </el-form-item>
 
                   <el-form-item label="新电话号码:">
-                      <el-input  prefix-icon="el-icon-mobile"  v-model="phone" placeholder="请输入您的邮箱地址"  clearable></el-input>
+                      <el-input  prefix-icon="el-icon-mobile"  v-model="phone" placeholder="请输入您的邮箱地址"  clearable>
+
+                      </el-input>
                   </el-form-item>
 
 
@@ -59,7 +65,8 @@
 
 
    </div>
-
+     <!--Axios-->
+     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
      <!--vue.js 必须在elementUI.js之前导入-->
      <script src="../js/vue/Vue.js"></script>
      <!--使用ajax 需要导入-->
