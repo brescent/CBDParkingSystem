@@ -98,11 +98,11 @@ public class StallController {
      * @param stallImg 车位产权图片
      */
 
-
+    //@PathVariable("stallAddress") String stallAddress,@PathVariable("stallNo") String stallNo,@PathVariable("peopleNo") String peopleNo,@PathVariable("stallImg") String stallImg
     @PostMapping("addSingle")
-    public void addSingle(@RequestParam("stallAddress") String stallAddress,@RequestParam("stallNo") String stallNo,@RequestParam("peopleNo") String peopleNo,@RequestParam("stallImg") String stallImg){
+    public void addSingle(@RequestBody Map<String,String> map){
 
-        stallService.addSingle(stallAddress,stallNo,peopleNo,stallImg);
+        stallService.addSingle(map.get("stallAddress"),map.get("stallNo"),map.get("peopleNo"),map.get("stallImg"));
     }
 
 
