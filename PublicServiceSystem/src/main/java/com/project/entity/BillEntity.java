@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -20,10 +21,12 @@ public class BillEntity {
     private int billId;
     /**交易日期*/
     @Column(name = "b_tradeDate")
-    private Date tradeDate=new Date(System.currentTimeMillis());
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date tradeDate;
     /**交易时间*/
     @Column(name = "b_tradeTime")
-    private Date tradeTime=new Date(System.currentTimeMillis());
+//    @JsonFormat(pattern = "hh:mm:ss")
+    private Date tradeTime;
     /**收入*/
     @Column(name = "b_income")
     private Double income;

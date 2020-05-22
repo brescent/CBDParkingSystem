@@ -1,6 +1,7 @@
 package com.project.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.domain.Page;
 
 import java.io.Serializable;
 import java.util.List;

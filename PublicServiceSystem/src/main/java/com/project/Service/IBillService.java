@@ -1,10 +1,9 @@
 package com.project.Service;
 
 import com.project.entity.BillEntity;
-import org.springframework.cloud.openfeign.FeignClient;
+import com.project.entity.PageEntity;
 
 import java.sql.Date;
-import java.util.List;
 
 /**
  * 账单业务层就接口
@@ -16,9 +15,11 @@ public interface IBillService {
      * 动态查询账单
      * @param startDate 起始日期
      * @param endDate   终止日期
-     * @return  账单集合
+     * @param pageSize  每页条数
+     * @param pageNum   页码
+     * @return  分页实体
      */
-    public List<BillEntity> findByItem(int userId, Date startDate, Date endDate);
+    public PageEntity<BillEntity> findByItem(int userId, Date startDate, Date endDate, int pageSize, int pageNum);
 
     /**
      * 通过id查询账单

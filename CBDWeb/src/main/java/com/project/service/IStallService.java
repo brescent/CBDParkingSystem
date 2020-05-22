@@ -1,7 +1,7 @@
 package com.project.service;
 
 
-import com.project.Entity.PaginationBean;
+import com.project.entity.PaginationBean;
 import com.project.dto.StallDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;

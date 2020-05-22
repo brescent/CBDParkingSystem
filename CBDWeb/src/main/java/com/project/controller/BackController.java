@@ -1,7 +1,7 @@
 package com.project.controller;
 
 
-import com.project.Entity.PaginationBean;
+import com.project.entity.PaginationBean;
 import com.project.dto.StallDto;
 import com.project.service.IStallService;
 import org.springframework.beans.factory.annotation.Autowired;
