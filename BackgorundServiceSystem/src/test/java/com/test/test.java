@@ -3,7 +3,7 @@ package com.test;
 
 
 import com.lovo.back.BackMain;
-import com.lovo.back.dao.ICompanyDao;
+
 import com.lovo.back.dao.IStallDao;
 import com.lovo.back.entity.*;
 import com.lovo.back.service.ICompanyContractService;
@@ -30,8 +30,7 @@ IStallDao   stallDao;
 
     @Autowired
     IOutContractService outContractService;
-    @Autowired
-    ICompanyDao companyDao;
+
     @Autowired
     ICompanyContractService companyContractService;
 
@@ -40,7 +39,7 @@ IStallDao   stallDao;
     public void test1(){
 
 
-//        stallService.addSingle("天府二街永商cdb","TFcbd154","51246587531596","img1");
+       stallService.addSingle("问wong路888号","WW666","46484545348348","img1");
 
 //        stallService.add("台南府二届","cw",5,3);
 
@@ -57,23 +56,23 @@ IStallDao   stallDao;
     @Test
     public  void  testAddCompanyContract() {
 
-        CompanyContractEntity com=new CompanyContractEntity("tsdwa5454", Date.valueOf("2020-06-05"),Date.valueOf("2021-09-09")
+        CompanyContractEntity com=new CompanyContractEntity("qqq555", Date.valueOf("2020-06-05"),Date.valueOf("2021-09-09")
         ,25648,"img1",null);
 
 
-        //CompanyEntity  companyEntity=new CompanyEntity("战地干科技有限公司","黄花梨街48号","战地干","154875454");
+        //CompanyEntity  companyEntity=new CompanyEntity("咕咕鸡科技有限公司","黄花梨街32号","咕咕鸡","154875454");
+
+      //companyDao.save(companyEntity);
 
 
-
-
-        com.setCompany(companyDao.findById(2));
-        companyContractService.add(com,new int[] {17,21,18,22});
+      //  com.setCompany(companyDao.findById(3));
+     //   companyContractService.add(com,new int[] {31,32,33});
     }
 
     @Test
     public  void test2(){
 
-     PaginationBean<StallEntity> list=  stallService.findByItems("天府二街",null,1,5);
+     PaginationBean<StallEntity> list=  stallService.findByItems("南",null,1,5);
         System.out.println(list.getTotal());
 
         for(StallEntity s:list.getDataList()){
@@ -92,7 +91,7 @@ IStallDao   stallDao;
 
         OutContractEntity  out=new OutContractEntity("5454dw","天空一号","张三","李四",Date.valueOf("2020-03-09"),Date.valueOf("2022-03-09"),5465,"contractImg",null);
 
-        outContractService.add(out,new int[]{17,19,21});
+        //outContractService.add(out,new int[]{17,19,21});
 
 
     }
@@ -108,6 +107,18 @@ IStallDao   stallDao;
 
         //companyContractService.updateState(3);
 
-        System.out.println(stallDao.save(new StallEntity("天府二街永商cdb","TFcbd154","51246587531596","img1")));
-}
+       // System.out.println(stallDao.save(new StallEntity("天府二街永商cdb","TFcbd154","51246587531596","img1")));
+
+//    for(StallEntity s:stallService.findAll()){
+//        System.out.println(s.getStallAddress());
+//    }
+
+        //System.out.println(outContractService.findByPage(1,2).getDataList().get(0).getOutContractNo());
+
+        //System.out.println(companyContractService.findByPage(1,1).getDataList().get(0).getDealPrice());
+
+        //System.out.println(outContractService.findById(1).getOutContractAndStallSet().size());
+
+        System.out.println(stallService.findByAddress("").size());
+    }
 }

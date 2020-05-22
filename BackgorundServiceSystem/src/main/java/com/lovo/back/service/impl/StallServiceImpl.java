@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 车位管理服务
  */
-@Service(value="stall")
+@Service(value="stallService")
 public class StallServiceImpl  implements IStallService {
     @Autowired
     IStallDao stallDao;
@@ -30,28 +30,29 @@ public class StallServiceImpl  implements IStallService {
     }
 
     @Override
-    public PaginationBean<StallEntity> findByItems(String stallAddress, String stallNo, int page, int size) {
+    public PaginationBean<StallEntity> findByItems(String stallAddress, String stallNo, int currentPage, int pageSize) {
         PaginationBean paginationBean=new PaginationBean();
 
-        Pageable pageable=new PageRequest((page-1),size);
+        Pageable pageable=new PageRequest((currentPage-1),pageSize);
 
-        paginationBean.setCurrentPage(page);
-        paginationBean.setPageSize(size);
+        paginationBean.setCurrentPage(currentPage);
+        paginationBean.setPageSize(pageSize);
         paginationBean.setDataList(stallDao.findByItems(stallAddress,stallNo,pageable));
         int totalPage=0;
 
-        if((stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue())%size!=0){
-            totalPage=(stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue())/size+1;
+        if((stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue())%pageSize!=0){
+            totalPage=(stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue())/pageSize+1;
 
         }else{
-            totalPage=(stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue())/size;
+            totalPage=(stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue())/pageSize;
         }
 
         paginationBean.setTotal(totalPage);
 
+        paginationBean.setCount(stallDao.findByItemsCount(stallAddress,stallNo).get(0).intValue());
 
 
-        paginationBean.setTotal(totalPage);
+
         return paginationBean;
     }
 
@@ -72,12 +73,16 @@ public class StallServiceImpl  implements IStallService {
             stallDao.save(stall);
 
         }
+
+
     }
+
 
     @Override
     public List<StallEntity> findAll() {
         return stallDao.findAll();
     }
+
 
 
     @Override
@@ -113,4 +118,37 @@ public class StallServiceImpl  implements IStallService {
     public StallEntity addAndReturn(StallEntity stall) {
         return stallDao.save(stall);
     }
+
+    @Override
+    public PaginationBean<StallEntity> findByPage(int currentPage, int pageSize) {
+        PaginationBean paginationBean=new PaginationBean();
+
+        Pageable pageable=new PageRequest((currentPage-1),pageSize);
+
+        paginationBean.setCurrentPage(currentPage);
+        paginationBean.setPageSize(pageSize);
+        paginationBean.setDataList(stallDao.findByPage(pageable));
+        int totalPage=0;
+
+        if((stallDao.findByPageCount().get(0).intValue())%pageSize!=0){
+            totalPage=(stallDao.findByPageCount().get(0).intValue())/pageSize+1;
+
+        }else{
+            totalPage=(stallDao.findByPageCount().get(0).intValue())/pageSize;
+        }
+
+        paginationBean.setTotal(totalPage);
+
+
+
+        paginationBean.setTotal(totalPage);
+        return paginationBean;
+    }
+
+    @Override
+    public List<StallEntity> findByAddress(String stallAddress) {
+        return stallDao.findByAddress(stallAddress);
+    }
+
+
 }

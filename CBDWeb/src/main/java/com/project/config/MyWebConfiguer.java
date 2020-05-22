@@ -46,7 +46,8 @@ public class MyWebConfiguer implements WebMvcConfigurer {
        .excludePathPatterns("/xd/css/**").excludePathPatterns("/xd/js/**")
         .excludePathPatterns("/yzh/page/login.html").excludePathPatterns("/yzh/page/addUser.html")
         .excludePathPatterns("/yzh/page/main.html").excludePathPatterns("/bwk/page/billList.html")
-         .excludePathPatterns("/bwk/page/showMessageList.html");
+         .excludePathPatterns("/bwk/page/showMessageList.html")
+       .excludePathPatterns("/addUser").excludePathPatterns("/login").excludePathPatterns("/yzh/page/publicServiceMain.html");
 
     }
 

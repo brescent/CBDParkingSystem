@@ -3,13 +3,13 @@ server:
   port: 8099
 eureka:
   instance:
-    hostname: 127.0.0.1  #服务器的IP地址
+    hostname: 127.0.0.1  #本地服务器的IP地址
   client:
     serviceUrl:    #注册服务器的地址
-      defaultZone: http://127.0.0.1:8761/eureka/
+      defaultZone: http://127.0.0.1:8000/eureka/
 spring:
   application:
-    name: backServer
+    name: backServerClient
   datasource:
     url: jdbc:mysql://localhost:3306/aopbase?useUnicode=true&characterEncoding=UTF-8
     username: root
