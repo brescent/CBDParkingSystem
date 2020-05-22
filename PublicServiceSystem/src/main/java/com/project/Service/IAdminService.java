@@ -1,5 +1,6 @@
 package com.project.Service;
 
+import com.project.dto.AdminVo;
 import com.project.entity.AdminEntity;
 import com.project.entity.PageEntity;
 import org.omg.CORBA.StringHolder;
@@ -14,10 +15,9 @@ public interface IAdminService {
     /**
      * 添加管理员
      *
-     * @param admin 管理员实体
-     * @param pwd   管理员密码
+     * @param admin 管理员vo
      */
-    public void addAdmin(AdminEntity admin, String pwd);
+    public String addAdmin(AdminVo admin);
 
 
     /**
@@ -28,6 +28,13 @@ public interface IAdminService {
      */
     public AdminEntity getAdminEntityByUserId(int UserId);
 
+    /**
+     * 修改管理员个人信息
+     * @param admin
+     * @param userId
+     * @return
+     */
+    public String updAdminMsg(AdminVo admin,Integer userId);
 
     /**
      * 根据管理员id查询管理员
@@ -49,13 +56,13 @@ public interface IAdminService {
      *
      * @param adminId
      */
-    public void delAdmin(int adminId);
+    public String delAdmin(int adminId);
 
     /**
      * 根据管理员id修改权限
      * @param adminId 管理员id
      * @param newPower 新权限数组
      */
-    public void updAdminPower(int adminId, int[] newPower);
+    public String updAdminPower(int adminId, int[] newPower);
 
 }

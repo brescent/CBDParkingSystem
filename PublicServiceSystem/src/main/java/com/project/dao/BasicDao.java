@@ -50,7 +50,8 @@ public class BasicDao {
         EntityManager entityManager=this.getEntityManager();
         NativeQuery query  = (NativeQuery) entityManager.createNativeQuery(sql);
         query.addEntity(CompanyUserEntity.class);
-        return   query.getResultList();
+        List<CompanyUserEntity> list = query.getResultList();
+        return   list;
     }
 
     public int getAllCouunt(String companyName, String companyAddress,

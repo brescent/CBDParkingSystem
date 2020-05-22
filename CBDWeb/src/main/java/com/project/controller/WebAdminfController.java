@@ -1,90 +1,101 @@
 package com.project.controller;
 
+import com.project.dto.UserDto;
 import com.project.entity.AdminEntity;
-import com.project.entity.PageEntity;
+import com.project.entity.PowerEntity;
+import com.project.vo.AdminVo;
 import com.project.service.IWebAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 管理员控制器
  */
 @RestController
 public class WebAdminfController {
-
     @Autowired
     private IWebAdminService webAdminService;
-
-
-
     /**
      * 获取所有管理员
-     *
      * @return
      */
     @GetMapping("getAllAdmin")
     public String getAllAdmin(int pageNum, int pageSize) {
-
-        System.out.println();
+       String str =  webAdminService.getAllAdmin(pageNum, pageSize);
         return webAdminService.getAllAdmin(pageNum, pageSize);
-
-
     }
-
-
     /**
      * 添加管理员
-     *
      * @param admin
-     * @param pwd
      */
-    @RequestMapping("addAdmin")
-    public void addAdmin( AdminEntity admin,  String pwd) {
-        webAdminService.addAdmin(admin, pwd);
+    @PostMapping("addAdmin")
+    public String addAdmin(@RequestBody AdminVo admin) {
+      return   webAdminService.addAdmin(admin);
     }
 
-
     /**
-     * 根据用户id查询对应管理员信息
-     *
-     * @param userId
+     * 修改管理员的个人信息
+     * @param admin
      * @return
      */
-    @RequestMapping("getAdminByUserId")
-    public AdminEntity getAdminByUserId(@PathVariable("userId") int userId) {
-        return webAdminService.getAdminByUserId(userId);
+    @PostMapping("updAdminMsg")
+    public String updAdminMsg(@RequestBody AdminVo admin,HttpServletRequest request){
+        UserDto user =(UserDto) request.getSession().getAttribute("user");
+        String str = webAdminService.updAdminMsg(admin,user.getId());
+        return   webAdminService.updAdminMsg(admin,user.getId());
     }
-
     /**
      * 根据管理员id查询管理员
-     *
      * @param adminId
      * @return
      */
-    @RequestMapping("getAdminById")
-    public AdminEntity getAdminById(@PathVariable("adminId") int adminId) {
+    @GetMapping("getAdminById")
+    public String getAdminById(int adminId) {
         return webAdminService.getAdminById(adminId);
     }
+
+    /**
+     * 根据用户id查询管理员信息
+     * @param request
+     * @return
+     */
+    @GetMapping("getAdminByUserId")
+    public String getAdminByUserId(HttpServletRequest request){
+        UserDto user =(UserDto) request.getSession().getAttribute("user");
+        String string = webAdminService.getAdminByUserId(user.getId());
+        return string;
+    }
+    /**
+     * 根据id修改管理员权限
+     * @param adminId  管理员id
+     * @param powerList 新权限数组
+     */
+    @PostMapping("updAdmin")
+    public String updAdminPower( int adminId, int[] powerList) {
+        return webAdminService.updAdminPower(adminId,powerList);
+    }
+
+
+
 
     /**
      * 根据id删除管理员
      *
      * @param adminId
      */
-    @RequestMapping("delAdmin")
-    public void delAdmin(@PathVariable("adminId") int adminId) {
-        webAdminService.delAdmin(adminId);
+    @GetMapping("delAdmin")
+    public String delAdmin(int adminId) {
+
+        String ret = webAdminService.delAdmin(adminId);
+       return  ret;
 
     }
 
-    /**
-     * 根据id修改管理员权限
-     *
-     * @param adminId  管理员id
-     * @param newPower 新权限数组
-     */
-    @RequestMapping("updAdmin")
-    public void updAdminPower(@PathVariable("adminId") int adminId, @PathVariable("newPower") int[] newPower) {
 
-    }
+
 }

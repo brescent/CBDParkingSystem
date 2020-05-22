@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--vue.js 必须在elementUI.js之前导入-->
+    <script src="../js/vue/Vue.js"></script>
+    <!--使用ajax 需要导入-->
+    <script  src="../js/vue/vue-resource.js"></script>
+    <script src="../js/elementUI/elementUI.js"></script>
+    <script  src="../js/page_Js/main/add.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/main/add.css">
+</head>
+<body>
+
+
+<div style="margin-left: 700px"><h2 style="color: #66b1ff">投诉诉理</h2></div>
+
+<div id="app">
+<el-container>
+    <el-main>
+
+<div><span>事件记录</span></div>
+        <el-table :data="tableData1"
+                             highlight-current-row
+                             style="width:100%"
+    >
+        <el-table-column prop="stallAddress" label="车位地址">
+        </el-table-column>
+        <el-table-column prop="stallNo" label="车位编号">
+        </el-table-column>
+        <el-table-column prop="startDate" label="租赁开始时间">
+        </el-table-column>
+        <el-table-column prop="endDate" label="租赁结束时间">
+        </el-table-column>
+
+    </el-table>
+
+
+        <div><span>投诉人</span></div>
+        <el-table :data="tableData2"
+                  highlight-current-row
+                  style="width:100%"
+        >
+            <el-table-column prop="userName"  label="用户名">
+            </el-table-column>
+            <el-table-column prop="realName" label="真实姓名">
+            </el-table-column>
+            <el-table-column prop="no"   label="身份证号码">
+            </el-table-column>
+            <el-table-column prop="job"   label="职业">
+            </el-table-column>
+            <el-table-column prop="phoneNum"  label="联系电话">
+            </el-table-column>
+
+        </el-table>
+
+        <span style="color: darkred">投诉理由:</span><div><p style="font-family: 方正兰亭超细黑简体;color: red">{{complaintInfo}}</p></div>
+
+
+
+
+
+
+        <div><span >被投诉人</span></div>
+        <el-table :data="tableData3"
+                  highlight-current-row
+                  style="width:100%"
+        >
+            <el-table-column prop="userName"  label="用户名">
+            </el-table-column>
+            <el-table-column prop="realName"  label="真实姓名">
+            </el-table-column>
+            <el-table-column prop="no"   label="身份证号码">
+            </el-table-column>
+            <el-table-column prop="job"   label="职业">
+            </el-table-column>
+            <el-table-column prop="phoneNum"  label="联系电话">
+            </el-table-column>
+
+        </el-table>
+
+    </el-main>
+</el-container>
+
+    <!--     按钮区-->
+    <div id="titleDiv">
+
+
+
+
+        <div  style="margin-top: 50px;margin-left: 30px">
+            <el-row :gutter="120">
+                <el-col :span="6"><div class="grid-content bg-purple">
+                    <el-button type="primary" round   @click="sure">投诉生效</el-button>
+                </div></el-col>
+                <el-col :span="6"><div class="grid-content bg-purple">
+                    <el-button type="primary" round   @click="cancel">投诉失败</el-button></div></el-col>
+                <el-col :span="6"><div class="grid-content bg-purple">
+                    <el-button type="primary" round  @click="delay">暂缓处理</el-button>
+                </div></el-col>
+            </el-row>
+        </div>
+    </div>
+
+
+    </el-main>
+    </el-container>
+
+
+
+
+
+</div>
+
+<script>
+
+
+    var  tableData1=[{stallAddress:'青羊航天大厦',stallNo:'ct154',startDate:'2016-06-08',endDate:'2020-06-05'}]
+
+    var tableData2=[{userName:'Mr.gu',realName:'古巨基',no:"akdw565",job:'演员',phoneNum:'124587565'}];
+    var tableData3=[{userName:'Mr.xie',realName:'谢霆锋',no:"akdw565",job:'演员',phoneNum:'124587565'}];
+
+    new Vue({
+        el:'#app',
+        data:{
+            tableData1:tableData1,
+            tableData2:tableData2,
+            tableData3:tableData3,
+            complaintInfo:'太帅le'
+
+        },
+        methods:{
+
+            // 传入投诉id
+            sure (){},
+            cancel(){},
+            delay(){}
+
+
+
+        }
+    })
+
+</script>
+
+
+</body>
+</html>

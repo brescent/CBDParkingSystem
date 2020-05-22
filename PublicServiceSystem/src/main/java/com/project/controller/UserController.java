@@ -19,12 +19,9 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
+import com.project.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
@@ -112,26 +109,41 @@ public class UserController {
         return userDto;
     }
 
-    @RequestMapping("addUser")
-    public String addUser(Map userMap) {
-        PublicUserEntity publicUserEntity= (PublicUserEntity) userMap.get("publicUserEntity");
-        PersonalUserEntity personalUserEntity= (PersonalUserEntity) userMap.get("personalUserEntity");
-        PublicUserEntity mainUser = this.service.findUserByName(publicUserEntity.getLoginName());
-        if (mainUser != null) {
+    @PostMapping("addUser")
+    public String addUser(@RequestBody UserVo userVo) {
+        PublicUserEntity publicUserEntity= new PublicUserEntity();
+        publicUserEntity.setUserType(0);
+        PersonalUserEntity personalUserEntity= new PersonalUserEntity();
+        PublicUserEntity mainUser = this.service.findUserByName(userVo.getLoginName());
+        if (mainUser == null) {
+            //设置用户属性
+            publicUserEntity.setUserType(0);
+            publicUserEntity.setLoginName(userVo.getLoginName());
+            publicUserEntity.setPwd(userVo.getPwd());
+            personalUserEntity.setPhone(userVo.getPhone());
+            personalUserEntity.setHomeAddress(userVo.getHomeAddress());
+            personalUserEntity.setJobInfo(userVo.getJobInfo());
+            personalUserEntity.setIDCardNum(userVo.getCardNum());
+            personalUserEntity.setRealName(userVo.getRealName());
+            personalUserEntity.setPublicUser(publicUserEntity);
+            personalUserEntity.setEmail(userVo.getEmail());
             try {
                 String encryptedPwd = MD5Util.getEncryptedPwd(publicUserEntity.getPwd());
                 publicUserEntity.setPwd(encryptedPwd);
                 this.service.addUser(publicUserEntity, personalUserEntity);
                 LogEntity log = new LogEntity(publicUserEntity.getLoginName(), CBDStringUtil.ADDUSER_LOG);
                 this.logService.addLog(log);
+                return "1";
             } catch (NoSuchAlgorithmException var6) {
                 var6.printStackTrace();
             } catch (UnsupportedEncodingException var7) {
                 var7.printStackTrace();
             }
+        }else {
+            return null;
         }
 
-        return CBDStringUtil.ADD_FAIL;
+        return  null;
     }
 
     /**
@@ -147,20 +159,21 @@ public class UserController {
         userDto.setHomeAddress(user.getHomeAddress());
         userDto.setPhone(user.getPhone());
         userDto.setPhone(user.getPhone());
+        userDto.setJobInfo(user.getJobInfo());
         return userDto;
     }
 
     /**
      * 修改格瑞特
-     * @param userName
+     *
      * @param personalUserDto
      */
-    @RequestMapping("updateUser")
-    public void updatePersonalUser(String userName, PersonalUserDto personalUserDto) {
-        PublicUserEntity maiuUser = this.service.findUserByName(userName);
+    @PostMapping("updateUser")
+    public void updatePersonalUser(@RequestBody PersonalUserDto personalUserDto) {
+        PublicUserEntity maiuUser = this.service.findUserByName(personalUserDto.getUserName());
         PersonalUserEntity user = this.service.findByPublicUserId(maiuUser.getId());
         user.setPhone(personalUserDto.getPhone());
-        user.setJobInfo(personalUserDto.getJonInfo());
+        user.setJobInfo(personalUserDto.getJobInfo());
         user.setEmail(personalUserDto.getEmail());
         user.setHomeAddress(personalUserDto.getHomeAddress());
         String encryptedPwd = null;
@@ -174,7 +187,7 @@ public class UserController {
             var8.printStackTrace();
         }
 
-        LogEntity log = new LogEntity(userName,CBDStringUtil.UPDATEUSER_LOG);
+        LogEntity log = new LogEntity(personalUserDto.getUserName(),CBDStringUtil.UPDATEUSER_LOG);
         this.logService.addLog(log);
         this.service.updatePersonalUser(user, maiuUser.getId(), maiuUser);
     }

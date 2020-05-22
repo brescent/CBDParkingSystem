@@ -17,7 +17,7 @@ public class PowerEntity {
     @Column(name = "p_powerInfo")
     private int powerInfo;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_adminId")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private AdminEntity admin;

@@ -1,12 +1,15 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**管理员实体类*/
 
 
-public class AdminEntity {
+public class AdminEntity implements Serializable {
     /**管理员ID*/
 
     private Integer id;
@@ -26,12 +29,13 @@ public class AdminEntity {
     private PublicUserEntity publicUser;
 
 
+
     private List<PowerEntity> powerList;
 
     public AdminEntity() {
     }
 
-    public AdminEntity(int jobNum,String realName,String phone) {
+    public AdminEntity(int jobNum, String realName, String phone) {
         this.realName=realName;
         this.jobNum=jobNum;
         this.phone=phone;

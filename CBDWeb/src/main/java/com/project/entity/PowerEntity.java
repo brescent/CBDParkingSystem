@@ -1,7 +1,7 @@
 package com.project.entity;
 
-import javax.persistence.*;
 
+import com.project.vo.AdminVo;
 
 public class PowerEntity {
 
@@ -12,7 +12,7 @@ public class PowerEntity {
     private int powerInfo;
 
 
-    private AdminEntity admin;
+    private AdminVo admin;
 
     public PowerEntity() {
     }
@@ -33,11 +33,11 @@ public class PowerEntity {
         this.powerInfo = powerInfo;
     }
 
-    public AdminEntity getAdmin() {
+    public AdminVo getAdmin() {
         return admin;
     }
 
-    public void setAdmin(AdminEntity admin) {
+    public void setAdmin(AdminVo admin) {
         this.admin = admin;
     }
 }

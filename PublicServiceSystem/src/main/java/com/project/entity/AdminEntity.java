@@ -29,11 +29,11 @@ public class AdminEntity implements Serializable {
     @Column(name = "a_phone")
     private String phone;
 
-    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_publicUserId",referencedColumnName = "pk_publicUserId",nullable = false)
     private PublicUserEntity publicUser;
 
-    @OneToMany(mappedBy = "admin")
+    @OneToMany(mappedBy = "admin",fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     private List<PowerEntity> powerList;
 
     public AdminEntity() {

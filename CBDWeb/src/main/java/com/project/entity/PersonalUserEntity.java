@@ -28,7 +28,7 @@ public class PersonalUserEntity {
 
     private String IDCardNum;
 
-    /**个人用户身份证号*/
+    /**个人用户电话号码*/
 
     private String phone;
 

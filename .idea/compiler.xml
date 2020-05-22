@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="whj" />
-        <module name="BackgorundServiceSystem" />
-        <module name="PublicServiceSystem" />
         <module name="CBDWeb" />
+        <module name="PublicServiceSystem" />
+        <module name="register" />
+        <module name="JWK" />
+        <module name="BackgorundServiceSystem" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,7 +20,9 @@
       <module name="BackgorundServiceSystem" options="-parameters" />
       <module name="CBDWeb" options="-parameters" />
       <module name="FrontServiceSystem" options="-parameters" />
+      <module name="JWK" options="-parameters" />
       <module name="PublicServiceSystem" options="-parameters" />
+      <module name="register" options="-parameters" />
       <module name="whj" options="-parameters" />
     </option>
   </component>

@@ -31,7 +31,7 @@ public class CompanyUserEntity {
     @Column(name = "c_contactPhone")
     private String contactPhone;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_publicUserId",referencedColumnName = "pk_publicUserId",nullable = false)
     private PublicUserEntity publicUser;
 

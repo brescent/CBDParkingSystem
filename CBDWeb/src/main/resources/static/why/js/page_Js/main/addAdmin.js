@@ -6,9 +6,9 @@ const  app = new Vue({
     el:"#app",
     data:{
         /*管理员工号*/
-        jobNumber:"",
+        jobNum:"",
         /*管理员姓名*/
-        name:"",
+        realName:"",
         /*管理员密码*/
         pwd:"",
         /*联系电话*/
@@ -16,25 +16,18 @@ const  app = new Vue({
         /*权限集合*/
         powerList:[],
     },
-    // created:function(){
-    //     /*当vue实例化后加载下拉菜单的值*/
-    //     this.getClasses();
-    // },
-
     methods:{
         /*添加按钮事件*/
          add:function(){
-
-             alert(this.powerList)
-             this.$http.post("../AddStudentServlet",{
+             axios.post("../../addAdmin",{
                  /*后台传参数*/
-                 stuName:this.stuName,
-                 stuAge:this.stuAge,
-                 stuGender: this.stuGender,
-                 classId:this.classId
+                 jobNum:this.jobNum,
+                 realName:this.realName,
+                 pwd:this.pwd,
+                 phone: this.phone,
+                 powerList:this.powerList
              }).then(function(result){
-            // console.log(result.body+"***");
-                 if(result.body==1){
+                 if(result.data=="1"){
                      this.$alert('添加数据成功',{
                          title:"消息提示",
                          confirmButtonText: '确定',
@@ -50,20 +43,12 @@ const  app = new Vue({
                          center: true
                      });
                  }
-                 });
+                 }.bind(this));
          },
         /*取消按钮事件*/
         cancle:function(){
              window.history.go(-1);
         },
-        /*获得所有班级数据*/
-        // getClasses:function(){
-        //      this.$http.post("../GetAllClassesServlet")
-        //           .then(function(result){
-        //          console.log(result.body+"---->>");
-        //              this.classesData=result.body;
-        //           });
-        // }
     }
 
 });

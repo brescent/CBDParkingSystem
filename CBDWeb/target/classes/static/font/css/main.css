@@ -1,0 +1,39 @@
+.el-row {
+    margin-bottom: 20px;
+
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #409EFF;
+  }
+  .bg-purple {
+    background: #92bfec;
+  }
+  .bg-purple-light {
+    background: #d5dff5;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #409EFF;
+  }
+  h2,p,h1{
+      margin: 0;
+      text-align: center;
+  }
+  .el-table td, .el-table th {
+    text-align: center;
+} 
+.border_xq{
+  box-shadow: 0 2px 4px rgba(129, 172, 238, 0.22), 0 0 6px rgba(100, 150, 206, 0.24);
+    border: 1px solid rgba(191, 219, 247,0.5) ;
+}
+
+
+
+  
