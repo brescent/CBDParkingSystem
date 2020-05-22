@@ -1,5 +1,6 @@
 package com.lovo.back.dao;
 
+import com.lovo.back.entity.OutContractEntity;
 import com.lovo.back.entity.StallEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,11 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigInteger;
 import java.util.List;
 @Repository(value = "stallDao")
+@Transactional
 public interface IStallDao  extends JpaRepository<StallEntity,Integer> {
 
 
     /*企业用户查询平台空闲的车位*/
-    @Query(value = "select * from  t_stall where peopleNo is null and state =0",nativeQuery = true)
+    @Query(value = "select * from  t_stall where people_no is null and state =0",nativeQuery = true)
     public List<StallEntity>  findByState();
 
 
@@ -95,6 +97,28 @@ public interface IStallDao  extends JpaRepository<StallEntity,Integer> {
      */
     @Query(value="select * from t_stall where people_no=?1",nativeQuery = true)
     public StallEntity  findByPeopleNo(String peopleNo);
+
+
+
+
+
+    @Query(value="select * from  t_stall "
+            ,
+            countQuery = " select count(*) from t_stall "+
+                    " order by ?#{#pageable}",nativeQuery = true)
+    public List<StallEntity> findByPage(Pageable pageable);
+
+
+    @Query(value="select count(*) from t_stall ",
+            nativeQuery = true)
+    public List<BigInteger> findByPageCount();
+
+
+    @Query(value="select * from  t_stall where state = 0 " +
+            " and (stall_Address LIKE CONCAT('%',?1,'%') or ?1 is null)"
+
+            ,nativeQuery = true)
+    public List<StallEntity>  findByAddress(String address);
 
 
 }

@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加新企业</title>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/main/add.css">
+
+</head>
+<body>
+<div id="app">
+    <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">添加新企业</div>
+
+    <el-container>
+
+        <el-main>
+
+            <el-row>
+                <el-col :span="24" style="overflow: hidden">
+                    <div class="top" style="margin-top:30px">
+                        <el-form label-width="80px">
+
+
+                            <el-form-item label="企业名称:">
+                                <el-input prefix-icon="el-icon-user" v-model="companyName" placeholder="请输入企业名称"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="登录名:">
+                                <el-input prefix-icon="el-icon-unlock" v-model="companyLoginName" placeholder="请输入企业登录名"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="登录密码:">
+                                <el-input prefix-icon="el-icon-unlock" v-model="companyLoginPwd" placeholder="请输入企业密码"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="楼层位置:">
+                                <el-input prefix-icon="el-icon-unlock" v-model="companyAddress" placeholder="请输入企业楼层位置"></el-input>
+                            </el-form-item>
+
+
+                            <el-form-item label="联系人:">
+                                <el-input prefix-icon="el-icon-unlock" v-model="cpmpanyLinkMan" placeholder="请输入企业联系人"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="联系电话:">
+                                <el-input prefix-icon="el-icon-phone-outline" v-model="companyPhone" placeholder="请输入企业联系电话"></el-input>
+                            </el-form-item>
+
+
+                            <el-form-item style="margin-top:50px;">
+                                <el-button @click="add" type="primary" style="margin-right: 50px;">添加</el-button>
+                                <el-button @click="cancle" type="danger">取消</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-main>
+    </el-container>
+
+</div>
+
+</body>
+</html>
+
+<!--vue.js 必须在elementUI.js之前导入-->
+<script src="../js/vue/Vue.js"></script>
+<!--使用ajax 需要导入-->
+<script src="../js/vue/vue-resource.js"></script>
+<script src="../js/elementUI/elementUI.js"></script>
+<script src="../js/page_Js/main/addCompany.js"></script>

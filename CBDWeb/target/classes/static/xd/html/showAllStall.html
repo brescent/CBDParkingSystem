@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--vue.js 必须在elementUI.js之前导入-->
+    <script src="../js/vue/Vue.js"></script>
+    <!--使用ajax 需要导入-->
+    <script  src="../js/vue/vue-resource.js"></script>
+    <script src="../js/elementUI/elementUI.js"></script>
+    <script  src="../js/page_Js/main/add.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/main/add.css">
+</head>
+<body>
+<div style="margin-left: 680px"><h2 style="color: #66b1ff">车位管理</h2></div>
+<div id="app" style="margin-top: -20px">
+
+
+    <el-container>
+
+        <!--内容显示区-->
+        <el-main>
+
+            <el-table :data="tableData"
+                      highlight-current-row
+                      style="width:100%"
+            >
+                <el-table-column prop="stallNo" label="车位编号">
+                </el-table-column>
+                <el-table-column prop="stallAddress" label="车位地址">
+                </el-table-column>
+                <el-table-column prop="stallState"   label="车位状态">
+
+                    <template scope="scope">
+                        <p v-if="scope.row.stallState=='0'">空闲中</p>
+                        <p v-if="scope.row.stallState=='1'">出租中</p>
+
+                    </template>
+                </el-table-column>
+
+            </el-table>
+            <!-- 分页区 -->
+            <el-pagination style="margin: 20px auto;" background
+                           layout="prev,pager,next,sizes,total,jumper "
+                           :current-page="currentPage"
+                           :page-size="pageSize"
+                           :pager-count=5
+                           :page-sizes=[3,5,10]
+                           :total="total"
+                           @current-change="currentChange"
+                           @size-change="sizeChange"
+            >
+            </el-pagination>
+
+
+
+
+
+                        <div class="main_button" style="margin-bottom:30px">
+
+
+
+
+                            <el-form :inline="true" label-width="80px">
+                                <el-form-item label="车位地址:">
+                                    <el-input prefix-icon="el-icon-search" v-model="stallAddress"></el-input>
+                                </el-form-item>
+                                <el-form-item label="车位编号:">
+                                    <el-input prefix-icon="el-icon-search" v-model="stallNo" ></el-input>
+                                </el-form-item><br>
+                                <el-button type="primary" size="mini" @click="seach" icon="el-icon-search" style="margin-left: 40px">查找</el-button>
+                                <el-button type="primary" size="mini" @click="add" icon="el-icon-search" style="margin-left: 110px">添加车位</el-button>
+                            </el-form>
+                        </div>
+        </el-main>
+    </el-container>
+</div>
+
+
+<script type="text/javascript">
+
+    // //使用post发送ajax时需要设置
+    // Vue.http.options.emulateJSON = true;
+
+    //测试对象包含对象的数据
+    //  var tableData=[{stallAddress :'天府一街cbd',stallNo:'TF548',stallState:0},
+    //     {stallAddress :'天府一街cbd',stallNo:'TF528',stallState:1}];
+    new Vue({
+        el:"#app",
+        data:{
+            stallAddress:"",
+            stallNo:"",
+            stallState:"",
+            tableData:[],
+            pageSize:3,
+            total:0,
+            currentPage:1,
+            }
+        ,created(){
+        this.getDatas();
+          },
+        methods:{
+            /*查找按钮事件*/
+            seach:function(){
+                this.getDatas(this.currentPage,this.pageSize);
+            },
+            /*改变当前页数*/
+            currentChange:function(curNum){
+                this.getDatas(curNum,this.pageSize);
+            },
+            /*改变每页显示条数*/
+            sizeChange:function(pSize){
+                this.getDatas(this.currentPage,pSize);
+            },   /*查询数据*/
+            getDatas:function(stallAddress,stallNo,currentPage,pageSize){
+                //发送ajax
+                this.$http.get("back/stall/findByItems/",{
+                    stallAddress:this.stallAddress,
+                    stallNo:this.stallNo,
+                    stallState:this.stallState,
+                    currentPage:currentPage,
+                    pageSize:pageSize,
+
+                }).then(function(result){
+                    console.log(result.body);
+                    //设置分页控件的值
+                    this.tableData=result.body.dataList;
+                    this.pageSize=result.body.pageSize;
+                    this.currentPage=result.body.currentPage;
+                    this.total =result.body.total;
+                    console.log(this.total+"----total")
+
+                });
+
+
+
+
+            },
+            add(){
+
+                window.location.href="addStall.html";
+
+            }
+
+        }
+
+
+    })
+</script>
+
+</body>
+</html>

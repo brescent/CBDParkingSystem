@@ -2,6 +2,8 @@ package com.project.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity
 @Table(name = "t_publicUser")
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
+@DynamicInsert
+@DynamicUpdate
 public class PublicUserEntity {
     /**用户id*/
     @Id

@@ -20,7 +20,4 @@ public class PublicUserEntity {
     /**用户类型*/
 
 
-
-
-
 }

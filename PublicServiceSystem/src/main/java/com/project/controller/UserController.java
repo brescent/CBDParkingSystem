@@ -133,6 +133,7 @@ public class UserController {
                 this.service.addUser(publicUserEntity, personalUserEntity);
                 LogEntity log = new LogEntity(publicUserEntity.getLoginName(), CBDStringUtil.ADDUSER_LOG);
                 this.logService.addLog(log);
+                return "1";
             } catch (NoSuchAlgorithmException var6) {
                 var6.printStackTrace();
             } catch (UnsupportedEncodingException var7) {
@@ -178,8 +179,11 @@ public class UserController {
         String encryptedPwd = null;
 
         try {
-            encryptedPwd = MD5Util.getEncryptedPwd(personalUserDto.getPwd());
-            maiuUser.setPwd(encryptedPwd);
+            if(personalUserDto.getPwd()!=null){
+                encryptedPwd = MD5Util.getEncryptedPwd(personalUserDto.getPwd());
+                maiuUser.setPwd(encryptedPwd);
+            }
+
         } catch (NoSuchAlgorithmException var7) {
             var7.printStackTrace();
         } catch (UnsupportedEncodingException var8) {

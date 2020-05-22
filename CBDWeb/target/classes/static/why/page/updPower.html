@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改管理员信息</title>
+    <link rel="stylesheet" href="../css/elementUI/elementUI.css"/>
+    <link rel="stylesheet" href="../css/page_css/main/add.css">
+</head>
+<body>
+<div id="app">
+    <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">修改权限</div>
+
+    <el-container>
+        <el-main>
+            <el-row>
+                <el-col :span="24" style="overflow: hidden">
+                    <div class="top" style="margin-top:30px">
+                        <el-form label-width="80px">
+
+
+                            <el-form-item label="工号:">
+                                <span style="font-size: 20px;color: #13ce66">{{jobNum}}</span>
+                            </el-form-item>
+
+                            <el-form-item label="姓名:">
+                                <span style="font-size: 20px;color: #ff4d51">{{realName}}</span>
+                            </el-form-item>
+
+                            <el-form-item label="电话:">
+                                <span style="font-size: 20px;color: #3a8ee6">{{phone}}</span>
+                            </el-form-item>
+
+
+                            <el-form-item label="权限:">
+                                    <el-checkbox-group v-model="powerList">
+                                        <el-checkbox v-for="p in oldPower" :label="p" :key="p">
+                                            <span v-if="p == '1'">用户管理</span>
+                                            <span v-if="p == '2'">车位管理</span>
+                                            <span v-if="p == '3'">合同管理</span>
+                                            <span v-if="p == '4'">投诉管理</span>
+                                        </el-checkbox>
+                                    </el-checkbox-group>
+
+                            </el-form-item>
+
+                            <el-form-item style="margin-top:50px;">
+                                <el-button @click="update" type="primary" style="margin-right: 50px;">修改</el-button>
+                                <el-button @click="cancle" type="danger">取消</el-button>
+                            </el-form-item>
+
+                        </el-form>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-main>
+    </el-container>
+
+</div>
+
+</body>
+</html>
+<!--axios ajax异步请求-->
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<!--引用qs-->
+<script src="https://cdn.bootcss.com/qs/6.5.2/qs.min.js"></script>
+<script></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+<!-- 获取参数使用-->
+<script src="../js/vue/paragram.js"></script>
+<!--vue.js 必须在elementUI.js之前导入-->
+<script src="../js/vue/Vue.js"></script>
+<!--使用ajax 需要导入-->
+<script src="../js/vue/vue-resource.js"></script>
+<script src="../js/elementUI/elementUI.js"></script>
+<script src="../js/page_Js/main/updPower.js"></script>
+

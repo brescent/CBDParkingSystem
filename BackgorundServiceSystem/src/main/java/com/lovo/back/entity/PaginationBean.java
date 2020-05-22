@@ -7,7 +7,7 @@ public class PaginationBean<T> {
     private int  currentPage;
     private int pageSize;
     private  int total;
-
+private int count;
     private List<T> dataList;
 
     public int getCurrentPage() {
@@ -40,5 +40,12 @@ public class PaginationBean<T> {
 
     public void setDataList(List<T> dataList) {
         this.dataList = dataList;
+    }
+
+    public void setCount(int count){
+        this.count=count;
+    }
+    public int getCount(){
+       return count;
     }
 }

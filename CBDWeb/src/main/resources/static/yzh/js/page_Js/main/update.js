@@ -16,7 +16,7 @@ const  app = new Vue({
         /*性别输入框*/
          phone:"",
 
-        pwd:""
+        pwd:null,
 
     },
     created:function(){

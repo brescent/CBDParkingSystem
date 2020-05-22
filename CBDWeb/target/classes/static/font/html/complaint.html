@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<style>
+  .lease_p>p {
+    margin: 5px 10px;
+  }
+
+  .lease_p>p>span:first-child {
+    width: 33%;
+    text-align: right;
+    display: inline-block;
+  }
+
+  .lease_p>p>span:last-child {
+    width: 65%;
+    text-align: left;
+    display: inline-block;
+  }
+  textarea{
+    background: #92bfec;
+  }
+</style>
+
+<body>
+  <el-row>
+    <el-col :span="24">
+      <h2 class="grid-content bg-purple-dark" style="size:20px">投诉</h2>
+    </el-col>
+  </el-row>
+  <div id="app" style="width:600px; margin: 0 auto">
+    <el-row>
+      <el-col :span="24">
+        <div class="grid-content bg-purple-dark lease_p" style="background:#92bfec; margin-top:20px">
+          <p style="padding-top:10px">
+            <span>待租车位信息：</span>
+            <span>{{stallInfo.aa}}</span>
+          </p>
+          <p>
+            <span>租赁开始时间：</span>
+            <span>{{stallInfo.aa}}</span>
+          </p>
+          <p>
+            <span>租赁结束时间：</span>
+            <span>{{stallInfo.aa}}</span>
+          </p>
+          <p>
+            <span>用户名：</span>
+            <span>{{stallInfo.aa}}</span>
+          </p>
+          <p>
+            <span>职业：</span>
+            <span>{{stallInfo.aa}}</span>
+          </p>
+          <p>
+            <span>信誉度：</span>
+            <span>{{stallInfo.aa}}</span>
+          </p>
+          <p>
+            <span>价格：</span>
+            <span>{{stallInfo.aa}}</span>
+          </p>
+          <p>
+            <span>投诉理由：</span>
+            <span>
+           
+            </span>
+
+          </p>
+          <p>
+              <span style="width:50%">
+                <el-input type="textarea" :rows="3" placeholder="请输入投诉内容" v-model="textarea" style="background-color:#92bfec">
+                </el-input>
+              </span>
+  
+            </p>
+          <div class="block" style="  text-align: center; padding-bottom:10px;">
+            <el-button type="primary" @click="stallLease">投诉</el-button>
+            <el-button type="primary" @click="back">返回</el-button>
+          </div>
+
+        </div>
+      </el-col>
+    </el-row>
+  </div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    methods: {
+      stallLease() {
+        window.location.href="index.html";
+
+      },
+      back(){
+        window.history.go(-1);
+      }
+    },
+    data: function () {
+
+      return {
+
+        stallInfo: {
+          aa: "hahaha"
+
+        },
+        textarea: ""
+      }
+    }
+  })
+</script>
+
+</html>

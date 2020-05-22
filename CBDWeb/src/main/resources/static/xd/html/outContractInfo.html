@@ -9,7 +9,7 @@
     <!--使用ajax 需要导入-->
     <script  src="../js/vue/vue-resource.js"></script>
     <script src="../js/elementUI/elementUI.js"></script>
-    <script  src="../js/page_Js/main/add.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
@@ -20,17 +20,18 @@
 </head>
 
 <body>
-<div style="margin-left: 650px"><h2 style="color: #66b1ff">合同详情</h2></div>
 
-<div id="app" style="margin-top: -20px">
+
+<div id="app" >
+    <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">合同详情</div>
     <el-container>
         <el-main>
             <el-row>
                 <el-col :span="24" style="overflow: hidden">
                     <div class="top" style="float: left;margin-left: 60px" >
-                        合同单位名称:  <span>{{unitName}}</span><br><br>
+                        合同单位名称:  <span>{{unit}}</span><br><br>
                         <br>
-                        合同编号:  <span>{{contractNo}}</span><br><br><br>
+                        合同编号:  <span>{{outContractNo}}</span><br><br><br>
                         合同生效日期:  <span>{{startDate}}</span><br><br><br>
                         合同失效日期:  <span>{{endDate}}</span><br><br><br>
                         成交价格:  <span>{{dealPrice}}</span><br><br><br>
@@ -53,33 +54,72 @@
     </el-container>
 
 </div>
-
+<!--AJAX-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- 获取参数使用-->
+<script src="../js/vue/paragram.js"></script>
 <script>
     new Vue({
         el:'#app',
         data:{
-            unitName:'东方红',
-            contractNo:'dafaxf545689daw',
-            startDate:'1995-06-15',
-            endDate:'2002-03-25',
-            url:'https://588ku.com/ycpng/12576788.html'
-
+            id:0,
+            unit:'',
+            outContractNo:'',
+            dealPrice:'',
+            startDate:'',
+            endDate:'',
+            dealPrice:"",
+            srcList:[],
+            url:'https://www.52112.com/pic/372200.html'
 
         },
+    created:function(){
+            /*获取参数Id*/
+            let requestObj = GetRequest();
+            this.id=requestObj['oId'];
+            //查询详细信息
+            this. getInfo(this.id);
+
+        },
+
         methods:{
-            cancel(){
+            getInfo(id){
+
+
+                //发送ajax
+                axios.get('../../outContract/findById',{params:{
+                        id:id,
+
+                    }}).then(function(result){
+
+                    // console.log(result.data.unit);
+
+                    this.unit=result.data.unit;
+                    this.outContractNo=result.data.outContractNo;
+                    this.startDate=result.data.startDate;
+                    this.endDate=result.data.endDate;
+                    this.dealPrice=result.data.dealPrice;
+                    this.url="http://localhost:8888/static/file/image/"+result.data.contractImg;
+
+                }.bind(this));
 
             },
+
+            cancel(){
+                window.history.go(-1);
+            },
             add(){
-                window.location.href="goOnOutContract.html";
+                window.location.href="goOnOutContract.html?oId="+this.id;
             },
             back(){
 
                 window.location.href="showAllCompanyContract.html";
-            }
+            },
+
+    }
 
 
-        }
+
     })
 </script>
 

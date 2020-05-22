@@ -2,6 +2,8 @@ package com.project.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -9,6 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_personalUser")
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
+@DynamicInsert
+@DynamicUpdate
 public class PersonalUserEntity {
 
     /**个人用户id*/

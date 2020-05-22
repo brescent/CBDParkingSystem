@@ -19,7 +19,7 @@ public interface IStallService {
     public List<StallEntity> findByState();
 
     /*跟据 车位地址和编号进行动态查询*/
-    public PaginationBean<StallEntity> findByItems(String stallAddress, String stallNo, int page, int size);
+    public PaginationBean<StallEntity> findByItems(String stallAddress, String stallNo, int currentPage, int pageSize);
 
     /*修改车位的所属者身份证号*/
     public void updatePeopleNo(int id,String peopleNum);
@@ -31,13 +31,12 @@ public interface IStallService {
      *查询所有车位
      * @return
      */
-    public List<StallEntity>  findAll
-            ();
+    public List<StallEntity>  findAll();
 
 
 
 
-    /*批单个添加车位*/
+    /*单个添加车位*/
     public  void addSingle(String  stallAddress,String stallNo,String peopleNo,String stallImg);
 
 
@@ -69,5 +68,21 @@ public interface IStallService {
      * @return
      */
     public StallEntity  addAndReturn(StallEntity stall);
+
+
+    /**
+     * 分页查询
+     * @param currentPage 当前页
+     * @param pageSize 大小
+     * @return
+     */
+    public PaginationBean<StallEntity> findByPage(int currentPage, int pageSize);
+
+    /**
+     * 根绝车位地址查询车位集合
+     * @param stallAddress
+     * @return
+     */
+    public List<StallEntity> findByAddress(String stallAddress);
 
 }

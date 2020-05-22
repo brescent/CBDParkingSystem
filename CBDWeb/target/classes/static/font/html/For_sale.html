@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="../css//For_sale.css">
+  <title>待出售</title>
+</head>
+<body>
+  <div id="app">
+    <el-container>
+        <el-header><h1>预定信息</h1></el-header> 
+        <el-main>
+            <div id="information">
+                <div>
+                    <span>待 售 车 位 信 息：</span>
+                    <p>成都市天府一街12号中海兰亭小区E023车位</p>
+                </div>
+                <div>
+                    <span>用 户 名：</span>
+                    <p>XXX</p>
+                </div>
+                <div> 
+                    <span>真 实 姓 名：</span>
+                    <p>李四</p>
+                </div>
+                <div>
+                    <span>身 份 证 号：</span>
+                    <p>3100322XXXXXXXXXXX</p>
+                </div>
+                <div>
+                    <span>职 业：</span>
+                    <p>XX</p>
+                </div>
+                <div>
+                    <span>电 话：</span>
+                    <p>1355656494949</p>
+                </div>
+                <div>
+                    <span>信 誉  度：</span>
+                    <p>投诉次数/交易数(2/17)</p>
+                </div>
+                <div>
+                    <span>出 售 价 格：</span>
+                    <p style="color: #F56C6C;">28000</p>
+                </div>
+                <div>
+                    <span>留 言：</span>
+                    <p>XXXXXXX</p>
+                </div>
+                <div>
+                    <el-button type="primary" style="margin-right: 30px;">申请网上签约</el-button>
+                     <el-button>返回</el-button>
+                </div>
+            </div>
+        </el-main>
+      </el-container>
+  </div>
+</body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: function() {
+        return { visible: false }
+      }
+    })
+  </script>
+</html>
