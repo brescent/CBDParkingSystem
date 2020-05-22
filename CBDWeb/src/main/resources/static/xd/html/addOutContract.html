@@ -11,7 +11,7 @@
     <!--使用ajax 需要导入-->
     <script  src="../js/vue/vue-resource.js"></script>
     <script src="../js/elementUI/elementUI.js"></script>
-    <script  src="../js/page_Js/main/add.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
@@ -24,9 +24,10 @@
 </head>
 <body>
 
-<div style="margin-left: 650px"><h2 style="color: #66b1ff">新增外部合约</h2></div>
 
-<div id="app" style="margin-top: -20px">
+
+<div id="app" >
+    <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">新增外部合约</div>
     <el-container>
         <el-main>
             <el-row>
@@ -34,60 +35,58 @@
                     <div class="top" style="float: left" >
                         <el-form  label-width="140px">
                             <el-form-item label="合同编号:">
-                                <el-input  prefix-icon="el-icon-user"  placeholder="请输入合同编号"></el-input>
+                                <el-input  prefix-icon="el-icon-user"  placeholder="请输入合同编号" v-model="contractNo"></el-input>
                             </el-form-item>
 
                             <el-form-item label="合同单位:">
-                                <el-input prefix-icon="el-icon-date"   placeholder="请输入合同单位 "></el-input>
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入合同单位 "  v-model="unit"></el-input>
                             </el-form-item>
-                            <el-form-item label="双方联系人:">
-                                <el-input prefix-icon="el-icon-date"   placeholder="请输入双方联系人 "></el-input>
+                            <el-form-item label="对方方联系人:">
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入双方联系人 " v-model="linkMan"></el-input>
                             </el-form-item>
                             <el-form-item label="对方联系人电话:">
-                                <el-input prefix-icon="el-icon-date"   placeholder="请输入对方联系人电话 "></el-input>
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入对方联系人电话 " v-model="bothParties"></el-input>
                             </el-form-item>
                             <el-form-item label="车位所属详细地址:">
-                                <el-input prefix-icon="el-icon-location"   placeholder="请输入车位地址 "></el-input>
+                                <el-input prefix-icon="el-icon-location"   placeholder="请输入车位地址 " v-model="stallAddress"   ></el-input>
                             </el-form-item>
                             <el-form-item label="合同生效日期:" >
                                 <el-date-picker
-                                        v-model="value1"
+                                        v-model="startDate"
                                         type="date"
                                         placeholder="选择日期"  >
                                 </el-date-picker>
                             </el-form-item>
                             <el-form-item label="合同失效日期:" >
                                 <el-date-picker
-                                        v-model="value2"
+                                        v-model="endDate"
                                         type="date"
                                         placeholder="选择日期">
                                 </el-date-picker>
                             </el-form-item>
                             <el-form-item label="成交价格:">
-                                <el-input  prefix-icon="el-icon-user"   placeholder="请输入成交价格"></el-input>
+                                <el-input  prefix-icon="el-icon-user"   placeholder="请输入成交价格" v-model="dealPrice"></el-input>
                             </el-form-item>
+
                             <el-form-item label="选择车位:"  >
-                                <el-select  placeholder="请选择" multiple  v-model="value"  >
+                                <el-select  placeholder="请选择" multiple  value-key="id" v-model="stallIdList"  >
                                     <el-option label="选择所有" value="all"></el-option>
                                     <el-option
                                             v-for="item in options"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value">
+                                            :key= "item.id"
+                                            :label="item.stallNo"
+                                            :value="item.id">
                                     </el-option>
                                 </el-select>
                             </el-form-item>
-                            <el-form-item label="合同图片:">
+                            <el-form-item label="合同图片:"  id="file">
                                 <el-upload
                                         class="upload-demo"
-                                        action="https://jsonplaceholder.typicode.com/posts/"
+                                        action="http://localhost:8888/file"
                                         :on-preview="handlePreview"
                                         :on-remove="handleRemove"
-                                        :before-remove="beforeRemove"
-                                        multiple
-                                        :limit="3"
-                                        :on-exceed="handleExceed"
-                                >
+                                        :file-list="fileList"
+                                        list-type="picture">
                                     <el-button size="small" type="primary">点击上传</el-button>
                                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                                 </el-upload>
@@ -111,6 +110,8 @@
     </el-container>
 
 </div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     new Vue( {
         el:"#app",
@@ -118,29 +119,30 @@
 
             disabledDate(time) {
                 return time.getTime() > Date.now();
-            }, value1: '',
+            }, startDate: '',
             disabledDate(time) {
                 return time.getTime() > Date.now();
-            }, value2: '',
-
-            options: [{
-                value: '选项1',
-                label: 'cwco123'
-            }, {
-                value: '选项2',
-                label: 'cwco124'
-            }, {
-                value: '选项3',
-                label: 'cwco125'
-            }, {
-                value: '选项4',
-                label: 'cwco126'
-            }, {
-                value: '选项5',
-                label: 'cwco127'
-            }],value:[]
-
+            }, endDate: '',
+            options:[{id:16,stallNo:"cw001"},{id:17,stallNo:"cw002"},{id:18,stallNo:"cw003"},{id:19,stallNo:"cw004"}
+            ,{id:20,stallNo:"cw005"},{id:28,stallNo:"cw006"},{id:29,stallNo:"cw007"}],
+            stallIdList:[],
+            contractNo:'',
+            unit:'',
+            linkMan:'',
+            bothParties:'',
+            stallAddress:'',
+            dealPrice:'',
+            contractImg:"picture",
+            fileList: []
         },
+
+        watch:{stallIdList: function(val,oldval){
+                let newindex =  val.indexOf('all'),oldindex =  oldval.indexOf('all');   //获取val和oldval里all的索引,如果没有则返回-1
+                if(newindex!=-1 && oldindex==-1 && val.length>1)                       //如果新的选择里有勾选了选择所有选择所有 则 只直线勾选所有整个选项
+                    this.value=['all'];
+                else if(newindex!=-1 && oldindex!=-1 && val.length>1)                 //如果操作前有勾选了选择所有且当前也选中了勾选所有且勾选数量大于1  则移除掉勾选所有
+                    this.value.splice(val.indexOf('all'),1)
+            }},
         methods: {
             handleRemove(file, fileList) {
                 console.log(file, fileList);
@@ -148,22 +150,57 @@
             handlePreview(file) {
                 console.log(file);
             },
-            handleExceed(files, fileList) {
-                this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-            },
-            beforeRemove(file, fileList) {
-                return this.$confirm(`确定移除 ${ file.name }？`);
-            },
-            function(val,oldval){
-                let newindex =  val.indexOf('all'),oldindex =  oldval.indexOf('all');   //获取val和oldval里all的索引,如果没有则返回-1
-                if(newindex!=-1 && oldindex==-1 && val.length>1)                       //如果新的选择里有勾选了选择所有选择所有 则 只直线勾选所有整个选项
-                    this.citys=['all'];
-                else if(newindex!=-1 && oldindex!=-1 && val.length>1)                 //如果操作前有勾选了选择所有且当前也选中了勾选所有且勾选数量大于1  则移除掉勾选所有
-                    this.citys.splice(val.indexOf('all'),1)
+
+            findStall(){
+                //发送ajax   @blur="findStall"
+                axios.post('../../stall/findByAddress',
+                    {
+                            stallAddress:this.stallAddress
+                        }
+                    ).then(function(result){
+                    this.options =result.data;
+                }.bind(this));
             },
 
-            add(){},
-            cancle(){},
+            add(){
+
+                //发送ajax
+                axios.post('../../outContract/add',{
+                    contractNo:this.contractNo,
+                    unit:this.unit,
+                    linkMan:this.linkMan,
+                    dealPrice:this.dealPrice,
+                    bothParties:this.bothParties,
+                    startDate:this.startDate,
+                    endDate:this.endDate,
+                    stallIdList:this.stallIdList,
+                    stallAddress:this.stallAddress,
+                    contractImg:"picture"+Math.round(new Date() / 1000)
+                }).then(function(result){
+                    if(result.data=="ok"){
+                        this.alert('添加成功',{
+                            title:"消息提示",
+                            confirmButtonText: '确定',
+                            type:'success',
+                            center: true
+                        });
+                        window.location.href="showAllOutContract.html";
+                    }else{
+                        this.alert('添加失败', {
+                            title:"消息提示",
+                            confirmButtonText: '确定',
+                            type:'error',
+                            center: true
+                        });
+                    }
+
+                })
+
+
+            },
+            cancle(){
+                window.history.go(-1);
+            },
         }
     })
 

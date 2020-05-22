@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 @Getter(value= AccessLevel.PUBLIC)
 @Setter(value= AccessLevel.PUBLIC)
-@Data
+
 @Entity
 @Table(name = "outContract_stall")
 public class OutContractAndStall implements Serializable {
@@ -63,4 +63,6 @@ public class OutContractAndStall implements Serializable {
     public void setStall(StallEntity stall) {
         this.stall = stall;
     }
+
+
 }

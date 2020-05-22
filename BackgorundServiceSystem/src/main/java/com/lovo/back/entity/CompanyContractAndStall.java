@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter(value= AccessLevel.PUBLIC)
 @Setter(value= AccessLevel.PUBLIC)
-@Data
+
 @Entity
 @Table(name="companyContract_stall")
 public class CompanyContractAndStall implements Serializable {
@@ -59,4 +59,6 @@ private StallEntity  stall;
     public void setStall(StallEntity stall) {
         this.stall = stall;
     }
+
+
 }

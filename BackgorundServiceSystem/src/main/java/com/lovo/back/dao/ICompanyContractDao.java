@@ -2,15 +2,20 @@ package com.lovo.back.dao;
 
 import com.lovo.back.entity.CompanyContractEntity;
 
+import com.lovo.back.entity.OutContractEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Repository
+@Transactional
 public interface ICompanyContractDao extends CrudRepository<CompanyContractEntity,Integer> {
 
     /**
@@ -36,8 +41,20 @@ public interface ICompanyContractDao extends CrudRepository<CompanyContractEntit
      * @param id  企业id
      * @return 企业合同集合
      */
-    @Query(value="select b.* from t_company as c,t_companyContract as b where c.pk_company_userid=b.company_id and pk_companyUserID=:id",nativeQuery = true)
+    @Query(value="select b.* from t_company as c,t_company_contract as b where c.pk_company_userid=b.company_id and pk_companyUserID=:id",nativeQuery = true)
     public List<CompanyContractEntity>  findByCompany(@Param("id")int  id);
 
+
+
+    /*跟据 车位地址和编号进行动态查询*/
+    @Query(value="select * from  t_company_contract "
+            ,
+            countQuery = " select count(*) from t_company_contract "+
+                    " order by ?#{#pageable}",nativeQuery = true)
+    public List<CompanyContractEntity> findByPage(Pageable pageable);
+
+    @Query(value="select count(*) from t_company_contract ",
+            nativeQuery = true)
+    public List<BigInteger> findByItemsCount();
 
 }
