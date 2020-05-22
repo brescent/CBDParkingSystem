@@ -1,5 +1,6 @@
 package com.project.interceptor;
 
+import com.project.dto.PowerDto;
 import com.project.dto.UserDto;
 import com.project.entity.PowerEntity;
 
@@ -54,6 +55,37 @@ public class Powerinterceptor implements HandlerInterceptor {
                else if(userType.equals("超级管理员")){
                    if(!url.contains("xd")&&!url.contains("why")){
                        response.sendRedirect("/yzh/page/login.html");
+                   }
+               }
+               else if(userType.equals("管理员")){
+                   for (PowerDto power : userDto.getPowerList()) {
+                       if(power.getPowerName().equals("用户管理")){
+
+                           if(!gerUrl.contains("addCompany")&&!gerUrl.contains("showAllCompany")&&
+                           !gerUrl.contains("checkMsgInfo")&&!gerUrl.contains("showAllPart")&&
+                           !gerUrl.contains("partInfo")){
+                               response.sendRedirect("/yzh/page/login.html");
+                           }
+                       }
+                       if(power.getPowerName().equals("投诉管理")){
+                           if(!gerUrl.contains("showAllCompliant")&&!gerUrl.contains("CompliantInfo")){
+                               response.sendRedirect("/yzh/page/login.html");
+                           }
+                       }
+                       if(power.getPowerName().equals("车位管理") ){
+                           if(!gerUrl.contains("showAllStall")&&!gerUrl.contains("addStall")){
+                               response.sendRedirect("/yzh/page/login.html");
+                           }
+                       }
+                       if(power.getPowerName().equals("合同管理") ){
+                           if(!gerUrl.contains("addOutContract")&&!gerUrl.contains("showAllOutContract")&&
+                           !gerUrl.contains("addCompanyContract")&&!gerUrl.contains("showAllCompanyContract")
+                           &&!gerUrl.contains("goOnOutContract")&&!gerUrl.contains("goOnCompanyContract")
+                           &&!gerUrl.contains("outContractInfo")&&!gerUrl.contains("companyContractInfo")){
+                               response.sendRedirect("/yzh/page/login.html");
+                           }
+
+                       }
                    }
                }
            }
