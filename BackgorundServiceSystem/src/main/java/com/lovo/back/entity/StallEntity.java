@@ -4,13 +4,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Getter(value= AccessLevel.PUBLIC)
 @Setter(value= AccessLevel.PUBLIC)
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
+
+
 @Entity
 @Table(name = "t_stall")
 public class StallEntity implements Serializable {
@@ -22,26 +23,26 @@ public class StallEntity implements Serializable {
     private int id;
 
     /*车位地址*/
-    @Column(length = 48)
+    @Column(name="stallAddress",length = 48)
     private String stallAddress;
 
     /*车位编号*/
-    @Column(length = 48)
+    @Column(name="stallNo",length = 48)
     private String stallNo;
     /*车位状态   0表示空闲  1表示 出租中*/
     private int state;
 
-    @Column(length = 48)
+    @Column(name="stallImg",length = 48)
     /*车位产权图片名称*/
     private String stallImg;
 
     /*身份证号*/
-    @Column(length = 48)
+    @Column(name="peopleNo", length = 48)
     private String peopleNo;
 
 
     /*车位有效性 0表示无效 1表示有效*/
-    @Column(length = 48)
+    @Column(name="valid",length = 48)
     private int valid=0;
 
     /*外部合约*/
@@ -52,12 +53,21 @@ public class StallEntity implements Serializable {
     @OneToMany(mappedBy = "stall")
     private Set<CompanyContractAndStall> companySet;
 
+
+
+
+    public StallEntity() {
+    }
+
     public StallEntity(String stallAddress, String stallNo, String stallImg, String peopleNo) {
         this.stallAddress = stallAddress;
         this.stallNo = stallNo;
         this.stallImg = stallImg;
         this.peopleNo = peopleNo;
     }
+
+
+
 
     public int getId() {
         return id;

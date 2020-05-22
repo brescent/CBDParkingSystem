@@ -1,6 +1,7 @@
 package com.lovo.back.service;
 
 import com.lovo.back.entity.OutContractEntity;
+import com.lovo.back.entity.PaginationBean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface IOutContractService  {
      * @param outContractEntity  外部合约对象
      * @param stallIdList 车位id集合
      */
-    public  void add(OutContractEntity  outContractEntity,int [] stallIdList);
+    public  void add(OutContractEntity  outContractEntity,List<Integer> stallIdList);
 
 
 
@@ -27,5 +28,13 @@ public interface IOutContractService  {
     /*根据id查询合约详情*/
 
     public OutContractEntity findById(int  id);
+
+    /**
+     * 分页查询
+     * @param currentPage 当前页
+     * @param pageSize 大小
+     * @return
+     */
+    public PaginationBean<OutContractEntity> findByPage(int currentPage, int pageSize);
 
 }

@@ -3,12 +3,11 @@ package com.lovo.back.service.impl;
 import com.lovo.back.dao.ICompanyContractAndStallDao;
 import com.lovo.back.dao.ICompanyContractDao;
 import com.lovo.back.dao.IStallDao;
-import com.lovo.back.entity.CompanyContractAndStall;
-import com.lovo.back.entity.CompanyContractEntity;
-import com.lovo.back.entity.OutContractAndStall;
-import com.lovo.back.entity.StallEntity;
+import com.lovo.back.entity.*;
 import com.lovo.back.service.ICompanyContractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
@@ -40,7 +39,7 @@ public class CompanyCtractServiceImpl implements ICompanyContractService {
      * @param stallIdList
      */
     @Override
-    public void add(CompanyContractEntity companyContractEntity,int [] stallIdList) {
+    public void add(CompanyContractEntity companyContractEntity,List<Integer> stallIdList) {
         companyContractDao.save(companyContractEntity);
 
 
@@ -86,7 +85,31 @@ public class CompanyCtractServiceImpl implements ICompanyContractService {
         return null;
     }
 
+    @Override
+    public PaginationBean<CompanyContractEntity> findByPage(int currentPage, int pageSize) {
+        PaginationBean paginationBean=new PaginationBean();
 
+        Pageable pageable=new PageRequest((currentPage-1),pageSize);
+
+        paginationBean.setCurrentPage(currentPage);
+        paginationBean.setPageSize(pageSize);
+        paginationBean.setDataList(companyContractDao.findByPage(pageable));
+        int totalPage=0;
+
+        if((companyContractDao.findByItemsCount().get(0).intValue())%pageSize!=0){
+            totalPage=(companyContractDao.findByItemsCount().get(0).intValue())/pageSize+1;
+
+        }else{
+            totalPage=(companyContractDao.findByItemsCount().get(0).intValue())/pageSize;
+        }
+
+        paginationBean.setTotal(totalPage);
+paginationBean.setCount(companyContractDao.findByItemsCount().get(0).intValue());
+
+        paginationBean.setCount(companyContractDao.findByItemsCount().get(0).intValue());
+        return paginationBean;
+
+    }
 
 
 }
