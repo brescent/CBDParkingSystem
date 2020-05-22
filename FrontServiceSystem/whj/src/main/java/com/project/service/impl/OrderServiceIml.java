@@ -19,15 +19,24 @@ public class OrderServiceIml implements IOderService {
     @Autowired
     private DealDao dealDao;
 
+    String i;
+
 
     @Override
-    public void saveOrder(String message, int id) {
+    public String saveOrder(String message, int id) {
         FrontOrderEntity frontOrderEntity = new FrontOrderEntity();
         FrontDealEntity frontDealEntity =  dealDao.getDealById2(id);
         frontOrderEntity.setFrontDealEntity(frontDealEntity);
         frontOrderEntity.setFrontUserInfoId(frontDealEntity.getFrontStallId().getStall());
         frontOrderEntity.setOrderState(0);
         frontOrderEntity.setMessage(message);
-        orderDao.save(frontOrderEntity);
+
+        if(orderDao.save(frontOrderEntity)==null){
+            i = "1";
+        }else {
+            i = "0";
+        }
+
+        return i;
     }
 }

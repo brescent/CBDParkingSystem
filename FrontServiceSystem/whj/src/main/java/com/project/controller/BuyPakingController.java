@@ -65,8 +65,9 @@ public class BuyPakingController {
     }
 
     @RequestMapping("/saveOrder/{message}/{id}")
-    public void saveOrder(@PathVariable("message") String message,@PathVariable("id") int id){
-        orderServiceIml.saveOrder(message,id);
+    public String saveOrder(@PathVariable("message") String message,@PathVariable("id") int id){
+            String i =  orderServiceIml.saveOrder(message,id);
+            return i;
     }
 
     /**
