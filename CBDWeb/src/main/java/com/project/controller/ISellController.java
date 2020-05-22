@@ -1,10 +1,11 @@
 package com.project.controller;
 
+import com.project.service.IReleaseSellService;
 import com.project.service.IStallDealService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 @RestController
@@ -12,6 +13,9 @@ public class ISellController {
 
     @Autowired
     private IStallDealService stallDealService;
+
+    @Autowired
+    private IReleaseSellService releaseSellService;
 
     @RequestMapping("/test/{tag}")
     public String getAllByDealEndDate(@PathVariable("tag") int tag){
@@ -38,5 +42,10 @@ public class ISellController {
             i="0";
         }
         return i;
+    }
+
+    @PostMapping("/addSingle")
+    public void addSingle(@RequestBody Map<String,String> map){
+        releaseSellService.addSingle(map.get("stallAddress"),map.get("stallNo"),map.get("peopleNo"),map.get("stallImg"));
     }
 }

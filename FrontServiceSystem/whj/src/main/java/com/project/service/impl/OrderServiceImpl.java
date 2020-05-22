@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service(value = "orderService")
-public class OrderServiceIml implements IOderService {
+public class OrderServiceImpl implements IOderService {
 
     @Autowired
     private OrderDao orderDao;
