@@ -57,6 +57,7 @@ public class BackController {
     @Autowired
     ICompanyContractService companyContractService;
     /*投诉业务接口*/
+
     @Autowired
     IComplainService  complainService;
     /**
@@ -291,15 +292,18 @@ public class BackController {
 
         return "ok";
     }
+
+
+
 /*查询所有的投诉*/
-    @GetMapping
+    @GetMapping("findAllComplaint")
     public  String findAllComplaint(){
 
      return    complainService.findAllComplaint();
 
     }
     /*查询所有的投诉*/
-    @GetMapping
+    @GetMapping("findById")
     public  String findComplaintById(String id){
 
         return    complainService.findComplaintById(id);
@@ -307,8 +311,8 @@ public class BackController {
     }
 
 /*修改投诉状态*/
-    @GetMapping
-    public String updateComplaint(String id,String state){
+    @GetMapping("updateState")
+    public String updateComplaint(@RequestParam("id") String id,@RequestParam("state")String state){
 
         complainService.updateState(id,state);
 

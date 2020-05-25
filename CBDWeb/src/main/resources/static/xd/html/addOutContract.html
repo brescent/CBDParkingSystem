@@ -33,7 +33,8 @@
             <el-row>
                 <el-col :span="24" style="overflow: hidden">
                     <div class="top" style="float: left" >
-                        <el-form  label-width="140px">
+                        <el-form  label-width="140px"
+                                  >
                             <el-form-item label="合同编号:">
                                 <el-input  prefix-icon="el-icon-user"  placeholder="请输入合同编号" v-model="contractNo"></el-input>
                             </el-form-item>
@@ -132,8 +133,15 @@
             bothParties:'',
             stallAddress:'',
             dealPrice:'',
-            fileList: []
-        },
+            fileList: [],
+
+            formRules:{contractNo:[
+                    {required:true, message:'用户昵称不得为空', trigger:'blur'},
+                    {pattern:'^[A-Z]{2}[a-z0-9]{10}$',message:'格式类似GB15454dwa54'}
+                ]},
+
+    },
+
 
         watch:{stallIdList: function(val,oldval){
                 let newindex =  val.indexOf('all'),oldindex =  oldval.indexOf('all');   //获取val和oldval里all的索引,如果没有则返回-1

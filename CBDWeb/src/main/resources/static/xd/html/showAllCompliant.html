@@ -104,54 +104,31 @@
      new Vue({
         el:"#app",
         data:{
-            disabledDate(time) {
-                return time.getTime() > Date.now();
-            }, startDate: '',
-            disabledDate(time) {
-                return time.getTime() > Date.now();
-            },  endDate: '',
+             beComplainter:'',
+             complainter:'',
+             complaintDate:'',
                 tableData:tableData,
-                pageSize:3,
-                total:0,
-                currentPage:1,
+
         },
         //在vue被实例化之后
-        created:function(){
-            // //调用getdatas()方法
-            // this.getDatas(this.currentPage,this.pageSize);
-        },
+         created:function(){
+             //调用getdatas()方法
+             this.getDatas();
+         },
         methods:{
-            /*查找按钮事件*/
-            seach:function(){
-                this.getDatas(this.currentPage,this.pageSize);
-            },
+
             /*处理编辑按钮*/
             handleEdit:function(index,row){
-                window.location.href="complaintInfo.html?contractId="+row.id;
+                window.location.href="complaintInfo.html?id="+row.id;
             },
-            /*改变当前页数*/
-            currentChange:function(curNum){
-                this.getDatas(curNum,this.pageSize);
-            },
-            /*改变每页显示条数*/
-            sizeChange:function(pSize){
-                this.getDatas(this.currentPage,pSize);
-            },
-            /*查询数据*/
-            getDatas: function (currentPage, pageSize) {
 
-                axios.post("../../stall/findByItems",{
-                        startDate:this.startDate,
-                        endDate:this.endDate,
-                        currentPage:currentPage,
-                        pageSize:pageSize,
-                    }
+            /*查询数据*/
+            getDatas: function () {
+
+                axios.post("../../findAllComplaint"
                 ).then(function (result) {
-                    console.log(result + "-->>>")
+
                     this.tableData = result.data.dataList;
-                    this.pageSize = result.data.pageSize;
-                    this.currentPage = result.data.currentPage;
-                    this.total = result.data.count;
                 }.bind(this));
 
             }
