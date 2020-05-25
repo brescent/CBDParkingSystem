@@ -1,8 +1,5 @@
-package com.project.entity;
+package com.project.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -10,56 +7,44 @@ import java.text.SimpleDateFormat;
 /**
  * 消息实体类
  */
-@Entity
-@Table(name = "t_message")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
-public class MessageEntity implements Serializable {
+
+public class MessageVo implements Serializable {
     /**消息id*/
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pk_messageId")
+
     private int messageId;
     /**消息内容*/
-    @Column(name = "m_info")
+
     private String messageInfo;
     /**消息类型 0是个人消息，1是系统消息*/
-    @Column(name = "m_type")
+
     private int messageType;
     /**消息发送日期*/
-    @Column(name = "m_date")
+
     private Date messageDate = new Date(System.currentTimeMillis());
     /**消息状态 0表示未读，1表示已读，2表示已删除*/
-    @Column(name = "m_status")
+
     private int messageStatus = 0;
     /**接收用户*/
-    @OneToOne
-    @JoinColumn(name = "fk_receiverId")
-    private PublicUserEntity receiver;
+
+    private int receiver;
     /**发送用户*/
-    @OneToOne
-    @JoinColumn(name = "fk_senderId")
-    private PublicUserEntity sender;
+
+    private int sender;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-    public MessageEntity() {
+    public MessageVo() {
     }
 
-    public MessageEntity(String messageInfo, int messageType, Date messageDate, int messageStatus, PublicUserEntity receiver, PublicUserEntity sender) {
+    public MessageVo(String messageInfo, int messageType, int messageStatus, int receiver, int sender) {
         this.messageInfo = messageInfo;
         this.messageType = messageType;
-        this.messageDate = messageDate;
         this.messageStatus = messageStatus;
         this.receiver = receiver;
         this.sender = sender;
     }
 
-    public MessageEntity(String messageInfo, int messageType, PublicUserEntity receiver, PublicUserEntity sender) {
-        this.messageInfo = messageInfo;
-        this.messageType = messageType;
-        this.receiver = receiver;
-        this.sender = sender;
-    }
+
 
     public int getMessageId() {
         return messageId;
@@ -97,19 +82,19 @@ public class MessageEntity implements Serializable {
         this.messageStatus = messageStatus;
     }
 
-    public PublicUserEntity getReceiver() {
+    public int getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(PublicUserEntity receiver) {
+    public void setReceiver(int receiver) {
         this.receiver = receiver;
     }
 
-    public PublicUserEntity getSender() {
+    public int getSender() {
         return sender;
     }
 
-    public void setSender(PublicUserEntity sender) {
+    public void setSender(int sender) {
         this.sender = sender;
     }
 }

@@ -10,6 +10,18 @@ eureka:
 spring:
   application:
     name: publicUserService
+
+    rabbitmq:
+      host: 127.0.0.1  #rabbitmq中间件的IP
+      port: 5672
+      username: admin
+      password: admin
+      publisher-confirms: true
+      publisher-returns: true
+      virtual-host: /
+      listener:
+        simple:
+          acknowledge-mode: manual  #开启ACK
   datasource:
     url: jdbc:mysql://cdb-k8anlqni.cd.tencentcdb.com:10151/publicService?useUnicode=true&characterEncoding=UTF-8
     username: root
