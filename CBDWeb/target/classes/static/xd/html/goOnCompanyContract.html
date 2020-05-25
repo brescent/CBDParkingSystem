@@ -10,7 +10,7 @@
     <!--使用ajax 需要导入-->
     <script  src="../js/vue/vue-resource.js"></script>
     <script src="../js/elementUI/elementUI.js"></script>
-    <script  src="../js/page_Js/main/add.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
@@ -22,9 +22,10 @@
 </head>
 <body>
 
-<div style="margin-left: 650px"><h2 style="color: #66b1ff">续约企业合约</h2></div>
 
-<div id="app" style="margin-top: -20px">
+
+<div id="app" >
+    <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">续约企业合约</div>
     <el-container>
         <el-main>
             <el-row>
@@ -32,49 +33,46 @@
                     <div class="top" style="float: left" >
                         <el-form  label-width="120px">
                             <el-form-item label="原合同编号:">
-                                <el-input  prefix-icon="el-icon-user"  placeholder="请输入原合同编号"></el-input>
+                                <el-input  prefix-icon="el-icon-user"  placeholder="请输入原合同编号"  v-model="oldContractNo"></el-input>
                             </el-form-item>
 
                             <el-form-item label="新合同编号:">
-                            <el-input prefix-icon="el-icon-date"   placeholder="请输入新合同编号 "></el-input>
+                            <el-input prefix-icon="el-icon-date"   placeholder="请输入新合同编号 " v-model="contractNo"></el-input>
                         </el-form-item>
 
                             <el-form-item label="对方联系人:">
-                                <el-input prefix-icon="el-icon-date"   placeholder="请输入对方联系人 "></el-input>
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入对方联系人 "  v-model="linkMan"></el-input>
                             </el-form-item>
 
                             <el-form-item label="对方联系人电话:">
-                                <el-input prefix-icon="el-icon-date"   placeholder="请输入对方联系人电话 "></el-input>
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入对方联系人电话 " v-model="phone"></el-input>
                             </el-form-item>
                             <el-form-item label="合同生效日期:" >
                                 <el-date-picker
-                                        v-model="value1"
+                                        v-model="startDate"
                                         type="date"
                                         placeholder="选择日期"  >
                                 </el-date-picker>
                             </el-form-item>
                             <el-form-item label="合同失效日期:" >
                                 <el-date-picker
-                                        v-model="value2"
+                                        v-model="endDate"
                                         type="date"
                                         placeholder="选择日期">
                                 </el-date-picker>
                             </el-form-item>
                             <el-form-item label="成交价格:">
-                                <el-input  prefix-icon="el-icon-user"   placeholder="请输入成交价格"></el-input>
+                                <el-input  prefix-icon="el-icon-user"   placeholder="请输入成交价格"  v-model="dealPrice"></el-input>
                             </el-form-item>
 
-                            <el-form-item label="合同图片:">
+                            <el-form-item label="合同图片:"  id="file">
                                 <el-upload
                                         class="upload-demo"
-                                        action="https://jsonplaceholder.typicode.com/posts/"
+                                        action="http://localhost:8888/file"
                                         :on-preview="handlePreview"
                                         :on-remove="handleRemove"
-                                        :before-remove="beforeRemove"
-                                        multiple
-                                        :limit="3"
-                                        :on-exceed="handleExceed"
-                                >
+                                        :file-list="fileList"
+                                        list-type="picture">
                                     <el-button size="small" type="primary">点击上传</el-button>
                                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                                 </el-upload>
@@ -98,6 +96,9 @@
     </el-container>
 
 </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- 获取参数使用-->
+<script src="../js/vue/paragram.js"></script>
 <script>
     new Vue( {
         el:"#app",
@@ -105,27 +106,90 @@
 
             disabledDate(time) {
                 return time.getTime() > Date.now();
-            }, value1: '',
+            }, startDate: '',
             disabledDate(time) {
                 return time.getTime() > Date.now();
-            }, value2: ''
+            }, endDate: '',
+            oldContractNo:'',
+            contractNo:'',
+            linkMan:'',
+            phone:'',
+            dealPrice:'',
+            contractImg:'',
+            id:0,
+            fileList:[]
+        },
+
+        created:function(){
+            /*获取参数Id*/
+            let requestObj = GetRequest();
+            this.id=requestObj['id'];
+            //查询详细信息
+            this. getInfo(this.id);
+
         },
         methods: {
+            getInfo(id){
+                //发送ajax
+                axios.get('../../companyContract/findById',{params:{
+                        id:id,
+
+                    }}).then(function(result){
+
+                    // console.log(result.data.unit);
+
+                    this.oldContractNo=result.data.contractNo;
+                    this.linkMan=result.data.linkMan;
+                    this.startDate=result.data.startDate;
+                    this.phone=result.data.phone,
+                    this.endDate=result.data.endDate;
+                    this.dealPrice=result.data.dealPrice;
+
+
+                }.bind(this));
+
+            },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
             },
             handlePreview(file) {
                 console.log(file);
             },
-            handleExceed(files, fileList) {
-                this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-            },
-            beforeRemove(file, fileList) {
-                return this.$confirm(`确定移除 ${ file.name }？`);
+
+            ok(){
+                //发送ajax
+                axios.post('../../companyContract/goOn',{
+                    id:this.id,
+                    oldContractNo:this.oldContractNo,
+                    contractNo:this.contractNo,
+                    linkMan:this.linkMan,
+                    dealPrice:this.dealPrice,
+                    bothParties:this.bothParties,
+                    startDate:this.startDate,
+                    endDate:this.endDate,
+                    contractImg:"picture"+Math.round(new Date() / 1000)
+
+                }).then(function(result){
+                    if(result.data=="ok"){
+                        this.alert('续约成功',{
+                            title:"消息提示",
+                            confirmButtonText: '确定',
+                            type:'success',
+                            center: true
+                        });
+                        window.location.href="showAllCompanyContract.html";
+                    }else{
+                        this.alert('续约失败', {
+                            title:"消息提示",
+                            confirmButtonText: '确定',
+                            type:'error',
+                            center: true
+                        });
+                    }
+
+                })
 
             },
-
-            ok(){},
             no(){
                 window.history.go(-1);
             },

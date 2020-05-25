@@ -6,20 +6,20 @@ const app = new Vue({
     el:"#app",
     data:{
         tableData:[],
-        pageSize:3,
+        pageSize:10,
         total:0,
         pageNum:1
     },
     //在vue被实例化之后
     created:function(){
         //调用getdatas()方法
-        this.findLog();
+        this.findLog(this.pageNum,this.pageSize);
     },
     methods:{
-        /*查看详情按钮*/
-        lookInfo:function(index,row){
-            window.location.href="shoMessageInfo.html?messageId="+row.id;
-        },
+        // /*查看详情按钮*/
+        // lookInfo:function(index,row){
+        //     window.location.href="shoMessageInfo.html?messageId="+row.id;
+        // },
         /*删除消息按钮*/
         deleteMessage:function(index,row){
             // row 对象其实就是一个消息对象
@@ -68,21 +68,22 @@ const app = new Vue({
             this.findLog();
         },
         /*查询数据*/
-        findLog:function(){
+        findLog:function(pageNum,pageSize){
+            let vm=this;
             //发送ajax
-            this.$http.get("../../../../findLog",{
-                param:{
-                    tableData:this.tableData,
+            axios.get("../../../../findLog",{
+                params:{
+                    //tableData:this.tableData,
                     pageNum:this.pageNum,
-                    pageSize:pageSize
+                    pageSize:this.pageSize,
                 }
             }).then(function(result){
-                console.log(result.data);
+                // alert(result.data.list);
                 //设置分页控件的值
-                this.tableData=result.data.list;
-                this.pageSize=result.data.pageSize;
-                this.currentPage=result.data.pageNum;
-                this.total =result.data.count;
+                vm.tableData=result.data.list;
+                vm.pageSize=result.data.pageSize;
+                vm.currentPage=result.data.pageNum;
+                vm.total =result.data.count;
                 console.log(this.total+"----total")
 
             });

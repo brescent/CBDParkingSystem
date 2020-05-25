@@ -39,7 +39,7 @@ const app = new Vue({
                     pageSize: this.pageSize
                 }
             }).then(function (result) {
-                console.log(result.data);
+
                 //设置分页控件的值
                 this.billData = result.data.list;
                 this.pageSize = result.data.pageSize;

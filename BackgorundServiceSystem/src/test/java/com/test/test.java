@@ -4,6 +4,7 @@ package com.test;
 
 import com.lovo.back.BackMain;
 
+import com.lovo.back.controller.CheckController;
 import com.lovo.back.dao.IStallDao;
 import com.lovo.back.entity.*;
 import com.lovo.back.service.ICompanyContractService;
@@ -34,6 +35,8 @@ IStallDao   stallDao;
     @Autowired
     ICompanyContractService companyContractService;
 
+@Autowired
+CheckController c;
 
     @Test
     public void test1(){
@@ -120,5 +123,14 @@ IStallDao   stallDao;
         //System.out.println(outContractService.findById(1).getOutContractAndStallSet().size());
 
         System.out.println(stallService.findByAddress("").size());
+    }
+
+
+    @Test
+    public  void  mq(){
+
+     c.updPartCheckType(1);
+
+
     }
 }

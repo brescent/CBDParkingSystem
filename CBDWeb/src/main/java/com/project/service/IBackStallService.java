@@ -1,7 +1,7 @@
 package com.project.service;
 
 
-import com.lovo.back.entity.StallEntity;
+
 import com.project.dto.StallDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
