@@ -2,6 +2,7 @@ package com.project.controller;
 
 import com.project.Service.ILogService;
 import com.project.entity.LogEntity;
+import com.project.entity.PageEntity;
 import com.project.util.CBDStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +29,9 @@ public class LogController {
         return CBDStringUtil.ADD_SUCCESS;
     }
 
-    @GetMapping("find")
-    public List<LogEntity> findLogList(){
-        List<LogEntity> logList = logService.findAll();
-        return logList;
+    @GetMapping("findLog")
+    public PageEntity<LogEntity> findLogList(int pageNum, int pageSize){
+        PageEntity<LogEntity> pageEntity = logService.findAll(pageNum,pageSize);
+        return pageEntity;
     }
 }

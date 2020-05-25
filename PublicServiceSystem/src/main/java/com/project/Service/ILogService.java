@@ -1,6 +1,7 @@
 package com.project.Service;
 
 import com.project.entity.LogEntity;
+import com.project.entity.PageEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface ILogService {
      * 查找全部日志
      * @return 日志集合
      */
-    public List<LogEntity> findAll();
+    public PageEntity<LogEntity> findAll(int pageNum,int pageSize);
 
     /**
      * 添加日志
