@@ -1,5 +1,7 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -14,10 +16,11 @@ public class BillEntity {
     private int billId;
     /**交易日期*/
 
-    private Date tradeDate=new Date(System.currentTimeMillis());
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date tradeDate;
     /**交易时间*/
-
-    private Date tradeTime=new Date(System.currentTimeMillis());
+    @JsonFormat(pattern = "hh:mm:ss")
+    private Date tradeTime;
     /**收入*/
 
     private Double income;
@@ -60,16 +63,12 @@ public class BillEntity {
         this.billId = billId;
     }
 
-    public String getTradeDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String tradeDateStr = sdf.format(tradeDate);
-        return tradeDateStr;
+    public Date getTradeDate() {
+        return tradeDate;
     }
 
-    public String getTradeTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-        String tradeTimeStr = sdf.format(tradeTime);
-        return tradeTimeStr;
+    public Date getTradeTime() {
+        return tradeTime;
     }
 
     public Double getIncome() {

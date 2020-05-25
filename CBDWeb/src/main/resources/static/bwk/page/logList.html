@@ -30,10 +30,10 @@
             <!-- 分页区 -->
             <el-pagination style="margin: 20px auto;" background
                            layout="prev,pager,next,sizes,total,jumper "
-                           :current-page="currentPage"
+                           :current-page="pageNum"
                            :page-size="pageSize"
-                           :pager-count=5
-                           :page-sizes=[5,10]
+                           :pager-count=7
+                           :page-sizes=[10,20,30,50,100]
                            :total="total"
                            @current-change="currentChange"
                            @size-change="sizeChange">
@@ -44,6 +44,8 @@
 </body>
 </html>
 
+<!--Axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!--vue.js 必须在elementUI.js之前导入-->
 <script src="../js/vue/Vue.js"></script>
 <!--使用ajax 需要导入-->

@@ -31,6 +31,7 @@ import java.sql.Date;
 import java.util.*;
 
 @RestController
+@RequestMapping("back")
 public class BackController {
 
 
