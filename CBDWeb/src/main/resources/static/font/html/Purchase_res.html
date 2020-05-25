@@ -92,7 +92,7 @@
                 }
                 return(false);
             },dealById:function (id) {
-                axios.get("http://127.0.0.1:8089/getDealDate/"+id).then(function (respone) {
+                axios.get("/getDealDate/"+id).then(function (respone) {
                         console.log(respone.data)
                         this.list = respone.data;
                 }.bind(this)).catch(function (error) {
@@ -100,14 +100,14 @@
                 })
             },
             saveOrder:function () {
-                axios.get("http://127.0.0.1:8089/saveOrder/"+this.textarea+"/"+this.id).then(function (res) {
+                axios.get("/saveOrder/"+this.textarea+"/"+this.id).then(function (res) {
                     if(res="0"){
                         this.$message({
                             message: '预约成功！已通知车位主人',
                             type: 'success'
                         });
                     }else {
-                        this.$message.error('预定失败，请稍后重试！');
+                        this.$message.error('预约失败，请稍后重试！');
                     }
                 }.bind(this))
             }

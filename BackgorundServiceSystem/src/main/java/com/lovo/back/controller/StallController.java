@@ -40,14 +40,6 @@ public class StallController {
         return  stallService.findAll();
     }
 
-    /**
-     * 根据车位地址  车位编号分页动态查询
-     * @param address 车位地址
-     * @param stallNo 车位编号
-     * @param currentPage 当前页
-     * @param pageSize 每页记录数
-     * @return 合条件的车位集合
-     */
 
     @PostMapping ("findByItems")
     public String findByItems (@RequestBody Map<String,String> map)
@@ -90,13 +82,7 @@ public class StallController {
     }
 
 
-    /**
-     * 单个添加车位
-     * @param stallAddress 车位地址
-     * @param stallNo 车位编号
-     * @param peopleNo 身份证号
-     * @param stallImg 车位产权图片
-     */
+
 
     //@PathVariable("stallAddress") String stallAddress,@PathVariable("stallNo") String stallNo,@PathVariable("peopleNo") String peopleNo,@PathVariable("stallImg") String stallImg
     @PostMapping("addSingle")

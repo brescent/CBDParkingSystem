@@ -9,6 +9,9 @@ import com.project.service.IOderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 
 @Service(value = "orderService")
 public class OrderServiceImpl implements IOderService {
@@ -38,5 +41,10 @@ public class OrderServiceImpl implements IOderService {
         }
 
         return i;
+    }
+
+    @Override
+    public List<Map> findOrderByDealId(int id) {
+        return orderDao.findOrderByDealId(id);
     }
 }

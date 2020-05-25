@@ -84,10 +84,9 @@
             this.stallAll();
         },methods:{
             stallAll: function(){
-                axios.get("http://127.0.0.1:8089/getAllDeal").then(function (respone) {
+                axios.get("/getAllDeal").then(function (respone) {
                         this.list=respone.data;
                 }.bind(this)).catch(function (error) {
-                    console.log(error)
                 })
             },
             setClass(value) {

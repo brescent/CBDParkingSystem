@@ -6,7 +6,7 @@ eureka:
     hostname: 127.0.0.1 #服务器的IP地址
   client:
     serviceUrl:    #注册服务器的地址
-      defaultZone: http://127.0.0.1:8000/eureka/
+      defaultZone: http://192.168.43.183:8000/eureka/
 spring:
   application:
     name: frontServiceSystem
