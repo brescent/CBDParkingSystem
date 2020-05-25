@@ -29,6 +29,7 @@ public class AdminEntity implements Serializable {
     private PublicUserEntity publicUser;
 
 
+
     private List<PowerEntity> powerList;
 
     public AdminEntity() {
