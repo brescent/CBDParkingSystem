@@ -4,6 +4,7 @@ import com.lovo.back.entity.MessageEntity;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,11 +18,12 @@ public class CheckController {
     private AmqpTemplate amqpTemplate;
 
 
+    @RequestMapping("updPartType/{partId}")
     public  String updPartType(@PathVariable("partId") Integer partId){
         MessageEntity messageEntity =
                 new MessageEntity("合同审核通过",1,1,1,1);
 
-        amqpTemplate.convertAndSend("message_exchange","message_all",messageEntity);
+        amqpTemplate.convertAndSend("message_exchange","message.all",messageEntity);
         return "1";
     }
 

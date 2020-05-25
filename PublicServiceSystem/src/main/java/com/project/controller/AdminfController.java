@@ -2,10 +2,14 @@ package com.project.controller;
 
 import com.project.Service.IAdminService;
 import com.project.dto.AdminVo;
+import com.project.dto.MessageDto;
 import com.project.entity.AdminEntity;
+import com.project.entity.MessageEntity;
 import com.project.entity.PageEntity;
 import com.project.entity.PowerEntity;
+import com.project.vo.MessageVo;
 import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +27,8 @@ public class AdminfController {
 
     @Autowired
     private IAdminService adminService;
+
+
 
     /**
      * 获取所有管理员

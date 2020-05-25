@@ -1,6 +1,8 @@
-package com.project.entity;
+package com.project.Entity;
 
-import javax.persistence.*;
+import com.project.entity.PublicUserEntity;
+
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -26,17 +28,17 @@ public class MessageEntity {
     private int messageStatus = 0;
     /**接收用户*/
 
-    private PublicUserEntity receiver;
+    private com.project.entity.PublicUserEntity receiver;
     /**发送用户*/
 
-    private PublicUserEntity sender;
+    private com.project.entity.PublicUserEntity sender;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     public MessageEntity() {
     }
 
-    public MessageEntity(String messageInfo, int messageType, Date messageDate, int messageStatus, PublicUserEntity receiver, PublicUserEntity sender) {
+    public MessageEntity(String messageInfo, int messageType, Date messageDate, int messageStatus, com.project.entity.PublicUserEntity receiver, com.project.entity.PublicUserEntity sender) {
         this.messageInfo = messageInfo;
         this.messageType = messageType;
         this.messageDate = messageDate;
@@ -45,7 +47,7 @@ public class MessageEntity {
         this.sender = sender;
     }
 
-    public MessageEntity(String messageInfo, int messageType, PublicUserEntity receiver, PublicUserEntity sender) {
+    public MessageEntity(String messageInfo, int messageType, com.project.entity.PublicUserEntity receiver, com.project.entity.PublicUserEntity sender) {
         this.messageInfo = messageInfo;
         this.messageType = messageType;
         this.receiver = receiver;
@@ -88,15 +90,15 @@ public class MessageEntity {
         this.messageStatus = messageStatus;
     }
 
-    public PublicUserEntity getReceiver() {
+    public com.project.entity.PublicUserEntity getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(PublicUserEntity receiver) {
+    public void setReceiver(com.project.entity.PublicUserEntity receiver) {
         this.receiver = receiver;
     }
 
-    public PublicUserEntity getSender() {
+    public com.project.entity.PublicUserEntity getSender() {
         return sender;
     }
 

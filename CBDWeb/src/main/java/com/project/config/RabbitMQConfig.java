@@ -1,4 +1,4 @@
-package com.lovo.back.config;
+package com.project.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -16,6 +16,16 @@ public class RabbitMQConfig {
     @Bean
     public Queue messageQueue() {
         return new Queue("message_queue");
+    }
+
+    @Bean
+    public Queue objectQueue() {
+        return new Queue("object_queue");
+    }
+
+    @Bean
+    public Queue stringQueue() {
+        return new Queue("string_queue");
     }
 
     /**
@@ -37,6 +47,30 @@ public class RabbitMQConfig {
     public Binding bndingMessageQueueToMessageExchange(Queue messageQueue,TopicExchange messageExchange){
 
         return BindingBuilder.bind(messageQueue).to(messageExchange).with("message.#");
+    }
+
+    /**
+     *
+     * @param objectQueue
+     * @param messageExchange
+     * @return
+     */
+    @Bean
+    public Binding bndingObjectQueueToMessageExchange(Queue objectQueue,TopicExchange messageExchange){
+
+        return BindingBuilder.bind(objectQueue).to(messageExchange).with("obj.#");
+    }
+
+    /**
+     *
+     * @param stringQueue
+     * @param messageExchange
+     * @return
+     */
+    @Bean
+    public Binding bndingStringQueueToMessageExchange(Queue stringQueue,TopicExchange messageExchange){
+
+        return BindingBuilder.bind(stringQueue).to(messageExchange).with("str.#");
     }
 
 }
