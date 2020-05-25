@@ -76,19 +76,18 @@
                 </div>
         </div>
             <el-row :gutter="20">
-                <el-col :span="12" style="padding:10px;" v-for="(item ,index) in stallList">
+                <el-col :span="12" style="padding:10px;" v-for="(item ,index) in dealData">
                     <div class="grid-content bg-purple hire_p">
-                         <p style="padding-top:10px" ><span>待租车位信息：</span><span>{{item.aa}}</span></p>
-                         <p><span>租赁开始时间：</span><span>{{item.aa}}</span></p>
-                         <p><span>租赁结束时间：</span><span>{{item.aa}}</span></p>
-                         <p><span>用户名：</span><span>{{item.aa}}</span></p>
-                         <p><span>职业：</span><span>{{item.aa}}</span></p>
-                         <p><span>信誉度：</span><span>{{item.aa}}</span></p>
-                         <p><span>价格：</span><span>{{item.aa}}</span></p>
-                         <div class="block" style="  text-align: center; padding-bottom:10px;">
-                                <el-button type="primary" @click="searchtiem">预定</el-button>
-                            </div>
-                    </div>
+                     <p style="padding-top:10px" ><span>待租车位信息：</span><span>{{item.stallAddress}}</span></p>
+                            <p><span>租赁开始时间：</span><span>{{item.dealStateDate}}</span></p>
+                            <p><span>租赁结束时间：</span><span>{{item.dealEndDate}}</span></p>
+                            <p><span>用户名：</span><span>{{item.userName}}</span></p>
+                            <p><span>职业：</span><span>{{item.userProfession}}</span></p>
+                            <p><span>价格：</span><span>{{item.dealPrice}}</span></p>
+                            <div class="block" style="  text-align: center; padding-bottom:10px;">
+                                <el-button type="primary" @click="searchtiem(index)">预定</el-button>
+                            </div></div>
+
                 </el-col>
                
             </el-row>
@@ -111,14 +110,19 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--axios -->
+<script src="https://cdn.bootcss.com/axios/0.19.2/axios.js"></script>
 <script>
     new Vue({
         el: '#app',
         methods: {
-            searchtiem(){
-                console.log();
-                
-            },handleClick(row) {
+            searchtiem(msg){
+
+ window.location.href="lease.html?id="+msg;
+
+
+            },
+            handleClick(row) {
         console.log(row);
       },
     
@@ -129,23 +133,32 @@
         console.log(`当前页: ${val}`);
       }
         },
-        data: function () {
-            return {
-                selectTime: {
-                    endtime: "",
-                    starttime: ""
-                },
-               stallList:[{aa:"2"
-            
-               },{aa:"3"
-            
-        }],
-        page:{
+        data: {
+               dealData:[],
+               page:{
             currentPage1: 5,
             total:10,
-          },
-            }
+          },selectTime: {
+                endtime: "",
+                starttime: ""}
+            },
+
+        mounted:function () {
+
+            // var that=this;
+            axios.post('/getAllDeal',{
+
+            }).then( (response)=> {
+
+                this.dealData=response.data
+
+            })
+                .catch(function (error) {0
+
+                    console.log(error);
+                });
         }
+
     })
 </script>
 

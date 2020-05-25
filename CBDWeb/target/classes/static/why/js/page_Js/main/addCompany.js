@@ -27,16 +27,17 @@ const  app = new Vue({
         /*添加按钮事件*/
          add:function(){
 
-             alert(this.powerList)
-             this.$http.post("../AddStudentServlet",{
+             axios.post("../../addCompany",{
                  /*后台传参数*/
-                 stuName:this.stuName,
-                 stuAge:this.stuAge,
-                 stuGender: this.stuGender,
-                 classId:this.classId
+                 companyName:this.companyName,
+                 companyLoginName:this.companyLoginName,
+                 companyLoginPwd: this.companyLoginPwd,
+                 companyAddress:this.companyAddress,
+                 contact:this.cpmpanyLinkMan,
+                 contactPhone:this.companyPhone
              }).then(function(result){
             // console.log(result.body+"***");
-                 if(result.body==1){
+                 if(result.data==1){
                      this.$alert('添加数据成功',{
                          title:"消息提示",
                          confirmButtonText: '确定',
@@ -52,20 +53,13 @@ const  app = new Vue({
                          center: true
                      });
                  }
-                 });
+                 }.bind(this));
          },
         /*取消按钮事件*/
         cancle:function(){
              window.history.go(-1);
         },
-        /*获得所有班级数据*/
-        // getClasses:function(){
-        //      this.$http.post("../GetAllClassesServlet")
-        //           .then(function(result){
-        //          console.log(result.body+"---->>");
-        //              this.classesData=result.body;
-        //           });
-        // }
+
     }
 
 });
