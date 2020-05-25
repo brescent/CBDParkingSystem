@@ -34,10 +34,11 @@ public class PerformanceStatistics {
             throwable.printStackTrace();
         }
         long time2 = System.currentTimeMillis();
-        long useTime = (time2 - time1)/1000;
+        long useTime = (time2 - time1);
+        point.getTarget();
         String className = point.getTarget().getClass().getName();
         String methodName = point.getSignature().getName();
-        String logInfo = "执行" + className + "的" + methodName + "方法时，使用了" + useTime + "秒时间";
+        String logInfo = "执行" + className + "的" + methodName + "方法时，使用了" + useTime + "毫秒时间";
         //new LogEntity("性能统计",logInfo);
         publicService.addLog(logInfo,"性能统计");
        return obj;
