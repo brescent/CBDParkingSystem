@@ -76,7 +76,10 @@ public class OutContractController {
         str2=str2.substring(0,10);
         out.setEndDate(Date.valueOf(str2));
 
-        out.setDealPrice(Double.parseDouble((Integer)map.get("dealPrice")+""));
+
+
+        out.setDealPrice(Double.parseDouble((String) map.get("dealPrice")));
+
         out.setContractImg((String)map.get("contractImg"));
         out.setOldOutContractNo((String)map.get("oldContractNo"));
 
@@ -96,7 +99,7 @@ public class OutContractController {
     }
 
     @GetMapping("findByPage/{currentPage}/{pageSize}")
-    public String findByPage(@PathVariable("currentPage")int currentPage,@PathVariable("pageSize")int pageSize){
+    public String findByPage(@PathVariable("currentPage") int currentPage,@PathVariable("pageSize") int pageSize){
 
 
 

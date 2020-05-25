@@ -82,7 +82,7 @@
                             <el-form-item label="合同图片:"  id="file">
                                 <el-upload
                                         class="upload-demo"
-                                        action="http://localhost:8888/file"
+                                        action="http://localhost:8089/file"
                                         :on-preview="handlePreview"
                                         :on-remove="handleRemove"
                                         :file-list="fileList"
@@ -132,7 +132,6 @@
             bothParties:'',
             stallAddress:'',
             dealPrice:'',
-            contractImg:"picture",
             fileList: []
         },
 
@@ -175,7 +174,7 @@
                     endDate:this.endDate,
                     stallIdList:this.stallIdList,
                     stallAddress:this.stallAddress,
-                    contractImg:"picture"+Math.round(new Date() / 1000)
+
                 }).then(function(result){
                     if(result.data=="ok"){
                         this.alert('添加成功',{

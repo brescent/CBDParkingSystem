@@ -120,7 +120,7 @@
 
             getDatas:function (currentPage,pageSize){
                 //发送ajax
-                axios.get('../../companyContract/findAll' ,{params :{
+                axios.get('../../companyContract/findAll' ,{params:{
                         currentPage:currentPage,
                         pageSize:pageSize,
                     }}).then(function(result){

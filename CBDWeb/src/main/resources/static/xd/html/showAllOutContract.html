@@ -120,14 +120,16 @@
 
             getDatas:function (currentPage,pageSize){
                 //发送ajax
-                axios.get('../../outContract/findAll' ,{params :{
+                axios.get('../../outContract/findAll' ,{params:{
                         currentPage:currentPage,
                         pageSize:pageSize,
                     }}).then(function(result){
                     console.log(result.data);
                     //设置分页控件的值
                     this.tableData=result.data.dataList;
-
+                    this.pageSize = result.data.pageSize;
+                    this.currentPage = result.data.currentPage;
+                    this.total = result.data.count;
                 }.bind(this));
             }
         }

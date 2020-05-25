@@ -14,7 +14,7 @@ public interface IOutContractService {
 
 
     @GetMapping("outContract/findByPage/{currentPage}/{pageSize}")
-    public String findAllOutContract(@PathVariable("currentPage") int currentPage,@PathVariable("pageSize")int pageSize);
+    public String findAllOutContract(@PathVariable("currentPage")int currentPage,@PathVariable("pageSize")int pageSize);
 
 
     /**

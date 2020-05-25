@@ -102,8 +102,7 @@ public class CompanyContractController {
     }
 
     @GetMapping("findByPage/{currentPage}/{pageSize}")
-    public String findByPage(@PathVariable("currentPage")int currentPage,@PathVariable("pageSize")int pageSize){
-
+    public String findByPage(@PathVariable("currentPage") int currentPage,@PathVariable("pageSize") int pageSize){
 
 
         return JSON.toJSONString(companyCtractService.findByPage(currentPage, pageSize));

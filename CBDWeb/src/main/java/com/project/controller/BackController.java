@@ -11,6 +11,7 @@ import com.lovo.back.entity.OutContractEntity;
 import com.project.dto.CompanyContractDto;
 import com.project.dto.OutContractDto;
 import com.project.service.ICompanyContractService;
+import com.project.service.IComplainService;
 import com.project.service.IOutContractService;
 import com.project.service.IBackStallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ import java.util.*;
 public class BackController {
 
 
+
+    public static String fileName="";
     public static final String ROOT = "upload-dir";
 
     private final ResourceLoader resourceLoader;
@@ -52,7 +55,9 @@ public class BackController {
     /*企业合约前端接口*/
     @Autowired
     ICompanyContractService companyContractService;
-
+    /*投诉业务接口*/
+    @Autowired
+    IComplainService  complainService;
     /**
      * 动态查询车位信息
      *
@@ -130,7 +135,7 @@ public class BackController {
      */
     @GetMapping("outContract/findAll")
     @ResponseBody
-    public String findAllOutContract(int currentPage, int pageSize) {
+    public String findAllOutContract(@RequestParam("currentPage") int currentPage,@RequestParam("pageSize") int pageSize) {
 
 
         return outContractService.findAllOutContract(currentPage, pageSize);
@@ -150,6 +155,7 @@ public class BackController {
     @ResponseBody
     public String addOutContract(@RequestBody Map<String, Object> map) {
         System.out.println(map);
+        map.put("contractImg",fileName);
         outContractService.addCompanyContract(map);
         return "ok";
     }
@@ -167,7 +173,7 @@ public class BackController {
             name = name.substring(name.lastIndexOf("."));
             name = UUID.randomUUID().toString().replace("-", "") + name;
 
-            File dir = new File(ROOT);
+            File dir = new File("CBDWeb/classpath:/static/"+ROOT);
             if (!dir.exists()) {
                 dir.mkdirs();
             }
@@ -178,7 +184,10 @@ public class BackController {
             e.printStackTrace();
         }
 
-        return name;
+
+        fileName=name;
+
+        return "ok";
     }
 
     @PostMapping("outContract/goOn")
@@ -196,6 +205,7 @@ public class BackController {
 
             stallIdList.add(stallId);
         }
+        map.put("contractImg",fileName);
         map.put("unit", outContractDto1.getUnit());
         map.put("stallIdList", stallIdList);
         outContractService.addCompanyContract(map);
@@ -221,12 +231,11 @@ public class BackController {
      */
     @GetMapping("companyContract/findAll")
     @ResponseBody
-    public String findAllCompanyContract(int currentPage, int pageSize) {
+    public String findAllCompanyContract(@RequestParam("currentPage") int currentPage,@RequestParam("pageSize") int pageSize) {
 
         return companyContractService.findAllCompanyContract(currentPage, pageSize);
 
     }
-
 
     @GetMapping("companyContract/findById")
     @ResponseBody
@@ -281,6 +290,28 @@ public class BackController {
 
         return "ok";
     }
+/*查询所有的投诉*/
+    @GetMapping
+    public  String findAllComplaint(){
 
+     return    complainService.findAllComplaint();
+
+    }
+    /*查询所有的投诉*/
+    @GetMapping
+    public  String findComplaintById(String id){
+
+        return    complainService.findComplaintById(id);
+
+    }
+
+/*修改投诉状态*/
+    @GetMapping
+    public String updateComplaint(String id,String state){
+
+        complainService.updateState(id,state);
+
+        return "ok";
+    }
 
 }
