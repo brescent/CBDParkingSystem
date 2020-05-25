@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <title>车位招租
     </title>
+
 </head>
 
 <body>
@@ -17,32 +18,32 @@
         </el-col>
     </el-row>
     <div id="app" style="width:800px; margin: 0 auto">
-        <el-form ref="form" :model="form" label-width="80px">
-            <el-form-item label="活动名称">
-                <el-input v-model="form.name"></el-input>
+        <el-form ref="formDate" :model="formDate" label-width="80px">
+            <el-form-item label="小区编号">
+                <el-input v-model="formDate.addressNum"></el-input>
             </el-form-item>
 
-            <el-form-item label="活动名称">
-                <el-input v-model="form.name"></el-input>
+            <el-form-item label="出租价格">
+                <el-input v-model="formDate.price"></el-input>
             </el-form-item>
             <el-form-item label="产权编号">
-                <el-input v-model="form.stallNum"></el-input>
+                <el-input v-model="formDate.stallNum"></el-input>
             </el-form-item>
             <el-form-item label="小区地址">
-                <el-input v-model="form.stallAddress"></el-input>
+                <el-input v-model="formDate.stallAddress"></el-input>
             </el-form-item>
             <div style=" display: flex;
             justify-content: space-between">
                 <el-form-item label="开始日期">
                     <div class="block">
-                        <el-date-picker v-model="form.startTime" type="date" placeholder="选择日期">
+                        <el-date-picker v-model="formDate.startTime" type="date" placeholder="选择日期">
                         </el-date-picker>
                     </div>
                 </el-form-item>
 
                 <el-form-item label="结束日期">
                     <div class="block">
-                        <el-date-picker v-model="form.endTime" type="date" placeholder="选择日期">
+                        <el-date-picker v-model="formDate.endTime" type="date" placeholder="选择日期">
                         </el-date-picker>
                     </div>
                 </el-form-item>
@@ -58,7 +59,7 @@
                     multiple
                     :limit="1"
                     :on-exceed="handleExceed"
-                    :file-list="form.fileList">
+                    :file-list="formDate.fileList">
                     <el-button size="small" type="primary" >点击上传</el-button>
                     <span slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过2M</span>
                   </el-upload>
@@ -78,19 +79,21 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--axios -->
+<script src="https://cdn.bootcss.com/axios/0.19.2/axios.js"></script>
 <script>
     new Vue({
         el: '#app',
-        data: function () {
-            return {form: {
-                    name: '',
+        data: {formDate: {
+                    addressNum: '',
+                    price:"",
                     stallNum: '',
                     stallAddress: '',
                     startTime: '',
                     endTime: "",
                     fileList: [],
                 }
-            }
+
         },
         methods: {
             unloadfile(file){
@@ -105,7 +108,21 @@
                 
             },
             onSubmit() {
-                console.log('submit!');
+
+              console.log(this.formDate)
+                    // var that=this;
+                    axios.post('/addDeal',this.formDate
+
+                    ).then( (response)=> {
+
+                     window.location.href="hireinfo.html"
+
+                    })
+                        .catch(function (error) {0
+
+                            console.log(error);
+                        });
+
             },
             handleRemove(file, fileList) {
         console.log(file, fileList);

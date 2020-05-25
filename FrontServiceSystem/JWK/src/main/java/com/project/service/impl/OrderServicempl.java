@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderServicempl implements IOrderService {
@@ -39,5 +40,15 @@ public class OrderServicempl implements IOrderService {
     @Override
     public List<FrontOrderEntity> orderByUserid(int id) {
         return orderDao.orderByUserid(id);
+    }
+
+    @Override
+    public List<Map> getAllOrderByUserId(int id) {
+        return orderDao.getAllOrderByUserId(id);
+    }
+
+    @Override
+    public List<Map> getOrderById(int id) {
+        return orderDao.getOrderById(id);
     }
 }

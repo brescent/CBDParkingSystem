@@ -1,10 +1,7 @@
-package com.project.entity;
-
-import lombok.Data;
+package com.project.Entity;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  *用户信息实体
@@ -39,7 +36,7 @@ public class FrontUserInfoEntity {
      */
     @Column(name = "f_IDNum",length = 20)
     private String IDNum;
-    @OneToMany(mappedBy = "userInfoEntity" ,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "userInfoEntity")
     private List<FrontStallEntity> frontStallEntity;
 
 

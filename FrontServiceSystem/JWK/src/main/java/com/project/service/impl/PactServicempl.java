@@ -7,6 +7,9 @@ import com.project.service.IPactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class PactServicempl implements IPactService {
     @Autowired
@@ -30,5 +33,10 @@ public class PactServicempl implements IPactService {
     public FrontPactEntity selPact(int id) {
 
         return pactDao.findById(id).get();
+    }
+
+    @Override
+    public List<Map> getAllPact() {
+        return pactDao.getAllPact();
     }
 }

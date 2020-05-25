@@ -6,6 +6,8 @@ import com.project.service.IComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -29,4 +31,20 @@ public class Complaintmpl implements IComplaintService {
         Optional<FrontcomplaintEntity> optional= complaintDao.findById(id);
        return optional.get();
     }
+
+    @Override
+    public List<Map> getAllComplaint() {
+        return complaintDao.getAllComplaint();
+    }
+
+    @Override
+    public void updateById(int id ,int state) {
+        complaintDao.updateById(id,state);
+    }
+
+    @Override
+    public int getComplaintNum(int id) {
+        return complaintDao.getComplaintNum(id);
+    }
+
 }

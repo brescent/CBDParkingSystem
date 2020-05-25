@@ -1,6 +1,4 @@
-package com.project.entity;
-
-import lombok.Data;
+package com.project.Entity;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -36,35 +34,13 @@ public class FrontcomplaintEntity {
      * 投诉时间
      */
     @Column(name = "f_complaintTime")
-    private Date complaintTime;
-
-    @Column(name = "f_complaintState" ,length = 10)
-    private int complaintState;
+    private Date complaintTime=new Date(System.currentTimeMillis());
     /**
      * 订单外键
      */
     @OneToOne
     @JoinColumn(name = "fk_frontOrderId")
     private FrontOrderEntity frontOrderId;
-    @OneToOne
-    @JoinColumn(name = "fk_frontUserId")
-    private FrontUserInfoEntity userInfoEntity;
-
-    public int getComplaintState() {
-        return complaintState;
-    }
-
-    public void setComplaintState(int complaintState) {
-        this.complaintState = complaintState;
-    }
-
-    public FrontUserInfoEntity getUserInfoEntity() {
-        return userInfoEntity;
-    }
-
-    public void setUserInfoEntity(FrontUserInfoEntity userInfoEntity) {
-        this.userInfoEntity = userInfoEntity;
-    }
 
     public int getId() {
         return id;
