@@ -1,11 +1,12 @@
 package com.project.dto;
 
+
 import com.lovo.back.entity.CompanyContractAndStall;
 import com.project.entity.CompanyUserEntity;
 
 import javax.persistence.Column;
 import java.sql.Date;
-import java.util.Optional;
+
 import java.util.Set;
 
 public class CompanyContractDto {

@@ -1,14 +1,15 @@
 package com.lovo.back.controller;
 
 
+;
 import com.alibaba.fastjson.JSON;
-
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.lovo.back.dto.CompanyContractDto;
 import com.lovo.back.dto.CompanyDto;
 import com.lovo.back.entity.CompanyContractEntity;
 import com.lovo.back.service.ICompanyContractService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -102,8 +103,7 @@ public class CompanyContractController {
     }
 
     @GetMapping("findByPage/{currentPage}/{pageSize}")
-    public String findByPage(@PathVariable("currentPage")int currentPage,@PathVariable("pageSize")int pageSize){
-
+    public String findByPage(@PathVariable("currentPage") int currentPage,@PathVariable("pageSize") int pageSize){
 
 
         return JSON.toJSONString(companyCtractService.findByPage(currentPage, pageSize));

@@ -37,12 +37,34 @@ public class FrontcomplaintEntity {
      */
     @Column(name = "f_complaintTime")
     private Date complaintTime;
+
+    @Column(name = "f_complaintState" ,length = 10)
+    private int complaintState;
     /**
      * 订单外键
      */
     @OneToOne
     @JoinColumn(name = "fk_frontOrderId")
     private FrontOrderEntity frontOrderId;
+    @OneToOne
+    @JoinColumn(name = "fk_frontUserId")
+    private FrontUserInfoEntity userInfoEntity;
+
+    public int getComplaintState() {
+        return complaintState;
+    }
+
+    public void setComplaintState(int complaintState) {
+        this.complaintState = complaintState;
+    }
+
+    public FrontUserInfoEntity getUserInfoEntity() {
+        return userInfoEntity;
+    }
+
+    public void setUserInfoEntity(FrontUserInfoEntity userInfoEntity) {
+        this.userInfoEntity = userInfoEntity;
+    }
 
     public int getId() {
         return id;

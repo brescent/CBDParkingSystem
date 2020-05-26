@@ -7,14 +7,17 @@ import com.project.service.IStallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class StallServcempl  implements IStallService {
     @Autowired
     private StallDao stallDao;
     @Override
-    public void addStall(FrontStallEntity frontStallEntity) {
-         stallDao.save(frontStallEntity);
+    public int addStall(FrontStallEntity frontStallEntity) {
+        FrontStallEntity f=  stallDao.save(frontStallEntity);
+        return f.getId();
     }
 
     @Override
@@ -31,5 +34,10 @@ public class StallServcempl  implements IStallService {
     public FrontStallEntity  selStall(int id) {
 
         return stallDao.findById(id).get();
+    }
+
+    @Override
+    public List<FrontStallEntity> getStallByUserId(int id) {
+        return stallDao.getStallByUserId(id);
     }
 }

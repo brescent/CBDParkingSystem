@@ -6,6 +6,7 @@ import com.project.entity.FrontUserInfoEntity;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IOrderService {
     public  void  addOrder(FrontOrderEntity frontOrderEntity);
@@ -14,4 +15,6 @@ public interface IOrderService {
     public FrontOrderEntity selOrder(int id);
 
     public List<FrontOrderEntity> orderByUserid(int id);
+    public List<Map> getAllOrderByUserId(int id);
+    public List<Map> getOrderById(int id);
 }

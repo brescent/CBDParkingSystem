@@ -41,7 +41,7 @@
        <el-pagination
          @size-change="handleSizeChange"
          @current-change="handleCurrentChange"
-         :current-page="page.currentPage"
+         :current-page="page.currentPage1"
          :page-sizes="[3, 10, 15]"
          :page-size="3"
          layout="total, sizes, prev, pager, next, jumper"
@@ -61,6 +61,8 @@
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <!-- import JavaScript -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+ <!--axios -->
+<script src="https://cdn.bootcss.com/axios/0.19.2/axios.js"></script>
   <script>
     new Vue({
       el: '#app',
@@ -70,51 +72,55 @@
       },
     
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+      this.page.size=val;
+          this.showData()
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
+          this.page.currentPage1=val;
+          this.showData()
       },
     news(){
         window.location.href="../../bwk/page/ShowMessageList.html"
-    }
+    },
+          showData:function(){
+             this.tableData=this.infoData.slice(this.page.size*(this.page.currentPage1-1),
+                 this.page.size*(this.page.currentPage1-1)+this.page.size)
+          }
 
     },
-      data: function() {
-        return { 
-          tableData: [{
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }],
+      data: {
+          tableData:[] ,
+          infoData:[],
           page:{
-            currentPage1: 5,
-            total:10,
+            currentPage1:1,
+            total:1,
+              size:3
           },
-         infoData: [{
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }],
-        }
-      
-      }
+      },
+        mounted:function () {
+            var that=this;
+            axios.get('/getStallByuserId?id=1')
+                .then(function (response) {
+
+                     if(response.data.length>1){
+                         that.page.total=response.data.length
+                         var resultdata=[];
+                         resultdata[0]=response.data[0]
+                         for (let i=1;i<response.data.length;i++) {
+                             resultdata[i]=response.data[0].userInfoEntity.frontStallEntity[i]
+                         }
+                         that.infoData=resultdata;
+                         that.showData();
+                     }
+                     else {
+                         that.infoData=response.data
+                     }
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
     })
   </script>
 </html>

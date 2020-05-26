@@ -9,7 +9,7 @@
     <!--使用ajax 需要导入-->
     <script  src="../js/vue/vue-resource.js"></script>
     <script src="../js/elementUI/elementUI.js"></script>
-    <script  src="../js/page_Js/main/add.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
@@ -21,9 +21,10 @@
 <body>
 
 
-<div style="margin-left: 700px"><h2 style="color: #66b1ff">投诉管理</h2></div>
+
 <div id="app">
 
+    <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">投诉管理</div>
 
     <el-container>
 
@@ -72,29 +73,14 @@
 <!--            按钮区-->
             <div class="main_button" style="margin-bottom:30px">
 
-
-
-
-                <el-form :inline="true" label-width="150px">
-                    <el-form-item label="授理状态:" style="margin-left: -10px">
-                        <el-select v-model="value" placeholder="请选择">
-                            <el-option
-                                    v-for="item in options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
-
                     <el-form-item label="投诉时间：" >
                         <el-date-picker
-                                v-model="value1"
+                                v-model="startDate"
                                 type="date"
                                 placeholder="选择日期"  >
                         </el-date-picker>
                         <el-date-picker
-                                v-model="value2"
+                                v-model="endDate"
                                 type="date"
                                 placeholder="选择日期"  >
                         </el-date-picker>
@@ -106,7 +92,7 @@
         </el-main>
     </el-container>
 </div>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
 
@@ -120,33 +106,19 @@
         data:{
             disabledDate(time) {
                 return time.getTime() > Date.now();
-            }, value1: '',
+            }, startDate: '',
             disabledDate(time) {
                 return time.getTime() > Date.now();
-            }, value2: '',
+            },  endDate: '',
                 tableData:tableData,
-                 pageSize:3,
-                 total:0,
-                 currentPage:1,
-
-
-            options: [{
-                value: '选项1',
-                label: '投诉成功'
-            }, {
-                value: '选项2',
-                label: '投诉失败'
-            }, {
-                value: '选项3',
-                label: '暂缓处理'
-            }],
-            value: ''
-
+                pageSize:3,
+                total:0,
+                currentPage:1,
         },
         //在vue被实例化之后
         created:function(){
-            //调用getdatas()方法
-            this.getDatas(this.currentPage,this.pageSize);
+            // //调用getdatas()方法
+            // this.getDatas(this.currentPage,this.pageSize);
         },
         methods:{
             /*查找按钮事件*/
@@ -166,47 +138,21 @@
                 this.getDatas(this.currentPage,pSize);
             },
             /*查询数据*/
-            getDatas:function(currentPage,pageSize){
-                //发送ajax
-                this.$http.get("../showStudentInfo",{
-                    stuName:this.stuName,
-                    stuGender:this.stuGender,
-                    className:this.className,
-                    currentPage:currentPage,
-                    pageSize:pageSize
-                }).then(function(result){
-                    console.log(result.body);
-                    //设置分页控件的值
-                    this.tableData=result.body.list;
-                    this.pageSize=result.body.pageSize;
-                    this.currentPage=result.body.pageNum;
-                    this.total =result.body.total;
-                    console.log(this.total+"----total")
+            getDatas: function (currentPage, pageSize) {
 
-                });
-
-                /* axios.post("../showStudentInfo",{
-                     currentPage:this.currentPage,
-                     pageSize:this.pageSize
-                 }).then(function(result){
-                     console.log(result+"-->>>")
-                 });*/
-
-
-
-                this.tableData=[{
-                    complainter:"张三",
-                    beComplainter:"李四"
-
-                },{complainter:"老舍",
-                    beComplainter:"珠子"}];
-                //测试对象包含对象的数据
-                /*this.tableData=[
-                    {id:1,age:18,name:"张三",gender:"男",classBean:{id:1,name:"1班",teacherBean:{id:1,name:"张老师"}}},
-                    {id:1,age:18,name:"张三",gender:"男",classBean:{id:2,name:"2班",teacherBean:{id:1,name:"张老师"}}},
-                    {id:1,age:18,name:"张三",gender:"男",classBean:{id:3,name:"3班",teacherBean:{id:1,name:"张老师"}}},
-                    {id:1,age:18,name:"张三",gender:"男",classBean:{id:4,name:"4班",teacherBean:{id:1,name:"张老师"}}}
-                ];*/
+                axios.post("../../stall/findByItems",{
+                        startDate:this.startDate,
+                        endDate:this.endDate,
+                        currentPage:currentPage,
+                        pageSize:pageSize,
+                    }
+                ).then(function (result) {
+                    console.log(result + "-->>>")
+                    this.tableData = result.data.dataList;
+                    this.pageSize = result.data.pageSize;
+                    this.currentPage = result.data.currentPage;
+                    this.total = result.data.count;
+                }.bind(this));
 
             }
         }

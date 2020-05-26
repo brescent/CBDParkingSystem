@@ -23,7 +23,7 @@
             </el-header>
             <el-main>
                 <div class="content">
-                    <div class="information" v-for="(item,key) in list">
+                    <div  style="width: 400px" sclass="information" v-for="(item,key) in list">
                         <div>
                             <span>待 售 车 位 信 息：</span>
                             <p>{{item.stallAddress}}{{item.stallNum}}车位</p>
@@ -84,10 +84,9 @@
             this.stallAll();
         },methods:{
             stallAll: function(){
-                axios.get("http://127.0.0.1:8089/getAllDeal").then(function (respone) {
+                axios.get("/getAllDeal").then(function (respone) {
                         this.list=respone.data;
                 }.bind(this)).catch(function (error) {
-                    console.log(error)
                 })
             },
             setClass(value) {

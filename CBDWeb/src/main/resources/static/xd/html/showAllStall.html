@@ -85,77 +85,76 @@
 
 
 <!--AJAX-->
-
 <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<script src="../js/page_Js/main/showAllStall.js"></script>
+<!--<script type="text/javascript">-->
 
-<script type="text/javascript">
+<!--    // //使用post发送ajax时需要设置-->
+<!--    // Vue.http.options.emulateJSON = true;->-->
 
-    // //使用post发送ajax时需要设置
-    // Vue.http.options.emulateJSON = true;->
+<!--    //测试对象包含对象的数据-->
+<!--      var tableData=[{stallAddress :'天府一街cbd',stallNo:'TF548',stallState:0},-->
+<!--         {stallAddress :'天府一街cbd',stallNo:'TF528',stallState:1}];-->
+<!--    new Vue({-->
+<!--        el:"#app",-->
+<!--        data(){-->
+<!--            return {-->
+<!--            stallAddress:"",-->
+<!--            stallNo:"",-->
+<!--            stallState:"",-->
+<!--            tableData:[],-->
+<!--            pageSize:3,-->
+<!--            total:0,-->
+<!--            currentPage:1,-->
+<!--            }}-->
+<!--        ,-->
+<!--        //在vue被实例化之后-->
+<!--        created:function(){-->
+<!--            //调用getdatas()方法-->
+<!--            this.getDatas(this.currentPage,this.pageSize);-->
+<!--        },-->
+<!--        methods:{-->
+<!--            /*查找按钮事件*/-->
+<!--            seach:function(){-->
+<!--                this.getDatas(this.stallAddress,this.stallNo,this.currentPage,this.pageSize);-->
+<!--            },-->
+<!--            /*改变当前页数*/-->
+<!--            currentChange:function(curNum){-->
+<!--                this.getDatas(curNum,this.pageSize);-->
+<!--            },-->
+<!--            /*改变每页显示条数*/-->
+<!--            sizeChange:function(pSize){-->
+<!--                this.getDatas(this.currentPage,pSize);-->
+<!--            },   /*查询数据*/-->
+<!--            getDatas:function(stallAddress,stallNo,currentPage,pageSize){-->
+<!--                //发送ajax-->
+<!--                axios.get('../../stall/findByItems',{params:{-->
+<!--                    stallAddress:this.stallAddress,-->
+<!--                    stallNo:this.stallNo,-->
+<!--                    currentPage:currentPage,-->
+<!--                    pageSize:pageSize,-->
+<!--                }}).then(function(result){-->
+<!--                    console.log(result.body);-->
+<!--                    //设置分页控件的值-->
+<!--                    this.tableData=result.body.dataList;-->
+<!--                    this.pageSize=result.body.pageSize;-->
+<!--                    this.currentPage=result.body.currentPage;-->
+<!--                    this.total =result.body.total;-->
+<!--                    console.log(this.total+"&#45;&#45;&#45;&#45;total")-->
 
-    //测试对象包含对象的数据
-      var tableData=[{stallAddress :'天府一街cbd',stallNo:'TF548',stallState:0},
-         {stallAddress :'天府一街cbd',stallNo:'TF528',stallState:1}];
-    new Vue({
-        el:"#app",
-        data(){
-            return {
-            stallAddress:"",
-            stallNo:"",
-            stallState:"",
-            tableData:[],
-            pageSize:3,
-            total:0,
-            currentPage:1,
-            }}
-        ,
-        //在vue被实例化之后
-        created:function(){
-            //调用getdatas()方法
-            this.getDatas(this.currentPage,this.pageSize);
-        },
-        methods:{
-            /*查找按钮事件*/
-            seach:function(){
-                this.getDatas(this.stallAddress,this.stallNo,this.currentPage,this.pageSize);
-            },
-            /*改变当前页数*/
-            currentChange:function(curNum){
-                this.getDatas(curNum,this.pageSize);
-            },
-            /*改变每页显示条数*/
-            sizeChange:function(pSize){
-                this.getDatas(this.currentPage,pSize);
-            },   /*查询数据*/
-            getDatas:function(stallAddress,stallNo,currentPage,pageSize){
-                //发送ajax
-                axios.get('../../stall/findByItems',{params:{
-                    stallAddress:this.stallAddress,
-                    stallNo:this.stallNo,
-                    currentPage:currentPage,
-                    pageSize:pageSize,
-                }}).then(function(result){
-                    console.log(result.body);
-                    //设置分页控件的值
-                    this.tableData=result.body.dataList;
-                    this.pageSize=result.body.pageSize;
-                    this.currentPage=result.body.currentPage;
-                    this.total =result.body.total;
-                    console.log(this.total+"----total")
+<!--                });-->
+<!--            },-->
+<!--            add(){-->
 
-                });
-            },
-            add(){
+<!--                window.location.href="addStall.html";-->
 
-                window.location.href="addStall.html";
+<!--            }-->
 
-            }
-
-        }
+<!--        }-->
 
 
-    })
-</script>
+<!--    })-->
+<!--</script>-->
 
 </body>
 </html>
