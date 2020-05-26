@@ -12,7 +12,7 @@ const app = new Vue({
     },
     //在vue被实例化之后
     created:function(){
-        //调用getdatas()方法
+        //调用findLog()方法加载表格
         this.findLog(this.pageNum,this.pageSize);
     },
     methods:{

@@ -58,7 +58,7 @@ public class UserController {
             //如果用户类型是2或者3，也就是管理员或则超级管理员
             if (userType == 2||userType==3) {
                 //通过用户id查找管理员信息
-                AdminEntity admin=adminService.getAdminById(mainUser.getId());
+                AdminEntity admin=adminService.getAdminEntityByUserId(mainUser.getId());
                 //通过管理员id查找权限集合
                 List<PowerEntity> powerlist = this.powerService.getPowerByAdminId(admin.getId());
 

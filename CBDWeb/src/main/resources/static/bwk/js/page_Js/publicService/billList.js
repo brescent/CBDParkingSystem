@@ -26,10 +26,11 @@ const app = new Vue({
         /*改变每页显示条数*/
         sizeChange: function (pSize) {
             this.pageSize = pSize;
-            this.getDatas();
+            this.findBill();
         },
         /*查询数据*/
         findBill: function () {
+            var vm = this;
             //发送ajax
             axios.get("../../../../findBillList", {
                 params:{
@@ -41,16 +42,17 @@ const app = new Vue({
             }).then(function (result) {
 
                 //设置分页控件的值
-                this.billData = result.data.list;
-                this.pageSize = result.data.pageSize;
-                this.pageNum = result.data.pageNum;
-                this.total = result.data.list.count;
+                this.billData = result.data.page.list;
+                this.pageSize = result.data.page.pageSize;
+                this.pageNum = result.data.page.pageNum;
+                this.total = result.data.page.list.length;
+                vm.totalData = result.data.billCountDtoList;
                 console.log(this.total + "----total")
-            }.bind(this));
+            }.bind(vm));
 
             //测试对象包含对象的数据
             // this.totalData = [
-            //     {totalReceive: "2000", totalPaid: "2000", totalCount: "4"}
+            //     {totalReceived: "2000", totalPaid: "2000", totalCount: "4"}
             // ];
             //
             // this.billData = [
