@@ -63,7 +63,7 @@ public class Powerinterceptor implements HandlerInterceptor {
 
                            if(!gerUrl.contains("addCompany")&&!gerUrl.contains("showAllCompany")&&
                            !gerUrl.contains("checkMsgInfo")&&!gerUrl.contains("showAllPart")&&
-                           !gerUrl.contains("partInfo")&&!gerUrl.contains("log")){
+                           !gerUrl.contains("partInfo")&&!gerUrl.contains("log")&&!gerUrl.contains("checkAllMsg")){
                                response.sendRedirect("/yzh/page/login.html");
                            }
                        }
