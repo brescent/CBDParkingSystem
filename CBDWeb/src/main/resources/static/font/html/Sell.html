@@ -10,53 +10,55 @@
 </head>
 
 <body>
-    <div id="app">
-        <el-container>
-            <el-header>
-                <h1>出售车位</h1>
-            </el-header>
-            <el-main>
-                <div id="information">
-                    <el-form ref="form" :model="form" label-width="80px">
-                        <el-form-item label="小区地址">
-                            <el-input v-model="address" prefix-icon="el-icon-s-home"></el-input>
-                        </el-form-item>
-                        <el-form-item label="车位编号">
-                            <el-input v-model="number" prefix-icon="el-icon-info"></el-input>
-                        </el-form-item>
-                        <el-form-item label="出售价格">
-                            <el-input v-model.number="price" prefix-icon="el-icon-coin" oninput ="value=value.replace(/[^0-9.]/g,'')"></el-input>
-                        </el-form-item>
-                        <el-upload class="upload-demo" style="margin:0px 0px 40px 18px;" drag
-                            action="https://jsonplaceholder.typicode.com/posts/" :before-upload="beforeAvatarUpload"
-                                   :file-list="fileList"
-                                   :http-request="getFile"
-                            :limit="1" multiple>
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">请上传车位产权复印件，将文件拖到此处，或<em>点击上传</em></div>
-                            <div class="el-upload__tip" slot="tip">上传文件大小不超过2M，仅支持.jpg和.png两种格式</div>
-                        </el-upload>
-                        <el-button type="primary" style="margin-right: 30px;">发布</el-button>
-                        <el-button>返回</el-button>
-                    </el-form>
-                </div>
-            </el-main>
-        </el-container>
-    </div>
+<div id="app">
+    <el-container>
+        <el-header>
+            <h1>出售车位</h1>
+        </el-header>
+        <el-main>
+            <div id="information">
+                <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="小区地址">
+                        <el-input required v-model="address" prefix-icon="el-icon-s-home"></el-input>
+                    </el-form-item>
+                    <el-form-item label="车位编号">
+                        <el-input required v-model="number" prefix-icon="el-icon-info"></el-input>
+                    </el-form-item>
+                    <el-form-item label="出售价格">
+                        <el-input required v-model.number="price" prefix-icon="el-icon-coin" oninput ="value=value.replace(/[^0-9.]/g,'')"></el-input>
+                    </el-form-item>
+                    <el-upload class="upload-demo" style="margin:0px 0px 40px 18px;" drag
+                                   action="https://jsonplaceholder.typicode.com/posts/" :before-upload="beforeAvatarUpload"
+                               :file-list="fileList"
+                               :http-request="getFile"
+                               :limit="1" multiple>
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">请上传车位产权复印件，将文件拖到此处，或<em>点击上传</em></div>
+                        <div class="el-upload__tip" slot="tip">上传文件大小不超过2M，仅支持.jpg和.png两种格式</div>
+                    </el-upload>
+                    <el-button @click="upload" type="primary" style="margin-right: 30px;">发布</el-button>
+                    <el-button>返回</el-button>
+                </el-form>
+            </div>
+        </el-main>
+    </el-container>
+</div>
 </body>
 <!-- import Vue before Element -->
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 <script>
     new Vue({
         el: '#app',
         data: {
-                address: "",
-                number: "",
-                price: "",
-                file:"",
-                fileList: []
+            address: "",
+            number: "",
+            price: "",
+            file:"",
+            fileList: [],
+            fileName:""
         },
         methods: {
             beforeAvatarUpload(file) {
@@ -79,19 +81,40 @@
                 return extension || extension2 && isLt2M
             },
             getFile(item) {
-                console.log(item.file.name)
                 this.file = item.file
-                console.log(this.file)
             },
             upload() {
                 const fd = new FormData()
-                fd.append('filename', this.file)
-                const config = { headers: { 'Content-Type': 'multipart/form-data' }}
-                this.$request.post('/uploading', fd, config
-                ).then(response => {
-                    this.$message.success(response.retCode)
-                })
-            },
+                    fd.append('filename', this.file)
+                        axios({
+                            method: "post",
+                            url: "/addSingleFile",
+                            data: fd,
+                            headers: {
+                                'Content-Type': 'multipart/form-data'  // 文件上传
+                            },
+                        }).then(function (response) {
+                            this.fileName=response.data;
+                            axios.post("/addSingle",{
+                                stallAddress:this.address,
+                                stallNo:this.number,
+                                peopleNo:"51032220011207097X",
+                                stallImg:this.fileName
+                            }).then(function (res) {
+                                if(res="0"){
+                                    this.$message({
+                                        message: '发布成功！等待审核',
+                                        type: 'success'
+                                    });
+                                    setTimeout(window.location.href='http://192.168.40.3:8089/font/html/Purchase_res.html',1000);
+                                }else {
+
+                                }
+                            }.bind(this))
+                        }.bind(this)).catch(function (reason) {
+
+                        })
+            }
         },
     })
 </script>

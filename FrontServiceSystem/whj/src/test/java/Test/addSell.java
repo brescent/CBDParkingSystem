@@ -7,7 +7,7 @@ import com.project.entity.FrontStallEntity;
 import com.project.entity.FrontUserInfoEntity;
 import com.project.service.IUserInfoService;
 import com.project.service.impl.BookingServiceImpl;
-import com.project.service.impl.OrderServiceIml;
+import com.project.service.impl.OrderServiceImpl;
 import com.project.service.impl.SellServiceImpl;
 import com.project.vo.ShowDealTwo;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class addSell {
     private IUserInfoService iUserInfoService;
 
     @Autowired
-    private OrderServiceIml orderServiceIml;
+    private OrderServiceImpl orderServiceIml;
 
     @Test
     public void addsellTest(){

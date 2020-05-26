@@ -9,9 +9,12 @@ import com.project.service.IOderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 
 @Service(value = "orderService")
-public class OrderServiceIml implements IOderService {
+public class OrderServiceImpl implements IOderService {
 
     @Autowired
     private OrderDao orderDao;
@@ -19,15 +22,29 @@ public class OrderServiceIml implements IOderService {
     @Autowired
     private DealDao dealDao;
 
+    String i;
+
 
     @Override
-    public void saveOrder(String message, int id) {
+    public String saveOrder(String message, int id) {
         FrontOrderEntity frontOrderEntity = new FrontOrderEntity();
         FrontDealEntity frontDealEntity =  dealDao.getDealById2(id);
         frontOrderEntity.setFrontDealEntity(frontDealEntity);
         frontOrderEntity.setFrontUserInfoId(frontDealEntity.getFrontStallId().getStall());
         frontOrderEntity.setOrderState(0);
         frontOrderEntity.setMessage(message);
-        orderDao.save(frontOrderEntity);
+
+        if(orderDao.save(frontOrderEntity)==null){
+            i = "1";
+        }else {
+            i = "0";
+        }
+
+        return i;
+    }
+
+    @Override
+    public List<Map> findOrderByDealId(int id) {
+        return orderDao.findOrderByDealId(id);
     }
 }
