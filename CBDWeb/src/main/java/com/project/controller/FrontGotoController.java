@@ -31,7 +31,7 @@ public class FrontGotoController {
      * 交易信息
      * @return
      */
-    @RequestMapping("getAllDeal")
+    @RequestMapping("getAllDeallist")
     private  String getAllDeallist(){
       String str= dealService.getAllDeallist();
         return str;
