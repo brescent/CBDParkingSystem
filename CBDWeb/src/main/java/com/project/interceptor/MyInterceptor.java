@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * 用户拦截器
+ */
 public class MyInterceptor implements HandlerInterceptor {
 
 

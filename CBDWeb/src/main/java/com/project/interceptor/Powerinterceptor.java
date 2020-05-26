@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 权限拦截器
+ */
 public class Powerinterceptor implements HandlerInterceptor {
 
 
