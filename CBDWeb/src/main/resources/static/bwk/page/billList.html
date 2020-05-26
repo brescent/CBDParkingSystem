@@ -23,7 +23,7 @@
                 <el-table :data="totalData"
                           highlight-current-row
                           style="width:100%">
-                    <el-table-column prop="totalReceive" label="总收入金额" align="center">
+                    <el-table-column prop="totalReceived" label="总收入金额" align="center">
                     </el-table-column>
                     <el-table-column prop="totalPaid" label="总支出金额" align="center">
                     </el-table-column>
@@ -61,7 +61,7 @@
                            :current-page="pageNum"
                            :page-size="pageSize"
                            :pager-count=5
-                           :page-sizes=[3,5]
+                           :page-sizes=[3,5,10]
                            :total="total"
                            @current-change="currentChange"
                            @size-change="sizeChange">
