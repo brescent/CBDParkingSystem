@@ -14,4 +14,5 @@ public interface IComplaintService {
     public List<Map> getAllComplaint();
     public void updateById(int id ,int state);
     public int getComplaintNum(int id);
+    public  Map getComplaintById(int id);
 }

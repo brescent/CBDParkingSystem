@@ -47,4 +47,9 @@ public class Complaintmpl implements IComplaintService {
         return complaintDao.getComplaintNum(id);
     }
 
+    @Override
+    public Map getComplaintById(int id) {
+        return complaintDao.getComplaintById(id);
+    }
+
 }
