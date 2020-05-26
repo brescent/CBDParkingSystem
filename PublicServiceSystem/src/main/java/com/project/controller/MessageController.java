@@ -28,7 +28,7 @@ public class MessageController {
      * 添加消息
      * @param messageDto 消息Dto
      */
-    @PostMapping("add")
+    @PostMapping("addMessage")
     public void addMessage(MessageDto messageDto){
         PublicUserEntity receiver = userService.findUserByName(messageDto.getReceiverName());
         PublicUserEntity sender = userService.findUserByName(messageDto.getSenderName());
@@ -59,4 +59,5 @@ public class MessageController {
         messageService.readMessageById(messageId);
         return messageEntity;
     }
+
 }

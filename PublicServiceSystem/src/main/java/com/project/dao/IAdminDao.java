@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import javax.swing.*;
 import java.awt.print.Pageable;
 import java.util.List;
 
@@ -38,5 +39,11 @@ public interface IAdminDao extends CrudRepository<AdminEntity,Integer> {
      */
     @Query( "select count (id) from  AdminEntity " )
     public int getAdminCount();
+
+
+    @Query(value = "from  AdminEntity  where id=:adminId")
+    public AdminEntity findAdminByAdminId(@Param("adminId") int admindId);
+
+
 
 }

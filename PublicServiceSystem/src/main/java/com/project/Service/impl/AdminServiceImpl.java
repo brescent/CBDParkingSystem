@@ -87,7 +87,9 @@ public class AdminServiceImpl implements IAdminService {
     }
 
 
-    public String updAdminMsg(AdminVo admin,Integer userId){
+
+    @Override
+    public String updAdminMsg(AdminVo admin, Integer userId){
 
         try{
             //修改登录密码,以及记录日志
@@ -116,7 +118,7 @@ public class AdminServiceImpl implements IAdminService {
     @Override
     public AdminEntity getAdminById(int adminId) {
         //根据id获取管理员
-        AdminEntity adminEntity =adminDao.getAdminEntityById(adminId);
+        AdminEntity adminEntity =adminDao.findAdminByAdminId(adminId);
         return adminEntity;
     }
 
