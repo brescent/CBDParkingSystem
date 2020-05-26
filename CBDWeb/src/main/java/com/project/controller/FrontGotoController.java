@@ -75,6 +75,12 @@ public class FrontGotoController {
         return str;
     }
 
+    @RequestMapping("getComplaintById/{id}")
+    public  String getComplaintById(@PathVariable("id") int id){
+        return complaintService.getComplaintById(id);
+    }
+
+
     /*
     订单
      */

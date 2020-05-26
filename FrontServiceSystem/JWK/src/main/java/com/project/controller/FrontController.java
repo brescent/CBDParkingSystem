@@ -154,6 +154,18 @@ public class FrontController {
      public void updateComplaintById(@PathVariable("id") int id , @PathVariable("id") int state){
        complaintmpl.updateById(id,state);
      };
+    @RequestMapping("getComplaintById/{id}")
+    public  String getComplaintById(@PathVariable("id") int id){
+      Map map=  complaintmpl.getComplaintById(id);
+        String str= JSON.toJSONStringWithDateFormat(map,"yyyy-MM-dd", SerializerFeature.WriteDateUseDateFormat);
+
+        return  str;
+    };
+
+
+
+
+
     @RequestMapping("getAllPact")
     public String getAllPact() {
         List<Map> list = pactServicempl.getAllPact();
