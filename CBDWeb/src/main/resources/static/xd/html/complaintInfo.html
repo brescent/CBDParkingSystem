@@ -136,120 +136,17 @@
             tableData1:tableData1,
             tableData2:tableData2,
             tableData3:tableData3,
-            complaintInfo:'太帅le',
-            id:''
+            complaintInfo:'太帅le'
 
         },
-        created:function(){
-            /*获取参数Id*/
-            let requestObj = GetRequest();
-            this.id=requestObj['id'];
-            //查询详细信息
-            this. getInfo(this.id);
-
-        },
-
         methods:{
 
-            getInfo(id){
-
-
-                //发送ajax
-                axios.get('../../findById',{params:{
-                        id:id,
-
-                    }}).then(function(result){
-
-                    // console.log(result.data.unit);
-                    tableData1=result.data.
-                        tableData2=result.data.
-                        tableData3=result.data.
-                        complaintInfo=result.data.
-                }.bind(this));
-
-            },
-
             // 传入投诉id
-            sure (){
-                //发送ajax
-                axios.post('../../updateState',{
-                    id:this.id,
-                    state:'1'
-
-                }).then(function(result){
-                    if(result.data=="ok"){
-                        this.alert('处理成功',{
-                            title:"消息提示",
-                            confirmButtonText: '确定',
-                            type:'success',
-                            center: true
-                        });
-                        window.location.href="showAllOutContract.html";
-                    }else{
-                        this.alert('添加失败', {
-                            title:"消息提示",
-                            confirmButtonText: '确定',
-                            type:'error',
-                            center: true
-                        });
-                    }
-
-                })
-
-
-            },
+            sure (){},
             cancel(){
-                //发送ajax
-                axios.post('../../updateState',{
-                    id:this.id,
-                    state:'2'
-
-                }).then(function(result){
-                    if(result.data=="ok"){
-                        this.alert('处理成功',{
-                            title:"消息提示",
-                            confirmButtonText: '确定',
-                            type:'success',
-                            center: true
-                        });
-                        window.location.href="showAllOutContract.html";
-                    }else{
-                        this.alert('添加失败', {
-                            title:"消息提示",
-                            confirmButtonText: '确定',
-                            type:'error',
-                            center: true
-                        });
-                    }
-
-                })
+                window.history.go(-1);
             },
-            delay(){
-                //发送ajax
-                axios.post('../../updateState',{
-                    id:this.id,
-                    state:'3'
-
-                }).then(function(result){
-                    if(result.data=="ok"){
-                        this.alert('处理成功',{
-                            title:"消息提示",
-                            confirmButtonText: '确定',
-                            type:'success',
-                            center: true
-                        });
-                        window.location.href="showAllOutContract.html";
-                    }else{
-                        this.alert('添加失败', {
-                            title:"消息提示",
-                            confirmButtonText: '确定',
-                            type:'error',
-                            center: true
-                        });
-                    }
-
-                })
-            }
+            delay(){}
 
 
 

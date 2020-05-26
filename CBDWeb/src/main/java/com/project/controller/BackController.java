@@ -57,17 +57,11 @@ public class BackController {
     @Autowired
     ICompanyContractService companyContractService;
     /*投诉业务接口*/
-
     @Autowired
     IComplainService  complainService;
     /**
      * 动态查询车位信息
      *
-     * @param address     车位地址
-     * @param no          车位编 号
-     * @param currentPage 当前页    @RequestParam(value = "no",required = false)
-     * @param pageSize    页面大小   @RequestParam(value = "address",required = false)
-     * @return
      */
 
 
@@ -98,8 +92,6 @@ public class BackController {
     /**
      * 根据车位id修改车位的拥有者
      *
-     * @param id       车位id
-     * @param peopleNo 身份证号
      */
     @GetMapping("stall/updatePeole")
     @ResponseBody
@@ -292,29 +284,26 @@ public class BackController {
 
         return "ok";
     }
-
-
-
 /*查询所有的投诉*/
-    @GetMapping("findAllComplaint")
+    @GetMapping
     public  String findAllComplaint(){
 
-     return    complainService.findAllComplaint();
+     return    complainService.findAll();
 
     }
     /*查询所有的投诉*/
-    @GetMapping("findById")
-    public  String findComplaintById(String id){
+    @GetMapping
+    public  String findComplaintById(int id){
 
-        return    complainService.findComplaintById(id);
+        return    complainService.findById(id);
 
     }
 
 /*修改投诉状态*/
-    @GetMapping("updateState")
-    public String updateComplaint(@RequestParam("id") String id,@RequestParam("state")String state){
+    @GetMapping
+    public String updateComplaint(int id,int state){
 
-        complainService.updateState(id,state);
+        complainService.updateComplaintById(id,state);
 
         return "ok";
     }

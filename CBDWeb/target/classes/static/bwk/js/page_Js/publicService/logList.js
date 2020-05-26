@@ -5,25 +5,21 @@ Vue.http.options.emulateJSON = true;
 const app = new Vue({
     el:"#app",
     data:{
-        messageId:"",
-        messageInfo:"",
-        messageType:"",
-        receiveDate:"",
         tableData:[],
-        pageSize:3,
+        pageSize:10,
         total:0,
-        currentPage:1
+        pageNum:1
     },
     //在vue被实例化之后
     created:function(){
         //调用getdatas()方法
-        this.getDatas(this.currentPage,this.pageSize);
+        this.findLog(this.pageNum,this.pageSize);
     },
     methods:{
-        /*查看详情按钮*/
-        lookInfo:function(index,row){
-            window.location.href="shoMessageInfo.html?messageId="+row.id;
-        },
+        // /*查看详情按钮*/
+        // lookInfo:function(index,row){
+        //     window.location.href="shoMessageInfo.html?messageId="+row.id;
+        // },
         /*删除消息按钮*/
         deleteMessage:function(index,row){
             // row 对象其实就是一个消息对象
@@ -63,42 +59,45 @@ const app = new Vue({
         },
         /*改变当前页数*/
         currentChange:function(curNum){
-            this.getDatas(curNum,this.pageSize);
+            this.pageNum = curNum;
+            this.findLog();
         },
         /*改变每页显示条数*/
         sizeChange:function(pSize){
-            this.getDatas(this.currentPage,pSize);
+            this.pageSize = pSize;
+            this.findLog();
         },
         /*查询数据*/
-        getDatas:function(currentPage,pageSize){
+        findLog:function(pageNum,pageSize){
+            let vm=this;
             //发送ajax
-            this.$http.post("../showStudentInfo",{
-                stuName:this.stuName,
-                stuGender:this.stuGender,
-                className:this.className,
-                currentPage:currentPage,
-                pageSize:pageSize
+            axios.get("../../../../findLog",{
+                params:{
+                    //tableData:this.tableData,
+                    pageNum:this.pageNum,
+                    pageSize:this.pageSize,
+                }
             }).then(function(result){
-                console.log(result.body);
+                // alert(result.data.list);
                 //设置分页控件的值
-                this.tableData=result.body.list;
-                this.pageSize=result.body.pageSize;
-                this.currentPage=result.body.pageNum;
-                this.total =result.body.total;
+                vm.tableData=result.data.list;
+                vm.pageSize=result.data.pageSize;
+                vm.currentPage=result.data.pageNum;
+                vm.total =result.data.count;
                 console.log(this.total+"----total")
 
             });
 
             //测试对象包含对象的数据
-            this.tableData=[
-                {logDate:"2020-5-9 16:02:01",logInfo:"张三登录"},
-                {logDate:"2020-5-9 16:02:01",logInfo:"李四登录"},
-                {logDate:"2020-5-9 16:02:01",logInfo:"王五登录"},
-                {logDate:"2020-5-9 16:02:01",logInfo:"赵六登录"},
-                {logDate:"2020-5-9 16:02:01",logInfo:"钱七登录"},
-                {logDate:"2020-5-9 16:02:01",logInfo:"孙八登录"},
-                {logDate:"2020-5-9 16:02:01",logInfo:"李九登录"}
-            ];
+            // this.tableData=[
+            //     {logDate:"2020-5-9 16:02:01",logInfo:"张三登录"},
+            //     {logDate:"2020-5-9 16:02:01",logInfo:"李四登录"},
+            //     {logDate:"2020-5-9 16:02:01",logInfo:"王五登录"},
+            //     {logDate:"2020-5-9 16:02:01",logInfo:"赵六登录"},
+            //     {logDate:"2020-5-9 16:02:01",logInfo:"钱七登录"},
+            //     {logDate:"2020-5-9 16:02:01",logInfo:"孙八登录"},
+            //     {logDate:"2020-5-9 16:02:01",logInfo:"李九登录"}
+            // ];
 
         }
     }

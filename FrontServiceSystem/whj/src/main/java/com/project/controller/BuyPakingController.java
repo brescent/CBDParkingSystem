@@ -3,7 +3,7 @@ package com.project.controller;
 import com.alibaba.fastjson.JSON;
 import com.project.entity.FrontDealEntity;
 import com.project.service.IStallService;
-import com.project.service.impl.OrderServiceIml;
+import com.project.service.impl.OrderServiceImpl;
 import com.project.service.impl.SellServiceImpl;
 import com.project.vo.ShowDealTwo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class BuyPakingController {
     private IStallService stallService;
 
     @Autowired
-    private OrderServiceIml orderServiceIml;
+    private OrderServiceImpl orderServiceIml;
 
     /**
      *  发布出售车位
@@ -65,8 +65,9 @@ public class BuyPakingController {
     }
 
     @RequestMapping("/saveOrder/{message}/{id}")
-    public void saveOrder(@PathVariable("message") String message,@PathVariable("id") int id){
-        orderServiceIml.saveOrder(message,id);
+    public String saveOrder(@PathVariable("message") String message,@PathVariable("id") int id){
+            String i =  orderServiceIml.saveOrder(message,id);
+            return i;
     }
 
     /**

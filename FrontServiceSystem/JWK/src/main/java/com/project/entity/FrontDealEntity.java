@@ -58,6 +58,7 @@ public class FrontDealEntity {
     @JoinColumn(name = "fk_frontStallId")
     private FrontStallEntity frontStallId;
 
+
     public int getId() {
         return id;
     }

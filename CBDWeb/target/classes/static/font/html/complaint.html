@@ -40,31 +40,27 @@
         <div class="grid-content bg-purple-dark lease_p" style="background:#92bfec; margin-top:20px">
           <p style="padding-top:10px">
             <span>待租车位信息：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.stallAddress}}</span>
           </p>
           <p>
             <span>租赁开始时间：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.dealStateDate}}</span>
           </p>
           <p>
             <span>租赁结束时间：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.dealEndDate}}</span>
           </p>
           <p>
             <span>用户名：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.userName}}</span>
           </p>
           <p>
             <span>职业：</span>
-            <span>{{stallInfo.aa}}</span>
-          </p>
-          <p>
-            <span>信誉度：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.userProfession}}</span>
           </p>
           <p>
             <span>价格：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.dealPrice}}</span>
           </p>
           <p>
             <span>投诉理由：</span>
@@ -94,26 +90,62 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--axios -->
+<script src="https://cdn.bootcss.com/axios/0.19.2/axios.js"></script>
 <script>
   new Vue({
     el: '#app',
     methods: {
       stallLease() {
-        window.location.href="index.html";
+
+          axios.post('/addComplaint',{
+                  Orderid:this.orederId,
+                   msg:this.textarea,
+                  UserId:this.userId
+              }
+
+          ).then( (response)=> {
+
+              alert("投诉提交")
+
+          })
+              .catch(function (error) {0
+
+                  console.log(error);
+              });
+        window.location.href="record.html?id"+this.userId;
 
       },
       back(){
         window.history.go(-1);
       }
     },
+      mounted:function () {
+          this.orederId=(window.location.search.substring(4,));
+
+          axios.post('/getOrderById',{
+                  Orderid:this.orederId
+              }
+
+          ).then( (response)=> {
+
+              this.stallInfo=response.data;
+              console.log(this.stallInfo)
+
+          })
+              .catch(function (error) {0
+
+                  console.log(error);
+              });
+      },
     data: function () {
 
       return {
 
         stallInfo: {
-          aa: "hahaha"
-
         },
+          orederId:"",
+          userId:1,
         textarea: ""
       }
     }

@@ -2,24 +2,23 @@ package com.project.service;
 
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Map;
-
-@FeignClient("frontServiceSystem")
+@FeignClient("frontService")
 public interface IComplainService {
 
-    @GetMapping("/getAllComplaintList")
-    public String findAllComplaint();
+
+    @GetMapping("getAllComplaintlist")
+    public String findAll();
 
 
-
-    @GetMapping("/updateComplaintById")
-    public void updateState(@RequestParam("id") String id,@RequestParam("state") String state);
-
+    @GetMapping("getById/{id}")
+    public String findById(@PathVariable("id") int id);
 
 
-    @GetMapping("/findComplaintById")
-    public  String findComplaintById(@RequestParam("id")String id);
+    @GetMapping("updateComplaintById/{id}/{state}")
+    public void updateComplaintById(@PathVariable("id") int id, @PathVariable("id") int state);
+
 
 }

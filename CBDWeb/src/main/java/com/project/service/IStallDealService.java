@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface IStallDealService {
 
     @RequestMapping("getDealDate/{tag}")
-    public String getAllByDealEndDate(@PathVariable("tag") int tag);
+    String getAllByDealEndDate(@PathVariable("tag") int tag);
 
     @RequestMapping("getAllDeal")
-    public String getAllDeal();
+    String getAllDeal();
 
     @RequestMapping("/getDealDate/{tag}")
-    public String getDealById(@PathVariable("tag") int id);
+    String getDealById(@PathVariable("tag") int id);
 
     @RequestMapping("/saveOrder/{message}/{id}")
-    public String saveOrder(@PathVariable("message") String message,@PathVariable("id") int id);
+    String saveOrder(@PathVariable("message") String message,@PathVariable("id") int id);
 
 }

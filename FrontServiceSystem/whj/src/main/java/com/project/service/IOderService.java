@@ -1,8 +1,13 @@
 package com.project.service;
 
 
+import java.util.List;
+import java.util.Map;
+
 public interface IOderService {
 
-    void  saveOrder(String message, int id);
+    String  saveOrder(String message, int id);
+
+    List<Map> findOrderByDealId(int id);
 
 }

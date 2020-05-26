@@ -13,7 +13,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "t_frontStall")
-
 public class FrontStallEntity {
     /**
      * id
@@ -36,7 +35,7 @@ public class FrontStallEntity {
      * 车位状态
      */
     @Column(name = "f_stallState",length = 32)
-    private String stallState;
+    private int stallState;
     /**
      * 车位产权
      */
@@ -85,11 +84,11 @@ public class FrontStallEntity {
         this.stallAddress = stallAddress;
     }
 
-    public String getStallState() {
+    public int getStallState() {
         return stallState;
     }
 
-    public void setStallState(String stallState) {
+    public void setStallState(int stallState) {
         this.stallState = stallState;
     }
 
@@ -136,7 +135,7 @@ public class FrontStallEntity {
     public FrontStallEntity() {
     }
 
-    public FrontStallEntity(String stallNum, String stallAddress, String stallState,
+    public FrontStallEntity(String stallNum, String stallAddress, int stallState,
                             String stallPhoto, String stallAreaNum, int stallOwner,
                             String IDNum, FrontUserInfoEntity userInfoEntity) {
         this.stallNum = stallNum;

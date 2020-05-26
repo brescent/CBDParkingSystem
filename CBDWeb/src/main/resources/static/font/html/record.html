@@ -39,10 +39,10 @@
       label="操作"
       width="150">
       <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row.stallId)" type="text" size="medium">查看详情</el-button>
-        <el-button @click="handleClick(scope.row.stallId)" type="text" size="medium">投诉</el-button>
+        <el-button @click="showInfo(scope.row.stallId)" type="text" size="medium">查看详情</el-button>
+        <el-button @click="Complaint(scope.row.stallId)" type="text" size="medium">投诉</el-button>
       </template>
-  </el-table>
+
   <div class="block">
        <el-pagination
          @size-change="handleSizeChange"
@@ -64,13 +64,20 @@
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <!-- import JavaScript -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--axios -->
+<script src="https://cdn.bootcss.com/axios/0.19.2/axios.js"></script>
   <script>
     new Vue({
       el: '#app',
       methods: {
-      handleClick(row) {
+          showInfo(row) {
         console.log(row);
       },
+          Complaint(row) {
+
+              console.log(row)
+              window.location.href="complaint.html?id="+row
+          },
     
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
@@ -79,38 +86,31 @@
         console.log(`当前页: ${val}`);
       }
     },
+        mounted:function () {
+
+            // var that=this;
+            axios.post('/getAllOrderByUserId',{
+              userId:this.userId
+            }).then( (response)=> {
+
+                this.tableData=response.data
+                console.log(this.tableData)
+
+            })
+                .catch(function (error) {
+
+                    console.log(error);
+                });
+        },
       data: function() {
         return { 
-          tableData: [{
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }],
+          tableData: [],
           page:{
             currentPage1: 5,
             total:10,
           },
-         infoData: [{
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            stallId: '2',
-            stallState: '王小虎',
-            stallAddress: '上海市普陀区金沙江路 1518 弄'
-          }],
+            userId:1
+
         }
       
       }

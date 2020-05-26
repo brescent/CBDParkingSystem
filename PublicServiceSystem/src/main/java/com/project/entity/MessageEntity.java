@@ -3,7 +3,6 @@ package com.project.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -13,7 +12,7 @@ import java.text.SimpleDateFormat;
 @Entity
 @Table(name = "t_message")
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
-public class MessageEntity implements Serializable {
+public class MessageEntity {
     /**消息id*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
