@@ -35,8 +35,7 @@ import java.util.*;
 public class BackController {
 
 
-
-    public static String fileName="";
+    public static String fileName = "";
     public static final String ROOT = "upload-dir";
 
     private final ResourceLoader resourceLoader;
@@ -58,10 +57,10 @@ public class BackController {
     ICompanyContractService companyContractService;
     /*投诉业务接口*/
     @Autowired
-    IComplainService  complainService;
+    IComplainService complainService;
+
     /**
      * 动态查询车位信息
-     *
      */
 
 
@@ -91,7 +90,6 @@ public class BackController {
 
     /**
      * 根据车位id修改车位的拥有者
-     *
      */
     @GetMapping("stall/updatePeole")
     @ResponseBody
@@ -129,7 +127,7 @@ public class BackController {
      */
     @GetMapping("outContract/findAll")
     @ResponseBody
-    public String findAllOutContract(@RequestParam("currentPage") int currentPage,@RequestParam("pageSize") int pageSize) {
+    public String findAllOutContract(@RequestParam("currentPage") int currentPage, @RequestParam("pageSize") int pageSize) {
 
 
         return outContractService.findAllOutContract(currentPage, pageSize);
@@ -149,7 +147,7 @@ public class BackController {
     @ResponseBody
     public String addOutContract(@RequestBody Map<String, Object> map) {
         System.out.println(map);
-        map.put("contractImg",fileName);
+        map.put("contractImg", fileName);
         outContractService.addCompanyContract(map);
         return "ok";
     }
@@ -167,7 +165,7 @@ public class BackController {
             name = name.substring(name.lastIndexOf("."));
             name = UUID.randomUUID().toString().replace("-", "") + name;
 
-            File dir = new File("CBDWeb/classpath:/static/"+ROOT);
+            File dir = new File("CBDWeb/classpath:/static/" + ROOT);
             if (!dir.exists()) {
                 dir.mkdirs();
             }
@@ -179,7 +177,7 @@ public class BackController {
         }
 
 
-        fileName=name;
+        fileName = name;
 
         return "ok";
     }
@@ -199,7 +197,7 @@ public class BackController {
 
             stallIdList.add(stallId);
         }
-        map.put("contractImg",fileName);
+        map.put("contractImg", fileName);
         map.put("unit", outContractDto1.getUnit());
         map.put("stallIdList", stallIdList);
         outContractService.addCompanyContract(map);
@@ -225,7 +223,7 @@ public class BackController {
      */
     @GetMapping("companyContract/findAll")
     @ResponseBody
-    public String findAllCompanyContract(@RequestParam("currentPage") int currentPage,@RequestParam("pageSize") int pageSize) {
+    public String findAllCompanyContract(@RequestParam("currentPage") int currentPage, @RequestParam("pageSize") int pageSize) {
 
         return companyContractService.findAllCompanyContract(currentPage, pageSize);
 
@@ -284,26 +282,28 @@ public class BackController {
 
         return "ok";
     }
-/*查询所有的投诉*/
-    @GetMapping
-    public  String findAllComplaint(){
 
-     return    complainService.findAll();
-
-    }
     /*查询所有的投诉*/
-    @GetMapping
-    public  String findComplaintById(int id){
+    @GetMapping("complaint/findAll")
+    public String findAllComplaint() {
 
-        return    complainService.findById(id);
+        return complainService.findAll();
 
     }
 
-/*修改投诉状态*/
-    @GetMapping
-    public String updateComplaint(int id,int state){
+    /*查询id投诉*/
+    @GetMapping("complaint/findById")
+    public String findComplaintById(int id) {
 
-        complainService.updateComplaintById(id,state);
+        return complainService.findById(id);
+
+    }
+
+    /*修改投诉状态*/
+    @GetMapping("complaint/updateState")
+    public String updateComplaint(int id, int state) {
+
+        complainService.updateComplaintById(id, state);
 
         return "ok";
     }
