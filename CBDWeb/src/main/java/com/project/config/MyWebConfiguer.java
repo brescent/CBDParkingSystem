@@ -18,12 +18,19 @@ public class MyWebConfiguer implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-     //放行的文件
+     //放行的静态文件
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
 
 
     }
+
+
+
+
+
+
+
 
     /**
      * 拦截器
