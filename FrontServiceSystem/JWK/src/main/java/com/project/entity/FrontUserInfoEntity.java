@@ -3,6 +3,7 @@ package com.project.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -38,8 +39,8 @@ public class FrontUserInfoEntity {
      */
     @Column(name = "f_IDNum",length = 20)
     private String IDNum;
-    @OneToMany(mappedBy = "userInfoEntity")
-    private Set<FrontStallEntity> frontStallEntitySet;
+    @OneToMany(mappedBy = "userInfoEntity" ,fetch = FetchType.LAZY)
+    private List<FrontStallEntity> frontStallEntity;
 
 
     public int getId() {
@@ -82,20 +83,20 @@ public class FrontUserInfoEntity {
         this.IDNum = IDNum;
     }
 
-    public Set<FrontStallEntity> getFrontStallEntitySet() {
-        return frontStallEntitySet;
+    public List<FrontStallEntity> getFrontStallEntity() {
+        return frontStallEntity;
     }
 
-    public void setFrontStallEntitySet(Set<FrontStallEntity> frontStallEntitySet) {
-        this.frontStallEntitySet = frontStallEntitySet;
+    public void setFrontStallEntity(List<FrontStallEntity> frontStallEntity) {
+        this.frontStallEntity = frontStallEntity;
     }
 
-    public FrontUserInfoEntity(String userProfession, String realName, String userName, String IDNum, Set<FrontStallEntity> frontStallEntitySet) {
+    public FrontUserInfoEntity(String userProfession, String realName, String userName, String IDNum, List<FrontStallEntity> frontStallEntity) {
         this.userProfession = userProfession;
         this.realName = realName;
         this.userName = userName;
         this.IDNum = IDNum;
-        this.frontStallEntitySet = frontStallEntitySet;
+        this.frontStallEntity = frontStallEntity;
     }
 
     public FrontUserInfoEntity() {

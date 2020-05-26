@@ -42,15 +42,12 @@ public interface IStallService {
 
 
     /*审核车位信息*/
-
-
     public void updateValid(int id);
 
     /**
      * 查看所有未审核车位
      * @return 未审核车位信息集合
      */
-
     public List<StallEntity> findNoValid();
 
 

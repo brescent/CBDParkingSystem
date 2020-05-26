@@ -1,7 +1,7 @@
 package com.project.controller;
 
 import com.project.dto.UserDto;
-import com.project.entity.AdminEntity;
+
 import com.project.entity.PowerEntity;
 import com.project.vo.AdminVo;
 import com.project.service.IWebAdminService;

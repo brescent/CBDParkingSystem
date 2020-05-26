@@ -3,6 +3,8 @@ package com.project.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Date;
+
 
 /**
  * 合同实体
@@ -22,6 +24,12 @@ public class FrontPactEntity {
      */
     @Column(name = "f_pactState",length = 10)
     private int pactState;
+
+    /**
+     * 合同状态
+     */
+    @Column(name = "f_pactTime")
+    private Date pactTime=new Date(System.currentTimeMillis());
     /**
      * 订单外键
      */
@@ -35,6 +43,14 @@ public class FrontPactEntity {
     public FrontPactEntity(int pactState, FrontOrderEntity frontOrderId) {
         this.pactState = pactState;
         this.frontOrderId = frontOrderId;
+    }
+
+    public Date getPactTime() {
+        return pactTime;
+    }
+
+    public void setPactTime(Date pactTime) {
+        this.pactTime = pactTime;
     }
 
     public int getId() {

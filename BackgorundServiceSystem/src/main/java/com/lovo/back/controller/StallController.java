@@ -3,13 +3,9 @@ package com.lovo.back.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.lovo.back.dto.StallDto;
-import com.lovo.back.entity.PaginationBean;
 import com.lovo.back.entity.StallEntity;
 import com.lovo.back.service.IStallService;
-
-import org.apache.commons.collections4.Get;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -40,6 +36,12 @@ public class StallController {
         return  stallService.findAll();
     }
 
+    /**
+     * 根据车位地址  车位编号分页动态查询
+     * @param  map 参数体
+     * @return 合条件的车位集合
+     */
+
 
     @PostMapping ("findByItems")
     public String findByItems (@RequestBody Map<String,String> map)
@@ -51,7 +53,7 @@ public class StallController {
 
 
 
-    @GetMapping ("addStall")
+    @PostMapping ("addStall")
     public void add(@RequestBody Map<String,String> map){
 
          stallService.add(map.get("stallAddress"),map.get("addressNo"),Integer.parseInt(map.get("total")),Integer.parseInt(map.get("startNum")));
@@ -82,7 +84,10 @@ public class StallController {
     }
 
 
-
+    /**
+     * 单个添加车位
+     * @param map   参数体
+     */
 
     //@PathVariable("stallAddress") String stallAddress,@PathVariable("stallNo") String stallNo,@PathVariable("peopleNo") String peopleNo,@PathVariable("stallImg") String stallImg
     @PostMapping("addSingle")

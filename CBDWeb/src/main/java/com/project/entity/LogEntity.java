@@ -1,5 +1,7 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -13,7 +15,7 @@ public class LogEntity {
 
     private int logId;
     /**操作时间*/
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date logDate=new Date(System.currentTimeMillis());
     /**操作记录*/
 
@@ -50,7 +52,9 @@ public class LogEntity {
         return dateFormat.format(logDate);
     }
 
-
+    public void setLogDate(Date logDate) {
+        this.logDate = logDate;
+    }
 
     public String getLogInfo() {
         return logInfo;

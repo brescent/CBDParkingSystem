@@ -6,8 +6,8 @@ Vue.http.options.emulateJSON = true;
 const  app = new Vue({
      el:"#app",
     data:{
-         /*用户*/
-         user:'aaa',
+
+         adminId:"",
         /*工号*/
         jobNumber:"001",
         /*姓名*/
@@ -18,41 +18,41 @@ const  app = new Vue({
         phone:"15784658474",
 
     },
-    // created:function(options){
-    //      /*获取参数stuId*/
-    //     let requestObj = GetRequest();
-    //      this.stuId=requestObj['stuId'];
-    //    //查询学生详细信息
-    //      this. getStudentInfo(this.stuId);
-    //     /*当vue实例化后加载下拉菜单的值*/
-    //     this.getClasses();
-    // },
+    created:function(options){
+       //查询管理员详细信息
+         this. getAdminByid();
+    },
     methods:{
-         /*查询学生详细信息*/
-         // getStudentInfo:function(stuId) {
-         //     this.$http.post("../ShowStudentInfoDetailServlet",{
-         //         stuId:stuId
-         //     }).then(function(result){
-         //
-         //     });
-         // },
+         /*查询用户详细信息*/
+         getAdminByid:function() {
+             axios.get("../../getAdminByUserId").then(function(result){
+              this. jobNumber = result.data.jobNum;
+              this. name = result.data.realName;
+              this.phone = result.data.phone;
+              this.adminId = result.data.id;
+             }.bind(this));
+         },
         /*修改按钮事件*/
         update:function(){
-            this.$http.post("../UpdateStudentInfoServlet",{
-                stuId :this.stuId,
-                stuName:this.stuName,
-                stuAge:this.stuAge,
-                stuGender: this.stuGender,
-                classId:this.classId
+            axios.post("../../updAdminMsg",{
+                id:this.adminId,
+                /*密码*/
+                pwd:this.pwd,
+                /*电话*/
+                phone:this.phone,
+                /*工号*/
+                jobNum:this.jobNumber,
+                /*姓名*/
+                realName:this.name,
             }).then(function(result){
-                if(result.body==1){
+                if(result.data==1){
                     this.$alert('修改数据成功',{
                         title:"消息提示",
                         confirmButtonText: '确定',
                         type:'success',
                         center: true
                     });
-                    window.location.href="studentList.html";
+                    window.location.href="publicServiceMain.html";
                 }else{
                     this.$alert('修改数据失败', {
                         title:"消息提示",
@@ -61,19 +61,13 @@ const  app = new Vue({
                         center: true
                     });
                 }
-            });
+            }.bind(this));
         },
         /*取消按钮事件*/
         cancle:function(){
             window.history.go(-1);
         },
-        /*获取所有班级数据*/
-        // getClasses:function(){
-        //     this.$http.post("../GetAllClassesServlet")
-        //         .then(function(result){
-        //             this.classesData=result.body;
-        //         });
-        // }
+
     }
 
 });

@@ -6,6 +6,9 @@ import com.project.service.IDealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class DealServicempl implements IDealService {
     @Autowired
@@ -31,5 +34,20 @@ dealDao.deleteById(id);
     public FrontDealEntity selDeal(int id) {
 
       return   dealDao.findById(id).get();
+    }
+
+    @Override
+    public List<Map> getAllDeal() {
+        return dealDao.getAllDeal();
+    }
+
+    @Override
+    public void updateDealById(int id, int state) {
+              dealDao.updateDealById(id ,state);
+    }
+
+    @Override
+    public List<Map> getDealById(int id) {
+        return dealDao.getDealById(id);
     }
 }

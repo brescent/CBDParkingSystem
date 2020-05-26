@@ -3,10 +3,10 @@ server:
   port: 8099
 eureka:
   instance:
-    hostname: 127.0.0.1  #本地服务器的IP地址
+    hostname: 192.168.40.2  #本地服务器的IP地址     本机ip地址
   client:
     serviceUrl:    #注册服务器的地址
-      defaultZone: http://127.0.0.1:8000/eureka/
+      defaultZone: http://192.168.43.183:8000/eureka/
 spring:
   application:
     name: backServerClient
@@ -23,6 +23,14 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         database-platform: org.hibernate.dialect.MySQL5Dialect
 
+  rabbitmq:
+    host: 127.0.0.1  #rabbitmq中间件的IP
+    port: 5672
+    username: guest
+    password: guest
+    publisher-confirms: true
+    publisher-returns: true
+    virtual-host: /
 
 
 

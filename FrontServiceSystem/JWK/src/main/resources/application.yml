@@ -6,12 +6,20 @@ eureka:
     hostname: 127.0.0.1  #服务器的IP地址
   client:
     serviceUrl:    #注册服务器的地址
-      defaultZone: http://127.0.0.1:8088/eureka/
+      defaultZone: http://192.168.43.183:8000/eureka/
 spring:
+  rabbitmq:
+    host: 192.168.43.183
+    port: 5672
+    password: guest
+    username: guest
+    publisher-confirms: true # 开启发送确认
+    publisher-returns: true  # 开启发送失败退回
+    virtual-host: /
   application:
-    name: frontServiceSystem
+    name: frontService
   datasource:
-    url: jdbc:mysql://localhost:3306/cbd?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/cbd?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: root
     password: 116525
     driver-class-name: com.mysql.jdbc.Driver
@@ -25,8 +33,13 @@ spring:
       physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       database-platform: org.hibernate.dialect.MySQL5Dialect
 
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 
 
 
-
+#ribbon:
+#  eureka:
+#    enabled: true

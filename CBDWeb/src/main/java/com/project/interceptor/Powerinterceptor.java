@@ -53,7 +53,7 @@ public class Powerinterceptor implements HandlerInterceptor {
 
                }
                else if(userType.equals("超级管理员")){
-                   if(!url.contains("xd")&&!url.contains("why")){
+                   if(!url.contains("xd")&&!url.contains("why")&&!gerUrl.contains("log")){
                        response.sendRedirect("/yzh/page/login.html");
                    }
                }
@@ -63,17 +63,17 @@ public class Powerinterceptor implements HandlerInterceptor {
 
                            if(!gerUrl.contains("addCompany")&&!gerUrl.contains("showAllCompany")&&
                            !gerUrl.contains("checkMsgInfo")&&!gerUrl.contains("showAllPart")&&
-                           !gerUrl.contains("partInfo")){
+                           !gerUrl.contains("partInfo")&&!gerUrl.contains("log")){
                                response.sendRedirect("/yzh/page/login.html");
                            }
                        }
                        if(power.getPowerName().equals("投诉管理")){
-                           if(!gerUrl.contains("showAllCompliant")&&!gerUrl.contains("CompliantInfo")){
+                           if(!gerUrl.contains("showAllCompliant")&&!gerUrl.contains("CompliantInfo")&&!gerUrl.contains("log")){
                                response.sendRedirect("/yzh/page/login.html");
                            }
                        }
                        if(power.getPowerName().equals("车位管理") ){
-                           if(!gerUrl.contains("showAllStall")&&!gerUrl.contains("addStall")){
+                           if(!gerUrl.contains("showAllStall")&&!gerUrl.contains("addStall")&&!gerUrl.contains("log")){
                                response.sendRedirect("/yzh/page/login.html");
                            }
                        }
@@ -81,7 +81,8 @@ public class Powerinterceptor implements HandlerInterceptor {
                            if(!gerUrl.contains("addOutContract")&&!gerUrl.contains("showAllOutContract")&&
                            !gerUrl.contains("addCompanyContract")&&!gerUrl.contains("showAllCompanyContract")
                            &&!gerUrl.contains("goOnOutContract")&&!gerUrl.contains("goOnCompanyContract")
-                           &&!gerUrl.contains("outContractInfo")&&!gerUrl.contains("companyContractInfo")){
+                           &&!gerUrl.contains("outContractInfo")&&!gerUrl.contains("companyContractInfo")
+                                   &&!gerUrl.contains("log")){
                                response.sendRedirect("/yzh/page/login.html");
                            }
 

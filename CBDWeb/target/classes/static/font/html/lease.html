@@ -40,31 +40,31 @@
         <div class="grid-content bg-purple-dark lease_p" style="background:#92bfec; margin-top:20px">
           <p style="padding-top:10px">
             <span>待租车位信息：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.stallAddress}}</span>
           </p>
           <p>
             <span>租赁开始时间：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.dealStateDate}}</span>
           </p>
           <p>
             <span>租赁结束时间：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.dealEndDate}}</span>
           </p>
           <p>
             <span>用户名：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.userName}}</span>
           </p>
           <p>
             <span>职业：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.userProfession}}</span>
           </p>
           <p>
             <span>信誉度：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.complaintNum}}</span>
           </p>
           <p>
             <span>价格：</span>
-            <span>{{stallInfo.aa}}</span>
+            <span>{{stallInfo.dealPrice}}</span>
           </p>
           <p>
             <span>留言：</span>
@@ -94,26 +94,56 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--axios -->
+<script src="https://cdn.bootcss.com/axios/0.19.2/axios.js"></script>
 <script>
   new Vue({
     el: '#app',
     methods: {
       stallLease() {
-        console.log("租赁");
+          axios.post('/addOrder',{
+                  Dealid:this.stallInfo.pk_id,
+                 msg:this.textarea
+              }
 
+          ).then( (response)=> {
+
+              window.location.href="hireinfo.html"
+
+          })
+              .catch(function (error) {0
+
+                  console.log(error);
+              });
       },
+
+
     },
-    data: function () {
+      mounted:function () {
+       this.id=(window.location.search.substring(4,));
 
-      return {
+          axios.post('/detDealById',{
+              Dealid:this.id+1
+              }
 
-        stallInfo: {
-          aa: "hahaha"
+          ).then( (response)=> {
 
-        },
+              this.stallInfo=response.data;
+              console.log(this.stallInfo)
+
+          })
+              .catch(function (error) {0
+
+                  console.log(error);
+              });
+      },
+    data:{
+
+        stallInfo:{},
+          id:"",
         textarea: ""
       }
-    }
+
   })
 </script>
 

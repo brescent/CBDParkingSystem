@@ -9,7 +9,7 @@
     <!--使用ajax 需要导入-->
     <script  src="../js/vue/vue-resource.js"></script>
     <script src="../js/elementUI/elementUI.js"></script>
-    <script  src="../js/page_Js/main/add.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
@@ -19,9 +19,10 @@
     <link rel="stylesheet" href="../css/page_css/main/add.css">
 </head>
 <body>
-<div style="margin-left: 680px"><h2 style="color: #66b1ff">添加车位</h2></div>
 
-<div id="app" style="margin-top: -20px">
+
+<div id="app" >
+    <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">添加车位</div>
     <el-container>
         <el-main>
             <el-row>
@@ -29,17 +30,17 @@
                     <div class="top" style="float: left" >
                         <el-form  label-width="120px">
                             <el-form-item label="车位所在地址:">
-                                <el-input  prefix-icon="el-icon-location"  placeholder="请输入车位地址"></el-input>
+                                <el-input  prefix-icon="el-icon-location"  placeholder="请输入车位地址" v-model="stallAddress"></el-input>
                             </el-form-item>
 
                             <el-form-item label="车位区域编号:">
-                                <el-input prefix-icon="el-icon-date"   placeholder="请输入区域编号 "></el-input>
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入区域编号 " v-model="addressNo"></el-input>
                             </el-form-item>
                             <el-form-item label="车位起始号:">
-                                <el-input prefix-icon="el-icon-date"   placeholder="请输入起始号 "></el-input>
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入起始号 " v-model="startNum"></el-input>
                             </el-form-item>
-                            <el-form-item label="车位结束号:">
-                                <el-input prefix-icon="el-icon-date"   placeholder="请输入结束号 "></el-input>
+                            <el-form-item label="总车位数:">
+                                <el-input prefix-icon="el-icon-date"   placeholder="请输入总数 " v-model="total"></el-input>
                             </el-form-item>
 
                             <el-form-item style="margin-top:50px;">
@@ -60,31 +61,49 @@
     </el-container>
 
 </div>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     new Vue( {
         el:"#app",
         data:{
+            stallAddress:'',
+            addressNo:'',
+            startNum:'',
+            total:''
 
         },
         methods: {
-
-            add(){
-
-
-                    this.$alert('添加成功', 'ok', {
+            add:function(){
+            axios.post("../../stall/add",
+                {
+                            stallAddress:this.stallAddress,
+                            addressNo:this.addressNo,
+                            startNum:this.startNum,
+                            total:this.total,
+                        }
+                ).then(function(result){
+                if(result.data=="ok"){
+                    this.alert('添加数据成功',{
+                        title:"消息提示",
                         confirmButtonText: '确定',
-                        callback: action => {
-                            window.location.href="showAllStall.html";
-                        },
+                        type:'success',
+                        center: true
                     });
+                    window.location.href="showAllStall.html";
+                }else{
+                    this.alert('添加失败', {
+                        title:"消息提示",
+                        confirmButtonText: '确定',
+                        type:'error',
+                        center: true
+                    });
+                }
 
+            })
 
             },
-
-
             cancle(){
-                window.location.href="showAllStall.html";
+                window.history.go(-1);
             },
         }
     })

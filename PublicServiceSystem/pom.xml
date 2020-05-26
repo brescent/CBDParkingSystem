@@ -17,7 +17,18 @@
 <!--    </dependency>-->
 <!--</dependencies>-->
 
+    <!--<dependencies>-->
+        <!--&lt;!&ndash;阿里巴巴的json转化包&ndash;&gt;-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba</groupId>-->
+            <!--<artifactId>fastjson</artifactId>-->
+            <!--<version>1.2.47</version>-->
+        <!--</dependency>-->
+    <!--</dependencies>-->
+
     <artifactId>PublicServiceSystem</artifactId>
+
 
 
 </project>

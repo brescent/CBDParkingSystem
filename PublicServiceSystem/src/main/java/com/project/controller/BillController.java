@@ -3,17 +3,15 @@ package com.project.controller;
 import com.project.Service.IBillService;
 import com.project.Service.IUserService;
 import com.project.entity.BillEntity;
+import com.project.entity.PageEntity;
 import com.project.util.CBDStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.List;
 
-@RequestMapping("bill")
+@RestController
 public class BillController {
 
     @Autowired
@@ -43,10 +41,10 @@ public class BillController {
         return CBDStringUtil.ADD_SUCCESS;
     }
 
-    @GetMapping("findByItem")
-    public List<BillEntity> findByItem(int userId, Date startDate, Date endDate){
-        List<BillEntity> billList = billService.findByItem(userId,startDate,endDate);
-        return billList;
+    @GetMapping("findBillList")
+    public PageEntity<BillEntity> findBillList(int userId, Date startDate, Date endDate, int pageSize, int pageNum){
+        PageEntity<BillEntity> page = billService.findByItem(userId,startDate,endDate,pageSize,pageNum);
+        return page;
     }
 
     @GetMapping("findById/{billId}")

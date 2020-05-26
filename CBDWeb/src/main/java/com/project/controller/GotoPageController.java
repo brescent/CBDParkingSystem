@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class GotoPageController {
 
-    @RequestMapping("gotoLogin")
+    @RequestMapping("CBDLogin")
     public String gotoLogin(){
 
         return "yzh/page/login";
