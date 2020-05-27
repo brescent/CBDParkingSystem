@@ -1,6 +1,5 @@
 package com.project.entity;
 
-import javax.persistence.*;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 

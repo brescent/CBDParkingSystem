@@ -24,15 +24,15 @@
                       highlight-current-row
                       style="width:100%"
             >
-                <el-table-column prop="renter" label="出租人">
+                <el-table-column prop="userName" label="出租人">
                 </el-table-column>
-                <el-table-column prop="carAddress" label="车位地址">
+                <el-table-column prop="stallAddress" label="车位地址">
                 </el-table-column>
-                <el-table-column prop="carNumber" label="车位编号">
+                <el-table-column prop="stallId" label="车位编号">
                 </el-table-column>
-                <el-table-column prop="price" label="出租价格">
+                <el-table-column prop="dealPrice" label="出租价格">
                 </el-table-column>
-                <el-table-column prop="checkType" label="处理状态">
+                <el-table-column prop="dealState" label="处理状态">
                 </el-table-column>
                 <el-table-column label="操作" width="300px">
                     <template slot-scope="scope">
@@ -54,8 +54,6 @@
                            :pager-count=5
                            :page-sizes=[3,5,10]
                            :total="total"
-                           @current-change="currentChange"
-                           @size-change="sizeChange"
             >
             </el-pagination>
         </el-main>
@@ -66,6 +64,8 @@
 </html>
 <!--vue.js 必须在elementUI.js之前导入-->
 <script src="../js/vue/Vue.js"></script>
+
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 <!--使用ajax 需要导入-->
 <script src="../js/vue/vue-resource.js"></script>
 <script src="../js/elementUI/elementUI.js"></script>

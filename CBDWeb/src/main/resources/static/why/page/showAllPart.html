@@ -23,20 +23,19 @@
                       highlight-current-row
                       style="width:100%"
             >
-                <el-table-column prop="seller" label="卖家">
+                <el-table-column prop="userName" label="卖家">
                 </el-table-column>
-                <el-table-column prop="buyer" label="买家">
+                <el-table-column prop="customerName" label="买家">
                 </el-table-column>
-                <el-table-column prop="carAddress" label="车位地址">
+                <el-table-column prop="stallAddress" label="车位地址">
                 </el-table-column>
-                <el-table-column prop="carNumber" label="车位编号">
+                <el-table-column prop="stallId" label="车位编号">
                 </el-table-column>
-                <el-table-column prop="price" label="出售价格">
+                <el-table-column prop="dealPrice"  label="出售价格">
                 </el-table-column>
-                <el-table-column prop="checkType" label="审核状态">
+                <el-table-column prop="pactstate"  label="审核状态"></el-table-column>
                 </el-table-column>
-                <el-table-column prop="signType" label="签约状态">
-                </el-table-column>
+
                 <el-table-column label="操作" width="300px">
                     <template slot-scope="scope">
                         <el-button size="mini"
@@ -55,8 +54,6 @@
                            :pager-count=5
                            :page-sizes=[3,5,10]
                            :total="total"
-                           @current-change="currentChange"
-                           @size-change="sizeChange"
             >
             </el-pagination>
         </el-main>
@@ -65,6 +62,8 @@
 </div>
 </body>
 </html>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
 <!--vue.js 必须在elementUI.js之前导入-->
 <script src="../js/vue/Vue.js"></script>
 <!--使用ajax 需要导入-->

@@ -1,6 +1,4 @@
-package com.project.Entity;
-
-import javax.persistence.*;
+package com.project.entity;
 
 /**
  * 车位信息实体

@@ -43,61 +43,26 @@ const app = new Vue({
     //在vue被实例化之后
     created:function(){
          //调用getdatas()方法
-        this.getDatas(this.currentPage,this.pageSize);
+        this.getDatas();
     },
     methods:{
          /*查找按钮事件*/
          seach:function(){
-             this.getDatas(this.currentPage,this.pageSize);
+             this.getDatas();
          },
         /*处理编辑按钮*/
         handleEdit:function(index,row){
-            window.location.href="checkMsgInfo.html?Id="+row.id;
+            window.location.href="checkMsgInfo.html?id="+row.pk_id;
          },
-
-        /*改变当前页数*/
-        currentChange:function(curNum){
-            this.getDatas(curNum,this.pageSize);
-        },
-        /*改变每页显示条数*/
-        sizeChange:function(pSize){
-            this.getDatas(this.currentPage,pSize);
-        },
         /*查询数据*/
-        // getDatas:function(currentPage,pageSize){
-        //      //发送ajax
-        //   this.$http.post("../showStudentInfo",{
-        //          stuName:this.stuName,
-        //          stuGender:this.stuGender,
-        //          className:this.className,
-        //          currentPage:currentPage,
-        //          pageSize:pageSize
-        //     }).then(function(result){
-        //        console.log(result.body);
-        //        //设置分页控件的值
-        //          this.tableData=result.body.list;
-        //          this.pageSize=result.body.pageSize;
-        //          this.currentPage=result.body.pageNum;
-        //          this.total =result.body.total;
-        //          console.log(this.total+"----total")
-        //
-        //     });
-        //
-        //       /* axios.post("../showStudentInfo",{
-        //            currentPage:this.currentPage,
-        //            pageSize:this.pageSize
-        //        }).then(function(result){
-        //            console.log(result+"-->>>")
-        //        });*/
-        //
-        //     //测试对象包含对象的数据
-        //    /*this.tableData=[
-        //        {id:1,age:18,name:"张三",gender:"男",classBean:{id:1,name:"1班",teacherBean:{id:1,name:"张老师"}}},
-        //        {id:1,age:18,name:"张三",gender:"男",classBean:{id:2,name:"2班",teacherBean:{id:1,name:"张老师"}}},
-        //        {id:1,age:18,name:"张三",gender:"男",classBean:{id:3,name:"3班",teacherBean:{id:1,name:"张老师"}}},
-        //        {id:1,age:18,name:"张三",gender:"男",classBean:{id:4,name:"4班",teacherBean:{id:1,name:"张老师"}}}
-        //        ];*/
-        //
-        // }
+        getDatas:function(){
+               axios.get("../../getAllMsg").
+               then(function(result){
+                   this.tableData = result.data
+               }.bind(this));
+
+
+
+        }
     }
 });
