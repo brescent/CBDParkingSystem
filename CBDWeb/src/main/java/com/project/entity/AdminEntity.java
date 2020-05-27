@@ -1,6 +1,9 @@
-package com.project.entity;
+package com.project.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+import com.project.entity.PowerEntity;
+import com.project.entity.PublicUserEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;

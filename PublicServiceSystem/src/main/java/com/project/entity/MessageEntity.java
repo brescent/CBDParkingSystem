@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -11,7 +12,6 @@ import java.text.SimpleDateFormat;
  */
 @Entity
 @Table(name = "t_message")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer"})
 public class MessageEntity {
     /**消息id*/
     @Id
@@ -26,7 +26,8 @@ public class MessageEntity {
     private int messageType;
     /**消息发送日期*/
     @Column(name = "m_date")
-    private Date messageDate = new Date(System.currentTimeMillis());
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date messageDate;
     /**消息状态 0表示未读，1表示已读，2表示已删除*/
     @Column(name = "m_status")
     private int messageStatus = 0;
@@ -84,8 +85,12 @@ public class MessageEntity {
         this.messageType = messageType;
     }
 
-    public String getMessageDate() {
-        return sdf.format(messageDate);
+    public Date getMessageDate() {
+        return messageDate;
+    }
+
+    public void setMessageDate(Date messageDate) {
+        this.messageDate = messageDate;
     }
 
     public int getMessageStatus() {

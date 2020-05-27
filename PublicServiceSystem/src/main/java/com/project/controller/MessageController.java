@@ -4,6 +4,7 @@ import com.project.Service.IMessageService;
 import com.project.Service.IUserService;
 import com.project.dto.MessageDto;
 import com.project.entity.MessageEntity;
+import com.project.entity.PageEntity;
 import com.project.entity.PublicUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,6 @@ import java.util.List;
  * 消息控制层
  */
 @RestController
-@RequestMapping("message")
 public class MessageController {
 
     @Autowired
@@ -41,11 +41,12 @@ public class MessageController {
      * @param userName 用户名
      * @return 消息集合
      */
-    @GetMapping("find/{userName}")
-    public List<MessageEntity> findMessageListByUserId(@PathVariable("userName") String userName){
-        List<MessageEntity> messageList = new ArrayList<MessageEntity>();
-        messageList = messageService.findMessageListByUserName(userName);
-        return messageList;
+    @GetMapping("findMessageList")
+    public PageEntity<MessageEntity> findMessageListByUserId(String userName, int pageNum, int pageSize){
+        PageEntity<MessageEntity> pageEntity = new PageEntity<>();
+        PublicUserEntity userEntity = userService.findUserByName(userName);
+        pageEntity = messageService.findMessageListByUserName(userEntity.getId(),pageNum,pageSize);
+        return pageEntity;
     }
 
     /**
@@ -53,11 +54,15 @@ public class MessageController {
      * @param messageId 消息id
      * @return 消息实体
      */
-    @PutMapping("read/{messageId}")
-    public MessageEntity readMessage(@PathVariable("messageId")int messageId){
-        MessageEntity messageEntity = messageService.findById(messageId);
-        messageService.readMessageById(messageId);
+    @RequestMapping("readMessage")
+    public MessageEntity readMessage(int messageId){
+        MessageEntity messageEntity = messageService.readMessageById(messageId);
         return messageEntity;
+    }
+
+    @RequestMapping("deleteMessage")
+    public void deleteMessage(int messageId){
+        messageService.deleteMessageTypeById(messageId);
     }
 
 }

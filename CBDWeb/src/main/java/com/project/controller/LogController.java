@@ -20,7 +20,7 @@ public class LogController {
 
     @GetMapping("findLog")
     public String findAllLog(int pageNum,int pageSize){
-        String logJson = null;
+       String logJson = null;
        PageEntity<LogEntity> page= service.findAllLog(pageNum, pageSize);
        logJson = JSON.toJSONString(page);
 

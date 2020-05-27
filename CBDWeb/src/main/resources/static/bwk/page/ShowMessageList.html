@@ -22,39 +22,38 @@
             <el-table :data="tableData"
                       highlight-current-row
                       style="width:100%">
+                <el-table-column prop="messageId" label="消息id" v-if="false">
+                </el-table-column>
                 <el-table-column prop="" label="选中" align="center">
                     <template slot-scope="scope">
                         <el-checkbox v-model="scope.row.checked"></el-checkbox>
                     </template>
                 </el-table-column>
-                <el-table-column prop="messageInfo" label="标题内容" align="center" width="500px">
+                <el-table-column prop="messageInfo" label="标题内容" align="center" width="400px">
                 </el-table-column>
-                <el-table-column prop="receiveDate" label="接收时间" align="center">
+                <el-table-column prop="messageDate" label="接收时间" align="center">
                 </el-table-column>
-                <el-table-column prop="messageType" label="消息类型" align="center">
+                <el-table-column prop="messageTypeStr" label="消息类型" align="center">
+                </el-table-column>
+                <el-table-column prop="messageStatusStr" label="消息状态" align="center">
                 </el-table-column>
                 <el-table-column prop="operation" label="操作" align="center">
                     <template slot-scope="scope">
                         <el-button size="mini"
-                                   @click="lookInfo(messageId)"
+                                   @click="deleteMessage(scope.$index, scope.row)"
+                                   type="warning"
+                                   icon="el-icon-delete" >删除消息</el-button>
+                        <el-button size="mini"
+                                   @click="readMessage(scope.$index, scope.row)"
                                    type="success"
-                                   icon="el-icon-view" >查看详情</el-button>
+                                   icon="el-icon-s-claim" >标记已读</el-button>
                     </template>
                 </el-table-column>
             </el-table>
-
-            <div>
-                <el-button style="margin: 20px auto;" type="primary" size="mini" icon="el-icon-delete">
-                    <a href="javascript:deleteMessage(id)">删除</a>
-                </el-button>
-                <el-button style="margin: 20px auto;" type="primary" size="mini" icon="el-icon-s-claim">
-                    <a href="javascript:readMessage(id)">标记已读</a>
-                </el-button>
-            </div>
             <!-- 分页区 -->
             <el-pagination style="margin: 20px auto;" background
                            layout="prev,pager,next,sizes,total,jumper "
-                           :current-page="currentPage"
+                           :current-page="pageNum"
                            :page-size="pageSize"
                            :pager-count=5
                            :page-sizes=[5,10]
@@ -70,6 +69,8 @@
 </body>
 </html>
 
+<!--Axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!--vue.js 必须在elementUI.js之前导入-->
 <script src="../js/vue/Vue.js"></script>
 <!--使用ajax 需要导入-->

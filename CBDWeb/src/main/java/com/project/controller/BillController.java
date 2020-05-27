@@ -69,7 +69,7 @@ public class BillController {
         totalList.add(billCountDto);
         totalBillDto.setBillCountDtoList(totalList);
         pageJson = JSON.toJSONString(totalBillDto);
-        System.out.println(pageJson);
+//        System.out.println(pageJson);
 
         return pageJson;
     }
