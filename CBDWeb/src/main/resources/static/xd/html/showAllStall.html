@@ -18,18 +18,17 @@
 </head>
 <body>
 
-<div id="app" >
+<div id="app"  >
     <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">车位管理</div>
 
-    <el-container>
+    <el-container style="width: 750px">
 
         <!--内容显示区-->
         <el-main>
 
             <el-table :data="tableData"
                       border
-                    size="medium"
-            >
+                    size="medium">
 <!--                      style="width:150%"-->
 
                 <el-table-column prop="stallNo" label="车位编号">

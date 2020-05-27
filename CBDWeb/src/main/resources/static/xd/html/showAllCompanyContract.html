@@ -22,7 +22,7 @@
 <div id="app">
     <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">租户合约</div>
 
-    <el-container >
+    <el-container  style="width: 750px">
 
 <!--内容显示区-->
         <el-main>
@@ -54,6 +54,14 @@
                 <el-table-column prop="contractNo" label="合同编号"    >
                 </el-table-column>
                 <el-table-column prop="companyName" label="公司名称">
+                </el-table-column>
+                <el-table-column prop="state"   label="车位状态">
+
+                    <template scope="scope">
+                        <p v-if="scope.row.state=='0'">失效中</p>
+                        <p v-if="scope.row.state=='1'">生效中</p>
+
+                    </template>
                 </el-table-column>
                 <el-table-column label="操作"  >
                     <template slot-scope="scope">

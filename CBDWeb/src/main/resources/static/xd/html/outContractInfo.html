@@ -70,7 +70,7 @@
             endDate:'',
             dealPrice:"",
             srcList:[],
-            url:'https://www.52112.com/pic/372200.html'
+            url:'http://localhost:8089/file/1.jpg'
 
         },
     created:function(){
@@ -99,14 +99,37 @@
                     this.startDate=result.data.startDate;
                     this.endDate=result.data.endDate;
                     this.dealPrice=result.data.dealPrice;
-                    this.url="http://localhost:8888/static/file/image/"+result.data.contractImg;
 
                 }.bind(this));
 
             },
 
             cancel(){
-                window.history.go(-1);
+                //发送ajax
+                axios.get('../../outContract/updateState',{params:{
+                        id:this.id,
+
+                    }}).then(function(result){
+
+                    if(result.data=="ok"){
+                        this.alert('操作成功',{
+                            title:"消息提示",
+                            confirmButtonText: '确定',
+                            type:'success',
+                            center: true
+                        });
+                        window.location.href="showAllOutContract.html";
+                    }else{
+                        this.alert('操作失败', {
+                            title:"消息提示",
+                            confirmButtonText: '确定',
+                            type:'error',
+                            center: true
+                        });
+                    }
+
+
+                });
             },
             add(){
                 window.location.href="goOnOutContract.html?oId="+this.id;

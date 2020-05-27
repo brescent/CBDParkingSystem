@@ -39,7 +39,7 @@
                         <el-image
                                 style="width: 100px; height: 100px"
                                 :src="url"
-                                :preview-src-list="srcList">
+                                >
                         </el-image><br><br><br><br>
 
                         <el-button   @click="add" type="primary" style="margin-right: 50px;">续约</el-button>
@@ -71,7 +71,7 @@
             endDate:'',
             dealPrice:'',
             srcList:'',
-            url:'https://588ku.com/ycpng/12576788.html'
+            url:'http://localhost:8089/file/1.jpg'
 
 
         },
@@ -101,20 +101,46 @@
                     this.startDate=result.data.startDate;
                     this.endDate=result.data.endDate;
                     this.dealPrice=result.data.dealPrice;
-                    this.url="http://localhost:8888/static/file/image/"+result.data.contractImg;
+
 
                 }.bind(this));
 
             },
-            cancel(){
-                window.history.go(-1);
-            },
+
+                cancel(){
+                    //发送ajax
+                    axios.get('../../companyContract/updateState',{params:{
+                            id:this.id,
+
+                        }}).then(function(result){
+
+                        if(result.data=="ok"){
+                            this.alert('操作成功',{
+                                title:"消息提示",
+                                confirmButtonText: '确定',
+                                type:'success',
+                                center: true
+                            });
+                            window.location.href="showAllCompanyContract.html";
+                        }else{
+                            this.alert('操作失败', {
+                                title:"消息提示",
+                                confirmButtonText: '确定',
+                                type:'error',
+                                center: true
+                            });
+                        }
+
+
+                    });
+                },
+
             add(){
                 window.location.href="goOnCompanyContract.html?id="+this.id;
             },
             back(){
 
-                window.location.href="showAllOutContract.html";
+                window.location.href="showAllCompanyContract.html";
             }
 
 

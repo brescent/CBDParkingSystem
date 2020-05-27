@@ -24,7 +24,6 @@
 </head>
 <body>
 
-<div style="margin-left: 650px"><h2 style="color: #66b1ff">新增租户合约</h2></div>
 
 <div id="app" >
     <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">新增租户合约</div>
@@ -72,17 +71,14 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="合同图片:">
+                        <el-form-item label="合同图片:"  id="file">
                             <el-upload
                                     class="upload-demo"
-                                    action="http://localhost:8888/static/file/image/"
+                                    action="http://127.0.0.1:8089/file"
                                     :on-preview="handlePreview"
                                     :on-remove="handleRemove"
-                                    :before-remove="beforeRemove"
-                                    multiple
-                                    :limit="3"
-                                    :on-exceed="handleExceed"
-                                    >
+                                    :file-list="fileList"
+                                    list-type="picture">
                                 <el-button size="small" type="primary">点击上传</el-button>
                                 <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                             </el-upload>
