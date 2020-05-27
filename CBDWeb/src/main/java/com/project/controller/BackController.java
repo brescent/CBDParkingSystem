@@ -3,13 +3,14 @@ package com.project.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lovo.back.dto.CompanyContractDto;
 import com.lovo.back.entity.CompanyContractAndStall;
 import com.lovo.back.entity.CompanyContractEntity;
 import com.lovo.back.entity.OutContractAndStall;
 
 import com.lovo.back.entity.OutContractEntity;
-import com.project.dto.CompanyContractDto;
-import com.project.dto.OutContractDto;
+
+
 import com.project.service.ICompanyContractService;
 import com.project.service.IComplainService;
 import com.project.service.IOutContractService;
@@ -31,7 +32,7 @@ import java.sql.Date;
 import java.util.*;
 
 @RestController
-@RequestMapping("back")
+
 public class BackController {
 
 
@@ -63,6 +64,12 @@ public class BackController {
      * 动态查询车位信息
      */
 
+    @RequestMapping("test")
+    public String test(){
+
+
+        return "ok";
+    }
 
     @PostMapping("stall/findByItems")
     @ResponseBody

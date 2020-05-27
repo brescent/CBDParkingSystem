@@ -24,6 +24,8 @@ public class CompanyContractAndStall implements Serializable {
 @Column(name="pk_id")
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+
 /*企业合约外键*/
 @ManyToOne
 @JoinColumn(name="fk_companyContractId")
