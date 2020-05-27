@@ -118,16 +118,16 @@ public class CheckController {
                 string = "编号为" + id + "的招租申请被拒绝";
             }
 
-//            //发送人-->管理员
-//            PublicUserEntity sender = new PublicUserEntity();
-//            sender.setId(242);
-//
-//            //接收人-->出租人
-//            PublicUserEntity received = new PublicUserEntity();
-//            received.setId(userId);
-//
-//            MessageEntity messageEntity = new MessageEntity(string, 1, received, sender);
-//            sendMsgUtil.sendMessage(messageEntity);
+            //发送人-->管理员
+            PublicUserEntity sender = new PublicUserEntity();
+            sender.setId(242);
+
+            //接收人-->出租人
+            PublicUserEntity received = new PublicUserEntity();
+            received.setId(userId);
+
+            MessageEntity messageEntity = new MessageEntity(string, 1, received, sender);
+            sendMsgUtil.sendMessage(messageEntity);
 
             return "1";
         } catch (Exception e) {
