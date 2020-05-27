@@ -3,6 +3,9 @@ package com.project.config;
 
 import com.project.interceptor.MyInterceptor;
 import com.project.interceptor.Powerinterceptor;
+import com.project.listener.MySessionListener;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -18,15 +21,22 @@ public class MyWebConfiguer implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-     //放行的静态文件
+        //放行的静态文件
         registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/");
+                .addResourceLocations("classpath:/static/")
+
+        ;
 
 
     }
 
 
-
+    @Bean
+    public ServletListenerRegistrationBean getListener() {
+        ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
+        servletListenerRegistrationBean.setListener(new MySessionListener());
+        return servletListenerRegistrationBean;
+    }
 
 
 
@@ -38,23 +48,23 @@ public class MyWebConfiguer implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-       registry.addInterceptor(new MyInterceptor())
+        registry.addInterceptor(new MyInterceptor())
                 .addPathPatterns("/**")
-              .excludePathPatterns("/yzh/page/login.html","/yzh/page/addUser.html",
-                     "/login","/addUser","/yzh/css/**","/yzh/js/**"
-              );
+                .excludePathPatterns("/yzh/page/login.html","/yzh/page/addUser.html",
+                        "/login","/addUser","/yzh/css/**","/yzh/js/**"
+                );
 
 
-       registry.addInterceptor(new Powerinterceptor()).addPathPatterns("/**")
-       .excludePathPatterns("/yzh/css/**").excludePathPatterns("/yzh/js/**")
-       .excludePathPatterns("/bwk/css/**").excludePathPatterns("/bwk/js/**")
-       .excludePathPatterns("/font/css/**").excludePathPatterns("/font/js/**")
-       .excludePathPatterns("/why/css/**").excludePathPatterns("/why/js/**")
-       .excludePathPatterns("/xd/css/**").excludePathPatterns("/xd/js/**")
-        .excludePathPatterns("/yzh/page/login.html").excludePathPatterns("/yzh/page/addUser.html")
-        .excludePathPatterns("/yzh/page/main.html").excludePathPatterns("/bwk/page/billList.html")
-         .excludePathPatterns("/bwk/page/showMessageList.html")
-       .excludePathPatterns("/addUser").excludePathPatterns("/login").excludePathPatterns("/yzh/page/publicServiceMain.html");
+        registry.addInterceptor(new Powerinterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/yzh/css/**").excludePathPatterns("/yzh/js/**")
+                .excludePathPatterns("/bwk/css/**").excludePathPatterns("/bwk/js/**")
+                .excludePathPatterns("/font/css/**").excludePathPatterns("/font/js/**")
+                .excludePathPatterns("/why/css/**").excludePathPatterns("/why/js/**")
+                .excludePathPatterns("/xd/css/**").excludePathPatterns("/xd/js/**")
+                .excludePathPatterns("/yzh/page/login.html").excludePathPatterns("/yzh/page/addUser.html")
+                .excludePathPatterns("/yzh/page/main.html").excludePathPatterns("/bwk/page/billList.html")
+                .excludePathPatterns("/bwk/page/showMessageList.html")
+                .excludePathPatterns("/addUser").excludePathPatterns("/login").excludePathPatterns("/yzh/page/publicServiceMain.html");
 
     }
 
