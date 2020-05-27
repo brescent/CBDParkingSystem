@@ -1,7 +1,6 @@
 package com.lovo.back.controller;
 
 
-;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -66,7 +65,7 @@ public class CompanyContractController {
      CompanyContractEntity com=new CompanyContractEntity();
 
      com.setContractNo((String) map.get("contractNo"));
-     com.setDealPrice(Double.parseDouble((Integer)map.get("dealPrice")+""));
+     com.setDealPrice(Double.parseDouble(map.get("dealPrice")+""));
 
 
 

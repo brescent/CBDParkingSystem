@@ -98,9 +98,9 @@ public class OutContractServiceImpl implements IOutContractService {
 
         paginationBean.setTotal(totalPage);
 
-paginationBean.setCount(outContractDao.findByItemsCount().get(0).intValue());
+       paginationBean.setCount(outContractDao.findByItemsCount().get(0).intValue());
 
-        paginationBean.setPageSize(outContractDao.findByItemsCount().get(0).intValue());
+
         return paginationBean;
 
 
