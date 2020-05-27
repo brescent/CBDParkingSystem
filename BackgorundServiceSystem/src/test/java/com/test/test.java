@@ -1,4 +1,5 @@
 package com.test;
+import	java.util.Calendar;
 
 
 
@@ -122,15 +123,21 @@ CheckController c;
 
         //System.out.println(outContractService.findById(1).getOutContractAndStallSet().size());
 
-        System.out.println(stallService.findByAddress("").size());
-    }
+//        System.out.println(stallService.findByAddress("").size());
+
+//        Calendar calendar = Calendar.getInstance();
 
 
-    @Test
-    public  void  mq(){
-
-     c.updPartCheckType(1);
-
+        System.out.println(companyContractService.findByPage(1,3).getDataList().get(1).toString());
 
     }
+
+
+//    @Test
+//    public  void  mq(){
+//
+//     c.updPartCheckType(1);
+//
+//
+//    }
 }

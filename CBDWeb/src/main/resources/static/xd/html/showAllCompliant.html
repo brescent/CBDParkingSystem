@@ -26,7 +26,7 @@
 
     <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">投诉管理</div>
 
-    <el-container>
+    <el-container style="width: 750px">
 
         <!--内容显示区-->
         <el-main>
@@ -35,11 +35,13 @@
                       highlight-current-row
                       style="width:100%;margin-left: 20px"
             >
-                <el-table-column prop="complainter"    label="投诉人" width="110px" >
+                <el-table-column prop="userName"    label="投诉人" width="110px" >
                 </el-table-column>
-                <el-table-column prop="beComplainter"  label="被投诉人" width="110px">
+                <el-table-column prop="customerName"  label="被投诉人" width="110px">
                 </el-table-column>
-                <el-table-column prop="complaintDate"  label="投诉时间" width="110px">
+                <el-table-column prop="complainttime"  label="投诉时间" width="110px">
+                </el-table-column>
+                <el-table-column prop="complaintState"  label="投诉状态" width="110px">
                 </el-table-column>
                 <el-table-column label="操作" width="110px">
                     <template slot-scope="scope">
@@ -54,41 +56,8 @@
                 </el-table-column>
 
             </el-table>
-            <!-- 分页区 -->
-            <el-pagination style="margin: 20px auto;" background
-                           layout="prev,pager,next,sizes,total,jumper "
-                           :current-page="currentPage"
-                           :page-size="pageSize"
-                           :pager-count=5
-                           :page-sizes=[3,5,10]
-                           :total="total"
-                           @current-change="currentChange"
-                           @size-change="sizeChange"
-            >
-            </el-pagination>
 
 
-
-
-<!--            按钮区-->
-            <div class="main_button" style="margin-bottom:30px">
-
-                    <el-form-item label="投诉时间：" >
-                        <el-date-picker
-                                v-model="startDate"
-                                type="date"
-                                placeholder="选择日期"  >
-                        </el-date-picker>
-                        <el-date-picker
-                                v-model="endDate"
-                                type="date"
-                                placeholder="选择日期"  >
-                        </el-date-picker>
-
-                    </el-form-item><br>
-                    <el-button type="primary" size="mini" @click="seach" icon="el-icon-search" style="margin-left: 180px">查找</el-button>
-                </el-form>
-            </div>
         </el-main>
     </el-container>
 </div>
@@ -97,61 +66,41 @@
 <script>
 
 
-    var tableData = [{ complainter:'古巨基',
-        beComplainter:'谢霆锋',complaintDate:'2020-05-06'},{ complainter:'农夫',
-        beComplainter:'菊花',complaintDate:'2020-05-06'}];
+    // var tableData = [{ userName:'古巨基',
+    //     customerName:'谢霆锋',complainttime:'2020-05-06'},{ userName:'农夫',
+    //     customerName:'菊花',complainttime:'2020-05-06'}];
 
      new Vue({
         el:"#app",
         data:{
-            disabledDate(time) {
-                return time.getTime() > Date.now();
-            }, startDate: '',
-            disabledDate(time) {
-                return time.getTime() > Date.now();
-            },  endDate: '',
-                tableData:tableData,
-                pageSize:3,
-                total:0,
-                currentPage:1,
+
+                tableData:[],
+
         },
         //在vue被实例化之后
         created:function(){
-            // //调用getdatas()方法
-            // this.getDatas(this.currentPage,this.pageSize);
+            //调用getdatas()方法
+            this.getDatas();
         },
         methods:{
-            /*查找按钮事件*/
-            seach:function(){
-                this.getDatas(this.currentPage,this.pageSize);
-            },
+
             /*处理编辑按钮*/
             handleEdit:function(index,row){
-                window.location.href="complaintInfo.html?contractId="+row.id;
-            },
-            /*改变当前页数*/
-            currentChange:function(curNum){
-                this.getDatas(curNum,this.pageSize);
-            },
-            /*改变每页显示条数*/
-            sizeChange:function(pSize){
-                this.getDatas(this.currentPage,pSize);
-            },
-            /*查询数据*/
-            getDatas: function (currentPage, pageSize) {
+                window.location.href="complaintInfo.html?id="+row.complaintId;
 
-                axios.post("../../stall/findByItems",{
-                        startDate:this.startDate,
-                        endDate:this.endDate,
-                        currentPage:currentPage,
-                        pageSize:pageSize,
-                    }
+            },
+
+            /*查询数据*/
+            getDatas: function () {
+
+                axios.get("../../complaint/findAll"
+
+
                 ).then(function (result) {
                     console.log(result + "-->>>")
-                    this.tableData = result.data.dataList;
-                    this.pageSize = result.data.pageSize;
-                    this.currentPage = result.data.currentPage;
-                    this.total = result.data.count;
+                    this.tableData = result.data;
+
+
                 }.bind(this));
 
             }

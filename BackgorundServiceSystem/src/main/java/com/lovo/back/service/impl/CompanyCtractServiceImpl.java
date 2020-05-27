@@ -104,7 +104,6 @@ public class CompanyCtractServiceImpl implements ICompanyContractService {
         }
 
         paginationBean.setTotal(totalPage);
-paginationBean.setCount(companyContractDao.findByItemsCount().get(0).intValue());
 
         paginationBean.setCount(companyContractDao.findByItemsCount().get(0).intValue());
         return paginationBean;

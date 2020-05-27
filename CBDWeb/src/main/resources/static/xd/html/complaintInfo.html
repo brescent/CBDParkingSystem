@@ -24,15 +24,16 @@
 
 <div id="app">
     <div style="height: 30px;width: 100% ;font-size: 30px;text-align: center;color: #409EFF">投诉诉理</div>
-<el-container>
-    <el-main>
+<el-container >
+    <el-main  >
 
 <div><span>事件记录</span></div>
-        <el-table :data="tableData1"
+        <el-table          :data="tableData1"
                              highlight-current-row
                              style="width:100%"
     >
         <el-table-column prop="stallAddress" label="车位地址">
+
         </el-table-column>
         <el-table-column prop="stallNo" label="车位编号">
         </el-table-column>
@@ -45,24 +46,28 @@
 
 
         <div><span>投诉人</span></div>
-        <el-table :data="tableData2"
+        <el-table
+
+                :data="tableData2"
                   highlight-current-row
                   style="width:100%"
         >
             <el-table-column prop="userName"  label="用户名">
+
             </el-table-column>
             <el-table-column prop="realName" label="真实姓名">
             </el-table-column>
             <el-table-column prop="no"   label="身份证号码">
             </el-table-column>
             <el-table-column prop="job"   label="职业">
+
             </el-table-column>
             <el-table-column prop="phoneNum"  label="联系电话">
             </el-table-column>
 
         </el-table>
 
-        <span style="color: darkred">投诉理由:</span><div><p style="font-family: 方正兰亭超细黑简体;color: red">{{complaintInfo}}</p></div>
+        <span style="color: darkred">投诉理由:</span><div><p style="font-family: 方正兰亭超细黑简体;color: red">{{contant}}</p></div>
 
 
 
@@ -70,17 +75,21 @@
 
 
         <div><span >被投诉人</span></div>
-        <el-table :data="tableData3"
+        <el-table   :data="tableData3"
                   highlight-current-row
                   style="width:100%"
         >
             <el-table-column prop="userName"  label="用户名">
+
+
+
             </el-table-column>
             <el-table-column prop="realName"  label="真实姓名">
             </el-table-column>
             <el-table-column prop="no"   label="身份证号码">
             </el-table-column>
             <el-table-column prop="job"   label="职业">
+
             </el-table-column>
             <el-table-column prop="phoneNum"  label="联系电话">
             </el-table-column>
@@ -133,20 +142,142 @@
     new Vue({
         el:'#app',
         data:{
+
             tableData1:tableData1,
             tableData2:tableData2,
             tableData3:tableData3,
-            complaintInfo:'太帅le'
-
+            tableData:[],
+            contant:'',
+            stallAddress:'',
+            customerName:'',
+            customerProfession:'',
+            userName:'',
+            userProfession:''
         },
+        created:function(){
+            /*获取参数Id*/
+            let requestObj = GetRequest();
+            this.id=requestObj['id'];
+            //查询详细信息
+            this. getInfo(this.id);
+        },
+
         methods:{
 
-            // 传入投诉id
-            sure (){},
-            cancel(){
-                window.history.go(-1);
+            getInfo(id){
+                //发送ajax
+                axios.get('../../complaint/findById',{params:{
+                        id:id,
+
+                    }}).then(function(result){
+
+                    // console.log(result.data.unit);
+                    // this.tableData=result.data
+                    this.contant=result.data.contant
+                    // this.stallAddress=result.data.stallAddress
+                    // this.customerName=result.data.customerName
+                    // this.customerProfession=result.data.customerProfession
+                    // this.userName=result.data.userName
+                    // this.userProfession=result.data.userProfession
+                    // tableData2=result.data.frontOrderId.
+                    // tableData3=result.data.frontOrderId
+                    // complaintInfo=result.data.complaintContant
+                }.bind(this));
+
             },
-            delay(){}
+
+            // 传入投诉id
+            sure (){
+                //发送ajax
+                axios.get('../../complaint/updateState', {params:{
+                    id:this.id,
+                    state:1
+
+                }}).then(function(result){
+                    if(result.data=="ok"){
+                        this.alert('处理成功',{
+                            title:"消息提示",
+                            confirmButtonText: '确定',
+                            type:'success',
+                            center: true
+                        });
+                        window.location.href="showAllCompliant.html";
+                    }else{
+                        this.alert('添加失败', {
+                            title:"消息提示",
+                            confirmButtonText: '确定',
+                            type:'error',
+                            center: true
+                        });
+                    }
+
+                })
+
+
+            },
+
+            cancel(){
+                // 传入投诉id
+
+                    //发送ajax
+                    axios.post('../../complaint/updateState', {params:{
+                            id:this.id,
+                            state:2
+
+                        }}).then(function(result){
+                        if(result.data=="ok"){
+                            this.alert('处理成功',{
+                                title:"消息提示",
+                                confirmButtonText: '确定',
+                                type:'success',
+                                center: true
+                            });
+                            window.location.href="showAllCompliant.html";
+                        }else{
+                            this.alert('添加失败', {
+                                title:"消息提示",
+                                confirmButtonText: '确定',
+                                type:'error',
+                                center: true
+                            });
+                        }
+
+                    })
+
+
+                },
+
+            delay(){
+                // 传入投诉id
+
+                    //发送ajax
+                    axios.get('../../complaint/updateState', {params:{
+                            id:this.id,
+                            state:3
+
+                        }}).then(function(result){
+                        if(result.data=="ok"){
+                            this.alert('处理成功',{
+                                title:"消息提示",
+                                confirmButtonText: '确定',
+                                type:'success',
+                                center: true
+                            });
+                            window.location.href="showAllCompliant.html";
+                        }else{
+                            this.alert('添加失败', {
+                                title:"消息提示",
+                                confirmButtonText: '确定',
+                                type:'error',
+                                center: true
+                            });
+                        }
+
+                    })
+
+
+                },
+
 
 
 
