@@ -42,11 +42,20 @@ public class UserController {
 
     @GetMapping(value = "login")
     @ResponseBody
-    public  String  login(String userName,String pwd, HttpServletRequest request) {
+    public  String  login(String userName,String pwd, HttpServletRequest request,HttpServletResponse httpServletResponse) {
         UserDto userDto= userService.login(userName, pwd);
 
         if (userDto !=null){
-
+            // int count = OnlineUserCountUtil.getOnlineCount();
+            try{ //把sessionId记录在浏览器
+                Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(request.getSession().getId(), "utf-8"));
+                c.setPath("/");
+//先设置cookie有效期为2天，不用担心，session不会保存2天
+                c.setMaxAge(30*60);
+                httpServletResponse.addCookie(c);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             request.getSession().setAttribute("user",userDto);
             request.getSession().setMaxInactiveInterval(1800);
             return "1";
@@ -76,16 +85,7 @@ public class UserController {
     public String getLoginUserName(HttpServletRequest request,HttpServletResponse httpServletResponse){
         UserDto userDto= (UserDto) request.getSession().getAttribute("user");
         String userName=userDto.getLoginName();
-        // int count = OnlineUserCountUtil.getOnlineCount();
-        try{ //把sessionId记录在浏览器
-            Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(request.getSession().getId(), "utf-8"));
-            c.setPath("/");
-//先设置cookie有效期为2天，不用担心，session不会保存2天
-            c.setMaxAge(10*60);
-            httpServletResponse.addCookie(c);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
         HttpSession session = request.getSession();
 
         Object  count=session.getServletContext().getAttribute("count");
